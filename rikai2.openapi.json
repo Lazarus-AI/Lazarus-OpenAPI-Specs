@@ -1,0 +1,1770 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "4ge3zl0xw0dd2"
+  },
+  "info": {
+    "title": "RikAI2",
+    "version": "",
+    "description": "",
+    "contact": {
+      "name": "Lazarus IT",
+      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+      "email": "support@lazarusai.com"
+    },
+    "termsOfService": "https://www.lazarusforms.com/legal",
+    "license": {
+      "name": "Get Lazarus",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+    },
+    "summary": ""
+  },
+  "paths": {
+    "/rikai/bulk": {
+      "post": {
+        "summary": "Bulk file upload (async)",
+        "description": "Upload 1 or more files to a custom model for asynchronous processing. By default, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "operationId": "post_bulk_rikai2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/BulkURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BulkBase64Request"
+                  }
+                ],
+                "title": "Request Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResponse"
+                }
+              }
+            }
+          },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "903e0mk4p28xz"
+        }
+      }
+    },
+    "/rikai/ocr": {
+      "post": {
+        "summary": "OCR input, JSON response",
+        "description": "Make a request to RikAI-2 by providing OCR results as input, receive JSON response data.\nRikAI-2 has a vision component that requires the upload of the source document used for OCR. Provide the source document with either a base64 encoded string or an input URL.",
+        "operationId": "post_ocr_rikai2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/RikAIOCRURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RikAIOCRBase64Request"
+                  }
+                ],
+                "title": "Request Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "9ex24kjniciry"
+        },
+        "x-internal": true
+      }
+    },
+    "/rikai/zip/async/{document_id}": {
+      "get": {
+        "summary": "Get async request status",
+        "description": "Retrieves the status of an asynchronous request to `/rikai/zip?async=True` or `/rikai/bulk`. Identifiable by status ID (the {document_id} part of the URL).",
+        "operationId": "get_async_status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/documentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        },
+        "x-stoplight": {
+          "id": "g0vf7uo29etty"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Answer": {
+        "type": "object",
+        "title": "Answer",
+        "description": "Answer model, data for each Q&A in response",
+        "x-stoplight": {
+          "id": "ai1rebop6kgb7"
+        },
+        "required": [
+          "answer",
+          "question"
+        ],
+        "properties": {
+          "answer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              },
+              {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "rigay5plefu4t"
+                },
+                "items": {}
+              }
+            ],
+            "description": "Model's answer to the question asked. For the RikAI2-Extract endpoint, the model fills the JSON structure that was provided for input."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "The question asked."
+          },
+          "context": {
+            "type": "string",
+            "description": "Where in the document the answer was found."
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Answer confidence score ranging from 0 to 1."
+          },
+          "translated": {
+            "type": "string",
+            "description": "Translated answer if the `language` field was included in the request"
+          }
+        }
+      },
+      "AsyncStatusResponse": {
+        "properties": {
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "AsyncStatusResponse",
+        "description": "/rikai/zip/async response",
+        "x-stoplight": {
+          "id": "ypi6qcadalft7"
+        }
+      },
+      "BulkBase64Request": {
+        "type": "object",
+        "title": "BulkBase64Request",
+        "description": "/rikai/bulk request body",
+        "x-stoplight": {
+          "id": "90lldi1d3s1ni"
+        },
+        "required": [
+          "base64",
+          "question",
+          "outputURL"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "forceRequire": true,
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Sends the whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": true
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "fileId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object"
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "2w92pp0aqyp32"
+            },
+            "default": false,
+            "description": "Set to `true` to only send a JSON response rather than a ZIP file to the outputURL."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "4akk0es8nbvn8"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          }
+        }
+      },
+      "BulkURLRequest": {
+        "type": "object",
+        "title": "BulkURLRequest",
+        "description": "/rikai/bulk request body",
+        "x-stoplight": {
+          "id": "rrodthxoxqmph"
+        },
+        "required": [
+          "question",
+          "inputURL",
+          "outputURL"
+        ],
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Sends the whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": true
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "inputURL": {
+            "type": "array",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT.",
+            "forceRequire": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "fileId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object"
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ktvlw6abgivmo"
+            },
+            "default": false,
+            "description": "Set to `true` to only send a JSON response rather than a ZIP file to the outputURL."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "v2cyz77xn56we"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          }
+        }
+      },
+      "BulkResponse": {
+        "properties": {
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time."
+          },
+          "statusId": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              }
+            ],
+            "description": "List of document IDs for each file uploaded."
+          },
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request 'metadata' field."
+          }
+        },
+        "type": "object",
+        "required": [
+          "model",
+          "statusId",
+          "message"
+        ],
+        "title": "BulkResponse",
+        "description": "/rikai/bulk response",
+        "x-stoplight": {
+          "id": "p49zgrvhvigm3"
+        }
+      },
+      "ErrorMessage": {
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "message": {
+            "type": "string",
+            "title": "message",
+            "description": "Error message."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ErrorMessage",
+        "description": "Response when an error occurs.",
+        "x-stoplight": {
+          "id": "cx77s7oki06fe"
+        }
+      },
+      "RikAIBase64Request": {
+        "type": "object",
+        "title": "RikAIBase64Request",
+        "description": "/rikai/custom/{model_id} request body",
+        "x-stoplight": {
+          "id": "greoqs67hnkou"
+        },
+        "required": [
+          "base64",
+          "question"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document.",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          }
+        }
+      },
+      "RikAIChatRequestBody": {
+        "type": "object",
+        "title": "RikAIChatRequestBody",
+        "description": "/rikai/chat request body\nUploads blank png base64 string to base64 attribute so user is not required to input a file.",
+        "x-stoplight": {
+          "id": "aghyija2gqcsl"
+        },
+        "required": [
+          "question"
+        ],
+        "properties": {
+          "question": {
+            "anyOf": [
+              {}
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true,
+            "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "description": "Optional user settings.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          }
+        }
+      },
+      "RikAIFileRequest": {
+        "type": "object",
+        "title": "RikAIFileRequest",
+        "description": "/rikai/custom/{model_id} request body",
+        "x-stoplight": {
+          "id": "rnp4nefx04o19"
+        },
+        "required": [
+          "question",
+          "file"
+        ],
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF, or TXT.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document.",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          }
+        }
+      },
+      "RikAIOCRBase64Request": {
+        "type": "object",
+        "title": "RikAIOCRBase64Request",
+        "description": "/rikai/ocr/{model_id} request body",
+        "x-stoplight": {
+          "id": "fe8d2fgbiuk5b"
+        },
+        "required": [
+          "base64",
+          "question",
+          "ocr"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document.",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          }
+        }
+      },
+      "RikAIOCRURLRequest": {
+        "type": "object",
+        "title": "RikAIOCRURLRequest",
+        "description": "/rikai/ocr/{model_id} request body",
+        "x-stoplight": {
+          "id": "5qam93efm3y9p"
+        },
+        "required": [
+          "question",
+          "inputURL",
+          "ocr"
+        ],
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.\n",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document.",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "inputURL": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT.",
+            "forceRequire": true
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          }
+        }
+      },
+      "RikAIURLRequest": {
+        "type": "object",
+        "title": "RikAIURLRequest",
+        "description": "/rikai/custom/{model_id} request body",
+        "x-stoplight": {
+          "id": "jc6168gqtp10n"
+        },
+        "required": [
+          "question",
+          "inputURL"
+        ],
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document.",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "inputURL": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT.",
+            "forceRequire": true
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          }
+        }
+      },
+      "RikAIResponse": {
+        "properties": {
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time."
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Answer"
+            },
+            "type": "array",
+            "description": "Question and answer data for each question asked in the request."
+          },
+          "documentId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "ID for document request or filename if specified."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "questions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Number of questions asked."
+          },
+          "baseModel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Base model used during data extraction."
+          },
+          "ocrResults": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request."
+          },
+          "settings": {
+            "type": "object",
+            "description": "JSON containing any custom user settings specified in the request."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request 'metadata' field."
+          }
+        },
+        "type": "object",
+        "required": [
+          "model",
+          "pages",
+          "questions"
+        ],
+        "title": "RikAIResponse",
+        "description": "/rikai response",
+        "x-stoplight": {
+          "id": "sv82sgtwmwzsd"
+        }
+      },
+      "Settings": {
+        "type": "object",
+        "title": "Settings",
+        "description": "Settings model, request body",
+        "x-stoplight": {
+          "id": "thmr6jgr6hbv1"
+        },
+        "properties": {
+          "sendFile": {
+            "type": "boolean",
+            "description": "WARNING: Deprecated, will be removed in a future release. "
+          },
+          "advancedVision": {
+            "type": "boolean",
+            "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
+            "default": false
+          },
+          "returnConfidence": {
+            "type": "boolean",
+            "description": "For RikAI2-Extract only: set to true to include bounding boxes and confidence score in response.",
+            "default": false
+          }
+        }
+      },
+      "StatusEnum": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "SUBMITTED",
+          "FAILURE",
+          "AUTH_FAILURE",
+          "RUNNING"
+        ],
+        "title": "StatusEnum",
+        "description": "Status enum for responses",
+        "x-stoplight": {
+          "id": "g8zt0z8aqlt1a"
+        }
+      },
+      "ZipBase64Request": {
+        "type": "object",
+        "title": "ZipBase64Request",
+        "description": "/rikai/zip/{model_id} request body",
+        "x-stoplight": {
+          "id": "94k2gfq528ww5"
+        },
+        "required": [
+          "base64",
+          "question"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "With query parameter `?async=true` at the end of the URL, defaults to `true`, otherwise defaults to `false`. When set to true, send whole JSON response to webhook URL upon request completion. Set to false to only send request status.\n",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document.",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "qu0cdkgxvtof2"
+            },
+            "default": false,
+            "description": "For asynchronous requests only, set to `true` to send a JSON response rather than a ZIP file to the outputURL."
+          }
+        }
+      },
+      "ZipURLRequest": {
+        "type": "object",
+        "title": "ZipURLRequest",
+        "description": "/rikai/zip/{model_id} request body",
+        "x-stoplight": {
+          "id": "gejnb00074dwp"
+        },
+        "required": [
+          "question",
+          "inputURL"
+        ],
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
+            "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "With query parameter `?async=true` at the end of the URL, defaults to `true`, otherwise defaults to `false`. When set to true, send whole JSON response to webhook URL upon request completion. Set to false to only send request status.\n",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document.",
+            "setDefault": "file name",
+            "default": "file name"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "setDefault": false,
+            "default": false
+          },
+          "inputURL": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT.",
+            "forceRequire": true
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "forceType": "object",
+            "type": "object"
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "9u2ccmlei3sca"
+            },
+            "default": false,
+            "description": "For asynchronous requests only, set to `true` to send a JSON response rather than a ZIP file to the outputURL."
+          }
+        }
+      },
+      "ZipResponse": {
+        "properties": {
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time."
+          },
+          "code": {
+            "type": "integer",
+            "description": "Response code."
+          },
+          "documentId": {
+            "type": "string",
+            "description": "ID for document request or filename if specified."
+          },
+          "statusId": {
+            "type": "string",
+            "description": "List of document IDs for each file uploaded."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request 'metadata' field."
+          },
+          "organization": {
+            "type": "string",
+            "description": "Organization ID."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "questions": {
+            "type": "integer",
+            "description": "Number of questions asked."
+          }
+        },
+        "type": "object",
+        "required": [
+          "model",
+          "code",
+          "organization",
+          "pages",
+          "questions"
+        ],
+        "title": "ZipResponse",
+        "description": "/rikai/zip response",
+        "x-stoplight": {
+          "id": "964pjujc87ycl"
+        }
+      }
+    },
+    "parameters": {
+      "orgId": {
+        "name": "orgId",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-_]+$",
+          "title": "orgId",
+          "description": "Organization ID"
+        },
+        "description": "Organization ID"
+      },
+      "authKey": {
+        "name": "authKey",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9\\-_]+$",
+          "title": "authKey",
+          "description": "Authentication key"
+        },
+        "description": "Authentication key"
+      },
+      "async": {
+        "name": "async",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "async",
+          "description": "Runs request asynchronously"
+        },
+        "description": "Runs request asynchronously"
+      },
+      "statusId": {
+        "name": "statusId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "document_id",
+          "description": "Document ID"
+        },
+        "description": "Status ID"
+      }
+    },
+    "responses": {
+      "207": {
+        "description": "Bulk upload request failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Invalid credentials": {
+                "value": {
+                  "status": "AUTH_FAILURE",
+                  "message": "Invalid authentication"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not found error. When a request references an invalid endpoint or resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Model id 'abc' is not valid."
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Model processing failed. Extraction model or LLM could not process your request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "OCR failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Error during request to OCR microservice."
+                }
+              },
+              "LLM failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "We made three attempts to process the model with no success."
+                }
+              }
+            }
+          }
+        }
+      },
+      "502": {
+        "description": "Could not connect to model.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request to the model failed."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.lazarusforms.com/api",
+      "description": ""
+    }
+  ]
+}
