@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Custom Models",
+    "title": "Custom LLMs",
     "version": "",
     "summary": "",
     "description": "",
