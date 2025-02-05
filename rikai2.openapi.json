@@ -5,7 +5,7 @@
   },
   "info": {
     "title": "RikAI2",
-    "version": "",
+    "version": "0.1.0",
     "description": "",
     "contact": {
       "name": "Lazarus IT",
@@ -20,11 +20,11 @@
     "summary": ""
   },
   "paths": {
-    "/rikai/bulk": {
+    "/rikai": {
       "post": {
-        "summary": "Bulk file upload (async)",
-        "description": "Upload 1 or more files to a custom model for asynchronous processing. By default, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
-        "operationId": "post_bulk_rikai2",
+        "summary": "Document input, JSON response",
+        "description": "<!-- theme: info -->\n> Currently calls can only be made asynchronously through the [Bulk file upload](../reference/rikai2.json/paths/~1rikai~1bulk/post) endpoint.\n\nMake a request to RikAI-2 and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n\n<!-- theme: warning -->\n> Due to an error in our documentation provider, you currently cannot use the API simulator for multi-part forms with Python3.",
+        "operationId": "post_rikai2",
         "parameters": [
           {
             "$ref": "#/components/parameters/orgId"
@@ -36,14 +36,19 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
                   {
-                    "$ref": "#/components/schemas/BulkURLRequest"
+                    "$ref": "#/components/schemas/RikAIURLRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/BulkBase64Request"
+                    "$ref": "#/components/schemas/RikAIBase64Request"
                   }
                 ],
                 "title": "Request Body"
@@ -57,13 +62,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BulkResponse"
+                  "$ref": "#/components/schemas/RikAIResponse"
                 }
               }
             }
-          },
-          "207": {
-            "$ref": "#/components/responses/207"
           },
           "400": {
             "$ref": "#/components/responses/400"
@@ -82,8 +84,64 @@
           }
         },
         "x-stoplight": {
-          "id": "903e0mk4p28xz"
+          "id": "k2875t0akiz8l"
         }
+      }
+    },
+    "/rikai/chat": {
+      "post": {
+        "summary": "Chat, no input, JSON response",
+        "description": "<!-- theme: info -->\n> Currently deprecated. This endpoint can be used for [custom models](../reference/custom_rikai.json/paths/~1rikai~1chat~1{custom_model_id}/post), but not for RikAI-2.\n\nMake a request to a custom model using prompt as context. No document upload.",
+        "operationId": "post_chat_rikai2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIChatRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "6djeszn313l45"
+        },
+        "deprecated": true
       }
     },
     "/rikai/ocr": {
@@ -147,7 +205,146 @@
         "x-stoplight": {
           "id": "9ex24kjniciry"
         },
+        "deprecated": true,
         "x-internal": true
+      }
+    },
+    "/rikai/zip": {
+      "post": {
+        "summary": "Document input, ZIP file response",
+        "description": "<!-- theme: info -->\n> Currently calls can only be made asynchronously through the [Bulk file upload](../reference/rikai2.json/paths/~1rikai~1bulk/post) endpoint.\n\nMake a request to RikAI2 and receive response data in a ZIP file.\n To process your request asynchronously and send the ZIP file to an `outputURL`, include the `async` query parameter. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "operationId": "post_zip_rikai2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/async"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ZipURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ZipBase64Request"
+                  }
+                ],
+                "title": "Request Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request.\n\nWith query parameter `?async=true` at the end of the URL, receive a JSON response and ZIP file uploaded to `outputURL`. Without `async` query parameter or `?async=false`, receive ZIP file data directly.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZipResponse"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "eu0oibgsc1nqo"
+        }
+      }
+    },
+    "/rikai/bulk": {
+      "post": {
+        "summary": "Bulk file upload",
+        "description": "Upload 1 or more files to a custom model for asynchronous processing. By default, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "operationId": "post_bulk_rikai2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/BulkURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BulkBase64Request"
+                  }
+                ],
+                "title": "Request Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResponse"
+                }
+              }
+            }
+          },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "903e0mk4p28xz"
+        }
       }
     },
     "/rikai/zip/async/{document_id}": {
@@ -339,7 +536,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -366,7 +563,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -395,7 +592,7 @@
           "outputURL": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Receives PUT requests made by the API. Its body is either a byte stream (for a zip file, default) or a json file (if returnJson=true)."
+            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
             "type": "object",
@@ -452,7 +649,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -479,7 +676,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -516,7 +713,7 @@
           "outputURL": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Receives PUT requests made by the API. Its body is either a byte stream (for a zip file, default) or a json file (if returnJson=true)."
+            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
             "type": "object",
@@ -678,7 +875,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -705,7 +902,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -722,7 +919,7 @@
             "default": "file name"
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -753,7 +950,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "description": "Optional user settings.",
@@ -813,7 +1010,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -840,7 +1037,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -863,7 +1060,7 @@
             "default": "file name"
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -921,7 +1118,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -946,6 +1143,12 @@
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
@@ -959,7 +1162,7 @@
             "default": false
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1002,7 +1205,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1027,6 +1230,12 @@
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
@@ -1046,7 +1255,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1088,7 +1297,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1115,7 +1324,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -1138,7 +1347,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1336,7 +1545,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1363,7 +1572,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -1380,14 +1589,14 @@
             "default": false
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
           "outputURL": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Receives PUT requests made by the API. Its body is either a byte stream (for a zip file, default) or a json file (if returnJson=true)."
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
             "type": "object",
@@ -1440,7 +1649,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1467,7 +1676,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -1490,14 +1699,14 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
           "outputURL": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Receives PUT requests made by the API. Its body is either a byte stream (for a zip file, default) or a json file (if returnJson=true)."
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
             "type": "object",

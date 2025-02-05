@@ -5,8 +5,8 @@
   },
   "info": {
     "title": "RikAI-Generic-Summarizer",
-    "version": "",
-    "description": "# RikAI-Summarize Overview \n\n<!-- Generic Summarizer excels at handling summarization tasks and large documents.  -->\n\n\n\n<!-- The model will always provide a summary of the document, but its “secondary summary” field as well as its JSON structure allows users to specify the information to extract.  -->\n\nBelow are the RikAI-Summarize's main  capabilities and potential applications for each one. These capabilities can be combined into one prompt to satisfy specific needs. For specific prompting help, refer to our [RikAI-Summarize Prompting Guide](https://lazarus.stoplight.io/docs/prompting/branches/main/7ien5rgade3ek-rik-ai-summarize-prompting)\n\n#### Data Extraction\n\nThe RikAI-Summarize's data extraction is efficient and accurate,  generally far more precise than any human extracting data.  \n\n\n\n<!-- TODO: cut this down and/or make examples general and not client specific\\ -->\nReal-world examples of clients leveraging this capability include:\n\n- **Processing Insurance Policies:** An insurance company may receive thousands of policies per month and maintain a database of ~25 data points (policy number, product liability exposure, etc.) for each policy. Using the summarizer model, they extract all their desired data points in one prompt and directly populate their database as documents are received. \n- **Processing Hospital Bills:** Another client of ours uses a similar approach to process hospital bills. In their case, they extract important data points (expense item, billing, etc.) and every line item of the bill. The summarizer extracts this desired information with one prompt. \n\n\n\n#### Executive Summary\n\nOur model is capable of scanning long documents, sorting important information into pre-defined or auto-generated categories, and summarizing key insights into a succinct, usable summary. \n\n<!-- TODO: cut this down and/or make examples general and not client specific\\ -->\nHere are two examples of this capability in action:\n- **10-K Filing Summary:** The summarizer model can parse the entirety of a company’s 10-K filing (~55,000 words) and create an executive summary that condenses information to around 10% of its original length. Using unique prompting techniques, the model can sort this information into predefined categories: business, risk factors, financial data, and management’s discussion. This condensed version preserves important information and discards repetitive and inefficient wording to create an easy-to-understand end product.\n- **ACORD Form Processing:** Insurance companies use ACORD forms, a standardized set of form types which summarize different categories of information such as a business’ insurance coverage, a filed claim, a risk that is being insured, and other critical components of an insurance company’s business. The summarizer can output the purpose of each ACORD form, important data points (policy number, amount paid, etc.), and additional relevant information in a single prompt. \n \n\n<!-- \nTODO: add this or no?\n#### Example Questions\nPlease refer to the [Generic Summarizer's Prompting Guide](./https://lazarus.stoplight.io/docs/prompting/branches/main/7ien5rgade3ek-generic-summarizer) for more thorough information on prompting this model. -->\n\n\n\n### How to Use\nThe RikAI-Summarize is available for use through [endpoints](./summarizer) in the Lazarus API framework. \n\nThe RikAI-Summarize's architectural complexity demands that users develop more effective and precise prompts when using this model. Additionally, users must write prompts according to the summarizer model’s prompt structure, with two required (`documentType` and `summaryDescription`) and two optional prompt fields (`secondaryDescription` and `jsonFormat`).\n\nThe `webhook` parameter is a webhook URL to send status updates and JSON response to. Click [here](../webhook-examples) to read more about using `webhook` and `webhookSendFull` parameters. \n\n\n### Input and Output\nDocuments may be uploaded using an input URL or through a base64 encoded string.\n\nThe response is a JSON.\n\n",
+    "version": "0.1.0",
+    "description": "",
     "summary": "",
     "contact": {
       "name": "Lazarus IT",
@@ -83,8 +83,7 @@
         },
         "x-stoplight": {
           "id": "p05wy6wo402p7"
-        },
-        "deprecated": true
+        }
       }
     }
   },
@@ -201,7 +200,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           }
         }
       },
@@ -280,7 +279,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           }
         }
       },

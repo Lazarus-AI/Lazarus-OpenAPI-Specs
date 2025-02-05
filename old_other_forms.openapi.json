@@ -1,8 +1,11 @@
 {
   "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "l65gpguzhgw8s"
+  },
   "info": {
     "title": "Specialized Forms Models",
-    "version": "",
+    "version": "0.1.0",
     "summary": "",
     "description": "",
     "contact": {
@@ -20,7 +23,7 @@
     "/forms/ssn": {
       "post": {
         "summary": "JSON response",
-        "description": "Upload a social security card to extract SSN data. Receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Upload a social security card to extract SSN data. Receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_ssn",
         "parameters": [
           {
@@ -33,6 +36,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -44,11 +52,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -88,7 +91,7 @@
     "/forms/ssn/zip": {
       "post": {
         "summary": "Zip file response",
-        "description": "Upload a social security card to extract SSN data and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Upload a social security card to extract SSN data and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_ssn_zip",
         "parameters": [
           {
@@ -101,6 +104,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsZipFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -112,11 +120,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsZipFileRequest"
               }
             }
           }
@@ -154,7 +157,7 @@
     "/forms/invoices": {
       "post": {
         "summary": "JSON response",
-        "description": "**TODO: where is version parameter to change to V2?**\\\nUpload an invoice for data extraction and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "**TODO: where is version parameter to change to V2?**\\\nUpload an invoice for data extraction and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_invoices",
         "parameters": [
           {
@@ -167,6 +170,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -178,11 +186,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -222,7 +225,7 @@
     "/forms/invoices/zip": {
       "post": {
         "summary": "Zip file response",
-        "description": "Upload an invoice for data extraction and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Upload an invoice for data extraction and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_invoices_zip",
         "parameters": [
           {
@@ -235,6 +238,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsZipFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -246,11 +254,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsZipFileRequest"
               }
             }
           }
@@ -288,7 +291,7 @@
     "/forms/receipts": {
       "post": {
         "summary": "JSON response",
-        "description": "Upload a receipt for data extraction and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Upload a receipt for data extraction and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_forms_receipts",
         "parameters": [
           {
@@ -301,6 +304,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -312,11 +320,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -356,7 +359,7 @@
     "/forms/receipts/zip": {
       "post": {
         "summary": "Post Receipts Zip",
-        "description": "Upload a receipt for data extraction and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Upload a receipt for data extraction and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_receipts_zip_forms_receipts_zip__input_type__post",
         "parameters": [
           {
@@ -369,6 +372,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -380,11 +388,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -422,7 +425,7 @@
     "/forms/pii": {
       "post": {
         "summary": "Extract, JSON response",
-        "description": "Make a request to extract PII data and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to extract PII data and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_pii",
         "parameters": [
           {
@@ -434,6 +437,11 @@
         ],
         "requestBody": {
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/PIIFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -445,11 +453,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/PIIFileRequest"
               }
             }
           }
@@ -489,7 +492,7 @@
     "/forms/pii/redact": {
       "post": {
         "summary": "Redact, JSON response",
-        "description": "Make a request to redact PII data from a document and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to redact PII data from a document and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_pii_redact",
         "parameters": [
           {
@@ -501,6 +504,11 @@
         ],
         "requestBody": {
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RedactFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -512,11 +520,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/RedactFileRequest"
               }
             }
           }
@@ -1133,7 +1136,7 @@
           },
           "product_code": {
             "type": "string",
-            "title": "product_code",
+            "title": "productCode",
             "description": ""
           },
           "rawText": {
@@ -1152,22 +1155,22 @@
       "ItemData": {
         "properties": {
           "price": {
-            "type": "string",
+            "type": "number",
             "title": "price",
             "description": "",
-            "default": ""
+            "default": 0
           },
           "quantity": {
-            "type": "string",
+            "type": "integer",
             "title": "quantity",
             "description": "",
-            "default": ""
+            "default": 0
           },
           "total_price": {
-            "type": "string",
+            "type": "number",
             "title": "totalPrice",
             "description": "",
-            "default": ""
+            "default": 0
           }
         },
         "type": "object",

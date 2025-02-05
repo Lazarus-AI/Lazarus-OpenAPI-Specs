@@ -1,8 +1,11 @@
 {
   "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "0yiwgkz6qqyvk"
+  },
   "info": {
     "title": "Forms",
-    "version": "",
+    "version": "0.1.0",
     "summary": "",
     "description": "",
     "contact": {
@@ -20,7 +23,7 @@
     "/forms/generic": {
       "post": {
         "summary": "JSON response",
-        "description": "Make a request to the Forms-2 model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser. TODO: add file types",
+        "description": "Make a request to the Forms-2 model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser. TODO: add file types",
         "operationId": "post_forms",
         "parameters": [
           {
@@ -39,6 +42,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -49,11 +57,6 @@
                     "$ref": "#/components/schemas/FormsBase64Request"
                   }
                 ]
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -90,7 +93,7 @@
     "/forms/generic/zip": {
       "post": {
         "summary": "Zip file response",
-        "description": "Make a request to the Forms model and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.TODO",
+        "description": "Make a request to the Forms model and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.TODO",
         "operationId": "post_forms_zip",
         "parameters": [
           {
@@ -109,6 +112,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsZipFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -119,11 +127,6 @@
                     "$ref": "#/components/schemas/FormsZipBase64Request"
                   }
                 ]
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsZipFileRequest"
               }
             }
           }
@@ -158,7 +161,7 @@
     "/forms/generic/zip/async": {
       "post": {
         "summary": "Queue an async zip request",
-        "description": "Queue an asynchronous request to Forms model and receive response data in a ZIP file, sent to an `outputURL`.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Queue an asynchronous request to Forms model and receive response data in a ZIP file, sent to an `outputURL`.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_forms_async_zip",
         "parameters": [
           {
@@ -264,7 +267,7 @@
     "/forms/custom/{custom_model_id}": {
       "post": {
         "summary": "JSON response",
-        "description": "Make a request to a custom Forms model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to a custom Forms model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_forms_custom",
         "parameters": [
           {
@@ -283,6 +286,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -294,11 +302,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -338,7 +341,7 @@
     "/forms/custom/{custom_model_id}/zip": {
       "post": {
         "summary": "Zip file response",
-        "description": "Make a request to Forms model and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Make a request to Forms model and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_forms_custom_zip",
         "parameters": [
           {
@@ -360,6 +363,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsZipFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -371,11 +379,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsZipFileRequest"
               }
             }
           }
@@ -1150,7 +1153,7 @@
             "type": "string",
             "title": "id",
             "description": "Request ID.",
-            "default": "request_id"
+            "default": "071b26f7-23bb-4ed3-b3cb-7a1f3c104150"
           },
           "pages": {
             "type": "integer",
@@ -1824,6 +1827,12 @@
     {
       "url": "https://api.lazarusforms.com/api",
       "description": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "Custom",
+      "description": "Send requests to a custom forms model"
     }
   ]
 }

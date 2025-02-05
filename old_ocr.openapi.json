@@ -5,7 +5,7 @@
   },
   "info": {
     "title": "JSON response",
-    "version": "",
+    "version": "0.1.0",
     "summary": "",
     "description": "",
     "contact": {
@@ -23,7 +23,7 @@
     "/ocr": {
       "post": {
         "summary": "JSON response",
-        "description": "Make a request to OCR and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser. TODO: add file types\n<!-- Supports PDF, PNG, TIF, TIFF, JPE, WebP, and TXT. -->",
+        "description": "Make a request to OCR and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser. TODO: add file types\n<!-- Supports PDF, PNG, TIF, TIFF, JPE, WebP, and TXT. -->",
         "operationId": "post_ocr",
         "parameters": [
           {
@@ -36,6 +36,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -47,11 +52,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FileRequest"
               }
             }
           }
@@ -91,7 +91,7 @@
     "/ocr/zip": {
       "post": {
         "summary": "ZIP file response",
-        "description": "Make a request to OCR and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Make a request to OCR and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_zip_ocr",
         "parameters": [
           {
@@ -199,6 +199,12 @@
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "title": "forceOCR",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
           "metadata": {
             "type": "object",
             "title": "metadata",
@@ -212,7 +218,7 @@
           "version": {
             "type": "integer",
             "title": "version",
-            "description": "OCR model version (1 or 2).",
+            "description": "OCR model version.",
             "default": 2
           }
         },
@@ -273,6 +279,12 @@
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "title": "forceOCR",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
           "webhook": {
             "type": "string",
             "title": "webhook",
@@ -281,7 +293,7 @@
           "version": {
             "type": "integer",
             "title": "version",
-            "description": "OCR model version (1 or 2).",
+            "description": "OCR model version.",
             "default": 2
           }
         },
@@ -336,17 +348,54 @@
           "id": "l7xgb4v513z51"
         }
       },
+      "LineV2": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "content",
+            "description": "Content of the field as a string.",
+            "default": ""
+          },
+          "polygon": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "polygon",
+            "description": "Bounding box coordinates of content.",
+            "default": []
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/SpanV2"
+            },
+            "type": "array",
+            "title": "spans",
+            "description": "Span where data can be found in the raw text.",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "LineV2",
+        "x-stoplight": {
+          "id": "19sf5zljqpop9"
+        }
+      },
       "OCRResultsResponseBody": {
         "oneOf": [
           {
             "$ref": "#/components/schemas/OCRResultsResponseBodyV1"
+          },
+          {
+            "$ref": "#/components/schemas/OCRResultsResponseBodyV2"
           }
         ],
         "title": "OCRResultsResponseBody",
         "discriminator": {
           "propertyName": "ocrVersion",
           "mapping": {
-            "1": "#/components/schemas/OCRResultsResponseBodyV1"
+            "1": "#/components/schemas/OCRResultsResponseBodyV1",
+            "2": "#/components/schemas/OCRResultsResponseBodyV2"
           }
         },
         "x-stoplight": {
@@ -441,13 +490,101 @@
           "id": "k7huxspqj0b5f"
         }
       },
+      "OCRResultsResponseBodyV2": {
+        "properties": {
+          "ocrVersion": {
+            "const": 2,
+            "title": "Ocrversion"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Status"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request.",
+            "default": "AUTH_FAILURE"
+          },
+          "documentId": {
+            "type": "string",
+            "title": "documentId",
+            "description": "ID for document request or filename if specified.",
+            "default": ""
+          },
+          "modelType": {
+            "type": "string",
+            "title": "modelType",
+            "description": "Type of base/extraction model used, OCR or Forms.",
+            "default": ""
+          },
+          "id": {
+            "type": "string",
+            "title": "id",
+            "description": "Request ID.",
+            "default": ""
+          },
+          "requestDateTime": {
+            "type": "string",
+            "title": "requestDateTime",
+            "description": "Date and time request was made.",
+            "default": ""
+          },
+          "startTime": {
+            "type": "integer",
+            "title": "startTime",
+            "description": "Request start time.",
+            "default": 0
+          },
+          "endTime": {
+            "type": "integer",
+            "title": "endTime",
+            "description": "Request end time.",
+            "default": 0
+          },
+          "pages": {
+            "type": "integer",
+            "title": "pages",
+            "description": "Number of pages in the document.",
+            "default": 0
+          },
+          "ocrResults": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OCRResultsV2"
+              }
+            ],
+            "title": "ocrResults",
+            "description": "Model results."
+          },
+          "resultUrl": {
+            "type": "string",
+            "title": "resultURL",
+            "description": "URL to the result of the OCR process.",
+            "default": ""
+          },
+          "metadata": {
+            "type": "object",
+            "title": "metadata",
+            "description": "Custom JSON to be included in the returned response."
+          }
+        },
+        "type": "object",
+        "required": [
+          "ocrVersion"
+        ],
+        "title": "OCRResultsResponseBodyV2",
+        "x-stoplight": {
+          "id": "8a8925irqsl98"
+        }
+      },
       "OCRResultsV1": {
         "properties": {
           "version": {
             "type": "string",
             "title": "version",
-            "description": "OCR model version (1 or 2).",
-            "default": "1"
+            "description": "OCR model version.",
+            "default": ""
           },
           "modelVersion": {
             "type": "string",
@@ -469,6 +606,51 @@
         "title": "OCRResultsV1",
         "x-stoplight": {
           "id": "n22w4nvwkgcmu"
+        }
+      },
+      "OCRResultsV2": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "title": "version",
+            "description": "OCR model version.",
+            "default": ""
+          },
+          "modelVersion": {
+            "type": "string",
+            "title": "modelVersion",
+            "description": "OCR model version date.",
+            "default": ""
+          },
+          "readResults": {
+            "items": {
+              "$ref": "#/components/schemas/ReadResultV2"
+            },
+            "type": "array",
+            "title": "readResults",
+            "description": "Read results for each page in the document.",
+            "default": []
+          },
+          "readStyles": {
+            "items": {
+              "$ref": "#/components/schemas/ReadStyleV2"
+            },
+            "type": "array",
+            "title": "readStyles",
+            "description": "Styled objects found in the document.",
+            "default": []
+          },
+          "rawText": {
+            "type": "string",
+            "title": "rawText",
+            "description": "All the extracted text from the document.",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "OCRResultsV2",
+        "x-stoplight": {
+          "id": "dhnehgzlzwwhm"
         }
       },
       "ReadResultV1": {
@@ -515,6 +697,127 @@
         "title": "ReadResultV1",
         "x-stoplight": {
           "id": "ltc1n28dvxegs"
+        }
+      },
+      "ReadResultV2": {
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "title": "pageNumber",
+            "description": "Page number.",
+            "default": 0
+          },
+          "angle": {
+            "type": "number",
+            "title": "angle",
+            "description": "Slant of text read.",
+            "default": 0
+          },
+          "width": {
+            "type": "number",
+            "title": "width",
+            "description": "Document width.",
+            "default": 0
+          },
+          "height": {
+            "type": "number",
+            "title": "height",
+            "description": "Document height.",
+            "default": 0
+          },
+          "unit": {
+            "type": "string",
+            "title": "unit",
+            "description": "Unit of measurement used for height and width."
+          },
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/LineV2"
+            },
+            "type": "array",
+            "title": "lines",
+            "description": "Lines of text on the page.",
+            "default": []
+          },
+          "words": {
+            "items": {
+              "$ref": "#/components/schemas/WordV2"
+            },
+            "type": "array",
+            "title": "words",
+            "description": "Words on the page.",
+            "default": []
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/SpanV2"
+            },
+            "type": "array",
+            "title": "spans",
+            "description": "Span where data can be found in the raw text.",
+            "default": []
+          },
+          "kind": {
+            "type": "string",
+            "title": "kind",
+            "description": "Type of document.",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ReadResultV2",
+        "x-stoplight": {
+          "id": "1vg9w8flnsa29"
+        }
+      },
+      "ReadStyleV2": {
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "title": "confidence",
+            "description": "Model confidence in detection and accuracy.",
+            "default": 0
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/SpanV2"
+            },
+            "type": "array",
+            "title": "spans",
+            "description": "Span where data can be found in the raw text."
+          },
+          "isHandwritten": {
+            "type": "boolean",
+            "title": "isHandwritten",
+            "description": "Whether or not text was handwritten.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ReadStyleV2",
+        "x-stoplight": {
+          "id": "4h7xr7c2dxf2e"
+        }
+      },
+      "SpanV2": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "title": "offset",
+            "description": "Offset of the data from the edge of the document.",
+            "default": 0
+          },
+          "length": {
+            "type": "integer",
+            "title": "length",
+            "description": "Length of area of the data.",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "SpanV2",
+        "x-stoplight": {
+          "id": "3v1rzy7sniykl"
         }
       },
       "Status": {
@@ -570,6 +873,12 @@
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "title": "forceOCR",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
           "metadata": {
             "type": "object",
             "title": "metadata",
@@ -583,7 +892,7 @@
           "version": {
             "type": "integer",
             "title": "version",
-            "description": "OCR model version (1 or 2).",
+            "description": "OCR model version.",
             "default": 2
           }
         },
@@ -627,6 +936,45 @@
           "id": "51m7p6xmx7xi3"
         }
       },
+      "WordV2": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "content",
+            "description": "Content of the field as a string.",
+            "default": ""
+          },
+          "polygon": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "polygon",
+            "description": "Bounding box coordinates of content.",
+            "default": []
+          },
+          "confidence": {
+            "type": "number",
+            "title": "confidence",
+            "description": "Model confidence in detection and accuracy.",
+            "default": 0
+          },
+          "span": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanV2"
+              }
+            ],
+            "title": "span",
+            "description": "Span where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "title": "WordV2",
+        "x-stoplight": {
+          "id": "nthw2c5k1ruq3"
+        }
+      },
       "ZipBase64Request": {
         "properties": {
           "base64": {
@@ -656,6 +1004,12 @@
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "title": "forceOCR",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
           "metadata": {
             "type": "object",
             "title": "metadata",
@@ -664,7 +1018,7 @@
           "version": {
             "type": "integer",
             "title": "version",
-            "description": "OCR model version (1 or 2).",
+            "description": "OCR model version.",
             "default": 2
           }
         },
@@ -697,6 +1051,12 @@
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "title": "forceOCR",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
           "metadata": {
             "type": "object",
             "title": "metadata",
@@ -705,7 +1065,7 @@
           "version": {
             "type": "integer",
             "title": "version",
-            "description": "OCR model version (1 or 2).",
+            "description": "OCR model version.",
             "default": 2
           }
         },

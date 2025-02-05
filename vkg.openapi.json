@@ -4,6 +4,7 @@
     "id": "0pete9qnzd4dg"
   },
   "info": {
+    "version": "1.0.0",
     "title": "VKG API Reference",
     "description": "VKG API Reference"
   },
@@ -20,7 +21,7 @@
           "All VKG Management"
         ],
         "summary": "Get All VKG Overview",
-        "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the metadata filter section of the documentation.",
+        "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the [Searching the VKG: metadataFilter](../filter) section of the documentation.",
         "operationId": "get-vkg-overview-all",
         "parameters": [
           {
@@ -390,7 +391,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID": {
+    "/api/vkgs/{VKG_ID}": {
       "get": {
         "tags": [
           "Single VKG Management"
@@ -597,7 +598,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/search": {
+    "/api/vkgs/{VKG_ID}/search": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -693,7 +694,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/compute": {
+    "/api/vkgs/{VKG_ID}/compute": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -767,7 +768,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/export": {
+    "/api/vkgs/{VKG_ID}/export": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -834,7 +835,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes": {
+    "/api/vkgs/{VKG_ID}/nodes": {
       "get": {
         "tags": [
           "Nodes"
@@ -986,7 +987,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/batch": {
+    "/api/vkgs/{VKG_ID}/nodes/batch": {
       "delete": {
         "tags": [
           "Nodes"
@@ -1063,7 +1064,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/json": {
+    "/api/vkgs/{VKG_ID}/nodes/json": {
       "post": {
         "tags": [
           "Nodes"
@@ -1171,7 +1172,7 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Example of a request body:\n````json\n{\n  \"nodes\": {\n    \"NODE_ID_1\": {\n      \"text\": \"string\",\n      \"metadata\": {\n        \"METADATA_KEY_1\": \"string\",\n        \"METADATA_KEY_2\": \"string\"\n      }\n    },\n    \"NODE_ID_2\": {\n      \"text\": \"string\",\n      \"metadata\": {\n        \"METADATA_KEY_1\": \"string\",\n        \"METADATA_KEY_2\": \"string\"\n      }\n    }\n  }\n}\n````\n",
           "content": {
             "application/json": {
               "schema": {
@@ -1231,13 +1232,13 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/file": {
+    "/api/vkgs/{VKG_ID}/nodes/file": {
       "post": {
         "tags": [
           "Nodes"
         ],
         "summary": "Add Nodes via Files",
-        "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
+        "description": "For documentation on file formatting, refer to [Formatting](/docs/usage/formatting.md).",
         "operationId": "add-nodes-file",
         "parameters": [
           {
@@ -1316,7 +1317,7 @@
           "Nodes"
         ],
         "summary": "Edit Nodes via Files",
-        "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
+        "description": "For documentation on file formatting, refer to [Formatting](/docs/usage/formatting.md).",
         "operationId": "edit-nodes-file",
         "parameters": [
           {

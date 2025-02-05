@@ -1,10 +1,13 @@
 {
   "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "qwku7w6ool8r4"
+  },
   "info": {
     "title": "Forms",
-    "version": "",
+    "version": "1.0",
     "summary": "",
-    "description": "",
+    "description": "---\nstoplight-id: hxk86uh2m3v4m\n---\n# Forms API Overview\n\nLazarus Forms accurately extracts key-value pairs from any document without targeted training. It automatically converts PDFs and other unstructured data into a structured JSON format. This API enables efficient document processing without the need for a large data entry team. \n\nTo gain access to Lazarus Forms, please reach out to the [sales team at Lazarus AI](https://www.lazarusforms.com/#Sec.Schedule-a-live-demo).\n\n### Benefits of Using Lazarus Forms:\n - Detects checkboxes and tables. \n - Understands handwriting and text.\n - Works on all types of documents.\n - Provides confidence scores for the key-value pairs it extracts. \n - Works regardless of page orientation.\n - Detects urgency in documents. \n\n\n### Input and Output\nDocuments may be uploaded using an input URL or a base64 encoded string. Uploading a local file is supported via multi-part forms, which are available for the [JSON response endpoint](./reference/forms.json/paths/~1forms~1generic/post)\n\nOutput can either be in the form of raw JSON or a ZIP file. The ZIP will contain the file you uploaded, a CSV file with a breakdown of the itemization, and both a JSON and TXT file containing the entire JSON response.\n\n\n\n### Variations\nIn addition to the [Forms model](./forms), we also have [custom models](../reference/forms.json/paths/~1forms~1custom~1{custom_model_id}/post) that are specifically tailored variants of Forms. The custom model endpoints support JSON or ZIP file response. \n\nAll of the custom models share the same call/response format; the only difference is the {custom_model_id} value in the URL.\n\nEach custom model has a set {custom_model_id} value. Your organization may also request a custom-built model that will have a {custom_model_id} that is unique to the company.\n\n\n",
     "contact": {
       "name": "Lazarus IT",
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
@@ -20,7 +23,7 @@
     "/forms/generic": {
       "post": {
         "summary": "JSON response",
-        "description": "Make a request to the Forms model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n    - [PDF Form Example](https://documentation-resources.s3.amazonaws.com/JR_Form.pdf)\n    - [JSON Response for Example](https://docs.google.com/document/d/1Uw8xTRS6iFJ6Rg5l5OBnmHb3PES6Ev4JKCdPIRPXrHM/edit?usp=sharing)\n",
+        "description": "Make a request to the Forms model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n    - [PDF Form Example](https://documentation-resources.s3.amazonaws.com/JR_Form.pdf)\n    - [JSON Response for Example](https://docs.google.com/document/d/1Uw8xTRS6iFJ6Rg5l5OBnmHb3PES6Ev4JKCdPIRPXrHM/edit?usp=sharing)\n",
         "operationId": "post_forms",
         "parameters": [
           {
@@ -36,6 +39,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -46,11 +54,6 @@
                     "$ref": "#/components/schemas/FormsBase64Request"
                   }
                 ]
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -103,6 +106,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsZipFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -114,17 +122,12 @@
                   }
                 ]
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsZipFileRequest"
-              }
             }
           }
         },
         "responses": {
           "202": {
-            "description": "Successful Response. Output is a zip file.\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n",
+            "description": "Successful Response. Output is a zip file.\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n",
             "content": {
               "application/zip": {
                 "schema": {}
@@ -177,7 +180,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response. Output is a ZIP file. \n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
+            "description": "Successful Response. Output is a ZIP file. \n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
             "content": {
               "application/json": {
                 "schema": {
@@ -252,7 +255,7 @@
     "/forms/custom/{custom_model_id}": {
       "post": {
         "summary": "JSON response",
-        "description": "Make a request to a custom Forms2 model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to a custom Forms2 model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_forms_custom",
         "parameters": [
           {
@@ -268,6 +271,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -279,11 +287,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
               }
             }
           }
@@ -342,6 +345,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsZipFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -354,17 +362,12 @@
                 ],
                 "title": "Request Body"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsZipFileRequest"
-              }
             }
           }
         },
         "responses": {
           "202": {
-            "description": "Successful Response. Output is a ZIP file.\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
+            "description": "Successful Response. Output is a ZIP file.\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
             "content": {
               "application/zip": {
                 "schema": {}
@@ -1760,6 +1763,12 @@
     {
       "url": "https://api.lazarusforms.com/api",
       "description": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "Custom",
+      "description": "Send requests to a custom forms model"
     }
   ]
 }

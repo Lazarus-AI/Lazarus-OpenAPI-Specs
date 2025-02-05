@@ -1,9 +1,12 @@
 {
   "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "os5pt011d2x5s"
+  },
   "info": {
-    "title": "Custom Models",
-    "version": "",
-    "summary": "",
+    "title": "Custom LLMs",
+    "version": "0.1.0",
+    "summary": "TODO",
     "description": "",
     "contact": {
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
@@ -20,7 +23,7 @@
     "/rikai/custom/{custom_model_id}": {
       "post": {
         "summary": "Document input, JSON response",
-        "description": "Make a request to a custom model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to a custom model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `mulitpart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_custom",
         "parameters": [
           {
@@ -36,6 +39,11 @@
         "requestBody": {
           "required": true,
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIFileRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "anyOf": [
@@ -47,11 +55,6 @@
                   }
                 ],
                 "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIFileRequest"
               }
             }
           }
@@ -215,7 +218,7 @@
     "/rikai/zip/{custom_model_id}": {
       "post": {
         "summary": "Document input, ZIP file response",
-        "description": "Make a request to a custom model and receive response data in a ZIP file.\n To process your request asynchronously and send the ZIP file to an `outputURL`, include the `async` query parameter. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Make a request to a custom model and receive response data in a ZIP file.\n To process your request asynchronously and send the ZIP file to an `outputURL`, include the `async` query parameter. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_zip_custom",
         "parameters": [
           {
@@ -291,7 +294,7 @@
     "/rikai/bulk/{custom_model_id}": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to a custom model for asynchronous processing. By default, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "description": "Upload 1 or more files to a custom model for asynchronous processing. By default, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
         "operationId": "post_bulk_custom",
         "parameters": [
           {
@@ -578,7 +581,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -605,7 +608,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -695,7 +698,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -722,7 +725,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -898,7 +901,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -925,7 +928,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -942,7 +945,7 @@
             "default": "file name"
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -980,7 +983,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "description": "Optional user settings.",
@@ -1044,7 +1047,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1071,7 +1074,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -1094,7 +1097,7 @@
             "default": "file name"
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1156,7 +1159,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1181,6 +1184,12 @@
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
@@ -1194,7 +1203,7 @@
             "default": false
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1241,7 +1250,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1266,6 +1275,12 @@
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
           },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "setDefault": false,
+            "default": false
+          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
@@ -1285,7 +1300,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1331,7 +1346,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1358,7 +1373,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -1381,7 +1396,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1581,7 +1596,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1608,7 +1623,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -1625,7 +1640,7 @@
             "default": false
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1689,7 +1704,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A 2 character language code or the name of the language you wish to translate answers into."
           },
           "settings": {
             "allOf": [
@@ -1716,7 +1731,7 @@
           },
           "forceOCR": {
             "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
+            "description": "Will flatten a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
             "setDefault": false,
             "default": false
           },
@@ -1739,7 +1754,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document. If included, we do not run OCR and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1891,6 +1906,17 @@
           "description": "Document ID"
         },
         "description": "Status ID"
+      },
+      "modelId": {
+        "name": "custom_model_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "custom_model_id",
+          "description": "Custom model ID"
+        },
+        "description": "Custom model ID"
       }
     },
     "responses": {
