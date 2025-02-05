@@ -1893,6 +1893,17 @@
         "description": "Status ID"
       }
     },
+    "modelId": {
+      "name": "custom_model_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "title": "custom_model_id",
+        "description": "Custom model ID"
+      },
+      "description": "Custom model ID"
+    },
     "responses": {
       "207": {
         "description": "Bulk upload request failed.",

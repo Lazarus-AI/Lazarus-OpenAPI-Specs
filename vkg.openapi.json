@@ -390,7 +390,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID": {
+    "/api/vkgs/{VKG_ID}": {
       "get": {
         "tags": [
           "Single VKG Management"
@@ -409,7 +409,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -469,7 +469,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -557,7 +557,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -597,7 +597,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/search": {
+    "/api/vkgs/{VKG_ID}/search": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -616,7 +616,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -693,7 +693,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/compute": {
+    "/api/vkgs/{VKG_ID}/compute": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -721,7 +721,7 @@
             }
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -767,7 +767,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/export": {
+    "/api/vkgs/{VKG_ID}/export": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -786,7 +786,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -834,7 +834,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes": {
+    "/api/vkgs/{VKG_ID}/nodes": {
       "get": {
         "tags": [
           "Nodes"
@@ -869,7 +869,7 @@
             }
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -946,7 +946,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/batch": {
+    "/api/vkgs/{VKG_ID}/nodes/batch": {
       "delete": {
         "tags": [
           "Nodes"
@@ -1005,7 +1005,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1063,7 +1063,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/json": {
+    "/api/vkgs/{VKG_ID}/nodes/json": {
       "post": {
         "tags": [
           "Nodes"
@@ -1082,7 +1082,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1167,7 +1167,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1231,7 +1231,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/file": {
+    "/api/vkgs/{VKG_ID}/nodes/file": {
       "post": {
         "tags": [
           "Nodes"
@@ -1250,7 +1250,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1329,7 +1329,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
