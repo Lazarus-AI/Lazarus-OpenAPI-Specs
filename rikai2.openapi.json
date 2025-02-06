@@ -271,11 +271,11 @@
               }
             ],
             "forceRequire": true,
-            "description": "A string containing the question to be asked."
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -383,12 +383,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -576,7 +576,7 @@
       "RikAIBase64Request": {
         "type": "object",
         "title": "RikAIBase64Request",
-        "description": "/rikai/custom/rikai2 request body",
+        "description": "/rikai/custom/{model_id} request body",
         "x-stoplight": {
           "id": "greoqs67hnkou"
         },
@@ -609,12 +609,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -689,7 +689,7 @@
             "anyOf": [
               {}
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true,
             "type": "string"
           },
@@ -726,7 +726,7 @@
       "RikAIFileRequest": {
         "type": "object",
         "title": "RikAIFileRequest",
-        "description": "/rikai/custom/rikai2 request body",
+        "description": "/rikai/custom/{model_id} request body",
         "x-stoplight": {
           "id": "rnp4nefx04o19"
         },
@@ -744,12 +744,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -818,7 +818,7 @@
       "RikAIOCRBase64Request": {
         "type": "object",
         "title": "RikAIOCRBase64Request",
-        "description": "/rikai/ocr/rikai2 request body",
+        "description": "/rikai/ocr/{model_id} request body",
         "x-stoplight": {
           "id": "fe8d2fgbiuk5b"
         },
@@ -852,12 +852,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -914,7 +914,7 @@
       "RikAIOCRURLRequest": {
         "type": "object",
         "title": "RikAIOCRURLRequest",
-        "description": "/rikai/ocr/rikai2 request body",
+        "description": "/rikai/ocr/{model_id} request body",
         "x-stoplight": {
           "id": "5qam93efm3y9p"
         },
@@ -933,12 +933,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.\n",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.\n",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -1001,7 +1001,7 @@
       "RikAIURLRequest": {
         "type": "object",
         "title": "RikAIURLRequest",
-        "description": "/rikai/custom/rikai2 request body",
+        "description": "/rikai/custom/{model_id} request body",
         "x-stoplight": {
           "id": "jc6168gqtp10n"
         },
@@ -1019,12 +1019,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -1200,9 +1200,18 @@
           "id": "thmr6jgr6hbv1"
         },
         "properties": {
+          "sendFile": {
+            "type": "boolean",
+            "description": "WARNING: Deprecated, will be removed in a future release. "
+          },
           "advancedVision": {
             "type": "boolean",
             "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
+            "default": false
+          },
+          "returnConfidence": {
+            "type": "boolean",
+            "description": "For RikAI2-Extract only: set to true to include bounding boxes and confidence score in response.",
             "default": false
           }
         }
@@ -1225,7 +1234,7 @@
       "ZipBase64Request": {
         "type": "object",
         "title": "ZipBase64Request",
-        "description": "/rikai/zip/rikai2 request body",
+        "description": "/rikai/zip/{model_id} request body",
         "x-stoplight": {
           "id": "94k2gfq528ww5"
         },
@@ -1258,12 +1267,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
@@ -1344,7 +1353,7 @@
       "ZipURLRequest": {
         "type": "object",
         "title": "ZipURLRequest",
-        "description": "/rikai/zip/rikai2 request body",
+        "description": "/rikai/zip/{model_id} request body",
         "x-stoplight": {
           "id": "gejnb00074dwp"
         },
@@ -1362,12 +1371,12 @@
                 "type": "object"
               }
             ],
-            "description": "A string containing the question to be asked.",
+            "description": "A string containing the question to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary.",
             "forceRequire": true
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
             "setDefault": false,
             "default": false
           },
