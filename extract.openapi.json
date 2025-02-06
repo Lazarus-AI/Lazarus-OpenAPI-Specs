@@ -88,6 +88,75 @@
         }
       }
     },
+    "/rikai/ocr/rikai2-extract": {
+      "post": {
+        "summary": "OCR input, JSON response",
+        "description": "Make a request to a Rikai2-Extract by providing OCR results as input, receive JSON response data.\nNote: Custom model RikAI2 has a vision component that requires the upload of the source document used for OCR. Provide the source document with either a base64 encoded string or an input URL.\n",
+        "operationId": "post_ocr_custom",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/modelId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/RikAIOCRURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RikAIOCRBase64Request"
+                  }
+                ],
+                "title": "Request Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "ipq1dzw0klyqb"
+        }
+      }
+    },
     "/rikai/zip/rikai2-extract": {
       "post": {
         "summary": "Document input, ZIP file response",
@@ -953,10 +1022,6 @@
           "question": {
             "anyOf": [
               {
-                "type": "array",
-                "items": {}
-              },
-              {
                 "type": "string"
               },
               {
@@ -1049,10 +1114,6 @@
         "properties": {
           "question": {
             "anyOf": [
-              {
-                "type": "array",
-                "items": {}
-              },
               {
                 "type": "string"
               },
