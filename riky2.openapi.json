@@ -24,6 +24,9 @@
         "operationId": "post_custom",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -92,6 +95,9 @@
         "operationId": "post_ocr_custom",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -154,6 +160,9 @@
         "description": "Make a request to a custom model and receive response data in a ZIP file.\n To process your request asynchronously and send the ZIP file to an `outputURL`, include the `async` query parameter. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_zip_custom",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -228,6 +237,9 @@
         "operationId": "post_bulk_custom",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -293,6 +305,9 @@
         "description": "Retrieves the status of an asynchronous request to `/rikai/zip/riky2?async=True` or `/rikai/bulk/riky2`. Identifiable by document ID or status ID.",
         "operationId": "get_async_status",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1659,6 +1674,20 @@
       }
     },
     "parameters": {
+      "apiVersion": {
+        "name": "apiVersion",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "YYYY-MM-DD",
+          "title": "apiVersion",
+          "description": "API Version",
+          "default": "2025-02-06"
+        },
+        "description": "API Version"
+      },
       "orgId": {
         "name": "orgId",
         "in": "header",

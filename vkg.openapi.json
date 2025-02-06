@@ -24,6 +24,9 @@
         "operationId": "get-vkg-overview-all",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -77,6 +80,9 @@
         "description": "Create a single VKG and instantiate optional metadata.",
         "operationId": "create-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -177,6 +183,9 @@
         "operationId": "delete-vkg-all",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -214,6 +223,9 @@
         "description": "Export all the VKGs into CSVs as a ZIP file.",
         "operationId": "export-vkg-all",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -295,6 +307,9 @@
         "description": "Duplicate a VKG from another, preserving the nodes and metadata schema.",
         "operationId": "duplicate-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -400,6 +415,9 @@
         "operationId": "get-vkg-overview",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -459,6 +477,9 @@
         "description": "Edit a VKG's name and/or it's metadata schema.",
         "operationId": "edit-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -548,6 +569,9 @@
         "operationId": "delete-vkg",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -606,6 +630,9 @@
         "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilters](../docs/concepts/metadata/filter.md) page.",
         "operationId": "search-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -703,6 +730,9 @@
         "operationId": "compute-tsne",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -777,6 +807,9 @@
         "operationId": "export-vkg",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -843,6 +876,9 @@
         "description": "Retrieve all nodes.\n",
         "operationId": "get-vkg-nodes",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -937,6 +973,9 @@
         "operationId": "delete-vkg-nodes-all",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -995,6 +1034,9 @@
         "description": "Delete Nodes in batch by specific node IDs.",
         "operationId": "delete-vkg-nodes-specific",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1072,6 +1114,9 @@
         "description": "",
         "operationId": "add-nodes-body",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1158,6 +1203,9 @@
         "operationId": "edit-nodes-body",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -1241,6 +1289,9 @@
         "operationId": "add-nodes-file",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -1319,6 +1370,9 @@
         "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
         "operationId": "edit-nodes-file",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },

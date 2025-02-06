@@ -27,6 +27,9 @@
         "operationId": "summarize",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -439,6 +442,20 @@
       }
     },
     "parameters": {
+      "apiVersion": {
+        "name": "apiVersion",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "YYYY-MM-DD",
+          "title": "apiVersion",
+          "description": "API Version",
+          "default": "2025-02-06"
+        },
+        "description": "API Version"
+      },
       "orgId": {
         "name": "orgId",
         "in": "header",

@@ -24,6 +24,9 @@
         "operationId": "post_ssn",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -92,6 +95,9 @@
         "operationId": "post_ssn_zip",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -157,6 +163,9 @@
         "description": "**TODO: where is version parameter to change to V2?**\\\nUpload an invoice for data extraction and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_invoices",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -226,6 +235,9 @@
         "operationId": "post_invoices_zip",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -291,6 +303,9 @@
         "description": "Upload a receipt for data extraction and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_forms_receipts",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -360,6 +375,9 @@
         "operationId": "post_receipts_zip_forms_receipts_zip__input_type__post",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -425,6 +443,9 @@
         "description": "Make a request to extract PII data and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_pii",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -492,6 +513,9 @@
         "description": "Make a request to redact PII data from a document and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_pii_redact",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1953,6 +1977,20 @@
       }
     },
     "parameters": {
+      "apiVersion": {
+        "name": "apiVersion",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "YYYY-MM-DD",
+          "title": "apiVersion",
+          "description": "API Version",
+          "default": "2025-02-06"
+        },
+        "description": "API Version"
+      },
       "orgId": {
         "name": "orgId",
         "in": "header",

@@ -27,6 +27,9 @@
         "operationId": "post_bulk_rikai2",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -92,6 +95,9 @@
         "description": "Retrieves the status of an asynchronous request to `/rikai/zip?async=True` or `/rikai/bulk`. Identifiable by status ID (the {document_id} part of the URL).",
         "operationId": "get_async_status",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1525,6 +1531,20 @@
       }
     },
     "parameters": {
+      "apiVersion": {
+        "name": "apiVersion",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "YYYY-MM-DD",
+          "title": "apiVersion",
+          "description": "API Version",
+          "default": "2025-02-06"
+        },
+        "description": "API Version"
+      },
       "orgId": {
         "name": "orgId",
         "in": "header",
