@@ -165,7 +165,7 @@
                 "items": {}
               }
             ],
-            "description": "Model's answer to the question asked. For the RikAI2-Extract endpoint, the model fills the JSON structure that was provided for input."
+            "description": "Model's answer to the question asked."
           },
           "question": {
             "anyOf": [
