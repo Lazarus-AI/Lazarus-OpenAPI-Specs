@@ -419,9 +419,6 @@
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "Model's answer to the question asked."
@@ -434,9 +431,6 @@
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "The question asked.",
