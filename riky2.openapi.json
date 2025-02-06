@@ -429,17 +429,17 @@
           "question": {
             "anyOf": [
               {
-                "items": {},
-                "type": "array"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
-            "description": "The question asked.",
+            "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
+            "forceRequire": true,
             "default": [["What is the patient's date of birth?", "Format that as YYYY-MM-DD"], ["What is the patient's first and last name?"]]
           },
           "context": {
@@ -562,13 +562,12 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
@@ -673,7 +672,9 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
@@ -867,13 +868,12 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
@@ -959,7 +959,8 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
-            "forceRequire": true
+            "forceRequire": true,
+            "default": [["What is the patient's date of birth?", "Format that as YYYY-MM-DD"], ["What is the patient's first and last name?"]]
           },
           "language": {
             "type": "string",
@@ -1007,13 +1008,12 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
@@ -1096,13 +1096,12 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
@@ -1173,13 +1172,12 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
@@ -1251,13 +1249,12 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
@@ -1473,7 +1470,9 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
@@ -1572,13 +1571,12 @@
             "anyOf": [
               {
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "string"
+                }
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked. A 2D array of question lists is also supported. Each nested list contains a question, and subsequent follow-up questions.",
