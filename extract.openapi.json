@@ -224,10 +224,10 @@
         }
       }
     },
-    "/rikai/zip/async/{document_id}/RikAI2-Extract": {
+    "/rikai/zip/async/{customId}/RikAI2-Extract": {
       "get": {
         "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/RikAI2-Extract?async=True` or `/rikai/bulk/RikAI2-Extract`. Identifiable by document ID or status ID.",
+        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/RikAI2-Extract?async=True` or `/rikai/bulk/RikAI2-Extract`. Identifiable by statusId.",
         "operationId": "get_async_status",
         "parameters": [
           {
@@ -1843,7 +1843,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusforms.com/api",
+      "url": "https://api.lazarusai.com/api",
       "description": ""
     }
   ]
