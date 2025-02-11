@@ -150,10 +150,10 @@
         "x-internal": true
       }
     },
-    "/rikai/zip/async/{document_id}": {
+    "/rikai/zip/async/{statusId}": {
       "get": {
         "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip?async=True` or `/rikai/bulk`. Identifiable by status ID (the {document_id} part of the URL).",
+        "description": "Retrieves the status of an asynchronous request to `/rikai/zip?async=True` or `/rikai/bulk`. Identifiable by statusId.",
         "operationId": "get_async_status",
         "parameters": [
           {
@@ -1763,7 +1763,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusforms.com/api",
+      "url": "https://api.lazarusai.com/api",
       "description": ""
     }
   ]
