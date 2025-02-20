@@ -24,12 +24,6 @@
         "operationId": "post_custom",
         "parameters": [
           {
-<<<<<<< Updated upstream
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/orgId"
-=======
             "name": "model_id",
             "in": "path",
             "required": true,
@@ -39,7 +33,6 @@
               "description": "Custom model ID"
             },
             "description": "Custom model ID"
->>>>>>> Stashed changes
           },
           {
             "name": "orgId",
@@ -148,92 +141,13 @@
         }
       }
     },
-<<<<<<< Updated upstream
-    "/rikai/ocr/rikai2-extract": {
-      "post": {
-        "summary": "OCR input, JSON response",
-        "description": "Make a request to a Rikai2-Extract by providing OCR results as input, receive JSON response data.\nNote: Custom model RikAI2 has a vision component that requires the upload of the source document used for OCR. Provide the source document with either a base64 encoded string or an input URL.\n",
-        "operationId": "post_ocr_custom",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/orgId"
-          },
-          {
-            "$ref": "#/components/parameters/authKey"
-          },
-          {
-            "$ref": "#/components/parameters/modelId"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/RikAIOCRURLRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/RikAIOCRBase64Request"
-                  }
-                ],
-                "title": "Request Body"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          },
-          "502": {
-            "$ref": "#/components/responses/502"
-          }
-        },
-        "x-stoplight": {
-          "id": "ipq1dzw0klyqb"
-        }
-      }
-    },
-    "/rikai/zip/rikai2-extract": {
-=======
     "/rikai/zip/{model_id}": {
->>>>>>> Stashed changes
       "post": {
         "summary": "Document input, ZIP file response",
         "description": "Make a request to a RikAI2-Extract and receive response data in a ZIP file.\n To process your request asynchronously and send the ZIP file to an `outputURL`, include the `async` query parameter. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_zip_custom",
         "parameters": [
           {
-<<<<<<< Updated upstream
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/orgId"
-=======
             "name": "model_id",
             "in": "path",
             "required": true,
@@ -243,7 +157,6 @@
               "description": "Custom model ID"
             },
             "description": "Custom model ID"
->>>>>>> Stashed changes
           },
           {
             "name": "async",
@@ -390,12 +303,6 @@
         "operationId": "post_bulk_custom",
         "parameters": [
           {
-<<<<<<< Updated upstream
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/orgId"
-=======
             "name": "model_id",
             "in": "path",
             "required": true,
@@ -405,7 +312,6 @@
               "description": "Custom model ID"
             },
             "description": "Custom model ID"
->>>>>>> Stashed changes
           },
           {
             "name": "orgId",
@@ -503,19 +409,6 @@
         }
       }
     },
-<<<<<<< Updated upstream
-    "/rikai/zip/async/{document_id}/RikAI2-Extract": {
-      "get": {
-        "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/RikAI2-Extract?async=True` or `/rikai/bulk/RikAI2-Extract`. Identifiable by document ID or status ID.",
-        "operationId": "get_async_status",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/orgId"
-=======
     "/rikai/zip/async/{status_id}": {
       "get": {
         "summary": "Get Async Status Rikai",
@@ -532,7 +425,6 @@
               "description": "Status ID"
             },
             "description": "Status ID"
->>>>>>> Stashed changes
           },
           {
             "name": "orgId",
@@ -1345,179 +1237,12 @@
               }
             ],
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-<<<<<<< Updated upstream
-            "forceRequire": true
-          },
-          "question": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "Question must be a specifically structured JSON string or a dictionary. See our [prompting guide](../../../prompting-guide/model-specific/extract.md)",
-            "forceRequire": true,
-            "default": {
-              "PatientInfo": {
-                "FirstName": {
-                  "data": "Patient first name",
-                  "page_number": 0
-                },
-                "LastName": {
-                  "data": "Patient last name",
-                  "page_number": 0
-                }
-              }
-            }
-          },
-          "language": {
-            "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
-          },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings."
-          },
-          "metadata": {
-            "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
-          },
-          "webhook": {
-            "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "Webhook URL to send status updates and JSON response to."
-          },
-          "webhookSendFull": {
-            "type": "boolean",
-            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
-            "default": false
-          },
-          "forceOCR": {
-            "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
-            "setDefault": false,
-            "default": false
-          },
-          "fileId": {
-            "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-          "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
-            "forceType": "object",
-            "type": "object"
-          },
-          "statusId": {
-            "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId', will be removed in a future release."
-          }
-        }
-      },
-      "RikAIOCRURLRequest": {
-        "type": "object",
-        "title": "RikAIOCRURLRequest",
-        "description": "/rikai/ocr/rikai2-extract request body",
-        "x-stoplight": {
-          "id": "9gkz6vkclu3t8"
-        },
-        "required": [
-          "question",
-          "inputURL",
-          "ocr"
-        ],
-        "properties": {
-          "question": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "Question must be a specifically structured JSON string or a dictionary. See our [prompting guide](../../../prompting-guide/model-specific/extract.md)",
-            "forceRequire": true,
-            "default": {
-              "PatientInfo": {
-                "FirstName": {
-                  "data": "Patient first name",
-                  "page_number": 0
-                },
-                "LastName": {
-                  "data": "Patient last name",
-                  "page_number": 0
-                }
-              }
-            }
-          },
-          "language": {
-            "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
-          },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings."
-          },
-          "metadata": {
-            "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
-          },
-          "webhook": {
-            "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "Webhook URL to send status updates and JSON response to."
-          },
-          "webhookSendFull": {
-            "type": "boolean",
-            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
-            "default": false
-          },
-          "forceOCR": {
-            "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to  `true` only if the input file is a fillable pdf.",
-            "setDefault": false,
-            "default": false
-          },
-          "fileId": {
-            "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-=======
             "models": {
               "Riky2": {
                 "forceExclude": true
               }
             }
           },
->>>>>>> Stashed changes
           "inputURL": {
             "type": "string",
             "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
@@ -2174,61 +1899,12 @@
         "title": "ZipURLRequest",
         "description": "/rikai/zip and /rikai/zip/{model_id} url request"
       }
-<<<<<<< Updated upstream
-    },
-    "parameters": {
-      "apiVersion": {
-        "name": "apiVersion",
-        "in": "header",
-        "required": false,
-        "schema": {
-          "type": "string",
-          "minLength": 1,
-          "pattern": "YYYY-MM-DD",
-          "title": "apiVersion",
-          "description": "API Version",
-          "default": "2025-02-06"
-        },
-        "description": "API Version"
-      },
-      "orgId": {
-        "name": "orgId",
-        "in": "header",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "minLength": 1,
-          "pattern": "^[a-zA-Z0-9\\-_]+$",
-          "title": "orgId",
-          "description": "Organization ID"
-        },
-        "description": "Organization ID"
-      },
-      "authKey": {
-        "name": "authKey",
-        "in": "header",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9\\-_]+$",
-          "title": "authKey",
-          "description": "Authentication key"
-        },
-        "description": "Authentication key"
-      },
-      "async": {
-        "name": "async",
-        "in": "query",
-        "required": false,
-        "schema": {
-=======
     }
   },
   "schemas": {
     "Answer": {
       "properties": {
         "answer": {
->>>>>>> Stashed changes
           "anyOf": [
             {
               "items": {},
@@ -3914,17 +3590,8 @@
       "description": "/rikai/zip and /rikai/zip/{model_id} url request"
     }
   },
-<<<<<<< Updated upstream
-  "servers": [
-    {
-      "url": "https://api.lazarusforms.com/api",
-      "description": ""
-    }
-  ]
-=======
   "servers": {
     "url": "https://api.lazarusai.com/api",
     "description": ""
   }
->>>>>>> Stashed changes
 }
