@@ -3480,8 +3480,8 @@
       "description": "/rikai/zip and /rikai/zip/{model_id} url request"
     }
   },
-  "servers": {
+  "servers": [{
     "url": "https://api.lazarusai.com/api",
     "description": ""
-  }
+  }]
 }
