@@ -173,8 +173,7 @@
               }
             }
           }
-        },
-        "supportFormData": true
+        }
       }
     },
     "/rikai/ocr/riky2": {
@@ -512,29 +511,21 @@
           "answer": {
             "anyOf": [
               {
-                "items": {},
-                "type": "array"
+                "type": "list"
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
-            "description": "Model's answer to the question asked. For the RikAI2-Extract endpoint, the model fills the JSON structure that was provided for input."
+            "description": "Model's answer to the question asked."
           },
           "question": {
             "anyOf": [
               {
-                "items": {},
-                "type": "array"
+                "type": "list"
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "object"
               }
             ],
             "description": "The question asked."
@@ -557,8 +548,7 @@
           "answer",
           "question"
         ],
-        "title": "Answer",
-        "description": "Answer model, data for each Q&A in response"
+        "title": "Answer"
       },
       "AsyncStatusResponse": {
         "properties": {
@@ -567,15 +557,8 @@
             "description": "Model used to process the document."
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "endTime": {
             "type": "integer",
@@ -599,11 +582,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model"
-        ],
-        "title": "AsyncStatusResponse",
-        "description": "/rikai/zip/async/{status_id} response"
+        "required": [],
+        "title": "AsyncStatusResponse"
       },
       "BulkBase64Request": {
         "properties": {
@@ -719,8 +699,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkBase64Request",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} base64 request"
+        "title": "BulkBase64Request"
       },
       "BulkRequestBody": {
         "oneOf": [
@@ -732,7 +711,6 @@
           }
         ],
         "title": "BulkRequestBody",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} request body",
         "required": [],
         "properties": {}
       },
@@ -751,15 +729,8 @@
             "description": "List of document IDs for each file uploaded."
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "endTime": {
             "type": "integer",
@@ -796,13 +767,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model",
-          "statusId",
-          "message"
-        ],
-        "title": "BulkResponse",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} response"
+        "required": [],
+        "title": "BulkResponse"
       },
       "BulkURLRequest": {
         "properties": {
@@ -923,8 +889,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkURLRequest",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} url request"
+        "title": "BulkURLRequest"
       },
       "HTTPValidationError": {
         "properties": {
@@ -960,7 +925,6 @@
         },
         "type": "object",
         "title": "InputOutputSFTP",
-        "description": "SFTP server info for inputURL and outputURL",
         "required": []
       },
       "RikAIBase64Request": {
@@ -1047,8 +1011,7 @@
           "base64",
           "question"
         ],
-        "title": "RikAIBase64Request",
-        "description": "/rikai and /rikai/custom/{model_id} base64 request"
+        "title": "RikAIBase64Request"
       },
       "RikAIChatRequestBody": {
         "properties": {
@@ -1108,7 +1071,6 @@
         },
         "type": "object",
         "title": "RikAIChatRequestBody",
-        "description": "/rikai/chat and /rikai/chat/{model_id} request body\nDoes not serve Rikai2-Extract requests",
         "required": [
           "question"
         ]
@@ -1189,8 +1151,7 @@
           "file",
           "question"
         ],
-        "title": "RikAIFileRequest",
-        "description": "/rikai and /rikai/custom/{model_id} file request"
+        "title": "RikAIFileRequest"
       },
       "RikAIOCRRequestBody": {
         "properties": {
@@ -1268,8 +1229,7 @@
           "ocr",
           "question"
         ],
-        "title": "RikAIOCRRequestBody",
-        "description": "/rikai/ocr and /rikai/ocr/{model_id} request body\nDoes not serve Rikai2-Extract requests"
+        "title": "RikAIOCRRequestBody"
       },
       "RikAIRequestBody": {
         "oneOf": [
@@ -1281,7 +1241,6 @@
           }
         ],
         "title": "RikAIRequestBody",
-        "description": "/rikai and /rikai/custom/{model_id} request body",
         "required": [],
         "properties": {}
       },
@@ -1296,37 +1255,16 @@
             "description": "Number of pages in the document."
           },
           "questions": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Number of questions asked."
+            "description": "Number of questions asked.",
+            "type": "integer"
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "baseModel": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Base model used during data extraction."
+            "description": "Base model used during data extraction.",
+            "type": "string"
           },
           "data": {
             "items": {
@@ -1336,15 +1274,8 @@
             "description": "Question and answer data for each question asked in the request."
           },
           "documentId": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "ID for document request or filename if specified."
+            "description": "ID for document request or filename if specified.",
+            "type": "string"
           },
           "endTime": {
             "type": "integer",
@@ -1363,15 +1294,8 @@
             "description": "JSON from the request `metadata` field."
           },
           "ocrResults": {
-            "anyOf": [
-              {
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request."
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request.",
+            "type": "object"
           },
           "settings": {
             "type": "object",
@@ -1391,13 +1315,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model",
-          "pages",
-          "questions"
-        ],
-        "title": "RikAIResponse",
-        "description": "/rikai, /rikai/custom/{model_id}, /rikai/ocr, /rikai/ocr/{model_id},\n/rikai/chat, and /rikai/chat/{model_id} response"
+        "required": [],
+        "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
         "properties": {
@@ -1490,8 +1409,7 @@
           "inputURL",
           "question"
         ],
-        "title": "RikAIURLRequest",
-        "description": "/rikai and /rikai/custom/{model_id} url request"
+        "title": "RikAIURLRequest"
       },
       "SFTP": {
         "properties": {
@@ -1516,14 +1434,12 @@
         "required": [
           "user"
         ],
-        "title": "SFTP",
-        "description": "SFTP authentication model, request body"
+        "title": "SFTP"
       },
       "Settings": {
         "properties": {},
         "type": "object",
         "title": "Settings",
-        "description": "Settings model, request body",
         "required": []
       },
       "StatusEnum": {
@@ -1536,7 +1452,6 @@
           "RUNNING"
         ],
         "title": "StatusEnum",
-        "description": "Status enum for responses",
         "required": [],
         "properties": {}
       },
@@ -1684,8 +1599,7 @@
           "question",
           "webhook"
         ],
-        "title": "ZipBase64Request",
-        "description": "/rikai/zip and /rikai/zip/{model_id} base64 request"
+        "title": "ZipBase64Request"
       },
       "ZipRequestBody": {
         "oneOf": [
@@ -1697,7 +1611,6 @@
           }
         ],
         "title": "ZipRequestBody",
-        "description": "/rikai/zip and /rikai/zip/{model_id} request body",
         "required": [],
         "properties": {}
       },
@@ -1720,15 +1633,8 @@
             "description": "Number of pages in the document."
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "documentId": {
             "type": "string",
@@ -1747,15 +1653,8 @@
             "description": "JSON from the request `metadata` field."
           },
           "questions": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Number of questions asked."
+            "description": "Number of questions asked.",
+            "type": "integer"
           },
           "startTime": {
             "type": "integer",
@@ -1779,14 +1678,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model",
-          "code",
-          "organization",
-          "pages"
-        ],
-        "title": "ZipResponse",
-        "description": "/rikai/zip and /rikai/zip/{model_id} response"
+        "required": [],
+        "title": "ZipResponse"
       },
       "ZipURLRequest": {
         "properties": {
@@ -1898,8 +1791,7 @@
           "question",
           "webhook"
         ],
-        "title": "ZipURLRequest",
-        "description": "/rikai/zip and /rikai/zip/{model_id} url request"
+        "title": "ZipURLRequest"
       }
     }
   },

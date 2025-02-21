@@ -96,8 +96,7 @@
               }
             }
           }
-        },
-        "supportFormData": true
+        }
       }
     },
     "/rikai/zip/rikai2-extract": {
@@ -356,46 +355,12 @@
       "Answer": {
         "properties": {
           "answer": {
-            "anyOf": [
-              {
-                "items": {},
-                "type": "array"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "Model's answer to the question asked. For the RikAI2-Extract endpoint, the model fills the JSON structure that was provided for input."
+            "description": "Model's answer to the question asked. The model fills the JSON structure that was provided for input.",
+            "type": "object"
           },
           "question": {
-            "anyOf": [
-              {
-                "items": {},
-                "type": "array"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "The question asked."
-          },
-          "confidence": {
-            "type": "number",
-            "description": "Answer confidence score ranging from 0 to 1."
-          },
-          "context": {
-            "type": "string",
-            "description": "Where in the document the answer was found."
-          },
-          "translated": {
-            "type": "string",
-            "description": "Translated answer if the `language` field was included in the request"
+            "description": "The question asked.",
+            "type": "object"
           }
         },
         "type": "object",
@@ -403,8 +368,7 @@
           "answer",
           "question"
         ],
-        "title": "Answer",
-        "description": "Answer model, data for each Q&A in response"
+        "title": "Answer"
       },
       "AsyncStatusResponse": {
         "properties": {
@@ -413,15 +377,8 @@
             "description": "Model used to process the document."
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "endTime": {
             "type": "integer",
@@ -445,11 +402,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model"
-        ],
-        "title": "AsyncStatusResponse",
-        "description": "/rikai/zip/async/{status_id} response"
+        "required": [],
+        "title": "AsyncStatusResponse"
       },
       "BulkBase64Request": {
         "properties": {
@@ -477,7 +431,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "webhook": {
             "type": "string",
@@ -560,8 +527,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkBase64Request",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} base64 request"
+        "title": "BulkBase64Request"
       },
       "BulkRequestBody": {
         "oneOf": [
@@ -573,7 +539,6 @@
           }
         ],
         "title": "BulkRequestBody",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} request body",
         "required": [],
         "properties": {}
       },
@@ -592,15 +557,8 @@
             "description": "List of document IDs for each file uploaded."
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "endTime": {
             "type": "integer",
@@ -637,13 +595,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model",
-          "statusId",
-          "message"
-        ],
-        "title": "BulkResponse",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} response"
+        "required": [],
+        "title": "BulkResponse"
       },
       "BulkURLRequest": {
         "properties": {
@@ -671,7 +624,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "webhook": {
             "type": "string",
@@ -759,8 +725,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkURLRequest",
-        "description": "/rikai/bulk and /rikai/bulk/{model_id} url request"
+        "title": "BulkURLRequest"
       },
       "HTTPValidationError": {
         "properties": {
@@ -796,7 +761,6 @@
         },
         "type": "object",
         "title": "InputOutputSFTP",
-        "description": "SFTP server info for inputURL and outputURL",
         "required": []
       },
       "RikAIBase64Request": {
@@ -825,7 +789,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "settings": {
             "allOf": [
@@ -874,8 +851,7 @@
           "base64",
           "question"
         ],
-        "title": "RikAIBase64Request",
-        "description": "/rikai and /rikai/custom/{model_id} base64 request"
+        "title": "RikAIBase64Request"
       },
       "RikAIChatRequestBody": {
         "properties": {
@@ -889,7 +865,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "settings": {
             "allOf": [
@@ -935,7 +924,6 @@
         },
         "type": "object",
         "title": "RikAIChatRequestBody",
-        "description": "/rikai/chat and /rikai/chat/{model_id} request body\nDoes not serve Rikai2-Extract requests",
         "required": [
           "question"
         ]
@@ -957,7 +945,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "settings": {
             "allOf": [
@@ -1011,8 +1012,7 @@
           "file",
           "question"
         ],
-        "title": "RikAIFileRequest",
-        "description": "/rikai and /rikai/custom/{model_id} file request"
+        "title": "RikAIFileRequest"
       },
       "RikAIOCRRequestBody": {
         "properties": {
@@ -1030,7 +1030,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "settings": {
             "allOf": [
@@ -1104,8 +1117,7 @@
           "ocr",
           "question"
         ],
-        "title": "RikAIOCRRequestBody",
-        "description": "/rikai/ocr and /rikai/ocr/{model_id} request body\nDoes not serve Rikai2-Extract requests"
+        "title": "RikAIOCRRequestBody"
       },
       "RikAIRequestBody": {
         "oneOf": [
@@ -1117,7 +1129,6 @@
           }
         ],
         "title": "RikAIRequestBody",
-        "description": "/rikai and /rikai/custom/{model_id} request body",
         "required": [],
         "properties": {}
       },
@@ -1132,37 +1143,16 @@
             "description": "Number of pages in the document."
           },
           "questions": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Number of questions asked."
+            "description": "Number of questions asked.",
+            "type": "integer"
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "baseModel": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Base model used during data extraction."
+            "description": "Base model used during data extraction.",
+            "type": "string"
           },
           "data": {
             "items": {
@@ -1172,15 +1162,8 @@
             "description": "Question and answer data for each question asked in the request."
           },
           "documentId": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "ID for document request or filename if specified."
+            "description": "ID for document request or filename if specified.",
+            "type": "string"
           },
           "endTime": {
             "type": "integer",
@@ -1216,13 +1199,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model",
-          "pages",
-          "questions"
-        ],
-        "title": "RikAIResponse",
-        "description": "/rikai, /rikai/custom/{model_id}, /rikai/ocr, /rikai/ocr/{model_id},\n/rikai/chat, and /rikai/chat/{model_id} response"
+        "required": [],
+        "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
         "properties": {
@@ -1241,7 +1219,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "settings": {
             "allOf": [
@@ -1306,8 +1297,7 @@
           "inputURL",
           "question"
         ],
-        "title": "RikAIURLRequest",
-        "description": "/rikai and /rikai/custom/{model_id} url request"
+        "title": "RikAIURLRequest"
       },
       "SFTP": {
         "properties": {
@@ -1332,8 +1322,7 @@
         "required": [
           "user"
         ],
-        "title": "SFTP",
-        "description": "SFTP authentication model, request body"
+        "title": "SFTP"
       },
       "Settings": {
         "properties": {
@@ -1344,7 +1333,6 @@
         },
         "type": "object",
         "title": "Settings",
-        "description": "Settings model, request body",
         "required": []
       },
       "StatusEnum": {
@@ -1357,7 +1345,6 @@
           "RUNNING"
         ],
         "title": "StatusEnum",
-        "description": "Status enum for responses",
         "required": [],
         "properties": {}
       },
@@ -1417,7 +1404,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "webhook": {
             "type": "string",
@@ -1496,8 +1496,7 @@
           "question",
           "webhook"
         ],
-        "title": "ZipBase64Request",
-        "description": "/rikai/zip and /rikai/zip/{model_id} base64 request"
+        "title": "ZipBase64Request"
       },
       "ZipRequestBody": {
         "oneOf": [
@@ -1509,7 +1508,6 @@
           }
         ],
         "title": "ZipRequestBody",
-        "description": "/rikai/zip and /rikai/zip/{model_id} request body",
         "required": [],
         "properties": {}
       },
@@ -1532,15 +1530,8 @@
             "description": "Number of pages in the document."
           },
           "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "API version used for request."
+            "description": "API version used for request.",
+            "type": "string"
           },
           "documentId": {
             "type": "string",
@@ -1559,15 +1550,8 @@
             "description": "JSON from the request `metadata` field."
           },
           "questions": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Number of questions asked."
+            "description": "Number of questions asked.",
+            "type": "integer"
           },
           "startTime": {
             "type": "integer",
@@ -1591,14 +1575,8 @@
           }
         },
         "type": "object",
-        "required": [
-          "model",
-          "code",
-          "organization",
-          "pages"
-        ],
-        "title": "ZipResponse",
-        "description": "/rikai/zip and /rikai/zip/{model_id} response"
+        "required": [],
+        "title": "ZipResponse"
       },
       "ZipURLRequest": {
         "properties": {
@@ -1617,7 +1595,20 @@
               }
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              {
+                "PatientInfo": {
+                  "FirstName": {
+                    "data": "Patient first name",
+                    "page_number": 0
+                  },
+                  "LastName": {
+                    "data": "Patient last name",
+                    "page_number": 0
+                  }
+                }
+              }
+            ]
           },
           "webhook": {
             "type": "string",
@@ -1701,8 +1692,7 @@
           "question",
           "webhook"
         ],
-        "title": "ZipURLRequest",
-        "description": "/rikai/zip and /rikai/zip/{model_id} url request"
+        "title": "ZipURLRequest"
       }
     }
   },
