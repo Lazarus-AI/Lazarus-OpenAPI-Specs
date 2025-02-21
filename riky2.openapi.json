@@ -19,7 +19,7 @@
   "paths": {
     "/rikai/chat/riky2": {
       "post": {
-        "summary": "OCR input, JSON response",
+        "summary": "Chat, no file input, JSON response",
         "description": "Make a RikY2 request using prompt as context. No document upload.",
         "operationId": "post_chat_riky2",
         "parameters": [
