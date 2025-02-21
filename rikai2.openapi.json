@@ -1211,10 +1211,6 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
-          },
-          "statusId": {
-            "type": "string",
-            "description": "WARNING: Deprecating in favor of `fileId`, will be removed in a future release."
           }
         },
         "type": "object",
@@ -1396,10 +1392,6 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
-          },
-          "statusId": {
-            "type": "string",
-            "description": "WARNING: Deprecating in favor of `fileId`, will be removed in a future release."
           }
         },
         "type": "object",
