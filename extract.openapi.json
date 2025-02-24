@@ -20,7 +20,7 @@
     "/rikai/custom/rikai2-extract": {
       "post": {
         "summary": "Document input, JSON response",
-        "description": "Make a request to RikAI2-Extract and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to RikAI2-Extract and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_rikai2_extract",
         "parameters": [
           {
@@ -55,9 +55,9 @@
             "schema": {
               "type": "string",
               "title": "apiVersion",
-              "description": "API version used for request."
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
             },
-            "description": "API version used for request."
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
           }
         ],
         "requestBody": {
@@ -160,9 +160,9 @@
             "schema": {
               "type": "string",
               "title": "apiVersion",
-              "description": "API version used for request."
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
             },
-            "description": "API version used for request."
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
           }
         ],
         "requestBody": {
@@ -210,7 +210,7 @@
     "/rikai/bulk/rikai2-extract": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. By default, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. By default, a JSON response will be sent to your `webhook`. If `outputURL` is provided in the request, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
         "operationId": "post_bulk_rikai2_extract",
         "parameters": [
           {
@@ -245,9 +245,9 @@
             "schema": {
               "type": "string",
               "title": "apiVersion",
-              "description": "API version used for request."
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
             },
-            "description": "API version used for request."
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
           }
         ],
         "requestBody": {
@@ -338,9 +338,9 @@
             "schema": {
               "type": "string",
               "title": "apiVersion",
-              "description": "API version used for request."
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
             },
-            "description": "API version used for request."
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
           }
         ],
         "responses": {
@@ -397,7 +397,7 @@
             "description": "Model used to process the document."
           },
           "apiVersion": {
-            "description": "API version used for request.",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
           "endTime": {
@@ -519,7 +519,7 @@
           "outputURL": {
             "type": "string",
             "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
             "type": "object",
@@ -577,7 +577,7 @@
             "description": "List of document IDs for each file uploaded."
           },
           "apiVersion": {
-            "description": "API version used for request.",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
           "endTime": {
@@ -717,7 +717,7 @@
           "outputURL": {
             "type": "string",
             "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
             "type": "object",
@@ -1167,7 +1167,7 @@
             "type": "integer"
           },
           "apiVersion": {
-            "description": "API version used for request.",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
           "baseModel": {
@@ -1483,7 +1483,7 @@
           "outputURL": {
             "type": "string",
             "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
             "type": "object",
@@ -1546,7 +1546,7 @@
             "description": "Number of pages in the document."
           },
           "apiVersion": {
-            "description": "API version used for request.",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
           "documentId": {
@@ -1675,7 +1675,7 @@
           "outputURL": {
             "type": "string",
             "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
             "type": "object",
@@ -1748,7 +1748,7 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1768,7 +1768,7 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1788,7 +1788,7 @@
                   "status": "AUTH_FAILURE",
                   "message": "Invalid authentication",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1808,7 +1808,7 @@
                   "status": "FAILURE",
                   "message": "Model id 'abc' is not valid.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1828,7 +1828,7 @@
                   "status": "FAILURE",
                   "message": "Error during request to OCR microservice.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               },
               "LLM failed": {
@@ -1836,7 +1836,7 @@
                   "status": "FAILURE",
                   "message": "We made three attempts to process the model with no success.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               },
               "Internal server error": {
@@ -1844,7 +1844,7 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1864,7 +1864,7 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "df66bda3-07ad-48de-b2a7-11208d0503d4"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
