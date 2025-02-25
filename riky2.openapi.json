@@ -641,7 +641,17 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              [
+                [
+                  "What is the name of the patient?"
+                ],
+                [
+                  "What is the first medication listed under Section C - Medical Information?",
+                  "What is its strength?"
+                ]
+              ]
+            ]
           },
           "webhook": {
             "type": "string",
