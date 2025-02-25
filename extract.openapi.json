@@ -1748,7 +1748,7 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1768,7 +1768,7 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1788,7 +1788,7 @@
                   "status": "AUTH_FAILURE",
                   "message": "Invalid authentication",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1808,7 +1808,7 @@
                   "status": "FAILURE",
                   "message": "Model id 'abc' is not valid.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1828,7 +1828,7 @@
                   "status": "FAILURE",
                   "message": "Error during request to OCR microservice.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               },
               "LLM failed": {
@@ -1836,7 +1836,7 @@
                   "status": "FAILURE",
                   "message": "We made three attempts to process the model with no success.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               },
               "Internal server error": {
@@ -1844,7 +1844,7 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
@@ -1864,7 +1864,7 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
