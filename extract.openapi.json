@@ -210,7 +210,7 @@
     "/rikai/bulk/rikai2-extract": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. By default, a JSON response will be sent to your `webhook`. If `outputURL` is provided in the request, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Uploads a ZIP file for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
         "operationId": "post_bulk_rikai2_extract",
         "parameters": [
           {
@@ -1748,7 +1748,7 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               }
             }
@@ -1768,7 +1768,7 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               }
             }
@@ -1788,7 +1788,7 @@
                   "status": "AUTH_FAILURE",
                   "message": "Invalid authentication",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               }
             }
@@ -1808,7 +1808,7 @@
                   "status": "FAILURE",
                   "message": "Model id 'abc' is not valid.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               }
             }
@@ -1828,7 +1828,7 @@
                   "status": "FAILURE",
                   "message": "Error during request to OCR microservice.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               },
               "LLM failed": {
@@ -1836,7 +1836,7 @@
                   "status": "FAILURE",
                   "message": "We made three attempts to process the model with no success.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               },
               "Internal server error": {
@@ -1844,7 +1844,7 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               }
             }
@@ -1864,7 +1864,7 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "988d054c-80a1-4405-a1fb-4e0b174dbb3a"
                 }
               }
             }
