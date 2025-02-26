@@ -440,6 +440,9 @@
               }
             }
           },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
           "400": {
             "$ref": "#/components/responses/400"
           },
@@ -690,7 +693,14 @@
                 "type": "string"
               }
             ],
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file."
+            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "examples": [
+              "file name",
+              [
+                "file1.pdf",
+                "file2.pdf"
+              ]
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -882,7 +892,14 @@
                 "type": "string"
               }
             ],
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file."
+            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "examples": [
+              "file name",
+              [
+                "file1.pdf",
+                "file2.pdf"
+              ]
+            ]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1037,7 +1054,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "examples": [
+              "file name"
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -1115,7 +1134,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "examples": [
+              "file name"
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -1188,7 +1209,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "examples": [
+              "file name"
+            ]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1271,7 +1294,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "examples": [
+              "file name"
+            ]
           },
           "language": {
             "type": "string",
@@ -1443,7 +1468,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "examples": [
+              "file name"
+            ]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1625,7 +1652,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "examples": [
+              "file name"
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -1814,7 +1843,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "examples": [
+              "file name"
+            ]
           },
           "forceBase64": {
             "type": "boolean",
