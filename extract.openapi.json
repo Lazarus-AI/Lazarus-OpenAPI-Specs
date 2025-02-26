@@ -475,7 +475,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
@@ -532,7 +532,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
@@ -676,7 +676,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
@@ -738,7 +738,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
@@ -858,7 +858,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
@@ -936,7 +936,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
@@ -1018,7 +1018,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
@@ -1105,7 +1105,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
@@ -1140,7 +1140,7 @@
           },
           "inputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "language": {
@@ -1257,7 +1257,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "question": {
@@ -1296,7 +1296,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
@@ -1474,7 +1474,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
@@ -1517,7 +1517,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
@@ -1633,7 +1633,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "question": {
@@ -1663,7 +1663,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
@@ -1711,7 +1711,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
