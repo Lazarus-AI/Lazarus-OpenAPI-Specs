@@ -331,7 +331,8 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL."
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": false
           },
           "returnOCR": {
             "type": "boolean",
@@ -514,7 +515,8 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL."
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": false
           },
           "returnOCR": {
             "type": "boolean",
@@ -1203,7 +1205,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": true
+            "default": false
           },
           "returnOCR": {
             "type": "boolean",
@@ -1384,7 +1386,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": true
+            "default": false
           },
           "returnOCR": {
             "type": "boolean",
