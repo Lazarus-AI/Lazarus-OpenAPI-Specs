@@ -24,6 +24,9 @@
         "operationId": "get-vkg-overview-all",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -77,6 +80,9 @@
         "description": "Create a single VKG and instantiate optional metadata.",
         "operationId": "create-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -177,6 +183,9 @@
         "operationId": "delete-vkg-all",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -214,6 +223,9 @@
         "description": "Export all the VKGs into CSVs as a ZIP file.",
         "operationId": "export-vkg-all",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -295,6 +307,9 @@
         "description": "Duplicate a VKG from another, preserving the nodes and metadata schema.",
         "operationId": "duplicate-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -390,7 +405,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID": {
+    "/api/vkgs/{VKG_ID}": {
       "get": {
         "tags": [
           "Single VKG Management"
@@ -399,6 +414,9 @@
         "description": "Provides an overview of the specified VKG.",
         "operationId": "get-vkg-overview",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -409,7 +427,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -460,6 +478,9 @@
         "operationId": "edit-vkg",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -469,7 +490,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -548,6 +569,9 @@
         "operationId": "delete-vkg",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -557,7 +581,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -597,7 +621,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/search": {
+    "/api/vkgs/{VKG_ID}/search": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -606,6 +630,9 @@
         "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilters](../docs/concepts/metadata/filter.md) page.",
         "operationId": "search-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -616,7 +643,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -693,7 +720,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/compute": {
+    "/api/vkgs/{VKG_ID}/compute": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -702,6 +729,9 @@
         "description": "Compute the TSNE of the VKG. TSNE is the metric used to visualize nodes as a graph. Each node's TSNE needs to be calculated in order to create a visualization.",
         "operationId": "compute-tsne",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -721,7 +751,7 @@
             }
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -767,7 +797,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/export": {
+    "/api/vkgs/{VKG_ID}/export": {
       "post": {
         "tags": [
           "Single VKG Management"
@@ -776,6 +806,9 @@
         "description": "Export the VKG into a CSV.",
         "operationId": "export-vkg",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -786,7 +819,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -834,7 +867,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes": {
+    "/api/vkgs/{VKG_ID}/nodes": {
       "get": {
         "tags": [
           "Nodes"
@@ -843,6 +876,9 @@
         "description": "Retrieve all nodes.\n",
         "operationId": "get-vkg-nodes",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -869,7 +905,7 @@
             }
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -937,6 +973,9 @@
         "operationId": "delete-vkg-nodes-all",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -946,7 +985,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "responses": {
@@ -986,7 +1025,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/batch": {
+    "/api/vkgs/{VKG_ID}/nodes/batch": {
       "delete": {
         "tags": [
           "Nodes"
@@ -995,6 +1034,9 @@
         "description": "Delete Nodes in batch by specific node IDs.",
         "operationId": "delete-vkg-nodes-specific",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1005,7 +1047,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1063,7 +1105,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/json": {
+    "/api/vkgs/{VKG_ID}/nodes/json": {
       "post": {
         "tags": [
           "Nodes"
@@ -1072,6 +1114,9 @@
         "description": "",
         "operationId": "add-nodes-body",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1082,7 +1127,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1158,6 +1203,9 @@
         "operationId": "edit-nodes-body",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -1167,7 +1215,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1231,7 +1279,7 @@
         }
       }
     },
-    "/api/vkgs/VKG_ID/nodes/file": {
+    "/api/vkgs/{VKG_ID}/nodes/file": {
       "post": {
         "tags": [
           "Nodes"
@@ -1240,6 +1288,9 @@
         "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
         "operationId": "add-nodes-file",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1250,7 +1301,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
@@ -1320,6 +1371,9 @@
         "operationId": "edit-nodes-file",
         "parameters": [
           {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -1329,7 +1383,7 @@
             "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/VKG_ID"
+            "$ref": "#/components/parameters/{VKG_ID}"
           }
         ],
         "requestBody": {
