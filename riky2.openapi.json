@@ -663,15 +663,6 @@
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
-          },
           "webhookHeaders": {
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
@@ -862,15 +853,6 @@
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
-          },
           "webhookHeaders": {
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
@@ -1028,15 +1010,6 @@
               ]
             ]
           },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
-          },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
@@ -1108,15 +1081,6 @@
               ]
             ]
           },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
-          },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
@@ -1182,15 +1146,6 @@
                 "What is the address?"
               ]
             ]
-          },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -1267,15 +1222,6 @@
                 "What is the address?"
               ]
             ]
-          },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -1441,15 +1387,6 @@
                 "What is the address?"
               ]
             ]
-          },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -1630,15 +1567,6 @@
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
-          },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
           },
           "webhookHeaders": {
             "type": "object",
@@ -1821,15 +1749,6 @@
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
-          },
-          "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
-            "description": "Optional user settings.",
-            "type": "object"
           },
           "webhookHeaders": {
             "type": "object",
