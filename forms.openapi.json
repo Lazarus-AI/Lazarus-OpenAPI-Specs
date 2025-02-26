@@ -642,7 +642,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
@@ -684,7 +684,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -695,7 +695,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -780,7 +780,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -790,7 +790,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -847,7 +847,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -857,7 +857,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -897,7 +897,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
@@ -914,7 +914,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -924,7 +924,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1000,7 +1000,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -1010,7 +1010,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1044,7 +1044,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
@@ -1071,7 +1071,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -1081,7 +1081,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1142,7 +1142,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -1152,7 +1152,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {

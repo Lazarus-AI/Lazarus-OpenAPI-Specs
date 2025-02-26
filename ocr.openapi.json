@@ -660,7 +660,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -686,7 +686,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook to ping after API runs."
           },
           "webhookSendFull": {
@@ -703,7 +703,8 @@
         "type": "object",
         "title": "ZipBase64Request",
         "required": [
-          "base64"
+          "base64",
+          "webhook"
         ],
         "x-stoplight": {
           "id": "oc9su9i22oq6c"
@@ -713,7 +714,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
@@ -723,7 +724,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -749,7 +750,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook to ping after API runs."
           },
           "webhookSendFull": {
@@ -766,7 +767,8 @@
         "type": "object",
         "title": "ZipURLRequest",
         "required": [
-          "inputURL"
+          "inputURL",
+          "webhook"
         ],
         "x-stoplight": {
           "id": "rn1n7chd4gah9"
