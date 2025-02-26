@@ -82,6 +82,9 @@
               }
             }
           },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
           "400": {
             "$ref": "#/components/responses/400"
           },
