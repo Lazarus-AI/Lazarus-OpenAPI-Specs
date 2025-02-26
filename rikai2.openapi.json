@@ -267,7 +267,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "webhook": {
@@ -446,7 +449,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "webhook": {
@@ -597,7 +603,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "settings": {
@@ -662,7 +671,10 @@
         "properties": {
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "settings": {
@@ -722,7 +734,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "settings": {
@@ -792,7 +807,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "settings": {
@@ -970,7 +988,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "settings": {
@@ -1145,7 +1166,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "webhook": {
@@ -1321,7 +1345,10 @@
           },
           "question": {
             "description": "A string containing the question to be asked.",
-            "examples": [],
+            "examples": [
+              "What is the patient's name?",
+              "What is the date of birth?"
+            ],
             "type": "string"
           },
           "webhook": {

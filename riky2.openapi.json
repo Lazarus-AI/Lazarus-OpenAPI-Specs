@@ -647,7 +647,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "webhook": {
             "type": "string",
@@ -833,7 +839,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "webhook": {
             "type": "string",
@@ -991,7 +1003,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "settings": {
             "allOf": [
@@ -1063,7 +1081,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "settings": {
             "allOf": [
@@ -1130,7 +1154,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "settings": {
             "allOf": [
@@ -1207,7 +1237,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "settings": {
             "allOf": [
@@ -1373,7 +1409,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "settings": {
             "allOf": [
@@ -1549,7 +1591,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "webhook": {
             "type": "string",
@@ -1732,7 +1780,13 @@
               }
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": []
+            "examples": [
+              "What is the patient's name?",
+              [
+                "What is the date of birth?",
+                "What is the address?"
+              ]
+            ]
           },
           "webhook": {
             "type": "string",
