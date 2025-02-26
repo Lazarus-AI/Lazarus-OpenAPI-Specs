@@ -42,6 +42,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
@@ -147,6 +148,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
@@ -232,6 +234,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
@@ -325,6 +328,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
