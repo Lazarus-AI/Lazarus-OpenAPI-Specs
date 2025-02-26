@@ -86,6 +86,12 @@
         "x-stoplight": {
           "id": "0fdkotemra6fv"
         },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ],
         "tags": [
           "SSN"
         ]
@@ -155,6 +161,12 @@
         "x-stoplight": {
           "id": "xt4o08zvmuony"
         },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ],
         "tags": [
           "SSN"
         ]
@@ -226,6 +238,12 @@
         "x-stoplight": {
           "id": "hsr46bp1hhx92"
         },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ],
         "tags": [
           "Invoices"
         ]
@@ -295,6 +313,12 @@
         "x-stoplight": {
           "id": "yrqdyckec4evr"
         },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ],
         "tags": [
           "Invoices"
         ]
@@ -365,6 +389,12 @@
         "x-stoplight": {
           "id": "3f1p1gdaz39wk"
         },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ],
         "tags": [
           "PII"
         ]
@@ -435,6 +465,12 @@
         "x-stoplight": {
           "id": "v9ernc822es8s"
         },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ],
         "tags": [
           "PII"
         ]

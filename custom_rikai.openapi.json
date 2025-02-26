@@ -303,7 +303,7 @@
     "/rikai/bulk/{custom_model_id}": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to a custom model for asynchronous processing. By default, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "description": "Upload 1 or more files to a custom model for asynchronous processing. By default, a JSON response will be sent to your `webhook`. If `outputURL` is provided in the request, a ZIP file will be uploaded to your outputURL for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
         "operationId": "post_bulk_custom",
         "parameters": [
           {
@@ -372,10 +372,10 @@
         }
       }
     },
-    "/rikai/zip/async/{document_id}/{custom_model_id}": {
+    "/rikai/zip/async/{statusId}/{custom_model_id}": {
       "get": {
         "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/{custom_model_id}?async=True` or `/rikai/bulk/{custom_model_id}`. Identifiable by document ID or status ID.",
+        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/{custom_model_id}?async=True` or `/rikai/bulk/{custom_model_id}`. Identifiable by statusId.",
         "operationId": "get_async_status",
         "parameters": [
           {
