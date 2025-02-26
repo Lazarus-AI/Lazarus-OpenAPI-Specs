@@ -777,7 +777,7 @@
       "apiVersion": {
         "name": "apiVersion",
         "in": "header",
-        "required": false,
+        "required": true,
         "schema": {
           "type": "string",
           "minLength": 1,
