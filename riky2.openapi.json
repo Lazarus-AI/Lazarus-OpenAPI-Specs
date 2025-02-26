@@ -646,7 +646,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
@@ -831,7 +831,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
@@ -997,7 +997,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1069,7 +1069,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1136,7 +1136,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1213,7 +1213,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1379,7 +1379,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1546,7 +1546,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
@@ -1729,7 +1729,7 @@
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
