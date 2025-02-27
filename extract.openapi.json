@@ -499,11 +499,7 @@
             ],
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name",
-              [
-                "file1.pdf",
-                "file2.pdf"
-              ]
+              "file name"
             ]
           },
           "forceOCR": {
@@ -694,11 +690,7 @@
             ],
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name",
-              [
-                "file1.pdf",
-                "file2.pdf"
-              ]
+              "file name"
             ]
           },
           "forceBase64": {
