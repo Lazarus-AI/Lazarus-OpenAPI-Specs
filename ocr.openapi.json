@@ -670,9 +670,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",
@@ -734,9 +732,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",
