@@ -374,7 +374,7 @@
     "/rikai/bulk/riky2": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikY2 for asynchronous processing. By default, a JSON response will be sent to your `webhook`. If `outputURL` is provided in the request, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Uploads a ZIP file for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
         "operationId": "post_bulk_riky2",
         "parameters": [
           {
@@ -603,11 +603,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           }
         },
@@ -649,11 +645,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -784,11 +776,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           },
           "warning": {
@@ -834,11 +822,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -937,19 +921,11 @@
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SFTP"
-              }
-            ],
+            "$ref": "#/components/schemas/SFTP",
             "description": "SFTP server authentication info for the `inputURL`."
           },
           "outputURL": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SFTP"
-              }
-            ],
+            "$ref": "#/components/schemas/SFTP",
             "description": "SFTP server authentication info for the `outputURL`."
           }
         },
@@ -986,11 +962,7 @@
             "examples": []
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1058,11 +1030,7 @@
             "examples": []
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1125,11 +1093,7 @@
             "examples": []
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1202,11 +1166,7 @@
             "examples": []
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1336,11 +1296,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           }
         },
@@ -1368,11 +1324,7 @@
             "examples": []
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1549,11 +1501,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1687,11 +1635,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           },
           "statusId": {
@@ -1732,11 +1676,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
