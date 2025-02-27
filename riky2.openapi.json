@@ -9,10 +9,10 @@
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
       "email": "support@lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal",
+    "termsOfService": "https://www.lazarusai.com/legal",
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
     "summary": ""
   },
@@ -651,10 +651,14 @@
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
             "examples": [
-              "What is the patient's name?",
               [
-                "What is the date of birth?",
-                "What is the address?"
+                [
+                  "What is the name of the patient?"
+                ],
+                [
+                  "What is the first medication listed under Section C - Medical Information?",
+                  "What is its strength?"
+                ]
               ]
             ]
           },
@@ -662,6 +666,15 @@
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhookHeaders": {
             "type": "object",
@@ -857,6 +870,15 @@
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhookHeaders": {
             "type": "object",
@@ -1603,6 +1625,15 @@
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings.",
+            "type": "object"
+          },
           "webhookHeaders": {
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
@@ -1789,6 +1820,15 @@
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhookHeaders": {
             "type": "object",
