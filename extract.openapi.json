@@ -527,7 +527,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -723,7 +723,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -1466,7 +1466,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -1654,7 +1654,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [

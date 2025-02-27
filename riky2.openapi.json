@@ -713,7 +713,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",
@@ -908,7 +908,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",
@@ -1501,7 +1501,22 @@
         "title": "SFTP"
       },
       "Settings": {
-        "properties": {},
+        "properties": {
+          "advancedExplainability": {
+            "type": "boolean",
+            "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context.",
+            "default": false
+          },
+          "advancedVision": {
+            "type": "boolean",
+            "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
+            "default": false
+          },
+          "returnConfidence": {
+            "type": "boolean",
+            "description": "Set to true to include bounding boxes and confidence score in response."
+          }
+        },
         "type": "object",
         "title": "Settings",
         "required": []
@@ -1632,7 +1647,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",
@@ -1823,7 +1838,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",
