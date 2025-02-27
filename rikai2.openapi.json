@@ -397,7 +397,7 @@
           },
           "statusId": {
             "type": "object",
-            "description": "List of document IDs for each file uploaded."
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
           },
           "apiVersion": {
             "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
@@ -976,7 +976,7 @@
             "description": "Question and answer data for each question asked in the request."
           },
           "documentId": {
-            "description": "ID for document request or filename if specified.",
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
             "type": "string"
           },
           "endTime": {
@@ -1346,7 +1346,7 @@
           },
           "documentId": {
             "type": "string",
-            "description": "ID for document request or filename if specified."
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated."
           },
           "endTime": {
             "type": "integer",
@@ -1378,7 +1378,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "List of document IDs for each file uploaded."
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
           },
           "warning": {
             "type": "object",
