@@ -20,7 +20,7 @@
     "/rikai/bulk/rikai2": {
       "post": {
         "summary": "Bulk file upload (async)",
-        "description": "Upload 1 or more files to RikAI2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n",
+        "description": "Upload 1 or more files to RikAI2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n",
         "operationId": "post_bulk_rikai2",
         "parameters": [
           {
