@@ -12,9 +12,9 @@
     },
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal"
+    "termsOfService": "https://www.lazarusai.com/legal"
   },
   "paths": {
     "/forms/ssn": {
@@ -2117,7 +2117,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusforms.com/api",
+      "url": "https://api.lazarusai.com/api",
       "description": ""
     }
   ],

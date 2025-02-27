@@ -14,10 +14,10 @@
       "email": "support@lazarusai.com"
     },
     "license": {
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com",
       "name": "Get Lazarus"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal"
+    "termsOfService": "https://www.lazarusai.com/legal"
   },
   "paths": {
     "/summarize": {
@@ -597,7 +597,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusforms.com/api/rikai",
+      "url": "https://api.lazarusai.com/api/rikai",
       "description": ""
     }
   ]
