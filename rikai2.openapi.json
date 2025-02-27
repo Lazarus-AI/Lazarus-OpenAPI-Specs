@@ -19,9 +19,9 @@
   "paths": {
     "/rikai/bulk/rikai2": {
       "post": {
-        "summary": "Post Bulk Custom Rikai",
-        "description": "This function queues all of the files in the request to /zip?async=true\nand sends each resulting zip to the output url defined by the user.\n\nArgs:\n    request (Request): fastapi request object\n    req_body (BulkRequestBody): serialized request body model\n    model_id (str): Custom model id from request path parameters\n    org_id (str): Org ID from request headers\n    auth_key (str): Auth Key from request headers\n    api_version (str, optional): User can pass apiVersion in header. Unused here but for documentation purposes.\n    lb_api_version (str, optional): API version header from load balancer. Unused here but for documentation purposes.\n    sub_org_id (str, optional): Sub Org ID from request headers",
-        "operationId": "post_bulk_custom_rikai_rikai_bulk__model_id__post",
+        "summary": "Bulk file upload (async)",
+        "description": "Upload 1 or more files to RikAI2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n",
+        "operationId": "post_bulk_rikai2",
         "parameters": [
           {
             "name": "orgId",
@@ -82,15 +82,23 @@
               }
             }
           },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
           }
         }
       }
@@ -98,7 +106,7 @@
     "/rikai/zip/async/{statusId}": {
       "get": {
         "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip?async=True` or `/rikai/bulk`. Identifiable by statusId.",
+        "description": "Retrieves the status of an asynchronous request to `/rikai/bulk` or `/rikai/bulk/rikai2`. Identifiable by `statusId`.",
         "operationId": "get_async_status",
         "parameters": [
           {
@@ -263,8 +271,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -303,7 +310,7 @@
                 "type": "string"
               }
             ],
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name",
               [
@@ -457,8 +464,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -497,7 +503,7 @@
                 "type": "string"
               }
             ],
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name",
               [
@@ -623,8 +629,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -653,7 +658,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name"
             ]
@@ -698,8 +703,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -728,7 +732,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name"
             ]
@@ -768,8 +772,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -798,7 +801,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name"
             ]
@@ -848,8 +851,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -892,7 +894,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name"
             ]
@@ -1036,8 +1038,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -1066,7 +1067,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name"
             ]
@@ -1221,8 +1222,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -1251,7 +1251,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name"
             ]
@@ -1407,8 +1407,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the name of the patient?"
             ],
             "type": "string"
           },
@@ -1437,7 +1436,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file name"
             ]
