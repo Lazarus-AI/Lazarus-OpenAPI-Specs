@@ -827,7 +827,7 @@
                 "What is its strength?"
               ]
             ],
-            "webhook": null,
+            "webhook": "YOUR_WEBHOOK_URL",
             "settings": null,
             "webhookHeaders": null,
             "webhookSendFull": true,
@@ -1238,7 +1238,7 @@
                 "What is its strength?"
               ]
             ],
-            "webhook": null,
+            "webhook": "YOUR_WEBHOOK_URL",
             "webhookHeaders": null,
             "webhookSendFull": true,
             "fileId": "file1.pdf",
@@ -1429,7 +1429,7 @@
                 "What is its strength?"
               ]
             ],
-            "webhook": null,
+            "webhook": "YOUR_WEBHOOK_URL",
             "webhookHeaders": null,
             "webhookSendFull": true,
             "fileId": "file1.pdf",

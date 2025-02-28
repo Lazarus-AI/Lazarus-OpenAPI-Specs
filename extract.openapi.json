@@ -639,7 +639,7 @@
                 }
               }
             },
-            "webhook": null,
+            "webhook": "YOUR_WEBHOOK_URL",
             "settings": {
               "returnConfidence": true
             },
@@ -1258,7 +1258,7 @@
                 }
               }
             },
-            "webhook": null,
+            "webhook": "YOUR_WEBHOOK_URL",
             "settings": {
               "returnConfidence": true
             },
@@ -1655,7 +1655,7 @@
                 }
               }
             },
-            "webhook": null,
+            "webhook": "YOUR_WEBHOOK_URL",
             "settings": {
               "returnConfidence": true
             },
