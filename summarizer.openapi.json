@@ -194,7 +194,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -222,7 +222,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
@@ -273,7 +273,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -445,14 +445,14 @@
       "apiVersion": {
         "name": "apiVersion",
         "in": "header",
-        "required": false,
+        "required": true,
         "schema": {
           "type": "string",
           "minLength": 1,
           "pattern": "YYYY-MM-DD",
           "title": "apiVersion",
           "description": "API Version",
-          "default": "2025-02-06"
+          "default": "2025-02-27"
         },
         "description": "API Version"
       },
