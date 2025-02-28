@@ -817,6 +817,35 @@
         "title": "BulkResponse"
       },
       "BulkURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "settings": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": "YOUR_OUTPUT_URL",
+            "outputURLHeaders": null,
+            "returnJSON": false,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "anyOf": [
@@ -1187,6 +1216,29 @@
         "title": "RikAIFileRequest"
       },
       "RikAIOCRRequestBody": {
+        "examples": [
+          {
+            "ocr": {},
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "language": "en",
+            "metadata": null,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "ocr": {
             "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)).",
@@ -1349,6 +1401,32 @@
         "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "ocr": null,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
