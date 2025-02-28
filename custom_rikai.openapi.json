@@ -648,7 +648,7 @@
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
             "setDefault": "UUID",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "outputURL": {
             "type": "string",
@@ -774,7 +774,7 @@
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
             "setDefault": "UUID",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "outputURL": {
             "type": "string",

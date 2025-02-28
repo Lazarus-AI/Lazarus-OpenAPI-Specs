@@ -530,7 +530,7 @@
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -594,7 +594,7 @@
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -652,7 +652,7 @@
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -732,7 +732,7 @@
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -796,7 +796,7 @@
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -858,7 +858,7 @@
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
             "default": "UUID",
-            "examples": "file1.pdf"
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
