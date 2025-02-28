@@ -941,7 +941,7 @@
         "required": [
           "inputURL",
           "question",
-          "webhook"
+          "outputURL"
         ],
         "title": "BulkURLRequest"
       },
@@ -1820,7 +1820,7 @@
         "required": [
           "inputURL",
           "question",
-          "webhook"
+          "outputURL"
         ],
         "title": "ZipURLRequest"
       },
