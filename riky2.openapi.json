@@ -840,7 +840,7 @@
             "metadata": {},
             "outputURL": "string",
             "outputURLHeaders": {},
-            "returnJSON": false,
+            "returnJSON": true,
             "returnOCR": false,
             "sftp": {
               "user": "string",

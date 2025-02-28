@@ -654,7 +654,7 @@
             "metadata": {},
             "outputURL": "string",
             "outputURLHeaders": {},
-            "returnJSON": false,
+            "returnJSON": true,
             "sftp": {
               "user": "string",
               "password": "string",
@@ -1280,7 +1280,7 @@
             "metadata": {},
             "outputURL": "string",
             "outputURLHeaders": {},
-            "returnJSON": false,
+            "returnJSON": true,
             "sftp": {
               "user": "string",
               "password": "string",
@@ -1684,7 +1684,7 @@
             "metadata": {},
             "outputURL": "string",
             "outputURLHeaders": {},
-            "returnJSON": false,
+            "returnJSON": true,
             "sftp": {
               "user": "string",
               "password": "string",
