@@ -686,7 +686,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -713,7 +714,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",
@@ -905,7 +906,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -937,7 +939,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",
@@ -1057,7 +1059,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -1073,7 +1076,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "returnOCR": {
@@ -1189,7 +1192,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1258,7 +1262,7 @@
         ],
         "properties": {
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)).",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "question": {
@@ -1297,7 +1301,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "language": {
             "type": "string",
@@ -1492,7 +1497,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1513,7 +1519,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "returnOCR": {
@@ -1571,7 +1577,22 @@
         "title": "SFTP"
       },
       "Settings": {
-        "properties": {},
+        "properties": {
+          "advancedExplainability": {
+            "type": "boolean",
+            "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context.",
+            "default": false
+          },
+          "advancedVision": {
+            "type": "boolean",
+            "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
+            "default": false
+          },
+          "returnConfidence": {
+            "type": "boolean",
+            "description": "Set to true to include bounding boxes and confidence score in response."
+          }
+        },
         "type": "object",
         "title": "Settings",
         "required": []
@@ -1671,7 +1692,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -1687,7 +1709,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "outputURL": {
@@ -1702,7 +1724,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",
@@ -1857,7 +1879,8 @@
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
               "file1.pdf"
-            ]
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1878,7 +1901,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "outputURL": {
@@ -1893,7 +1916,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "returnOCR": {
             "type": "boolean",

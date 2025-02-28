@@ -499,8 +499,9 @@
             ],
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -527,7 +528,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -723,8 +724,9 @@
             ],
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -756,7 +758,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -876,8 +878,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -948,8 +951,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -1024,8 +1028,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1061,7 +1066,7 @@
       "RikAIOCRRequestBody": {
         "properties": {
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)).",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "question": {
@@ -1119,8 +1124,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "inputURL": {
             "type": "string",
@@ -1323,8 +1329,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1504,8 +1511,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -1532,7 +1540,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -1720,8 +1728,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-             "file1.pdf"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1753,7 +1762,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
