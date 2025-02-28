@@ -1114,10 +1114,7 @@
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
             "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
+              "Tell me about the history of AI."
             ]
           },
           "webhook": {
