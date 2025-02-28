@@ -15,9 +15,9 @@
     },
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal"
+    "termsOfService": "https://www.lazarusai.com/legal"
   },
   "paths": {
     "/ocr": {
@@ -670,9 +670,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",
@@ -733,9 +731,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",

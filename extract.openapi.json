@@ -9,10 +9,10 @@
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
       "email": "support@lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal",
+    "termsOfService": "https://www.lazarusai.com/legal",
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
     "summary": ""
   },
@@ -42,6 +42,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
@@ -107,7 +108,7 @@
     "/rikai/zip/rikai2-extract": {
       "post": {
         "summary": "Document input, ZIP file response",
-        "description": "Make a request to RikAI2-Extract and receive response data in a ZIP file.\n To process your request asynchronously and send the ZIP file to an `outputURL`, include the `async` query parameter. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Make a request to RikAI2-Extract and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_zip_rikai2_extract",
         "parameters": [
           {
@@ -147,6 +148,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
@@ -210,7 +212,7 @@
     "/rikai/bulk/rikai2-extract": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. By default, a JSON response will be sent to your `webhook`. If `outputURL` is provided in the request, a ZIP file will be uploaded to your `outputURL` for each document in the request. If you set the `returnJSON` parameter to true, a JSON file will be provided to the `outputURL` instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n\nThe default name for the file is an epoch timestamp if a file name could not be extracted from file data.",
+        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_rikai2_extract",
         "parameters": [
           {
@@ -232,6 +234,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
@@ -271,6 +274,9 @@
               }
             }
           },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
           "400": {
             "$ref": "#/components/responses/400"
           },
@@ -292,7 +298,7 @@
     "/rikai/zip/async/{statusId}": {
       "get": {
         "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/rikai2-extract?async=True` or `/rikai/bulk/rikai2-extract`. Identifiable by statusId.",
+        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/rikai2-extract?async=True` or `/rikai/bulk/rikai2-extract`. Identifiable by `statusId`.",
         "operationId": "get_async_status",
         "parameters": [
           {
@@ -325,6 +331,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "title": "authKey",
               "description": "Authentication key"
@@ -452,24 +459,13 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
@@ -501,7 +497,10 @@
                 "type": "string"
               }
             ],
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file."
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -518,7 +517,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
@@ -527,7 +526,8 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL."
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -539,6 +539,11 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -574,7 +579,7 @@
           },
           "statusId": {
             "type": "object",
-            "description": "List of document IDs for each file uploaded."
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
           },
           "apiVersion": {
             "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
@@ -619,6 +624,46 @@
         "title": "BulkResponse"
       },
       "BulkURLRequest": {
+        "examples": [
+          {
+            "inputURL": [
+              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
+            ],
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": "string",
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": {},
+            "webhookSendFull": true,
+            "fileId": "sample_form_1",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": {},
+            "outputURL": "string",
+            "outputURLHeaders": {},
+            "returnJSON": false,
+            "sftp": {
+              "user": "string",
+              "password": "string",
+              "privateKey": "string",
+              "privateKeyPassphrase": "string"
+            },
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "anyOf": [
@@ -645,24 +690,13 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
@@ -694,7 +728,10 @@
                 "type": "string"
               }
             ],
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file."
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceBase64": {
             "type": "boolean",
@@ -716,7 +753,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
@@ -725,7 +762,8 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL."
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -737,6 +775,11 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -810,18 +853,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -835,8 +867,8 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -849,8 +881,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -864,6 +898,11 @@
           "metadata": {
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -886,18 +925,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -911,8 +939,8 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -925,8 +953,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -940,6 +970,11 @@
           "metadata": {
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -966,18 +1001,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -991,8 +1015,8 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1005,8 +1029,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1025,6 +1051,11 @@
           "metadata": {
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -1051,18 +1082,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -1076,8 +1096,8 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1104,12 +1124,14 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "inputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "language": {
@@ -1130,6 +1152,11 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -1182,7 +1209,7 @@
             "description": "Question and answer data for each question asked in the request."
           },
           "documentId": {
-            "description": "ID for document request or filename if specified.",
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
             "type": "string"
           },
           "endTime": {
@@ -1223,10 +1250,50 @@
         "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
+        "examples": [
+          {
+            "inputURL": [
+              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
+            ],
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": "string",
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": {},
+            "webhookSendFull": true,
+            "fileId": "sample_form_1",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": {},
+            "outputURL": "string",
+            "outputURLHeaders": {},
+            "returnJSON": false,
+            "sftp": {
+              "user": "string",
+              "password": "string",
+              "privateKey": "string",
+              "privateKeyPassphrase": "string"
+            },
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "question": {
@@ -1240,18 +1307,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -1265,8 +1321,8 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1279,8 +1335,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1310,6 +1368,11 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -1425,24 +1488,13 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
@@ -1464,8 +1516,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceOCR": {
             "type": "boolean",
@@ -1482,7 +1536,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
@@ -1492,7 +1546,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": true
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -1504,6 +1558,11 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
@@ -1551,7 +1610,7 @@
           },
           "documentId": {
             "type": "string",
-            "description": "ID for document request or filename if specified."
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated."
           },
           "endTime": {
             "type": "integer",
@@ -1583,7 +1642,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "List of document IDs for each file uploaded."
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
           },
           "warning": {
             "type": "object",
@@ -1595,10 +1654,50 @@
         "title": "ZipResponse"
       },
       "ZipURLRequest": {
+        "examples": [
+          {
+            "inputURL": [
+              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
+            ],
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": "string",
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": {},
+            "webhookSendFull": true,
+            "fileId": "sample_form_1",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "string",
+            "metadata": {},
+            "outputURL": "string",
+            "outputURLHeaders": {},
+            "returnJSON": false,
+            "sftp": {
+              "user": "string",
+              "password": "string",
+              "privateKey": "string",
+              "privateKeyPassphrase": "string"
+            },
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "question": {
@@ -1612,24 +1711,13 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](docs/webhook-examples.md) is an example of a webhook URL response."
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
             "allOf": [
@@ -1651,8 +1739,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "default": "file name"
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file name"
+            ]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1674,7 +1764,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "(https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
@@ -1684,7 +1774,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": true
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -1696,6 +1786,11 @@
               }
             ],
             "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",

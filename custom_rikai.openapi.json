@@ -12,9 +12,9 @@
     },
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal"
+    "termsOfService": "https://www.lazarusai.com/legal"
   },
   "paths": {
     "/rikai/custom/{custom_model_id}": {
@@ -955,9 +955,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "ocr": {
             "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
@@ -1107,9 +1105,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "ocr": {
             "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
@@ -1201,9 +1197,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1286,9 +1280,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1388,9 +1380,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "inputURL": {
             "type": "string",
@@ -1632,9 +1622,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1740,9 +1728,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document."
           },
           "forceBase64": {
             "type": "boolean",
