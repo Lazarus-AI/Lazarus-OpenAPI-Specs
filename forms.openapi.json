@@ -670,8 +670,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -770,8 +771,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -837,8 +839,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -904,8 +907,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -980,8 +984,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1051,8 +1056,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1122,8 +1128,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",

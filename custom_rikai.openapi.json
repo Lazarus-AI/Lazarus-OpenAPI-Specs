@@ -646,8 +646,9 @@
               }
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "outputURL": {
             "type": "string",
@@ -771,8 +772,9 @@
               }
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "outputURL": {
             "type": "string",
@@ -956,8 +958,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "ocr": {
             "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
@@ -1108,8 +1111,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "ocr": {
             "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
@@ -1202,8 +1206,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1287,8 +1292,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1389,8 +1395,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "inputURL": {
             "type": "string",
@@ -1633,8 +1640,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1741,8 +1749,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["form1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
