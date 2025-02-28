@@ -790,17 +790,6 @@
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
           },
-          "outputURL": {
-            "type": "string",
-            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
-          },
-          "outputURLHeaders": {
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
-          },
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
@@ -925,17 +914,6 @@
             "type": "boolean",
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
-          },
-          "outputURL": {
-            "type": "string",
-            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
-          },
-          "outputURLHeaders": {
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
           },
           "forceBase64": {
             "type": "boolean",
