@@ -458,18 +458,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
@@ -660,18 +649,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
@@ -834,18 +812,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -917,18 +884,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -1004,18 +960,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -1096,18 +1041,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -1292,18 +1226,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "settings": {
@@ -1484,18 +1407,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
@@ -1678,18 +1590,7 @@
             ],
             "description": "A JSON string or a dictionary containing the question(s) to be asked.",
             "examples": [
-              {
-                "PatientInfo": {
-                  "FirstName": {
-                    "data": "Patient first name",
-                    "page_number": 0
-                  },
-                  "LastName": {
-                    "data": "Patient last name",
-                    "page_number": 0
-                  }
-                }
-              }
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
             ]
           },
           "webhook": {
