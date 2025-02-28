@@ -202,7 +202,8 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -277,7 +278,8 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -567,7 +569,8 @@
             "type": "string",
             "title": "fileId",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
