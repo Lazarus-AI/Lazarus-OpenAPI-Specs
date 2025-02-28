@@ -648,18 +648,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                [
-                  "What is the name of the patient?"
-                ],
-                [
-                  "What is the first medication listed under Section C - Medical Information?",
-                  "What is its strength?"
-                ]
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -698,11 +687,7 @@
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name",
-              [
-                "file1.pdf",
-                "file2.pdf"
-              ]
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -856,14 +841,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -902,11 +880,7 @@
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name",
-              [
-                "file1.pdf",
-                "file2.pdf"
-              ]
+              "file1.pdf"
             ]
           },
           "forceBase64": {
@@ -1032,14 +1006,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -1059,7 +1026,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -1108,14 +1075,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -1135,7 +1095,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -1179,14 +1139,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -1206,7 +1159,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceBase64": {
@@ -1260,14 +1213,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -1287,7 +1233,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "language": {
@@ -1430,14 +1376,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -1457,7 +1396,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceBase64": {
@@ -1610,14 +1549,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -1646,7 +1578,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -1806,14 +1738,7 @@
                 "type": "string"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              "What is the patient's name?",
-              [
-                "What is the date of birth?",
-                "What is the address?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked."
           },
           "webhook": {
             "type": "string",
@@ -1842,7 +1767,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceBase64": {

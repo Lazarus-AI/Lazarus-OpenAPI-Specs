@@ -271,8 +271,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -313,11 +312,7 @@
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name",
-              [
-                "file1.pdf",
-                "file2.pdf"
-              ]
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -465,8 +460,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -507,11 +501,7 @@
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name",
-              [
-                "file1.pdf",
-                "file2.pdf"
-              ]
+              "file1.pdf"
             ]
           },
           "forceBase64": {
@@ -631,8 +621,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -663,7 +652,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -706,8 +695,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -738,7 +726,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -776,8 +764,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -808,7 +795,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceBase64": {
@@ -856,8 +843,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -902,7 +888,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "inputURL": {
@@ -1044,8 +1030,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -1076,7 +1061,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceBase64": {
@@ -1229,8 +1214,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -1261,7 +1245,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceOCR": {
@@ -1415,8 +1399,7 @@
           "question": {
             "description": "A string containing the question to be asked.",
             "examples": [
-              "What is the patient's name?",
-              "What is the date of birth?"
+              "What is the patient's name?"
             ],
             "type": "string"
           },
@@ -1447,7 +1430,7 @@
             "type": "string",
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
             "examples": [
-              "file name"
+              "file1.pdf"
             ]
           },
           "forceBase64": {
