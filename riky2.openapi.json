@@ -1238,19 +1238,14 @@
                 "What is its strength?"
               ]
             ],
-            "webhook": "string",
-            "webhookHeaders": {},
+            "webhook": null,
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "file name",
+            "fileId": "file1.pdf",
             "language": "en",
-            "metadata": {},
+            "metadata": null,
             "returnOCR": false,
-            "sftp": {
-            "user": "string",
-            "password": "string",
-            "privateKey": "string",
-            "privateKeyPassphrase": "string"
-            },
+            "sftp": null,
             "staticIP": false
           }
         ],
