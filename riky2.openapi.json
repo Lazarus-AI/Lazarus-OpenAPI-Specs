@@ -1091,18 +1091,6 @@
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
           },
-          "fileId": {
-            "type": "string",
-            "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.",
-            "examples": [
-              "file1.pdf"
-            ]
-          },
-          "forceOCR": {
-            "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
-            "default": false
-          },
           "language": {
             "type": "string",
             "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
