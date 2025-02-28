@@ -166,8 +166,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": "file1.pdf"
           },
           "forceOCR": {
             "type": "boolean",
@@ -245,8 +246,9 @@
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": "file1.pdf"
           },
           "forceOCR": {
             "type": "boolean",
