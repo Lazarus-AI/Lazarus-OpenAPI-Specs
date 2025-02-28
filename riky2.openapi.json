@@ -1115,8 +1115,7 @@
             "description": "A string or list of strings containing the question(s) to be asked.",
             "examples": [
               [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
+                "Tell me about the history of AI"
               ]
             ]
           },
@@ -1133,18 +1132,6 @@
             "type": "boolean",
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
-          },
-          "fileId": {
-            "type": "string",
-            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
-            "examples": [
-              "sample_form_1"
-            ]
-          },
-          "forceOCR": {
-            "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
-            "default": false
           },
           "language": {
             "type": "string",
