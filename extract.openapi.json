@@ -1258,7 +1258,7 @@
                 }
               }
             },
-            "webhook": "YOUR_WEBHOOK_URL",
+            "webhook": null,
             "settings": {
               "returnConfidence": true
             },
