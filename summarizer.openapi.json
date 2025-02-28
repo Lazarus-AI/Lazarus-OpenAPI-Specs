@@ -165,7 +165,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
             "setDefault": "UUID",
             "default": "UUID",
             "examples": "file1.pdf"
@@ -245,7 +245,7 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
             "setDefault": "UUID",
             "default": "UUID",
             "examples": "file1.pdf"
