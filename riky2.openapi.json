@@ -817,9 +817,7 @@
       "BulkURLRequest": {
         "examples": [
           {
-            "inputURL": [
-              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-            ],
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
             "question": [
               [
                 "What is the name of the patient?"
@@ -829,25 +827,20 @@
                 "What is its strength?"
               ]
             ],
-            "webhook": "string",
-            "settings": {},
-            "webhookHeaders": {},
+            "webhook": null,
+            "settings": null,
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "file name",
+            "fileId": "file1.pdf",
             "forceBase64": false,
             "forceOCR": false,
             "language": "en",
-            "metadata": {},
-            "outputURL": "string",
-            "outputURLHeaders": {},
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
             "returnJSON": false,
             "returnOCR": false,
-            "sftp": {
-              "user": "string",
-              "password": "string",
-              "privateKey": "string",
-              "privateKeyPassphrase": "string"
-            },
+            "sftp": null,
             "staticIP": false
           }
         ],
@@ -1441,22 +1434,17 @@
                 "What is its strength?"
               ]
             ],
-            "webhook": "string",
-            "webhookHeaders": {},
+            "webhook": null,
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "file name",
+            "fileId": "file1.pdf",
             "forceBase64": false,
             "forceOCR": false,
             "language": "en",
-            "metadata": {},
-            "ocr": {},
+            "metadata": null,
+            "ocr": null,
             "returnOCR": false,
-            "sftp": {
-            "user": "string",
-            "password": "string",
-            "privateKey": "string",
-            "privateKeyPassphrase": "string"
-            },
+            "sftp": null,
             "staticIP": false
           }
         ],

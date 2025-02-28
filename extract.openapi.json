@@ -626,9 +626,7 @@
       "BulkURLRequest": {
         "examples": [
           {
-            "inputURL": [
-              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-            ],
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
             "question": {
               "PatientInfo": {
                 "FirstName": {
@@ -641,26 +639,21 @@
                 }
               }
             },
-            "webhook": "string",
+            "webhook": null,
             "settings": {
               "returnConfidence": true
             },
             "webhookHeaders": {},
             "webhookSendFull": true,
-            "fileId": "sample_form_1",
+            "fileId": "form1.pdf",
             "forceBase64": false,
             "forceOCR": false,
             "language": "en",
-            "metadata": {},
-            "outputURL": "string",
-            "outputURLHeaders": {},
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
             "returnJSON": false,
-            "sftp": {
-              "user": "string",
-              "password": "string",
-              "privateKey": "string",
-              "privateKeyPassphrase": "string"
-            },
+            "sftp": null,
             "staticIP": false
           }
         ],
@@ -1252,9 +1245,7 @@
       "RikAIURLRequest": {
         "examples": [
           {
-            "inputURL": [
-              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-            ],
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
             "question": {
               "PatientInfo": {
                 "FirstName": {
@@ -1267,26 +1258,21 @@
                 }
               }
             },
-            "webhook": "string",
+            "webhook": null,
             "settings": {
               "returnConfidence": true
             },
-            "webhookHeaders": {},
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "sample_form_1",
+            "fileId": "form1.pdf",
             "forceBase64": false,
             "forceOCR": false,
             "language": "en",
-            "metadata": {},
-            "outputURL": "string",
-            "outputURLHeaders": {},
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
             "returnJSON": false,
-            "sftp": {
-              "user": "string",
-              "password": "string",
-              "privateKey": "string",
-              "privateKeyPassphrase": "string"
-            },
+            "sftp": null,
             "staticIP": false
           }
         ],
@@ -1656,9 +1642,7 @@
       "ZipURLRequest": {
         "examples": [
           {
-            "inputURL": [
-              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-            ],
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
             "question": {
               "PatientInfo": {
                 "FirstName": {
@@ -1671,26 +1655,21 @@
                 }
               }
             },
-            "webhook": "string",
+            "webhook": null,
             "settings": {
               "returnConfidence": true
             },
-            "webhookHeaders": {},
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "sample_form_1",
+            "fileId": "form1.pdf",
             "forceBase64": false,
             "forceOCR": false,
-            "language": "string",
-            "metadata": {},
-            "outputURL": "string",
-            "outputURLHeaders": {},
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
             "returnJSON": false,
-            "sftp": {
-              "user": "string",
-              "password": "string",
-              "privateKey": "string",
-              "privateKeyPassphrase": "string"
-            },
+            "sftp": null,
             "staticIP": false
           }
         ],
