@@ -625,7 +625,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "metadata": {
             "type": "object",
@@ -685,7 +685,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "webhook": {
             "type": "string",
@@ -734,7 +734,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "metadata": {
             "type": "object",
@@ -813,7 +813,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",
@@ -828,7 +828,7 @@
           "statusId": {
             "type": "string",
             "title": "statusId",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "metadata": {
             "type": "object",
@@ -873,7 +873,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",
@@ -888,7 +888,7 @@
           "statusId": {
             "type": "string",
             "title": "statusId",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "webhook": {
             "type": "string",
@@ -932,7 +932,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",
@@ -947,7 +947,7 @@
           "statusId": {
             "type": "string",
             "title": "statusId",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "metadata": {
             "type": "object",

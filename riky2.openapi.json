@@ -17,89 +17,6 @@
     "summary": ""
   },
   "paths": {
-    "/rikai/chat/riky2": {
-      "post": {
-        "summary": "Chat, no file input, JSON response",
-        "description": "Make a RikY2 request using prompt as context. No document upload.",
-        "operationId": "post_chat_riky2",
-        "parameters": [
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIChatRequestBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          },
-          "502": {
-            "$ref": "#/components/responses/502"
-          }
-        }
-      }
-    },
     "/rikai/custom/riky2": {
       "post": {
         "summary": "Document input, JSON response",
@@ -442,6 +359,89 @@
           },
           "207": {
             "$ref": "#/components/responses/207"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        }
+      }
+    },
+    "/rikai/chat/riky2": {
+      "post": {
+        "summary": "Chat, no file input, JSON response",
+        "description": "Make a RikY2 request using prompt as context. No document upload.",
+        "operationId": "post_chat_riky2",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIChatRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/400"
@@ -816,6 +816,35 @@
         "title": "BulkResponse"
       },
       "BulkURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": "YOUR_WEBHOOK_URL",
+            "settings": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "anyOf": [
@@ -1082,8 +1111,7 @@
             "description": "A string or list of strings containing the question(s) to be asked.",
             "examples": [
               [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
+                "Tell me about the history of AI"
               ]
             ]
           },
@@ -1100,19 +1128,6 @@
             "type": "boolean",
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
-          },
-          "fileId": {
-            "type": "string",
-            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
-            "examples": [
-              "file1.pdf"
-            ],
-            "default": "UUID"
-          },
-          "forceOCR": {
-            "type": "boolean",
-            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
-            "default": false
           },
           "language": {
             "type": "string",
@@ -1217,6 +1232,34 @@
         "title": "RikAIFileRequest"
       },
       "RikAIOCRRequestBody": {
+        "examples": [
+          {
+            "ocr": {},
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": "string",
+            "webhookHeaders": {},
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "language": "en",
+            "metadata": {},
+            "returnOCR": false,
+            "sftp": {
+            "user": "string",
+            "password": "string",
+            "privateKey": "string",
+            "privateKeyPassphrase": "string"
+            },
+            "staticIP": false
+          }
+        ],
         "properties": {
           "ocr": {
             "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from Lazarus endpoints is supported as input.",
@@ -1386,6 +1429,32 @@
         "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "ocr": null,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
