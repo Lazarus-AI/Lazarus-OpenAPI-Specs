@@ -452,7 +452,7 @@
             "advancedVision": false
           },
           "webhookHeaders": null,
-          "webhookSendFull": true,
+          "webhookSendFull": false,
           "fileId": "file1.pdf",
           "forceBase64": false,
           "forceOCR": false,

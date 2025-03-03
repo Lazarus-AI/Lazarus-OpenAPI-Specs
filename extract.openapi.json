@@ -643,7 +643,7 @@
               "returnConfidence": true
             },
             "webhookHeaders": {},
-            "webhookSendFull": true,
+            "webhookSendFull": false,
             "fileId": "form1.pdf",
             "forceBase64": false,
             "forceOCR": false,
@@ -1262,7 +1262,7 @@
               "returnConfidence": true
             },
             "webhookHeaders": null,
-            "webhookSendFull": true,
+            "webhookSendFull": false,
             "fileId": "form1.pdf",
             "forceBase64": false,
             "forceOCR": false,
@@ -1659,7 +1659,7 @@
               "returnConfidence": true
             },
             "webhookHeaders": null,
-            "webhookSendFull": true,
+            "webhookSendFull": false,
             "fileId": "form1.pdf",
             "forceBase64": false,
             "forceOCR": false,
