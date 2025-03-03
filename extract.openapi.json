@@ -508,7 +508,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -737,7 +737,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -885,7 +885,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -957,7 +957,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1038,7 +1038,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1128,7 +1128,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1337,7 +1337,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1513,7 +1513,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1734,7 +1734,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
