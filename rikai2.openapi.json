@@ -460,7 +460,7 @@
           "metadata": null,
           "outputURL": "YOUR_OUTPUT_URL",
           "outputURLHeaders": null,
-          "returnJSON": true,
+          "returnJSON": false,
           "returnOCR": false,
           "sftp": null,
           "staticIP": false
