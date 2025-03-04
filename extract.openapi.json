@@ -17,201 +17,9 @@
     "summary": ""
   },
   "paths": {
-    "/rikai/custom/rikai2-extract": {
-      "post": {
-        "summary": "Document input, JSON response",
-        "description": "Make a request to RikAI2-Extract and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
-        "operationId": "post_rikai2_extract",
-        "parameters": [
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIRequestBody"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIFileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          },
-          "502": {
-            "$ref": "#/components/responses/502"
-          }
-        }
-      }
-    },
-    "/rikai/zip/rikai2-extract": {
-      "post": {
-        "summary": "Document input, ZIP file response",
-        "description": "Make a request to RikAI2-Extract and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
-        "operationId": "post_zip_rikai2_extract",
-        "parameters": [
-          {
-            "name": "async",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "async",
-              "description": "Runs request asynchronously"
-            },
-            "description": "Runs request asynchronously"
-          },
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ZipRequestBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ZipResponse"
-                }
-              }
-            }
-          },
-          "207": {
-            "$ref": "#/components/responses/207"
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          },
-          "502": {
-            "$ref": "#/components/responses/502"
-          }
-        }
-      }
-    },
     "/rikai/bulk/rikai2-extract": {
       "post": {
-        "summary": "Bulk file upload",
+        "summary": "Bulk file upload (async)",
         "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_rikai2_extract",
         "parameters": [
@@ -499,8 +307,9 @@
             ],
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -509,7 +318,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -527,7 +336,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -626,9 +435,7 @@
       "BulkURLRequest": {
         "examples": [
           {
-            "inputURL": [
-              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-            ],
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
             "question": {
               "PatientInfo": {
                 "FirstName": {
@@ -641,26 +448,21 @@
                 }
               }
             },
-            "webhook": "string",
+            "webhook": "YOUR_WEBHOOK_URL",
             "settings": {
               "returnConfidence": true
             },
-            "webhookHeaders": {},
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "sample_form_1",
+            "fileId": "file1.pdf",
             "forceBase64": false,
             "forceOCR": false,
             "language": "en",
-            "metadata": {},
-            "outputURL": "string",
-            "outputURLHeaders": {},
-            "returnJSON": false,
-            "sftp": {
-              "user": "string",
-              "password": "string",
-              "privateKey": "string",
-              "privateKeyPassphrase": "string"
-            },
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
             "staticIP": false
           }
         ],
@@ -730,8 +532,9 @@
             ],
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -745,7 +548,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -763,7 +566,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -883,8 +686,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -893,7 +697,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -955,8 +759,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -965,7 +770,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1031,8 +836,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1046,7 +852,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1068,7 +874,7 @@
       "RikAIOCRRequestBody": {
         "properties": {
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)).",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "question": {
@@ -1126,8 +932,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "inputURL": {
             "type": "string",
@@ -1136,7 +943,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1252,9 +1059,7 @@
       "RikAIURLRequest": {
         "examples": [
           {
-            "inputURL": [
-              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-            ],
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
             "question": {
               "PatientInfo": {
                 "FirstName": {
@@ -1267,26 +1072,21 @@
                 }
               }
             },
-            "webhook": "string",
+            "webhook": null,
             "settings": {
               "returnConfidence": true
             },
-            "webhookHeaders": {},
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "sample_form_1",
+            "fileId": "file1.pdf",
             "forceBase64": false,
             "forceOCR": false,
             "language": "en",
-            "metadata": {},
-            "outputURL": "string",
-            "outputURLHeaders": {},
-            "returnJSON": false,
-            "sftp": {
-              "user": "string",
-              "password": "string",
-              "privateKey": "string",
-              "privateKeyPassphrase": "string"
-            },
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
             "staticIP": false
           }
         ],
@@ -1337,8 +1137,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1352,7 +1153,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1518,8 +1319,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceOCR": {
             "type": "boolean",
@@ -1528,7 +1330,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1546,7 +1348,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -1656,9 +1458,7 @@
       "ZipURLRequest": {
         "examples": [
           {
-            "inputURL": [
-              "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-            ],
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
             "question": {
               "PatientInfo": {
                 "FirstName": {
@@ -1671,26 +1471,21 @@
                 }
               }
             },
-            "webhook": "string",
+            "webhook": null,
             "settings": {
               "returnConfidence": true
             },
-            "webhookHeaders": {},
+            "webhookHeaders": null,
             "webhookSendFull": true,
-            "fileId": "sample_form_1",
+            "fileId": "file1.pdf",
             "forceBase64": false,
             "forceOCR": false,
-            "language": "string",
-            "metadata": {},
-            "outputURL": "string",
-            "outputURLHeaders": {},
-            "returnJSON": false,
-            "sftp": {
-              "user": "string",
-              "password": "string",
-              "privateKey": "string",
-              "privateKeyPassphrase": "string"
-            },
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
             "staticIP": false
           }
         ],
@@ -1741,8 +1536,9 @@
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
             "examples": [
-              "file name"
-            ]
+              "file1.pdf"
+            ],
+            "default": "UUID"
           },
           "forceBase64": {
             "type": "boolean",
@@ -1756,7 +1552,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1774,7 +1570,7 @@
           "returnJSON": {
             "type": "boolean",
             "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
-            "default": false
+            "default": true
           },
           "sftp": {
             "anyOf": [

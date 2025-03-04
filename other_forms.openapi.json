@@ -528,8 +528,9 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -543,14 +544,6 @@
             "type": "boolean",
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
-          },
-          "outputUrl": {
-            "type": "string",
-            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
-          },
-          "outputUrlHeaders": {
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL."
           },
           "forceBase64": {
             "type": "boolean",
@@ -591,8 +584,9 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -648,8 +642,9 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -663,14 +658,6 @@
             "type": "boolean",
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
-          },
-          "outputUrl": {
-            "type": "string",
-            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
-          },
-          "outputUrlHeaders": {
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL."
           },
           "forceBase64": {
             "type": "boolean",
@@ -727,8 +714,9 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -742,7 +730,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "metadata": {
             "type": "object",
@@ -790,8 +778,9 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -805,7 +794,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "webhook": {
             "type": "string",
@@ -851,8 +840,9 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -866,7 +856,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "metadata": {
             "type": "object",
