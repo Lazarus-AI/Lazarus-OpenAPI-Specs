@@ -1980,14 +1980,14 @@
       "apiVersion": {
         "name": "apiVersion",
         "in": "header",
-        "required": false,
+        "required": true,
         "schema": {
           "type": "string",
           "minLength": 1,
           "pattern": "YYYY-MM-DD",
           "title": "apiVersion",
           "description": "API Version",
-          "default": "2025-02-06"
+          "default": "2025-02-27"
         },
         "description": "API Version"
       },

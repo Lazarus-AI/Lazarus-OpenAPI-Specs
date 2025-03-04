@@ -1410,7 +1410,7 @@
           "inputURL": {
             "type": "string",
             "minLength": 1,
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
             "forceRequire": true
           },
@@ -1664,7 +1664,7 @@
           "inputURL": {
             "type": "string",
             "minLength": 1,
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT. Note that TIFF files are currently unsupported for PII.",
             "forceRequire": true
           },
@@ -1771,14 +1771,14 @@
       "apiVersion": {
         "name": "apiVersion",
         "in": "header",
-        "required": false,
+        "required": true,
         "schema": {
           "type": "string",
           "minLength": 1,
           "pattern": "YYYY-MM-DD",
           "title": "apiVersion",
           "description": "API Version",
-          "default": "2025-02-06"
+          "default": "2025-02-27"
         },
         "description": "API Version"
       },

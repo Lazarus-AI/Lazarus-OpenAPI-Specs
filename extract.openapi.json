@@ -52,7 +52,7 @@
           {
             "name": "apiVersion",
             "in": "header",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "string",
               "title": "apiVersion",
@@ -149,7 +149,7 @@
           {
             "name": "apiVersion",
             "in": "header",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "string",
               "title": "apiVersion",
@@ -359,7 +359,7 @@
         "required": [
           "base64",
           "question",
-          "webhook"
+          "outputURL"
         ],
         "title": "BulkBase64Request"
       },
@@ -1371,7 +1371,7 @@
         "required": [
           "base64",
           "question",
-          "webhook"
+          "outputURL"
         ],
         "title": "ZipBase64Request"
       },
