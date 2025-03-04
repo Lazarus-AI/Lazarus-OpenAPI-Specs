@@ -359,7 +359,7 @@
         "required": [
           "base64",
           "question",
-          "outputURL"
+          "webhook"
         ],
         "title": "BulkBase64Request"
       },
@@ -1371,7 +1371,7 @@
         "required": [
           "base64",
           "question",
-          "outputURL"
+          "webhook"
         ],
         "title": "ZipBase64Request"
       },

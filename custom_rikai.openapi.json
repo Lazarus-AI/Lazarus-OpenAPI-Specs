@@ -554,7 +554,7 @@
         "required": [
           "base64",
           "question",
-          "outputURL"
+          "webhook"
         ],
         "properties": {
           "base64": {
