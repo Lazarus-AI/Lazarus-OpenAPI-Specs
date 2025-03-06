@@ -1110,9 +1110,7 @@
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
             "examples": [
-              [
-                "Tell me about the history of AI"
-              ]
+              "Tell me about the history of AI."
             ]
           },
           "webhook": {
