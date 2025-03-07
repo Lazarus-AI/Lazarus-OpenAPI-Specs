@@ -88,7 +88,7 @@
         },
         "servers": [
           {
-            "url": "https://api.lazarusai.com/api",
+            "url": "https://tm.lazarusai.com/api",
             "description": ""
           }
         ],
@@ -163,7 +163,7 @@
         },
         "servers": [
           {
-            "url": "https://api.lazarusai.com/api",
+            "url": "https://tm.lazarusai.com/api",
             "description": ""
           }
         ],
@@ -240,7 +240,7 @@
         },
         "servers": [
           {
-            "url": "https://api.lazarusai.com/api",
+            "url": "https://tm.lazarusai.com/api",
             "description": ""
           }
         ],
@@ -315,7 +315,7 @@
         },
         "servers": [
           {
-            "url": "https://api.lazarusai.com/api",
+            "url": "https://tm.lazarusai.com/api",
             "description": ""
           }
         ],
@@ -391,7 +391,7 @@
         },
         "servers": [
           {
-            "url": "https://api.lazarusai.com/api",
+            "url": "https://tm.lazarusai.com/api",
             "description": ""
           }
         ],
@@ -467,7 +467,7 @@
         },
         "servers": [
           {
-            "url": "https://api.lazarusai.com/api",
+            "url": "https://tm.lazarusai.com/api",
             "description": ""
           }
         ],
@@ -1909,7 +1909,7 @@
     },
     "servers": [
       {
-        "url": "https://api.lazarusai.com/api",
+        "url": "https://tm.lazarusai.com/api",
         "description": ""
       }
     ],

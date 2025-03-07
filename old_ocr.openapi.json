@@ -867,7 +867,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusai.com/api/forms",
+      "url": "https://tm.lazarusai.com/api/forms",
       "description": ""
     }
   ]

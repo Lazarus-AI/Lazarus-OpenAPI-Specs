@@ -599,7 +599,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusai.com/api/rikai",
+      "url": "https://tm.lazarusai.com/api/rikai",
       "description": ""
     }
   ]
