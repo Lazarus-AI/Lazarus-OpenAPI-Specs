@@ -165,9 +165,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceOCR": {
             "type": "boolean",
@@ -194,7 +195,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -204,7 +205,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           }
         }
       },
@@ -222,7 +223,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
@@ -244,9 +245,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceOCR": {
             "type": "boolean",
@@ -273,7 +275,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -283,7 +285,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           }
         }
       },

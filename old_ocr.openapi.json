@@ -197,7 +197,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",
@@ -271,7 +271,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",
@@ -568,7 +568,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",
@@ -654,7 +654,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",
@@ -695,7 +695,7 @@
           "fileId": {
             "type": "string",
             "title": "fileId",
-            "description": "Custom ID for document. If not present, will default to file name."
+            "description": "Custom ID for document. If not present, will default to a random UUID."
           },
           "forceBase64": {
             "type": "boolean",

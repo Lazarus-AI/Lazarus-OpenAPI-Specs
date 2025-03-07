@@ -554,7 +554,7 @@
         "required": [
           "base64",
           "question",
-          "outputURL"
+          "webhook"
         ],
         "properties": {
           "base64": {
@@ -596,7 +596,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -613,7 +613,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -646,12 +646,13 @@
               }
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -713,7 +714,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -730,7 +731,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -771,12 +772,13 @@
               }
             ],
             "description": "Custom ID for document. Requests with multiple files accept unique fileIds for each file.\n",
-            "setDefault": "file name",
-            "default": "file name"
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file or JSON should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -916,7 +918,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -933,7 +935,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -996,7 +998,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "description": "Optional user settings.",
@@ -1010,7 +1012,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -1060,7 +1062,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -1077,7 +1079,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -1170,7 +1172,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -1187,7 +1189,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -1253,7 +1255,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -1270,7 +1272,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -1290,7 +1292,7 @@
           },
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT.",
             "forceRequire": true
           },
@@ -1341,7 +1343,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -1358,7 +1360,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -1384,7 +1386,7 @@
           },
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT.",
             "forceRequire": true
           },
@@ -1589,7 +1591,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -1606,7 +1608,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -1637,7 +1639,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1695,7 +1697,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes](../../../prompting-guide/faq/#supported-languages)"
           },
           "settings": {
             "allOf": [
@@ -1712,7 +1714,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to."
           },
           "webhookSendFull": {
@@ -1738,7 +1740,7 @@
           },
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT.",
             "forceRequire": true
           },
@@ -1749,7 +1751,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1894,7 +1896,6 @@
               "type": "null"
             }
           ],
-          "title": "async",
           "description": "Runs request asynchronously"
         },
         "description": "Runs request asynchronously"

@@ -642,7 +642,7 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
@@ -669,9 +669,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -680,11 +681,11 @@
           },
           "statusId": {
             "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -695,7 +696,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -769,9 +770,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -780,24 +782,13 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
             "type": "boolean",
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
-          },
-          "outputURL": {
-            "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
-          },
-          "outputURLHeaders": {
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
           },
           "forceBase64": {
             "type": "boolean",
@@ -836,9 +827,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -847,7 +839,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -857,7 +849,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -897,15 +889,16 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
@@ -914,24 +907,13 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
             "type": "boolean",
             "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": false
-          },
-          "outputURL": {
-            "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
-          },
-          "outputURLHeaders": {
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
           },
           "forceBase64": {
             "type": "boolean",
@@ -979,9 +961,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1000,7 +983,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -1010,7 +993,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1021,7 +1004,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1044,15 +1027,16 @@
         "properties": {
           "inputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
             "forceRequire": true
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1071,7 +1055,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -1081,7 +1065,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1092,7 +1076,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1121,9 +1105,10 @@
           },
           "fileId": {
             "type": "string",
-            "description": "Custom ID for document. If not present, will default to file name.",
-            "setDefault": "file name",
-            "default": "file name"
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
           },
           "forceBase64": {
             "type": "boolean",
@@ -1142,7 +1127,7 @@
           },
           "webhook": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "Webhook URL to send status updates and JSON response to.\n"
           },
           "webhookSendFull": {
@@ -1152,7 +1137,7 @@
           },
           "outputURL": {
             "type": "string",
-            "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
           },
           "outputURLHeaders": {
@@ -1163,7 +1148,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to file name."
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1660,7 +1645,6 @@
               "type": "null"
             }
           ],
-          "title": "async",
           "description": "Runs request asynchronously"
         },
         "description": "Runs request asynchronously"
