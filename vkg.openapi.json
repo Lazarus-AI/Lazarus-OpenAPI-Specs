@@ -5,7 +5,17 @@
   },
   "info": {
     "title": "VKG API Reference",
-    "description": "VKG API Reference"
+    "description": "VKG API Reference",
+    "contact": {
+      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+      "name": "Lazarus IT",
+      "email": "support@lazarusai.com"
+    },
+    "license": {
+      "name": "Get Lazarus",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+    },
+    "termsOfService": "https://www.lazarusai.com/legal"
   },
   "servers": [
     {
@@ -20,7 +30,7 @@
           "All VKG Management"
         ],
         "summary": "Get All VKG Overview",
-        "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the metadata filter section of the documentation.",
+        "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the [Searching the VKG: metadataFilter](../vkg/concepts/filter) section of the documentation.",
         "operationId": "get-vkg-overview-all",
         "parameters": [
           {
@@ -199,7 +209,7 @@
           "content": {}
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Success, no content to send. "
           }
         },
@@ -375,18 +385,9 @@
                       "type": "string",
                       "description": "Same as input `toVkg` with whitespaces stripped from both ends (ID that should be used)"
                     },
-                    "expected": {
-                      "$ref": "#/components/schemas/expected"
-                    },
-                    "added": {
-                      "$ref": "#/components/schemas/added"
-                    },
-                    "nodesAdded": {
-                      "type": "array",
-                      "description": "Node IDs of the nodes that have been added",
-                      "items": {
-                        "type": "string"
-                      }
+                    "nodesCopied": {
+                      "type": "int",
+                      "description": "Number of nodes copied. Equals to the number of nodes in the original VKG."
                     }
                   }
                 }
@@ -627,7 +628,7 @@
           "Single VKG Management"
         ],
         "summary": "Search VKG",
-        "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilters](../docs/concepts/metadata/filter.md) page.",
+        "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilters](../vkg/concepts/filter) page.",
         "operationId": "search-vkg",
         "parameters": [
           {
@@ -655,7 +656,7 @@
                 "properties": {
                   "queries": {
                     "type": "array",
-                    "description": "Queries to search on.",
+                    "description": "The question or keyword for the search.",
                     "items": {
                       "type": "string"
                     }
@@ -666,7 +667,7 @@
                   },
                   "metadataFilter": {
                     "type": "object",
-                    "description": "Filter where `METADATA_NAME` is the name of the metadata field to filter on",
+                    "description": "Metadata field to filter on",
                     "additionalProperties": {
                       "$ref": "#/components/schemas/metadata-filter"
                     }
@@ -770,15 +771,6 @@
                     },
                     "vkgId": {
                       "$ref": "#/components/schemas/vkg-id"
-                    },
-                    "tsne": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/tsne"
-                        }
-                      }
                     }
                   }
                 }
@@ -1199,7 +1191,7 @@
           "Nodes"
         ],
         "summary": "Edit Nodes via Body",
-        "description": "",
+        "description": "Example of a request body:\n\n````json\n{\n  \"nodes\": {\n    \"NODE_ID_1 (property name)\": {\n      \"text\": \"string\",\n      \"metadata\": {\n        \"METADATA_KEY_1 (property name)\": \"string\",\n        \"METADATA_KEY_2 (property name)\": \"string\"\n      }\n    },\n    \"NODE_ID_2 (property name)\": {\n      \"text\": \"string\",\n      \"metadata\": {\n        \"METADATA_KEY_1 (property name)\": \"string\",\n        \"METADATA_KEY_2  (property name)\": \"string\"\n      }\n    }\n  }\n}\n````",
         "operationId": "edit-nodes-body",
         "parameters": [
           {
@@ -1257,7 +1249,7 @@
                       "$ref": "#/components/schemas/modified"
                     },
                     "modifiedNodes": {
-                      "type": "object",
+                      "type": "Array of strings",
                       "additionalProperties": {
                         "$ref": "#/components/schemas/node"
                       }
@@ -1482,11 +1474,11 @@
   "tags": [
     {
       "name": "All VKG Management",
-      "description": "Management for all the VKGs"
+      "description": "Management for all VKGs in the system."
     },
     {
       "name": "Single VKG Management",
-      "description": "Management for a specific VKG"
+      "description": "Management for a specific VKG."
     },
     {
       "name": "Nodes",
@@ -1627,7 +1619,7 @@
       },
       "metadata-filter": {
         "title": "Metadata Filter",
-        "description": "Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are listed in the Searching the VKG: metadataFilter section of the documentation.",
+        "description": "Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are listed in the [Searching the VKG: metadataFilter](../vkg/concepts/filter) section of the documentation.",
         "x-stoplight": {
           "id": "1qkmfh7tuvdl9"
         },
@@ -1832,7 +1824,7 @@
         ],
         "description": "Request's success/failure status."
       },
-      "errors": {
+      "error": {
         "type": "object",
         "nullable": true,
         "x-stoplight": {
@@ -1864,6 +1856,7 @@
       },
       "modified-nodes": {
         "type": "object",
+        "description": "List of modified node IDs",
         "additionalProperties": {
           "$ref": "#/components/schemas/node"
         },
