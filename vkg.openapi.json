@@ -9,7 +9,7 @@
   },
   "servers": [
     {
-      "url": "BASE_URL",
+      "url": "https://{BASE_URL}",
       "description": ""
     }
   ],
@@ -64,7 +64,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -166,7 +166,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -205,7 +205,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -289,7 +289,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -396,7 +396,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -461,7 +461,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -552,7 +552,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -612,7 +612,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -711,7 +711,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -788,7 +788,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -858,7 +858,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -956,7 +956,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -1016,7 +1016,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -1096,7 +1096,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -1186,7 +1186,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -1270,7 +1270,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -1354,7 +1354,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -1433,7 +1433,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
@@ -1469,7 +1469,7 @@
         },
         "servers": [
           {
-            "url": "BASE_URL",
+            "url": "https://{BASE_URL}",
             "description": ""
           }
         ],
