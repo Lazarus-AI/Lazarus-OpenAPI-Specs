@@ -817,6 +817,22 @@
               "id": "as57gxa46482b"
             },
             "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
