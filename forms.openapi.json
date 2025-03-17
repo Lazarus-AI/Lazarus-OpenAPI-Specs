@@ -713,6 +713,22 @@
             "type": "boolean",
             "description": "Set this parameter to true if resubmitting a Base64 or inputURL string that previously resulted in an error due to file size.",
             "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
@@ -1111,6 +1127,22 @@
               "id": "cvf2ht0geictj"
             },
             "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
