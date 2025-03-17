@@ -153,7 +153,7 @@
     "/forms/generic/zip/async": {
       "post": {
         "summary": "Queue an async zip request",
-        "description": "Queue an asynchronous request to Forms model and receive response data as JSON via a `webhook`, or in a ZIP file, sent to an `outputURL`.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n\n\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "description": "Queue an asynchronous request to Forms model and receive response data in a ZIP file, sent to an `outputURL`.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n\n\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
         "operationId": "post_forms_async_zip",
         "parameters": [
           {
@@ -632,7 +632,7 @@
           "inputURL",
           "base64",
           "file",
-          "webhook"
+          "outputURL"
         ],
         "properties": {
           "inputURL": {
