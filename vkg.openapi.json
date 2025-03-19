@@ -1191,7 +1191,7 @@
           "Nodes"
         ],
         "summary": "Edit Nodes via Body",
-        "description": "Example of a request body:\n\n````json\n{\n  \"nodes\": {\n    \"NODE_ID_1 (property name)\": {\n      \"text\": \"string\",\n      \"metadata\": {\n        \"METADATA_KEY_1 (property name)\": \"string\",\n        \"METADATA_KEY_2 (property name)\": \"string\"\n      }\n    },\n    \"NODE_ID_2 (property name)\": {\n      \"text\": \"string\",\n      \"metadata\": {\n        \"METADATA_KEY_1 (property name)\": \"string\",\n        \"METADATA_KEY_2  (property name)\": \"string\"\n      }\n    }\n  }\n}\n````",
+        "description": "",
         "operationId": "edit-nodes-body",
         "parameters": [
           {
