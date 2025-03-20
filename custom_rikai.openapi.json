@@ -960,7 +960,7 @@
             "description": "Custom ID for document."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1110,7 +1110,7 @@
             "description": "Custom ID for document."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1208,7 +1208,7 @@
             "default": false
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1297,7 +1297,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1391,7 +1391,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1633,7 +1633,7 @@
             "default": false
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
@@ -1745,7 +1745,7 @@
             "forceRequire": true
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?tab=t.0)). If included, we do not run OCR on the document and use these results instead.",
             "forceType": "object",
             "type": "object"
           },
