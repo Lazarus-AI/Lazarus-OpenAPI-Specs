@@ -636,7 +636,7 @@
       },
       "InvoiceData": {
         "properties": {
-          "amountDue": {
+          "amount_due": {
             "type": "string",
             "description": "Amount due at time of invoice."
           },
@@ -703,23 +703,23 @@
             "title": "status",
             "description": "Status of the request."
           },
-          "subTotal": {
+          "sub_total": {
             "type": "string",
             "description": "Invoice total without tax."
           },
-          "totalTax": {
+          "total_tax": {
             "type": "string",
             "description": "Total tax applied."
           },
-          "vendorAddress": {
+          "vendor_address": {
             "type": "string",
             "description": "Vendor address."
           },
-          "vendorAddressRecipient": {
+          "vendor_address_recipient": {
             "type": "string",
             "description": "Vendor recipient name."
           },
-          "vendorName": {
+          "vendor_name": {
             "type": "string",
             "description": "Vendor name."
           }
