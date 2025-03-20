@@ -9,209 +9,17 @@
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
       "email": "support@lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal",
+    "termsOfService": "https://www.lazarusai.com/legal",
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
     "summary": ""
   },
   "paths": {
-    "/rikai/custom/rikai2-extract": {
-      "post": {
-        "summary": "Document input, JSON response",
-        "description": "Make a request to RikAI2-Extract and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
-        "operationId": "post_rikai2_extract",
-        "parameters": [
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIRequestBody"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIFileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          },
-          "502": {
-            "$ref": "#/components/responses/502"
-          }
-        }
-      }
-    },
-    "/rikai/zip/rikai2-extract": {
-      "post": {
-        "summary": "Document input, ZIP file response",
-        "description": "Make a request to RikAI2-Extract and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead. \n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
-        "operationId": "post_zip_rikai2_extract",
-        "parameters": [
-          {
-            "name": "async",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "async",
-              "description": "Runs request asynchronously"
-            },
-            "description": "Runs request asynchronously"
-          },
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ZipRequestBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ZipResponse"
-                }
-              }
-            }
-          },
-          "207": {
-            "$ref": "#/components/responses/207"
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          },
-          "502": {
-            "$ref": "#/components/responses/502"
-          }
-        }
-      }
-    },
     "/rikai/bulk/rikai2-extract": {
       "post": {
-        "summary": "Bulk file upload",
+        "summary": "Bulk file upload (async)",
         "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_rikai2_extract",
         "parameters": [
@@ -420,7 +228,11 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "$ref": "#/components/schemas/StatusEnum",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
             "description": "Status of the request."
           }
         },
@@ -464,7 +276,11 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -502,7 +318,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -519,7 +335,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
             "default": true
           },
           "sftp": {
@@ -600,7 +416,11 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "$ref": "#/components/schemas/StatusEnum",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
             "description": "Status of the request."
           },
           "warning": {
@@ -613,6 +433,39 @@
         "title": "BulkResponse"
       },
       "BulkURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": "YOUR_WEBHOOK_URL",
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "anyOf": [
@@ -648,7 +501,11 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -691,7 +548,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -708,7 +565,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
             "default": true
           },
           "sftp": {
@@ -752,11 +609,19 @@
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
-            "$ref": "#/components/schemas/SFTP",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
             "description": "SFTP server authentication info for the `inputURL`."
           },
           "outputURL": {
-            "$ref": "#/components/schemas/SFTP",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
             "description": "SFTP server authentication info for the `outputURL`."
           }
         },
@@ -795,7 +660,11 @@
             ]
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -828,7 +697,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -864,7 +733,11 @@
             ]
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -897,7 +770,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -937,7 +810,11 @@
             ]
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -975,7 +852,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1015,7 +892,11 @@
             ]
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1062,7 +943,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1163,7 +1044,11 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "$ref": "#/components/schemas/StatusEnum",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
             "description": "Status of the request."
           }
         },
@@ -1172,6 +1057,39 @@
         "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": null,
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
@@ -1193,7 +1111,11 @@
             ]
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1231,7 +1153,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1376,7 +1298,11 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1404,7 +1330,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1421,7 +1347,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
             "default": true
           },
           "sftp": {
@@ -1509,7 +1435,11 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "$ref": "#/components/schemas/StatusEnum",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
             "description": "Status of the request."
           },
           "statusId": {
@@ -1526,6 +1456,39 @@
         "title": "ZipResponse"
       },
       "ZipURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": null,
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
@@ -1552,7 +1515,11 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "$ref": "#/components/schemas/Settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Settings"
+              }
+            ],
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1585,7 +1552,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1602,7 +1569,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
             "default": true
           },
           "sftp": {
