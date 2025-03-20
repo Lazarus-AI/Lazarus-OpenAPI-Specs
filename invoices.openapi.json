@@ -640,31 +640,31 @@
             "type": "string",
             "description": "Amount due at time of invoice."
           },
-          "customerAddress": {
+          "billing_address": {
             "type": "string",
             "description": "Customer address."
           },
-          "customerAddressRecipient": {
+          "billing_address_recipient": {
             "type": "string",
             "description": "Customer recipient name."
           },
-          "customerName": {
+          "customer_name": {
             "type": "string",
             "description": "Customer name."
           },
-          "dueDate": {
+          "due_date": {
             "type": "string",
             "description": "Invoice due date."
           },
-          "invoiceDate": {
+          "invoice_date": {
             "type": "string",
             "description": "Date of invoice."
           },
-          "invoiceId": {
+          "invoice_id": {
             "type": "string",
             "description": "Invoice ID."
           },
-          "invoiceTotal": {
+          "invoice_total": {
             "type": "string",
             "description": "Total amount on invoice."
           },
