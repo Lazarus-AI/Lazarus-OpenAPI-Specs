@@ -1644,7 +1644,7 @@
           "pattern": "YYYY-MM-DD",
           "title": "apiVersion",
           "description": "API Version",
-          "default": "2025-02-27"
+          "default": "2025-03-20"
         },
         "description": "API Version"
       },
