@@ -9,10 +9,10 @@
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
       "email": "support@lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusai.com/legal",
+    "termsOfService": "https://www.lazarusforms.com/legal",
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
     },
     "summary": ""
   },
@@ -240,11 +240,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           }
         },
@@ -281,11 +277,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -323,7 +315,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -340,7 +332,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
@@ -426,11 +418,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           },
           "warning": {
@@ -443,30 +431,6 @@
         "title": "BulkResponse"
       },
       "BulkURLRequest": {
-        "examples": [{
-          "inputURL": [
-            "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c"
-          ],
-          "question": "What is the name of the patient?",
-          "webhook": "YOUR_WEBHOOK_URL",
-          "settings": {
-            "advancedExplainability": false,
-            "advancedVision": false
-          },
-          "webhookHeaders": null,
-          "webhookSendFull": true,
-          "fileId": "file1.pdf",
-          "forceBase64": false,
-          "forceOCR": false,
-          "language": "en",
-          "metadata": null,
-          "outputURL": null,
-          "outputURLHeaders": null,
-          "returnJSON": true,
-          "returnOCR": false,
-          "sftp": null,
-          "staticIP": false
-        }],
         "properties": {
           "inputURL": {
             "anyOf": [
@@ -495,11 +459,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -542,7 +502,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -559,7 +519,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
@@ -608,19 +568,11 @@
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SFTP"
-              }
-            ],
+            "$ref": "#/components/schemas/SFTP",
             "description": "SFTP server authentication info for the `inputURL`."
           },
           "outputURL": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SFTP"
-              }
-            ],
+            "$ref": "#/components/schemas/SFTP",
             "description": "SFTP server authentication info for the `outputURL`."
           }
         },
@@ -652,11 +604,7 @@
             "type": "string"
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -689,7 +637,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -727,11 +675,7 @@
             "type": "string"
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -764,7 +708,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -797,11 +741,7 @@
             "type": "string"
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -839,7 +779,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -877,11 +817,7 @@
             "type": "string"
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -928,7 +864,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1038,11 +974,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           }
         },
@@ -1065,11 +997,7 @@
             "type": "string"
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1107,7 +1035,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1260,11 +1188,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1292,7 +1216,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1313,7 +1237,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
@@ -1406,11 +1330,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           },
           "statusId": {
@@ -1446,11 +1366,7 @@
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
           },
           "settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Settings"
-              }
-            ],
+            "$ref": "#/components/schemas/Settings",
             "description": "Optional user settings.",
             "type": "object"
           },
@@ -1483,7 +1399,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/general/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1504,7 +1420,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
