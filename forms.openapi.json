@@ -1,0 +1,1738 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Forms",
+    "version": "",
+    "summary": "",
+    "description": "",
+    "contact": {
+      "name": "Lazarus IT",
+      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+      "email": "support@lazarusai.com"
+    },
+    "license": {
+      "name": "Get Lazarus",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+    },
+    "termsOfService": "https://www.lazarusai.com/legal"
+  },
+  "paths": {
+    "/forms/generic": {
+      "post": {
+        "summary": "JSON response",
+        "description": "Make a request to the Forms model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n    - [PDF Form Example](https://documentation-resources.s3.amazonaws.com/JR_Form.pdf)\n    - [JSON Response for Example](https://docs.google.com/document/d/1Uw8xTRS6iFJ6Rg5l5OBnmHb3PES6Ev4JKCdPIRPXrHM/edit?usp=sharing)\n",
+        "operationId": "post_forms",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/version"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/FormsURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FormsBase64Request"
+                  }
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsFileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "x-stoplight": {
+          "id": "u0ef9ajkxnk6c"
+        }
+      }
+    },
+    "/forms/generic/zip": {
+      "post": {
+        "summary": "Zip file response",
+        "description": "Make a request to the Forms model and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "operationId": "post_forms_zip",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/version"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/FormsZipURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FormsZipBase64Request"
+                  }
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsZipFileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response. Output is a zip file.\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "x-stoplight": {
+          "id": "i1dv12ayac62c"
+        }
+      }
+    },
+    "/forms/generic/zip/async": {
+      "post": {
+        "summary": "Queue an async zip request",
+        "description": "Queue an asynchronous request to Forms model and receive response data in a ZIP file, sent to an `outputURL`.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n\n\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
+        "operationId": "post_forms_async_zip",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/version"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormsAsyncZipRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response. Output is a ZIP file. \n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormsAsyncZipResponseBody"
+                }
+              }
+            }
+          },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "x-stoplight": {
+          "id": "bbtq36l7d1mvl"
+        }
+      }
+    },
+    "/forms/generic/zip/async/{document_id}": {
+      "get": {
+        "summary": "Get status of an async request",
+        "description": "Get the status of an async zip request.",
+        "operationId": "get_async_status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/documentId"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        },
+        "x-stoplight": {
+          "id": "r0znp8mx74zoh"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AsyncStatusResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request."
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Model used to process the document."
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Request start time."
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Request end time."
+          },
+          "id": {
+            "type": "string",
+            "description": "Request ID.",
+            "removeDefault": true
+          }
+        },
+        "type": "object",
+        "title": "AsyncStatusResponse",
+        "x-stoplight": {
+          "id": "4rdrxw45999hs"
+        }
+      },
+      "BoundingRegion": {
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "description": "Page number.",
+            "default": 0
+          },
+          "polygon": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "description": "Bounding box coordinates of content.",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "BoundingRegion",
+        "x-stoplight": {
+          "id": "45zsm272na4p5"
+        }
+      },
+      "Cell": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Type of cell.",
+            "removeDefault": true
+          },
+          "rowIndex": {
+            "type": "integer",
+            "description": "Row index.",
+            "default": 0
+          },
+          "columnIndex": {
+            "type": "integer",
+            "description": "Column index.",
+            "default": 0
+          },
+          "columnSpan": {
+            "type": "integer",
+            "description": "Area column spans."
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the field as a string."
+          },
+          "boundingRegions": {
+            "items": {
+              "$ref": "#/components/schemas/BoundingRegion"
+            },
+            "type": "array",
+            "description": "Location of key value pair in the document."
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "description": "Span where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "required": [
+          "content",
+          "boundingRegions"
+        ],
+        "title": "Cell",
+        "x-stoplight": {
+          "id": "ll5rjp8jz2bns"
+        }
+      },
+      "ErrorMessage": {
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SuccessStatus"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "message": {
+            "type": "string",
+            "title": "message",
+            "description": "Error message."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ErrorMessage",
+        "description": "Response when an error occurs.",
+        "x-stoplight": {
+          "id": "7k4yebf6izdoy"
+        }
+      },
+      "ExtractedEntity": {
+        "properties": {
+          "boundingRegions": {
+            "items": {
+              "$ref": "#/components/schemas/BoundingRegion"
+            },
+            "type": "array",
+            "description": "Location of key value pair in the document."
+          },
+          "category": {
+            "type": "string",
+            "description": "Category entity falls under."
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Model confidence in detection and accuracy."
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "description": "Span where data can be found in the raw text."
+          },
+          "subCategory": {
+            "type": "string",
+            "description": "Sub category entity falls under."
+          }
+        },
+        "type": "object",
+        "title": "ExtractedEntity",
+        "x-stoplight": {
+          "id": "i9tftzdcq07sp"
+        }
+      },
+      "ExtractedTable": {
+        "properties": {
+          "boundingRegions": {
+            "items": {
+              "$ref": "#/components/schemas/BoundingRegion"
+            },
+            "type": "array",
+            "description": "Location of key value pair in the document."
+          },
+          "cells": {
+            "items": {
+              "$ref": "#/components/schemas/Cell"
+            },
+            "type": "array",
+            "description": "Data extracted from cells in table."
+          },
+          "columnCount": {
+            "type": "integer",
+            "description": "Number of columns in table."
+          },
+          "rowCount": {
+            "type": "integer",
+            "description": "Number of rows in table."
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "description": "Span where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "title": "ExtractedTable",
+        "x-stoplight": {
+          "id": "1ccaf7f06xg5f"
+        }
+      },
+      "FormsAsyncZipRequestBody": {
+        "type": "object",
+        "title": "FormsAsyncZipRequestBody",
+        "x-stoplight": {
+          "id": "lirhp0kdqcju4"
+        },
+        "required": [
+          "inputURL",
+          "base64",
+          "file",
+          "outputURL"
+        ],
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
+            "forceRequire": true
+          },
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object",
+            "removeDefault": true
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "bigFile": {
+            "type": "boolean",
+            "description": "Set this parameter to true if resubmitting a Base64 or inputURL string that previously resulted in an error due to file size.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsAsyncZipResponseBody": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request."
+          },
+          "statusId": {
+            "type": "string",
+            "description": "List of document IDs for each file uploaded."
+          },
+          "id": {
+            "type": "string",
+            "description": "Request ID.",
+            "removeDefault": true
+          }
+        },
+        "type": "object",
+        "title": "FormsAsyncZipResponseBody",
+        "x-stoplight": {
+          "id": "sa75oqv9hbw06"
+        }
+      },
+      "FormsBase64Request": {
+        "type": "object",
+        "title": "FormsBase64Request",
+        "x-stoplight": {
+          "id": "mxi0fj1qzlm1c"
+        },
+        "required": [
+          "base64"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "as57gxa46482b"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsFileRequest": {
+        "type": "object",
+        "title": "FormsFileRequest",
+        "x-stoplight": {
+          "id": "wtv1trxjyp0om"
+        },
+        "required": [
+          "file"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object",
+            "removeDefault": true
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "4mvmyhsthhqtk"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          }
+        }
+      },
+      "FormsURLRequest": {
+        "type": "object",
+        "title": "FormsURLRequest",
+        "x-stoplight": {
+          "id": "ha48h4doyc8x5"
+        },
+        "required": [
+          "inputURL"
+        ],
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "zo3sby1p1cx0n"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsZipBase64Request": {
+        "type": "object",
+        "title": "FormsZipBase64Request",
+        "x-stoplight": {
+          "id": "4vmhr1khbob18"
+        },
+        "required": [
+          "base64"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object",
+            "removeDefault": true
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "m2cdxfyau9jls"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsZipURLRequest": {
+        "type": "object",
+        "title": "FormsZipURLRequest",
+        "x-stoplight": {
+          "id": "cmab5agd9jbzf"
+        },
+        "required": [
+          "inputURL"
+        ],
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object",
+            "removeDefault": true
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "cvf2ht0geictj"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsZipFileRequest": {
+        "type": "object",
+        "title": "FormsZipFileRequest",
+        "x-stoplight": {
+          "id": "zpebyd93komx0"
+        },
+        "required": [
+          "file"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "setDefault": "UUID",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "forceType": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "forceType": "object",
+            "removeDefault": true
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "tbtov8b90risk"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          }
+        }
+      },
+      "GenericResponseBody": {
+        "properties": {
+          "documentId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "ID for document request or filename if specified."
+          },
+          "id": {
+            "type": "string",
+            "description": "Request ID.",
+            "removeDefault": true
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "entitiesExtracted": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractedEntity"
+            },
+            "type": "array",
+            "description": "Handwritten or drawn components in the document."
+          },
+          "isUrgent": {
+            "type": "boolean",
+            "description": "Indicates any marking of urgency on the document.",
+            "default": false
+          },
+          "keyValuePairs": {
+            "items": {
+              "$ref": "#/components/schemas/KeyValuePair"
+            },
+            "type": "array",
+            "description": "List of key value pairs found in the document.",
+            "removeDefault": true
+          },
+          "modelType": {
+            "type": "string",
+            "description": "Type of base/extraction model used, OCR or Forms."
+          },
+          "ocrResults": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OCRResults"
+              }
+            ],
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request."
+          },
+          "rawText": {
+            "type": "string",
+            "description": "All the extracted text from the document."
+          },
+          "requestDateTime": {
+            "type": "string",
+            "description": "Date and time request was made."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the request."
+          },
+          "tablesExtracted": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractedTable"
+            },
+            "type": "array",
+            "description": "Tables found in the document.",
+            "removeDefault": true
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request 'metadata' field."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time."
+          }
+        },
+        "type": "object",
+        "title": "GenericResponseBody",
+        "x-stoplight": {
+          "id": "0x9onnlwg2618"
+        }
+      },
+      "InputOutputSFTP": {
+        "properties": {
+          "inputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `inputURL`."
+          },
+          "outputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `outputURL`."
+          }
+        },
+        "type": "object",
+        "title": "InputOutputSFTP",
+        "required": []
+      },
+      "SFTP": {
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "SFTP username."
+          },
+          "password": {
+            "type": "string",
+            "description": "SFTP password. Either `password` or `privateKey` are required."
+          },
+          "privateKey": {
+            "type": "string",
+            "description": "Base64 encoded SFTP private key. Either `password` or `privateKey` are required."
+          },
+          "privateKeyPassphrase": {
+            "type": "string",
+            "description": "Optional passphrase to use if private key is protected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "title": "SFTP"
+      },
+      "KVPEntity": {
+        "properties": {
+          "boundingRegions": {
+            "items": {
+              "$ref": "#/components/schemas/BoundingRegion"
+            },
+            "type": "array",
+            "description": "Location of key value pair in the document.",
+            "default": []
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the field as a string.",
+            "default": ""
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "description": "Span where data can be found in the raw text.",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "KVPEntity",
+        "x-stoplight": {
+          "id": "h9vjwilbsbdpx"
+        }
+      },
+      "KeyValuePair": {
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "description": "Model confidence in detection and accuracy.",
+            "default": 0
+          },
+          "key": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KVPEntity"
+              }
+            ],
+            "description": "Key data."
+          },
+          "value": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KVPEntity"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Value data."
+          }
+        },
+        "type": "object",
+        "title": "KeyValuePair",
+        "x-stoplight": {
+          "id": "v6vekku5x9iuw"
+        }
+      },
+      "Line": {
+        "properties": {
+          "polygon": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "description": "Bounding box coordinates of content.",
+            "removeDefault": true
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the field as a string."
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "description": "Span where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "title": "Line",
+        "x-stoplight": {
+          "id": "2wjva89bdsbiz"
+        }
+      },
+      "OCRResults": {
+        "properties": {
+          "modelVersion": {
+            "type": "string",
+            "description": "OCR model version date."
+          },
+          "readResults": {
+            "items": {
+              "$ref": "#/components/schemas/ReadResult"
+            },
+            "type": "array",
+            "description": "Read results for each page in the document."
+          },
+          "readStyles": {
+            "items": {
+              "$ref": "#/components/schemas/ReadStyle"
+            },
+            "type": "array",
+            "description": "Styled objects found in the document."
+          },
+          "version": {
+            "type": "string",
+            "description": "OCR model version."
+          }
+        },
+        "type": "object",
+        "title": "OCRResults",
+        "x-stoplight": {
+          "id": "pt8rzz5vkyry5"
+        }
+      },
+      "ReadResult": {
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "description": "Page number."
+          },
+          "angle": {
+            "type": "number",
+            "description": "Slant of text read."
+          },
+          "height": {
+            "type": "number",
+            "description": "Document height."
+          },
+          "width": {
+            "type": "number",
+            "description": "Document width."
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit of measurement used for height and width."
+          },
+          "words": {
+            "items": {
+              "$ref": "#/components/schemas/Word"
+            },
+            "type": "array",
+            "description": "Words on the page."
+          },
+          "selectionMarks": {
+            "items": {
+              "$ref": "#/components/schemas/SelectionMark"
+            },
+            "type": "array",
+            "description": "Data for the checkboxes in the document."
+          },
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/Line"
+            },
+            "type": "array",
+            "description": "Lines of text on the page."
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "description": "Span where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "title": "ReadResult",
+        "x-stoplight": {
+          "id": "ry3qs1ihuz2df"
+        }
+      },
+      "ReadStyle": {
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "description": "Model confidence in detection and accuracy."
+          },
+          "isHandwritten": {
+            "type": "boolean",
+            "description": "Whether or not text was handwritten."
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "description": "Span where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "title": "ReadStyle",
+        "x-stoplight": {
+          "id": "orxudwjy6no7i"
+        }
+      },
+      "SelectedState": {
+        "type": "string",
+        "enum": [
+          "unselected",
+          "selected"
+        ],
+        "title": "SelectedState",
+        "description": "Selected State String Enum",
+        "x-stoplight": {
+          "id": "vlkq9mbn6lyn1"
+        }
+      },
+      "SelectionMark": {
+        "properties": {
+          "polygon": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "description": "Bounding box coordinates of content.",
+            "removeDefault": true
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Model confidence in detection and accuracy."
+          },
+          "span": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Span"
+              }
+            ],
+            "description": "Span where data can be found in the raw text."
+          },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SelectedState"
+              }
+            ],
+            "description": "State of the checkbox.",
+            "default": "unselected"
+          }
+        },
+        "type": "object",
+        "title": "SelectionMark",
+        "x-stoplight": {
+          "id": "8mw2f3z5q60uy"
+        }
+      },
+      "Span": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "description": "Offset of the data from the edge of the document.",
+            "default": 0
+          },
+          "length": {
+            "type": "integer",
+            "description": "Length of area of the data.",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "Span",
+        "x-stoplight": {
+          "id": "r99mymv51th1f"
+        }
+      },
+      "SuccessStatus": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "FAILURE",
+          "AUTH_FAILURE"
+        ],
+        "title": "SuccessStatus",
+        "description": "Success Status",
+        "x-stoplight": {
+          "id": "av92q3imqn8s2"
+        }
+      },
+      "Word": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Content of the field as a string."
+          },
+          "polygon": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "description": "Bounding box coordinates of content.",
+            "removeDefault": true
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Model confidence in detection and accuracy."
+          },
+          "span": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Span"
+              }
+            ],
+            "description": "Span where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "title": "Word",
+        "x-stoplight": {
+          "id": "ssmumviblzjif"
+        }
+      }
+    },
+    "parameters": {
+      "documentId": {
+        "name": "document_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "document_id",
+          "description": "Document ID"
+        },
+        "description": "Document ID"
+      },
+      "orgId": {
+        "name": "orgId",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-_]+$",
+          "title": "orgId",
+          "description": "Organization ID"
+        },
+        "description": "Organization ID"
+      },
+      "authKey": {
+        "name": "authKey",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-_]+$",
+          "title": "authKey",
+          "description": "Authentication key"
+        },
+        "description": "Authentication key"
+      },
+      "version": {
+        "name": "version",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "title": "version",
+          "description": "API version",
+          "default": 2
+        },
+        "description": "API version"
+      },
+      "modelId": {
+        "name": "custom_model_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "custom_model_id",
+          "description": "Custom model ID"
+        },
+        "description": "Custom model ID"
+      },
+      "async": {
+        "name": "async",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Runs request asynchronously"
+        },
+        "description": "Runs request asynchronously"
+      }
+    },
+    "responses": {
+      "207": {
+        "description": "Async upload request failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Invalid credentials": {
+                "value": {
+                  "status": "AUTH_FAILURE",
+                  "message": "Invalid authentication"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not found error. When a request references an invalid endpoint or resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Model id 'abc' is not valid."
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Model processing failed. Extraction model or LLM could not process your request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "OCR failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Error during request to OCR microservice."
+                }
+              },
+              "LLM failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "We made three attempts to process the model with no success."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.lazarusai.com/api",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,1894 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "0pete9qnzd4dg"
+  },
+  "info": {
+    "title": "VKG API Reference",
+    "description": "VKG API Reference",
+    "contact": {
+      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+      "name": "Lazarus IT",
+      "email": "support@lazarusai.com"
+    },
+    "license": {
+      "name": "Get Lazarus",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+    },
+    "termsOfService": "https://www.lazarusai.com/legal"
+  },
+  "servers": [
+    {
+      "url": "https://{BASE_URL}",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/api/vkgs": {
+      "get": {
+        "tags": [
+          "All VKG Management"
+        ],
+        "summary": "Get All VKG Overview",
+        "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the [Searching the VKG: metadataFilter](../vkg/concepts/filter) section of the documentation.",
+        "operationId": "get-vkg-overview-all",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgs": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "$ref": "#/components/schemas/vkg-metrics"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "9uptk7e9rjf3z"
+        }
+      },
+      "post": {
+        "tags": [
+          "Single VKG Management"
+        ],
+        "summary": "Create VKG",
+        "description": "Create a single VKG and instantiate optional metadata.",
+        "operationId": "create-vkg",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "vkgId": {
+                    "$ref": "#/components/schemas/vkg-id"
+                  },
+                  "metadata": {
+                    "$ref": "#/components/schemas/metadata-config"
+                  }
+                },
+                "required": [
+                  "vkgId"
+                ],
+                "example": {
+                  "vkgId": "numbers",
+                  "metadata": {
+                    "data": {
+                      "default": 12,
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "default": {
+                  "value": {
+                    "vkgId": "numbers",
+                    "metadata": {
+                      "data": {
+                        "default": 12,
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "created": {
+                      "type": "boolean"
+                    },
+                    "vkgId": {
+                      "$ref": "#/components/schemas/vkg-id"
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/metadata-config"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "l7n0smcx31l5k"
+        }
+      },
+      "delete": {
+        "tags": [
+          "All VKG Management"
+        ],
+        "summary": "Delete All VKGs",
+        "description": "Delete all existing VKGs.",
+        "operationId": "delete-vkg-all",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Success, no content to send. "
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "geaqbm7f0aevm"
+        }
+      }
+    },
+    "/api/vkgs/export": {
+      "post": {
+        "tags": [
+          "All VKG Management"
+        ],
+        "summary": "Export All VKGs",
+        "description": "Export all the VKGs into CSVs as a ZIP file.",
+        "operationId": "export-vkg-all",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filename": {
+                    "type": "string",
+                    "default": "[ISO Datetime]_export.csv"
+                  },
+                  "includeTsne": {
+                    "type": "boolean",
+                    "default": false,
+                    "x-deprecated": true
+                  },
+                  "includeMetadata": {
+                    "type": "boolean",
+                    "default": true,
+                    "x-deprecated": true
+                  }
+                },
+                "example": {
+                  "filename": "export",
+                  "include_tsne": false,
+                  "include_metadata": false
+                }
+              },
+              "examples": {
+                "default": {
+                  "value": {
+                    "filename": "export",
+                    "include_tsne": false,
+                    "include_metadata": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a ZIP file named `filename.zip`, that contains a CSV for each VKG.",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "o7dvady5jlwgh"
+        }
+      }
+    },
+    "/api/vkgs/duplicate": {
+      "post": {
+        "tags": [
+          "All VKG Management"
+        ],
+        "summary": "Duplicate VKG",
+        "description": "Duplicate a VKG from another, preserving the nodes and metadata schema.",
+        "operationId": "duplicate-vkg",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fromVkg": {
+                    "$ref": "#/components/schemas/vkg-id"
+                  },
+                  "toVkg": {
+                    "$ref": "#/components/schemas/vkg-id"
+                  }
+                },
+                "required": [
+                  "fromVkg",
+                  "toVkg"
+                ],
+                "example": {
+                  "fromVkg": "UMAPtest",
+                  "toVkg": "copy"
+                }
+              },
+              "examples": {
+                "default": {
+                  "value": {
+                    "fromVkg": "UMAPtest",
+                    "toVkg": "copy"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "fromVkg": {
+                      "type": "string",
+                      "description": "Same as input `fromVkg`"
+                    },
+                    "toVkg": {
+                      "type": "string",
+                      "description": "Same as input `toVkg` with whitespaces stripped from both ends (ID that should be used)"
+                    },
+                    "nodesCopied": {
+                      "type": "int",
+                      "description": "Number of nodes copied. Equals to the number of nodes in the original VKG."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "2i3eiq92jrrrw"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}": {
+      "get": {
+        "tags": [
+          "Single VKG Management"
+        ],
+        "summary": "Get VKG Overview",
+        "description": "Provides an overview of the specified VKG.",
+        "operationId": "get-vkg-overview",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgId": {
+                      "type": "string"
+                    },
+                    "statistics": {
+                      "$ref": "#/components/schemas/vkg-metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "if1q44ibr5pjd"
+        }
+      },
+      "put": {
+        "tags": [
+          "Single VKG Management"
+        ],
+        "summary": "Edit VKG",
+        "description": "Edit a VKG's name and/or it's metadata schema.",
+        "operationId": "edit-vkg",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "description": "Provides two functionalities:\n\n1. Renaming the VKG (When given `newVkgId`)\n2. Updating the VKG's metadata (When given `metadata`)\n\nWhen given both `newVkgId` and `metadata`, both functions will be run",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "newVkgId": {
+                    "$ref": "#/components/schemas/vkg-id"
+                  },
+                  "metadata": {
+                    "$ref": "#/components/schemas/metadata-config"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgId": {
+                      "type": "object",
+                      "description": "Only exists if `newVkgId` is passed in the input",
+                      "properties": {
+                        "old": {
+                          "$ref": "#/components/schemas/vkg-id"
+                        },
+                        "new": {
+                          "$ref": "#/components/schemas/vkg-id"
+                        }
+                      }
+                    },
+                    "metadata": {
+                      "type": "array",
+                      "description": "Only exists if `metadata` is passed in the input. Array of the node IDs that have been modified with the new metadata",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "drxn1w2hr5m1s"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Single VKG Management"
+        ],
+        "summary": "Delete VKG",
+        "description": "Delete a single VKG.",
+        "operationId": "delete-vkg",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "expected": {
+                      "$ref": "#/components/schemas/expected"
+                    },
+                    "deleted": {
+                      "$ref": "#/components/schemas/deleted"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "58wnpscpkcy23"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}/search": {
+      "post": {
+        "tags": [
+          "Single VKG Management"
+        ],
+        "summary": "Search VKG",
+        "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilter](../vkg/concepts/filter) page.",
+        "operationId": "search-vkg",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "description": "Note: Setting the `numClosest` parameter too high can result in unwanted results. They may be dissimilar, yet still are within the `numClosest` nodes (E.g. A VKG with 5 nodes with `numClosest` set to 5 nodes will retrieve them all)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "queries": {
+                    "type": "array",
+                    "description": "The question or keyword for the search.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "numClosest": {
+                    "type": "integer",
+                    "description": "Number of nodes to retrieve."
+                  },
+                  "metadataFilter": {
+                    "type": "object",
+                    "description": "Metadata field to filter on.",
+                    "additionalProperties": {
+                      "$ref": "#/components/schemas/metadata-filter"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgId": {
+                      "type": "string"
+                    },
+                    "queryResults": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/query-results"
+                      }
+                    },
+                    "numClosest": {
+                      "type": "integer",
+                      "description": "Number of nodes to retrieve."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "zuohzfbdu0ktd"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}/compute": {
+      "post": {
+        "tags": [
+          "Single VKG Management"
+        ],
+        "summary": "Compute TSNE",
+        "description": "Compute the TSNE of the VKG. TSNE is the metric used to visualize nodes as a graph. Each node's TSNE needs to be calculated in order to create a visualization.",
+        "operationId": "compute-tsne",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "name": "return_tsne",
+            "in": "query",
+            "description": "Whether or not to return the TSNE values",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgId": {
+                      "$ref": "#/components/schemas/vkg-id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "aqn3066t9fqmb"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}/export": {
+      "post": {
+        "tags": [
+          "Single VKG Management"
+        ],
+        "summary": "Export VKG",
+        "description": "Export the VKG into a CSV.",
+        "operationId": "export-vkg",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filename": {
+                    "type": "string"
+                  },
+                  "includeTsne": {
+                    "type": "boolean",
+                    "x-deprecated": true
+                  },
+                  "includeMetadata": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a CSV.",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "t8htcwsr3dndq"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}/nodes": {
+      "get": {
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Get Nodes",
+        "description": "Retrieve all nodes.\n",
+        "operationId": "get-vkg-nodes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "name": "do_tsne",
+            "in": "query",
+            "description": "Perform TSNE (Essentially runs /compute as well)",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "include_stats",
+            "in": "query",
+            "description": "Include the VKG's statistics",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgId": {
+                      "type": "string"
+                    },
+                    "nodes": {
+                      "type": "object",
+                      "description": "Dictionary where the key is the node ID and the values are a dictionary containing `text`, `metadata`, and `tsne` (If available)",
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/components/schemas/node"
+                          },
+                          {
+                            "$ref": "#/components/schemas/node-with-tsne"
+                          }
+                        ]
+                      }
+                    },
+                    "calculateTsne": {
+                      "type": "boolean"
+                    },
+                    "includeMetadata": {
+                      "type": "boolean"
+                    },
+                    "statistics": {
+                      "$ref": "#/components/schemas/vkg-metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "ztld34xz2u90l"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Delete All Nodes",
+        "description": "Delete all nodes in the VKG.",
+        "operationId": "delete-vkg-nodes-all",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "expected": {
+                      "$ref": "#/components/schemas/expected"
+                    },
+                    "deleted": {
+                      "$ref": "#/components/schemas/deleted"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "8jjrvctukliow"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}/nodes/batch": {
+      "delete": {
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Delete Specific Nodes",
+        "description": "Delete Nodes in batch by specific node IDs.",
+        "operationId": "delete-vkg-nodes-specific",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodes": {
+                    "type": "array",
+                    "description": "Array of node IDs",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "expected": {
+                      "$ref": "#/components/schemas/expected"
+                    },
+                    "deleted": {
+                      "$ref": "#/components/schemas/deleted"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "jjqrj68n1bzq7"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}/nodes/json": {
+      "post": {
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Add Nodes via Body",
+        "description": "",
+        "operationId": "add-nodes-body",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodes": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/node"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgId": {
+                      "$ref": "#/components/schemas/vkg-id"
+                    },
+                    "expected": {
+                      "$ref": "#/components/schemas/expected"
+                    },
+                    "added": {
+                      "$ref": "#/components/schemas/added"
+                    },
+                    "nodesAdded": {
+                      "type": "array",
+                      "description": "Array of node IDs corresponding to the nodes that were added",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "5pxo08k4hgrse"
+        }
+      },
+      "put": {
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Edit Nodes via Body",
+        "description": "",
+        "operationId": "edit-nodes-body",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodes": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "$ref": "#/components/schemas/node"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "expected": {
+                      "$ref": "#/components/schemas/expected"
+                    },
+                    "modified": {
+                      "$ref": "#/components/schemas/modified"
+                    },
+                    "modifiedNodes": {
+                      "type": "Array of strings",
+                      "additionalProperties": {
+                        "$ref": "#/components/schemas/node"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "04nwiukmpsdlz"
+        }
+      }
+    },
+    "/api/vkgs/{VKG_ID}/nodes/file": {
+      "post": {
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Add Nodes via Files",
+        "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
+        "operationId": "add-nodes-file",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "vkgId": {
+                      "$ref": "#/components/schemas/vkg-id"
+                    },
+                    "expected": {
+                      "$ref": "#/components/schemas/expected"
+                    },
+                    "added": {
+                      "$ref": "#/components/schemas/added"
+                    },
+                    "nodesAdded": {
+                      "$ref": "#/components/schemas/nodes-added"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "8r519hyss34e8"
+        }
+      },
+      "put": {
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Edit Nodes via Files",
+        "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
+        "operationId": "edit-nodes-file",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/{VKG_ID}"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    },
+                    "expected": {
+                      "$ref": "#/components/schemas/expected"
+                    },
+                    "modified": {
+                      "$ref": "#/components/schemas/modified"
+                    },
+                    "modifiedNodes": {
+                      "$ref": "#/components/schemas/modified-nodes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "rzis6sjee2xp0"
+        }
+      }
+    },
+    "/api/status": {
+      "get": {
+        "summary": "Status Check",
+        "description": "Endpoint to check that the server and all dependencies are healthy.",
+        "operationId": "get-api-status",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "error": {
+                      "$ref": "#/components/schemas/error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://{BASE_URL}",
+            "description": ""
+          }
+        ],
+        "x-stoplight": {
+          "id": "i9jbco8syrqju"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "All VKG Management",
+      "description": "Management for all VKGs in the system."
+    },
+    {
+      "name": "Single VKG Management",
+      "description": "Management for a specific VKG."
+    },
+    {
+      "name": "Nodes",
+      "description": "Management for a specific VKG's nodes."
+    }
+  ],
+  "components": {
+    "parameters": {
+      "VKG_ID": {
+        "name": "VKG_ID",
+        "in": "path",
+        "description": "ID of the VKG being accessed",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "orgId": {
+        "name": "orgId",
+        "in": "header",
+        "description": "Organization Identifier",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "authKey": {
+        "name": "authKey",
+        "in": "header",
+        "description": "Organization Authorization Key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "userId": {
+        "name": "userId",
+        "in": "header",
+        "description": "User Identifier",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "vkg-metrics": {
+        "type": "object",
+        "title": "VKG Metrics",
+        "description": "Metric overview of a single VKG.",
+        "x-stoplight": {
+          "id": "hw3wyx1icjazz"
+        },
+        "properties": {
+          "nodes": {
+            "type": "integer",
+            "description": "Number of nodes in the graph."
+          },
+          "queries": {
+            "type": "integer",
+            "description": "Number of queries that have been processed in aggregate."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/metadata-config"
+          },
+          "lastTsne": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO Datetime of the last time visualizations were computed"
+          }
+        }
+      },
+      "vkg-id": {
+        "type": "string",
+        "title": "VKG ID",
+        "description": "VKG's ID.",
+        "x-stoplight": {
+          "id": "hjwh9o5k8qv40"
+        }
+      },
+      "metadata-config": {
+        "type": "object",
+        "title": "Metadata Config",
+        "description": "Configuration for the metadata schema.",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/metadata-field-config"
+        },
+        "x-stoplight": {
+          "id": "ob8jqhv31tcoc"
+        }
+      },
+      "metadata-field-config": {
+        "title": "Metadata Field Config",
+        "description": "Configuration for each metadata field.",
+        "x-stoplight": {
+          "id": "7diqao48jjzn9"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/metadata-field-basic"
+          },
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/metadata-field-basic"
+              },
+              {
+                "$ref": "#/components/schemas/metadata-filter"
+              }
+            ]
+          }
+        ],
+        "type": "object"
+      },
+      "metadata-field-basic": {
+        "title": "Metadata Field Basic",
+        "x-stoplight": {
+          "id": "bld7a3stiopya"
+        },
+        "type": "object",
+        "properties": {
+          "default": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "905g05a2420zl"
+            },
+            "description": "Default value."
+          },
+          "type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "nulsp5uqwepge"
+            },
+            "description": "Type of this metadata."
+          }
+        },
+        "description": "Basic metadata layout"
+      },
+      "metadata-filter": {
+        "title": "Metadata Filter",
+        "description": "Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are listed in the [Searching the VKG: metadataFilter](../vkg/concepts/filter) section of the documentation.",
+        "x-stoplight": {
+          "id": "1qkmfh7tuvdl9"
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/one-of-filter"
+          },
+          {
+            "$ref": "#/components/schemas/more-than-filter"
+          },
+          {
+            "$ref": "#/components/schemas/more-than-equal-filter"
+          },
+          {
+            "$ref": "#/components/schemas/less-than-filter"
+          },
+          {
+            "$ref": "#/components/schemas/less-than-equal-filter"
+          }
+        ],
+        "type": "object"
+      },
+      "one-of-filter": {
+        "type": "object",
+        "title": "'One Of' Filter",
+        "x-stoplight": {
+          "id": "5py1qk9j7v6t6"
+        },
+        "properties": {
+          "oneOf": {
+            "type": "array",
+            "description": "List of values to match on\n",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "more-than-filter": {
+        "type": "object",
+        "title": "'More Than' Filter",
+        "properties": {
+          "moreThan": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "x-stoplight": {
+          "id": "vkosjtxrloqv8"
+        }
+      },
+      "more-than-equal-filter": {
+        "type": "object",
+        "title": "'More Than Equal' Filter",
+        "properties": {
+          "moreThanEq": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "x-stoplight": {
+          "id": "j9jykq4iwuuc6"
+        }
+      },
+      "less-than-filter": {
+        "type": "object",
+        "title": "'Less Than' Filter",
+        "properties": {
+          "lessThan": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "x-stoplight": {
+          "id": "8vqzxnjmnuies"
+        }
+      },
+      "less-than-equal-filter": {
+        "type": "object",
+        "title": "'Less Than Equal' Filter",
+        "properties": {
+          "lessThanEq": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "x-stoplight": {
+          "id": "avmnxpxibvudj"
+        }
+      },
+      "query-results": {
+        "type": "object",
+        "title": "Query Results",
+        "description": "Query and node results.",
+        "x-stoplight": {
+          "id": "k4erqqk0leuf5"
+        },
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Query from the request"
+          },
+          "results": {
+            "type": "array",
+            "description": "Array of dictionary whose key is the node ID and the values is a dictionary containing `text` and `metadata`",
+            "items": {
+              "$ref": "#/components/schemas/node"
+            }
+          }
+        }
+      },
+      "tsne": {
+        "type": "array",
+        "title": "TSNE Values",
+        "description": "TSNE values which reduce the embedding dimensions down to 3 for 3-D visualization.",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "number"
+        },
+        "x-stoplight": {
+          "id": "y3w2f91zho2nq"
+        }
+      },
+      "node": {
+        "type": "object",
+        "title": "Node Data",
+        "x-stoplight": {
+          "id": "2gzvc0lw0wxhb"
+        },
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Node's text contents."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Key-value pairs of the metadata items.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "node-with-tsne": {
+        "title": "Node w/ TSNE",
+        "x-stoplight": {
+          "id": "kjsysc7pihfcd"
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/node"
+          },
+          {
+            "x-stoplight": {
+              "id": "b6qmkrly1kd4u"
+            },
+            "properties": {
+              "tsne": {
+                "$ref": "#/components/schemas/tsne"
+              }
+            }
+          }
+        ],
+        "type": "object"
+      },
+      "status": {
+        "x-stoplight": {
+          "id": "n6kpttccgrouj"
+        },
+        "title": "Status",
+        "enum": [
+          "SUCCESS",
+          "FAILURE"
+        ],
+        "description": "Request's success/failure status."
+      },
+      "error": {
+        "type": "object",
+        "nullable": true,
+        "x-stoplight": {
+          "id": "ec6onla5yj2ai"
+        },
+        "title": "Error",
+        "description": "Object containing the error's description and other details that may be helpful."
+      },
+      "added": {
+        "title": "Added",
+        "description": "Number of nodes added.",
+        "type": "integer"
+      },
+      "nodes-added": {
+        "type": "array",
+        "description": "Array of node IDs corresponding to the nodes that were added.",
+        "items": {
+          "type": "string"
+        },
+        "x-stoplight": {
+          "id": "mbi22cb76czkj"
+        },
+        "title": "Nodes Added"
+      },
+      "modified": {
+        "title": "Modified",
+        "type": "integer",
+        "description": "Number of nodes modified."
+      },
+      "modified-nodes": {
+        "type": "object",
+        "description": "List of modified node IDs",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/node"
+        },
+        "x-stoplight": {
+          "id": "86ixvff4vrzrq"
+        },
+        "title": "Modified Nodes"
+      },
+      "file": {
+        "title": "File",
+        "x-stoplight": {
+          "id": "gmnw802wn6bir"
+        },
+        "type": "object",
+        "description": "File as a CSV or JSON."
+      },
+      "expected": {
+        "title": "Expected",
+        "x-stoplight": {
+          "id": "lxwtwhn1x17x0"
+        },
+        "type": "integer",
+        "description": "Number of nodes expected to change."
+      },
+      "deleted": {
+        "title": "Deleted",
+        "x-stoplight": {
+          "id": "crewr6g74x2xw"
+        },
+        "type": "integer",
+        "description": "Number of nodes deleted."
+      }
+    }
+  }
+}

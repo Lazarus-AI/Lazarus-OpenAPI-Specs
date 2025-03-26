@@ -1,0 +1,1783 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "cwxndbu4lr5tz"
+  },
+  "info": {
+    "title": "PII",
+    "version": "",
+    "summary": "",
+    "description": "Extract and redact personally identifiable information",
+    "contact": {
+      "name": "Lazarus IT",
+      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+      "email": "support@lazarusai.com"
+    },
+    "license": {
+      "name": "Get Lazarus",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+    },
+    "termsOfService": "https://www.lazarusai.com/legal"
+  },
+  "paths": {
+    "/forms/pii": {
+      "post": {
+        "summary": "Extract, JSON response",
+        "description": "Make a request to extract PII data and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "operationId": "post_pii",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/PIIURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PIIBase64Request"
+                  }
+                ],
+                "title": "Request Body"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/PIIFileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PIIResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "3f1p1gdaz39wk"
+        },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/forms/pii/redact": {
+      "post": {
+        "summary": "Redact, JSON response",
+        "description": "Make a request to redact PII data from a document and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "operationId": "post_pii_redact",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/authKey"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/RedactURLRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RedactBase64Request"
+                  }
+                ],
+                "title": "Request Body"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RedactFileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedactResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        },
+        "x-stoplight": {
+          "id": "v9ernc822es8s"
+        },
+        "servers": [
+          {
+            "url": "https://api.lazarusai.com/api",
+            "description": ""
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BoundingRegion": {
+        "properties": {
+          "boundingBox": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "description": "Bounding box coordinates of content."
+          },
+          "pageNumber": {
+            "type": "integer",
+            "description": "Page number."
+          }
+        },
+        "type": "object",
+        "title": "BoundingRegion",
+        "x-stoplight": {
+          "id": "fdunazv4o8gkl"
+        }
+      },
+      "FormsBase64Request": {
+        "type": "object",
+        "title": "FormsBase64Request",
+        "description": "Forms Request Body with base64 file upload",
+        "x-stoplight": {
+          "id": "ekqxrzlhp19bi"
+        },
+        "required": [
+          "base64"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "base64",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "webhook": {
+            "type": "string",
+            "description": "Webhook URL to ping a status update (startTime, endTime, status) during and after API runs."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "611d3zypk7289"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsFileRequest": {
+        "type": "object",
+        "title": "FormsFileRequest",
+        "description": "Forms Request Body with local file upload",
+        "x-stoplight": {
+          "id": "pe7gzpdduawyl"
+        },
+        "required": [
+          "file"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "file",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "webhook": {
+            "type": "string",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "outputUrl": {
+            "type": "string",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "za53mubzht2nj"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          }
+        }
+      },
+      "FormsURLRequest": {
+        "type": "object",
+        "title": "FormsURLRequest",
+        "description": "Forms Request Body with URL file upload",
+        "x-stoplight": {
+          "id": "n0t4cr5dj7b35"
+        },
+        "required": [
+          "inputUrl"
+        ],
+        "properties": {
+          "inputUrl": {
+            "type": "string",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "webhook": {
+            "type": "string",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "6qpsw1gxoygo1"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsZipBase64Request": {
+        "type": "object",
+        "title": "FormsZipBase64Request",
+        "description": "Forms ZIP Request Nody with base64 file upload",
+        "x-stoplight": {
+          "id": "rmi2xzran39ma"
+        },
+        "required": [
+          "base64"
+        ],
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "outputUrl": {
+            "type": "string",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputUrlHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "webhook": {
+            "type": "string",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "4eo1ya2ishu6v"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "FormsZipFileRequest": {
+        "type": "object",
+        "title": "FormsZipFileRequest",
+        "description": "Forms ZIP Request Nody with local file upload",
+        "x-stoplight": {
+          "id": "7yjwsa9zhqtdf"
+        },
+        "required": [
+          "file"
+        ],
+        "properties": {
+          "outputUrl": {
+            "type": "string",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "file",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
+            "forceRequire": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
+          },
+          "webhook": {
+            "type": "string",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "npr231n2y6l59"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          }
+        }
+      },
+      "FormsZipURLRequest": {
+        "type": "object",
+        "title": "FormsZipURLRequest",
+        "description": "Forms ZIP Request Nody with URL file upload",
+        "x-stoplight": {
+          "id": "ttrv1g6q64qie"
+        },
+        "required": [
+          "inputUrl"
+        ],
+        "properties": {
+          "inputUrl": {
+            "type": "string",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
+            "forceRequire": true
+          },
+          "outputUrl": {
+            "type": "string",
+            "description": "URL where resulting zip file should be sent. Must be open to PUT requests. Required if submitting an async request."
+          },
+          "outputUrlHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for document. If not present, will default to a random UUID.",
+            "default": "UUID",
+            "examples": ["file1.pdf"]
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Set this parameter to true if the input file is a fillable pdf.",
+            "default": false
+          },
+          "statusId": {
+            "type": "string",
+            "description": "WARNING: Deprecating in favor of 'fileId'. Custom ID for document. If not present, will default to a random UUID."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "webhook": {
+            "type": "string",
+            "description": "Webhook URL to send status updates and JSON response to.\n"
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "When set to `true`, send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
+            "default": false
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "9rktej0zuaqd5"
+            },
+            "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "InvoiceData": {
+        "properties": {
+          "amountDue": {
+            "type": "string",
+            "description": "Amount due at time of invoice."
+          },
+          "customerAddress": {
+            "type": "string",
+            "description": "Customer address."
+          },
+          "customerAddressRecipient": {
+            "type": "string",
+            "description": "Customer recipient name."
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Customer name."
+          },
+          "dueDate": {
+            "type": "string",
+            "description": "Invoice due date."
+          },
+          "invoiceDate": {
+            "type": "string",
+            "description": "Date of invoice."
+          },
+          "invoiceId": {
+            "type": "string",
+            "description": "Invoice ID."
+          },
+          "invoiceTotal": {
+            "type": "string",
+            "description": "Total amount on invoice."
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "type": "array",
+            "title": "items",
+            "description": "Invoice items."
+          },
+          "keyValuePairs": {
+            "items": {
+              "$ref": "#/components/schemas/KeyValuePair"
+            },
+            "type": "array",
+            "title": "keyValuePair",
+            "description": "List of key value pairs found in the document."
+          },
+          "pages": {
+            "type": "integer",
+            "title": "pages",
+            "description": "Number of pages in the document."
+          },
+          "rawText": {
+            "type": "string",
+            "title": "rawText",
+            "description": "All the extracted text from the document."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SuccessStatus"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "subTotal": {
+            "type": "string",
+            "description": "Invoice total without tax."
+          },
+          "totalTax": {
+            "type": "string",
+            "description": "Total tax applied."
+          },
+          "vendorAddress": {
+            "type": "string",
+            "description": "Vendor address."
+          },
+          "vendorAddressRecipient": {
+            "type": "string",
+            "description": "Vendor recipient name."
+          },
+          "vendorName": {
+            "type": "string",
+            "description": "Vendor name."
+          }
+        },
+        "type": "object",
+        "title": "InvoiceData",
+        "description": "Invoice Data",
+        "x-stoplight": {
+          "id": "943k08fhz9x66"
+        }
+      },
+      "InvoicesResponseBody": {
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "ID for document request or filename if specified."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time."
+          },
+          "id": {
+            "type": "string",
+            "description": "Request ID."
+          },
+          "invoiceData": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceData"
+              }
+            ],
+            "title": "invoiceData",
+            "description": "Breakdown of invoice data."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SuccessStatus"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request 'metadata' field."
+          }
+        },
+        "type": "object",
+        "title": "InvoicesResponseBody",
+        "description": "Invoices Response Body",
+        "x-stoplight": {
+          "id": "7wuff4ezc1vzu"
+        }
+      },
+      "Item": {
+        "properties": {
+          "amount": {
+            "type": "string",
+            "description": "Invoice item."
+          },
+          "description": {
+            "type": "string",
+            "description": "Invoice item description."
+          },
+          "quantity": {
+            "type": "string",
+            "description": "Invoice item quantity."
+          },
+          "unit_price": {
+            "type": "string",
+            "description": "Invoice item unit price"
+          },
+          "product_code": {
+            "type": "string",
+            "description": "Invoice item product code."
+          },
+          "rawText": {
+            "type": "string",
+            "description": "All the extracted text from item."
+          }
+        },
+        "type": "object",
+        "title": "Item",
+        "description": "Item",
+        "x-stoplight": {
+          "id": "96gj0hbjmgbs9"
+        }
+      },
+      "ItemData": {
+        "properties": {
+          "price": {
+            "type": "number",
+            "description": "Price per item.",
+            "default": 0
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Number of items.",
+            "default": 0
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "Total price of an item.",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "ItemData",
+        "description": "Item Data",
+        "x-stoplight": {
+          "id": "8g4apwdipfd09"
+        }
+      },
+      "InputOutputSFTP": {
+        "properties": {
+          "inputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `inputURL`."
+          },
+          "outputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `outputURL`."
+          }
+        },
+        "type": "object",
+        "title": "InputOutputSFTP",
+        "required": []
+      },
+      "SFTP": {
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "SFTP username."
+          },
+          "password": {
+            "type": "string",
+            "description": "SFTP password. Either `password` or `privateKey` are required."
+          },
+          "privateKey": {
+            "type": "string",
+            "description": "Base64 encoded SFTP private key. Either `password` or `privateKey` are required."
+          },
+          "privateKeyPassphrase": {
+            "type": "string",
+            "description": "Optional passphrase to use if private key is protected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "title": "SFTP"
+      },
+      "KVPEntity": {
+        "properties": {
+          "boundingRegions": {
+            "items": {
+              "$ref": "#/components/schemas/BoundingRegion"
+            },
+            "type": "array",
+            "title": "boundingRegion",
+            "description": "Location of key value pair in the document."
+          },
+          "content": {
+            "type": "string",
+            "title": "content",
+            "description": "Content of the field as a string."
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/Span"
+            },
+            "type": "array",
+            "title": "spans",
+            "description": "Area where data can be found in the raw text."
+          }
+        },
+        "type": "object",
+        "title": "KVPEntity",
+        "x-stoplight": {
+          "id": "qo40if12f28d6"
+        }
+      },
+      "KeyValuePair": {
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "title": "confidence",
+            "description": "Model confidence in detection and accuracy."
+          },
+          "key": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KVPEntity"
+              }
+            ],
+            "title": "key",
+            "description": "Key data."
+          },
+          "value": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KVPEntity"
+              }
+            ],
+            "title": "value",
+            "description": "Value data."
+          }
+        },
+        "type": "object",
+        "title": "KeyValuePair",
+        "x-stoplight": {
+          "id": "58tpwzc9q1toi"
+        }
+      },
+      "SSNData": {
+        "properties": {
+          "ssnNumber": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SSNNumber"
+              }
+            ],
+            "title": "ssnNumber",
+            "description": "Extracted social security number."
+          }
+        },
+        "type": "object",
+        "title": "SSNData",
+        "description": "SSN Data",
+        "x-stoplight": {
+          "id": "6d6i34epse39z"
+        }
+      },
+      "SSNNumber": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "description": "Actual social security number."
+          }
+        },
+        "type": "object",
+        "title": "SSNNumber",
+        "description": "SSN Number",
+        "x-stoplight": {
+          "id": "2gjukpki2l988"
+        }
+      },
+      "SSNResponseBody": {
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "description": "ID for document request or filename if specified."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request 'metadata' field."
+          },
+          "ssnData": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SSNData"
+              }
+            ],
+            "title": "ssnData",
+            "description": "Social security card data."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the request."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time."
+          },
+          "id": {
+            "type": "string",
+            "description": "Request ID."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "modelType": {
+            "type": "string",
+            "description": "Type of base/extraction model used, OCR or Forms."
+          }
+        },
+        "type": "object",
+        "title": "SSNResponseBody",
+        "description": "SSN Response Body",
+        "x-stoplight": {
+          "id": "jsx1vqkpdwj5l"
+        }
+      },
+      "Span": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "description": "Offset of the data from the edge of the document.",
+            "default": 0
+          },
+          "length": {
+            "type": "integer",
+            "description": "Length of area of the data.",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "Span",
+        "x-stoplight": {
+          "id": "y919kcyu615h5"
+        }
+      },
+      "SuccessStatus": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "FAILURE"
+        ],
+        "title": "SuccessStatus",
+        "x-stoplight": {
+          "id": "5iwbrcvy0zuc3"
+        }
+      },
+      "ContentRegion": {
+        "properties": {
+          "polygon": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "description": "Bounding box coordinates of content."
+          },
+          "content": {
+            "type": "string",
+            "description": "Detected text."
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Confidence score."
+          }
+        },
+        "type": "object",
+        "required": [
+          "polygon"
+        ],
+        "title": "ContentRegion",
+        "x-stoplight": {
+          "id": "ivi57lpw7ei5f"
+        }
+      },
+      "ErrorMessage": {
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ErrorMessage",
+        "description": "Response when an error occurs.",
+        "x-stoplight": {
+          "id": "uii1uj39tnp42"
+        }
+      },
+      "PIIBase64Request": {
+        "properties": {
+          "base64": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "pageQualityWeight": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
+            "default": 0.5,
+            "forceType": "number",
+            "setFormat": "float",
+            "format": "float"
+          },
+          "redact": {
+            "type": "boolean",
+            "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "PIIBase64Request",
+        "required": [
+          "base64"
+        ],
+        "x-stoplight": {
+          "id": "31o25qyxeqge4"
+        }
+      },
+      "PIIFileRequest": {
+        "type": "object",
+        "title": "PIIFileRequest",
+        "x-stoplight": {
+          "id": "qjn5ay7bahh9r"
+        },
+        "required": [
+          "file"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "forceRequire": true
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "pageQualityWeight": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
+            "default": 0.5,
+            "forceType": "number",
+            "setFormat": "float",
+            "format": "float"
+          },
+          "redact": {
+            "type": "boolean",
+            "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
+            "default": false
+          }
+        }
+      },
+      "PIIURLRequest": {
+        "type": "object",
+        "title": "PIIURLRequest",
+        "x-stoplight": {
+          "id": "9nbt9g6u3fy5a"
+        },
+        "required": [
+          "inputURL"
+        ],
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "forceRequire": true
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "pageQualityWeight": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
+            "default": 0.5,
+            "forceType": "number",
+            "setFormat": "float",
+            "format": "float"
+          },
+          "redact": {
+            "type": "boolean",
+            "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "PIIResult": {
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PageContent"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "A list of personally-identifiable information by page."
+          },
+          "redactedFile": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RedactedFile"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "redactedFile",
+            "description": "The b64 encoded PDF file with PII redacted."
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "PIIResult",
+        "description": "Model to return to /pii requests",
+        "x-stoplight": {
+          "id": "dyqhc1tljy2za"
+        }
+      },
+      "PageContent": {
+        "properties": {
+          "dimension": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageDimension"
+              }
+            ],
+            "description": "Width, height, and units of the given page."
+          },
+          "regions": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ContentRegion"
+                },
+                "type": "array"
+              },
+              {
+                "items": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              }
+            ],
+            "description": "List of bounding boxes or content regions."
+          }
+        },
+        "type": "object",
+        "required": [
+          "dimension",
+          "regions"
+        ],
+        "title": "PageContent",
+        "x-stoplight": {
+          "id": "ov6ocef3die0y"
+        }
+      },
+      "PageDimension": {
+        "properties": {
+          "height": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Document height."
+          },
+          "width": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Document width."
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit of measurement used for height and width."
+          }
+        },
+        "type": "object",
+        "required": [
+          "height",
+          "width"
+        ],
+        "title": "PageDimension",
+        "x-stoplight": {
+          "id": "klat0sx1s7ntt"
+        }
+      },
+      "RedactBase64Request": {
+        "properties": {
+          "base64": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "forceRequire": true
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "getPII": {
+            "type": "boolean",
+            "description": "Set to true to run the PII model first and redact any identified regions."
+          },
+          "pageQualityWeight": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
+            "default": 0.5,
+            "forceType": "number",
+            "setFormat": "float",
+            "format": "float"
+          },
+          "keywords": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "Labels of fields to redact."
+          },
+          "pages": {
+            "items": {
+              "$ref": "#/components/schemas/PageContent"
+            },
+            "type": "array",
+            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "RedactBase64Request",
+        "required": [
+          "base64"
+        ],
+        "x-stoplight": {
+          "id": "z52f06xa9h5po"
+        }
+      },
+      "RedactFileRequest": {
+        "type": "object",
+        "title": "RedactFileRequest",
+        "x-stoplight": {
+          "id": "uo4hxvqqq7zkc"
+        },
+        "required": [
+          "file"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "forceRequire": true
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "getPII": {
+            "type": "boolean",
+            "description": "Set to true to run the PII model first and redact any identified regions."
+          },
+          "pageQualityWeight": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
+            "default": 0.5,
+            "forceType": "number",
+            "setFormat": "float",
+            "format": "float"
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Labels of fields to redact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pages": {
+            "type": "array",
+            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions.",
+            "items": {
+              "$ref": "#/components/schemas/PageContent"
+            }
+          }
+        }
+      },
+      "RedactURLRequest": {
+        "type": "object",
+        "title": "RedactURLRequest",
+        "x-stoplight": {
+          "id": "sov6x9uit7ri4"
+        },
+        "required": [
+          "inputURL"
+        ],
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "forceRequire": true
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "getPII": {
+            "type": "boolean",
+            "description": "Set to true to run the PII model first and redact any identified regions."
+          },
+          "pageQualityWeight": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
+            "default": 0.5,
+            "forceType": "number",
+            "setFormat": "float",
+            "format": "float"
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Labels of fields to redact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pages": {
+            "type": "array",
+            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions.",
+            "items": {
+              "$ref": "#/components/schemas/PageContent"
+            }
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        }
+      },
+      "RedactResult": {
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "redactedFile": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RedactedFile"
+              }
+            ],
+            "title": "redactedFile",
+            "description": "The encoded redacted PDF file."
+          }
+        },
+        "type": "object",
+        "title": "RedactResult",
+        "description": "Model to return to /redact requests",
+        "x-stoplight": {
+          "id": "gn2t02wje0vl9"
+        }
+      },
+      "RedactedFile": {
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "binary",
+            "description": "Redacted and encoded file data."
+          },
+          "encoding": {
+            "type": "string",
+            "description": "File encoding."
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "encoding"
+        ],
+        "title": "RedactedFile",
+        "x-stoplight": {
+          "id": "tx0hef30q015l"
+        }
+      },
+      "StatusEnum": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "FAILURE",
+          "AUTH_FAILURE"
+        ],
+        "title": "StatusEnum",
+        "x-stoplight": {
+          "id": "wta4kqf2pz3ax"
+        }
+      }
+    },
+    "parameters": {
+      "apiVersion": {
+        "name": "apiVersion",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "YYYY-MM-DD",
+          "title": "apiVersion",
+          "description": "API Version",
+          "default": "2025-02-27"
+        },
+        "description": "API Version"
+      },
+      "orgId": {
+        "name": "orgId",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-_]+$",
+          "title": "orgId",
+          "description": "Organization ID"
+        },
+        "description": "Organization ID"
+      },
+      "authKey": {
+        "name": "authKey",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-_]+$",
+          "title": "authKey",
+          "description": "Authentication key"
+        },
+        "description": "Authentication key"
+      },
+      "responses": {
+        "400": {
+          "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorMessage"
+              },
+              "examples": {
+                "Missing required field": {
+                  "value": {
+                    "status": "FAILURE",
+                    "message": "Request body is missing required field(s): question"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "403": {
+          "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorMessage"
+              },
+              "examples": {
+                "Invalid credentials": {
+                  "value": {
+                    "status": "AUTH_FAILURE",
+                    "message": "Invalid authentication"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "Not found error. When a request references an invalid endpoint or resource.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorMessage"
+              },
+              "examples": {
+                "Custom model not found": {
+                  "value": {
+                    "status": "FAILURE",
+                    "message": "Model id 'abc' is not valid."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Model processing failed. Extraction model or LLM could not process your request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorMessage"
+              },
+              "examples": {
+                "OCR failed": {
+                  "value": {
+                    "status": "FAILURE",
+                    "message": "Error during request to OCR microservice."
+                  }
+                },
+                "LLM failed": {
+                  "value": {
+                    "status": "FAILURE",
+                    "message": "We made three attempts to process the model with no success."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "502": {
+          "description": "Could not connect to model.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorMessage"
+              },
+              "examples": {
+                "Custom model not found": {
+                  "value": {
+                    "status": "FAILURE",
+                    "message": "Request to the model failed."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "https://api.lazarusai.com/api",
+        "description": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,2122 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "RikY2",
+    "version": "",
+    "description": "",
+    "contact": {
+      "name": "Lazarus IT",
+      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+      "email": "support@lazarusai.com"
+    },
+    "termsOfService": "https://www.lazarusai.com/legal",
+    "license": {
+      "name": "Get Lazarus",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+    },
+    "summary": ""
+  },
+  "paths": {
+    "/rikai/custom/riky2": {
+      "post": {
+        "summary": "Document input, JSON response",
+        "description": "Make a request to RikY2 and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "operationId": "post_riky2",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIRequestBody"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIFileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        }
+      }
+    },
+    "/rikai/ocr/riky2": {
+      "post": {
+        "summary": "OCR input, JSON response",
+        "description": "Make a request to RikY2 by providing OCR results as input, receive JSON response data. This method skips the OCR process that typically precedes Riky2 calls. It is ideal for asking multiple questions of the same document.",
+        "operationId": "post_ocr_riky2",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIOCRRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        }
+      }
+    },
+    "/rikai/zip/riky2": {
+      "post": {
+        "summary": "Document input, ZIP file response",
+        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "operationId": "post_zip_riky2",
+        "parameters": [
+          {
+            "name": "async",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "async",
+              "description": "Runs request asynchronously"
+            },
+            "description": "Runs request asynchronously"
+          },
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ZipRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZipResponse"
+                }
+              }
+            }
+          },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        }
+      }
+    },
+    "/rikai/bulk/riky2": {
+      "post": {
+        "summary": "Bulk file upload",
+        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "operationId": "post_bulk_riky2",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResponse"
+                }
+              }
+            }
+          },
+          "207": {
+            "$ref": "#/components/responses/207"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        }
+      }
+    },
+    "/rikai/chat/riky2": {
+      "post": {
+        "summary": "Chat, no file input, JSON response",
+        "description": "Make a RikY2 request using prompt as context. No document upload.",
+        "operationId": "post_chat_riky2",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIChatRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
+          }
+        }
+      }
+    },
+    "/rikai/zip/async/{statusId}": {
+      "get": {
+        "summary": "Get async request status",
+        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/riky2?async=True` or `/rikai/bulk/riky2`. Identifiable by `statusId`.",
+        "operationId": "get_async_status",
+        "parameters": [
+          {
+            "name": "statusId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "statusId",
+              "description": "Status ID"
+            },
+            "description": "Status ID"
+          },
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Answer": {
+        "properties": {
+          "answer": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Model's answer to the question asked."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "The question asked."
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Answer confidence score ranging from 0 to 1."
+          },
+          "context": {
+            "type": "string",
+            "description": "Where in the document the answer was found."
+          },
+          "translated": {
+            "type": "string",
+            "description": "Translated answer if the `language` field was included in the request"
+          }
+        },
+        "type": "object",
+        "required": [
+          "answer",
+          "question"
+        ],
+        "title": "Answer"
+      },
+      "AsyncStatusResponse": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "AsyncStatusResponse"
+      },
+      "BulkBase64Request": {
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "base64",
+          "question",
+          "webhook"
+        ],
+        "title": "BulkBase64Request"
+      },
+      "BulkRequestBody": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BulkURLRequest"
+          },
+          {
+            "$ref": "#/components/schemas/BulkBase64Request"
+          }
+        ],
+        "title": "BulkRequestBody",
+        "required": [],
+        "properties": {}
+      },
+      "BulkResponse": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "statusId": {
+            "type": "object",
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "failedRequests": {
+            "items": {},
+            "type": "array",
+            "description": "File requests that failed to queue."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request `metadata` field."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          },
+          "warning": {
+            "type": "object",
+            "description": "Warnings such as webhook failure."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "BulkResponse"
+      },
+      "BulkURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": "YOUR_WEBHOOK_URL",
+            "settings": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
+        "properties": {
+          "inputURL": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "inputURL",
+          "question",
+          "webhook"
+        ],
+        "title": "BulkURLRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError",
+        "required": []
+      },
+      "InputOutputSFTP": {
+        "properties": {
+          "inputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `inputURL`."
+          },
+          "outputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `outputURL`."
+          }
+        },
+        "type": "object",
+        "title": "InputOutputSFTP",
+        "required": []
+      },
+      "RikAIBase64Request": {
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "type": "object"
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "base64",
+          "question"
+        ],
+        "title": "RikAIBase64Request"
+      },
+      "RikAIChatRequestBody": {
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              "Tell me about the history of AI."
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "RikAIChatRequestBody",
+        "required": [
+          "question"
+        ]
+      },
+      "RikAIFileRequest": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF, or TXT."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "file",
+          "question"
+        ],
+        "title": "RikAIFileRequest"
+      },
+      "RikAIOCRRequestBody": {
+        "examples": [
+          {
+            "ocr": {},
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": "string",
+            "webhookHeaders": {},
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "language": "en",
+            "metadata": {},
+            "returnOCR": false,
+            "sftp": {
+            "user": "string",
+            "password": "string",
+            "privateKey": "string",
+            "privateKeyPassphrase": "string"
+            },
+            "staticIP": false
+          }
+        ],
+        "properties": {
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "type": "object"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "ocr",
+          "question"
+        ],
+        "title": "RikAIOCRRequestBody"
+      },
+      "RikAIRequestBody": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RikAIURLRequest"
+          },
+          {
+            "$ref": "#/components/schemas/RikAIBase64Request"
+          }
+        ],
+        "title": "RikAIRequestBody",
+        "required": [],
+        "properties": {}
+      },
+      "RikAIResponse": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "questions": {
+            "description": "Number of questions asked.",
+            "type": "integer"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "baseModel": {
+            "description": "Base model used during data extraction.",
+            "type": "string"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Answer"
+            },
+            "type": "array",
+            "description": "Question and answer data for each question asked in the request."
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language results are translated into."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request `metadata` field."
+          },
+          "ocrResults": {
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request.",
+            "type": "object"
+          },
+          "settings": {
+            "type": "object",
+            "description": "JSON containing any custom user settings specified in the request."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "RikAIResponse"
+      },
+      "RikAIURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "ocr": null,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "type": "object"
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "inputURL",
+          "question"
+        ],
+        "title": "RikAIURLRequest"
+      },
+      "SFTP": {
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "SFTP username."
+          },
+          "password": {
+            "type": "string",
+            "description": "SFTP password. Either `password` or `privateKey` are required."
+          },
+          "privateKey": {
+            "type": "string",
+            "description": "Base64 encoded SFTP private key. Either `password` or `privateKey` are required."
+          },
+          "privateKeyPassphrase": {
+            "type": "string",
+            "description": "Optional passphrase to use if private key is protected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "title": "SFTP"
+      },
+      "Settings": {
+        "properties": {
+          "advancedExplainability": {
+            "type": "boolean",
+            "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context.",
+            "default": false
+          },
+          "advancedVision": {
+            "type": "boolean",
+            "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
+            "default": false
+          },
+          "returnConfidence": {
+            "type": "boolean",
+            "description": "Set to true to include bounding boxes and confidence score in response."
+          }
+        },
+        "type": "object",
+        "title": "Settings",
+        "required": []
+      },
+      "StatusEnum": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "SUBMITTED",
+          "FAILURE",
+          "AUTH_FAILURE",
+          "RUNNING"
+        ],
+        "title": "StatusEnum",
+        "required": [],
+        "properties": {}
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "ZipBase64Request": {
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "type": "object"
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "base64",
+          "question",
+          "webhook"
+        ],
+        "title": "ZipBase64Request"
+      },
+      "ZipRequestBody": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ZipURLRequest"
+          },
+          {
+            "$ref": "#/components/schemas/ZipBase64Request"
+          }
+        ],
+        "title": "ZipRequestBody",
+        "required": [],
+        "properties": {}
+      },
+      "ZipResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code."
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "organization": {
+            "type": "string",
+            "description": "Organization ID."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "documentId": {
+            "type": "string",
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request `metadata` field."
+          },
+          "questions": {
+            "description": "Number of questions asked.",
+            "type": "integer"
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          },
+          "statusId": {
+            "type": "string",
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
+          },
+          "warning": {
+            "type": "object",
+            "description": "Warnings such as webhook failure."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "ZipResponse"
+      },
+      "ZipURLRequest": {
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "list"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string or list of strings containing the question(s) to be asked.",
+            "examples": [
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceBase64": {
+            "type": "boolean",
+            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "default": false
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "type": "object"
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "default": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "inputURL",
+          "question",
+          "webhook"
+        ],
+        "title": "ZipURLRequest"
+      },
+      "ErrorMessage": {
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "description": "Status of the request."
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "apiVersion": {
+            "description": "API version used for request.",
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "title": "ErrorMessage",
+        "description": "Response when an error occurs."
+      }
+    },
+    "responses": {
+      "207": {
+        "description": "Bulk upload request failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Invalid credentials": {
+                "value": {
+                  "status": "AUTH_FAILURE",
+                  "message": "Invalid authentication",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not found error. When a request references an invalid endpoint or resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Model id 'abc' is not valid.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "An internal server error or model processing failed. Extraction model or LLM could not process your request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "OCR failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Error during request to OCR microservice.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              },
+              "LLM failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "We made three attempts to process the model with no success.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              },
+              "Internal server error": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "An internal error occurred. Please report this to support@lazarusai.com.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "502": {
+        "description": "Could not connect to model.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Model unavailable": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "An internal error occurred. Please report this to support@lazarusai.com.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.lazarusai.com/api",
+      "description": ""
+    }
+  ]
+}
