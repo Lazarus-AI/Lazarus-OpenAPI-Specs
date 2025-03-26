@@ -1266,10 +1266,6 @@
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
           },
-          "bulkStartTime": {
-            "type": "integer",
-            "description": "Bulk request start time in Unix timestamp in milliseconds."
-          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
@@ -1320,10 +1316,6 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
-          },
-          "zipQueuedTime": {
-            "type": "integer",
-            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
           }
         },
         "type": "object",
@@ -1483,10 +1475,6 @@
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
           },
-          "bulkStartTime": {
-            "type": "integer",
-            "description": "Bulk request start time in Unix timestamp in milliseconds."
-          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
@@ -1542,10 +1530,6 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
-          },
-          "zipQueuedTime": {
-            "type": "integer",
-            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
           }
         },
         "type": "object",
