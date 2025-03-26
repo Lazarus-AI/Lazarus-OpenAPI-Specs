@@ -191,7 +191,7 @@
     "/rikai/zip/riky2": {
       "post": {
         "summary": "Document input, ZIP file response",
-        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](../webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_zip_riky2",
         "parameters": [
           {
@@ -295,7 +295,7 @@
     "/rikai/bulk/riky2": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](../webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_riky2",
         "parameters": [
           {
@@ -612,11 +612,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           }
         },
@@ -713,7 +709,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
@@ -799,15 +795,14 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           },
           "warning": {
-            "type": "object",
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
             "description": "Warnings such as webhook failure."
           }
         },
@@ -938,7 +933,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
@@ -987,19 +982,11 @@
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SFTP"
-              }
-            ],
+            "$ref": "#/components/schemas/SFTP",
             "description": "SFTP server authentication info for the `inputURL`."
           },
           "outputURL": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SFTP"
-              }
-            ],
+            "$ref": "#/components/schemas/SFTP",
             "description": "SFTP server authentication info for the `outputURL`."
           }
         },
@@ -1110,7 +1097,10 @@
             ],
             "description": "A string or list of strings containing the question(s) to be asked.",
             "examples": [
-              "Tell me about the history of AI."
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
             ]
           },
           "webhook": {
@@ -1126,6 +1116,19 @@
             "type": "boolean",
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
           },
           "language": {
             "type": "string",
@@ -1414,11 +1417,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           }
         },
@@ -1721,7 +1720,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
@@ -1814,11 +1813,7 @@
             "description": "Request start time recorded in epoch (Unix timestamp) format."
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the request."
           },
           "statusId": {
@@ -1913,7 +1908,7 @@
           },
           "returnJSON": {
             "type": "boolean",
-            "description": "Set to `true` to send a JSON response rather than a ZIP file to the outputURL.",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
           },
           "returnOCR": {
