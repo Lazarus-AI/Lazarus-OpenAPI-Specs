@@ -9,10 +9,10 @@
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
       "email": "support@lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal",
+    "termsOfService": "https://www.lazarusai.com/legal",
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
     "summary": ""
   },
@@ -424,6 +424,39 @@
         "title": "BulkResponse"
       },
       "BulkURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": "YOUR_WEBHOOK_URL",
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "anyOf": [
@@ -983,6 +1016,39 @@
         "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": null,
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
@@ -1200,10 +1266,6 @@
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
           },
-          "bulkStartTime": {
-            "type": "integer",
-            "description": "Bulk request start time in Unix timestamp in milliseconds."
-          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
@@ -1254,10 +1316,6 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
-          },
-          "zipQueuedTime": {
-            "type": "integer",
-            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
           }
         },
         "type": "object",
@@ -1345,6 +1403,39 @@
         "title": "ZipResponse"
       },
       "ZipURLRequest": {
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": null,
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
+            "staticIP": false
+          }
+        ],
         "properties": {
           "inputURL": {
             "type": "string",
@@ -1383,10 +1474,6 @@
             "type": "boolean",
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
-          },
-          "bulkStartTime": {
-            "type": "integer",
-            "description": "Bulk request start time in Unix timestamp in milliseconds."
           },
           "fileId": {
             "type": "string",
@@ -1443,10 +1530,6 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
-          },
-          "zipQueuedTime": {
-            "type": "integer",
-            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
           }
         },
         "type": "object",
