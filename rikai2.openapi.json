@@ -15,7 +15,7 @@
     "version": "0.1.0"
   },
   "paths": {
-    "rikai2": {
+    "/rikai2": {
       "post": {
         "summary": "Rikai2",
         "description": "Supported input files should support standard file formats (Formats are checked with file header bytes):\n- PDF\n- JPG/JPEG\n- PNG\n- TIFF",
