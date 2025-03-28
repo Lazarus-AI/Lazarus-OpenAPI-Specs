@@ -65,6 +65,16 @@
               }
             }
           },
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAI2Response"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Invalid license",
             "content": {
