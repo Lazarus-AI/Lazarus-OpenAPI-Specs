@@ -120,7 +120,7 @@
           "context": {
             "type": "string",
             "description": "Where in the document the answer was found. Under construction."
-          },          
+          }
         },
         "type": "object",
         "required": [
