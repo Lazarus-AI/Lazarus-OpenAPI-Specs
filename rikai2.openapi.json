@@ -112,7 +112,15 @@
             "type": "string",
             "title": "Answer",
             "description": "Answer to appropriate question"
-          }
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Answer confidence score ranging from 0 to 1. Under construction."
+          },
+          "context": {
+            "type": "string",
+            "description": "Where in the document the answer was found. Under construction."
+          },          
         },
         "type": "object",
         "required": [
@@ -143,7 +151,23 @@
             "type": "string",
             "title": "File",
             "description": "Input file as a base64 encoded string"
-          }
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Under construction.",
+            "default": false
+          },            
+          "settings": {
+            "properties": {
+              "advancedExplainability": {
+                "type": "boolean",
+                "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context. Under construction.",
+                "default": false
+              },
+            },
+            "type": "object",
+            "title": "Settings",
+          }          
         },
         "type": "object",
         "required": [
@@ -167,7 +191,11 @@
             "type": "string",
             "title": "Model",
             "description": "Name of the model"
-          }
+          },
+          "ocrResults": {
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request. Under construction.",
+            "type": "object"
+          }          
         },
         "type": "object",
         "required": [
