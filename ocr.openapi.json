@@ -836,10 +836,10 @@
           "type": "integer",
           "minLength": 1,
           "title": "version",
-          "description": "API version",
+          "description": "API version (1 or 2)",
           "default": 1
         },
-        "description": "API version"
+        "description": "API version (1 or 2)"
       },
       "async": {
         "name": "async",
