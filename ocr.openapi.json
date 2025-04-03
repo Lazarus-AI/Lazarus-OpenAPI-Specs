@@ -227,7 +227,7 @@
           "version": {
             "type": "integer",
             "description": "OCR model version (1 or 2)",
-            "default": 2
+            "default": 1
           }
         }
       },
@@ -299,7 +299,7 @@
           "version": {
             "type": "integer",
             "description": "OCR model version (1 or 2)",
-            "default": 2
+            "default": 1
           }
         }
       },
@@ -595,7 +595,7 @@
           "version": {
             "type": "integer",
             "description": "OCR model version (1 or 2)",
-            "default": 2
+            "default": 1
           }
         },
         "type": "object",
@@ -698,7 +698,7 @@
           "version": {
             "type": "integer",
             "description": "OCR model version (1 or 2)",
-            "default": 2
+            "default": 1
           }
         },
         "type": "object",
@@ -760,7 +760,7 @@
           "version": {
             "type": "integer",
             "description": "OCR model version (1 or 2).",
-            "default": 2
+            "default": 1
           }
         },
         "type": "object",
@@ -837,7 +837,7 @@
           "minLength": 1,
           "title": "version",
           "description": "API version",
-          "default": 2
+          "default": 1
         },
         "description": "API version"
       },
