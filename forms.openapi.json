@@ -211,14 +211,14 @@
         }
       }
     },
-    "/forms/generic/zip/async/{document_id}": {
+    "/forms/generic/zip/async/{status_id}": {
       "get": {
         "summary": "Get status of an async request",
         "description": "Get the status of an async zip request.",
         "operationId": "get_async_status",
         "parameters": [
           {
-            "$ref": "#/components/parameters/documentId"
+            "$ref": "#/components/parameters/statusId"
           },
           {
             "$ref": "#/components/parameters/orgId"
@@ -1552,16 +1552,16 @@
       }
     },
     "parameters": {
-      "documentId": {
-        "name": "document_id",
+      "statusId": {
+        "name": "status_id",
         "in": "path",
         "required": true,
         "schema": {
           "type": "string",
-          "title": "document_id",
-          "description": "Document ID"
+          "title": "status_id",
+          "description": "Status ID"
         },
-        "description": "Document ID"
+        "description": "Status ID"
       },
       "orgId": {
         "name": "orgId",
