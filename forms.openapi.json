@@ -130,12 +130,7 @@
         },
         "responses": {
           "202": {
-            "description": "Successful Response. Output is a zip file.\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n",
-            "content": {
-              "application/zip": {
-                "schema": {}
-              }
-            }
+            "description": "Successful Response. Output is a zip file.\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |\n"
           },
           "400": {
             "$ref": "#/components/responses/400"
@@ -216,14 +211,14 @@
         }
       }
     },
-    "/forms/generic/zip/async/{document_id}": {
+    "/forms/generic/zip/async/{status_id}": {
       "get": {
         "summary": "Get status of an async request",
         "description": "Get the status of an async zip request.",
         "operationId": "get_async_status",
         "parameters": [
           {
-            "$ref": "#/components/parameters/documentId"
+            "$ref": "#/components/parameters/statusId"
           },
           {
             "$ref": "#/components/parameters/orgId"
@@ -256,149 +251,6 @@
         "x-stoplight": {
           "id": "r0znp8mx74zoh"
         }
-      }
-    },
-    "/forms/custom/{custom_model_id}": {
-      "post": {
-        "summary": "JSON response",
-        "description": "Make a request to a custom Forms2 model and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
-        "operationId": "post_forms_custom",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/modelId"
-          },
-          {
-            "$ref": "#/components/parameters/orgId"
-          },
-          {
-            "$ref": "#/components/parameters/authKey"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/FormsURLRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/FormsBase64Request"
-                  }
-                ],
-                "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsFileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericResponseBody"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          }
-        },
-        "x-stoplight": {
-          "id": "6zisovfh2y08m"
-        },
-        "tags": [
-          "Custom"
-        ]
-      }
-    },
-    "/forms/custom/{custom_model_id}/zip": {
-      "post": {
-        "summary": "Zip file response",
-        "description": "Make a request to Forms model and receive response data in a ZIP file.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\nThe default name for the file is an epoch timestamp if `fileId` field is not included in the request.",
-        "operationId": "post_forms_custom_zip",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/modelId"
-          },
-          {
-            "$ref": "#/components/parameters/orgId"
-          },
-          {
-            "$ref": "#/components/parameters/authKey"
-          },
-          {
-            "$ref": "#/components/parameters/async"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/FormsZipURLRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/FormsZipBase64Request"
-                  }
-                ],
-                "title": "Request Body"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/FormsZipFileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Successful Response. Output is a ZIP file.\n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
-            "content": {
-              "application/zip": {
-                "schema": {}
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          }
-        },
-        "x-stoplight": {
-          "id": "pn7kng7blet46"
-        },
-        "tags": [
-          "Custom"
-        ]
       }
     }
   },
@@ -718,6 +570,22 @@
             "type": "boolean",
             "description": "Set this parameter to true if resubmitting a Base64 or inputURL string that previously resulted in an error due to file size.",
             "default": false
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
@@ -729,7 +597,7 @@
           },
           "statusId": {
             "type": "string",
-            "description": "List of document IDs for each file uploaded."
+            "description": "List of status IDs for each file uploaded."
           },
           "id": {
             "type": "string",
@@ -806,6 +674,22 @@
               "id": "as57gxa46482b"
             },
             "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
@@ -931,6 +815,22 @@
               "id": "zo3sby1p1cx0n"
             },
             "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
@@ -1012,6 +912,22 @@
               "id": "m2cdxfyau9jls"
             },
             "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
@@ -1084,6 +1000,22 @@
               "id": "cvf2ht0geictj"
             },
             "description": "Request headers to include in the POST request to the webhook."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         }
       },
@@ -1251,6 +1183,54 @@
         "x-stoplight": {
           "id": "0x9onnlwg2618"
         }
+      },
+      "InputOutputSFTP": {
+        "properties": {
+          "inputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `inputURL`."
+          },
+          "outputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `outputURL`."
+          }
+        },
+        "type": "object",
+        "title": "InputOutputSFTP",
+        "required": []
+      },
+      "SFTP": {
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "SFTP username."
+          },
+          "password": {
+            "type": "string",
+            "description": "SFTP password. Either `password` or `privateKey` are required."
+          },
+          "privateKey": {
+            "type": "string",
+            "description": "Base64 encoded SFTP private key. Either `password` or `privateKey` are required."
+          },
+          "privateKeyPassphrase": {
+            "type": "string",
+            "description": "Optional passphrase to use if private key is protected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "title": "SFTP"
       },
       "KVPEntity": {
         "properties": {
@@ -1572,16 +1552,16 @@
       }
     },
     "parameters": {
-      "documentId": {
-        "name": "document_id",
+      "statusId": {
+        "name": "status_id",
         "in": "path",
         "required": true,
         "schema": {
           "type": "string",
-          "title": "document_id",
-          "description": "Document ID"
+          "title": "status_id",
+          "description": "Status ID"
         },
-        "description": "Document ID"
+        "description": "Status ID"
       },
       "orgId": {
         "name": "orgId",
