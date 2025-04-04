@@ -595,9 +595,9 @@
             "type": "string",
             "description": "Status of the request."
           },
-          "documentId": {
+          "statusId": {
             "type": "string",
-            "description": "List of document IDs for each file uploaded."
+            "description": "List of status IDs for each file uploaded."
           },
           "id": {
             "type": "string",
