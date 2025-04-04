@@ -211,7 +211,7 @@
         }
       }
     },
-    "/forms/generic/zip/async/{document_id}": {
+    "/forms/generic/zip/async/{status_id}": {
       "get": {
         "summary": "Get status of an async request",
         "description": "Get the status of an async zip request.",
@@ -1553,12 +1553,12 @@
     },
     "parameters": {
       "documentId": {
-        "name": "document_id",
+        "name": "status_id",
         "in": "path",
         "required": true,
         "schema": {
           "type": "string",
-          "title": "document_id",
+          "title": "status_id",
           "description": "Document ID"
         },
         "description": "Document ID"
