@@ -218,7 +218,7 @@
         "operationId": "get_async_status",
         "parameters": [
           {
-            "$ref": "#/components/parameters/documentId"
+            "$ref": "#/components/parameters/statusId"
           },
           {
             "$ref": "#/components/parameters/orgId"
@@ -595,7 +595,7 @@
             "type": "string",
             "description": "Status of the request."
           },
-          "statusId": {
+          "documentId": {
             "type": "string",
             "description": "List of document IDs for each file uploaded."
           },
@@ -1552,16 +1552,16 @@
       }
     },
     "parameters": {
-      "documentId": {
+      "statusId": {
         "name": "status_id",
         "in": "path",
         "required": true,
         "schema": {
           "type": "string",
           "title": "status_id",
-          "description": "Document ID"
+          "description": "Status ID"
         },
-        "description": "Document ID"
+        "description": "Status ID"
       },
       "orgId": {
         "name": "orgId",
