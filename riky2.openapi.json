@@ -17,92 +17,6 @@
     "summary": ""
   },
   "paths": {
-    "/rikai/chat/riky2": {
-      "post": {
-        "summary": "Chat, no file input, JSON response",
-        "description": "Make a RikY2 request using prompt as context. No document upload.",
-        "operationId": "post_chat_riky2",
-        "parameters": [
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIChatRequestBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "413": {
-            "$ref": "#/components/responses/413"
-          },
-          "521": {
-            "$ref": "#/components/responses/521"
-          },
-          "522": {
-            "$ref": "#/components/responses/522"
-          }
-        }
-      }
-    },
     "/rikai/custom/riky2": {
       "post": {
         "summary": "Document input, JSON response",
@@ -470,6 +384,92 @@
         }
       }
     },
+    "/rikai/chat/riky2": {
+      "post": {
+        "summary": "Chat, no file input, JSON response",
+        "description": "Make a RikY2 request using prompt as context. No document upload.",
+        "operationId": "post_chat_riky2",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RikAIChatRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RikAIResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "413": {
+            "$ref": "#/components/responses/413"
+          },
+          "521": {
+            "$ref": "#/components/responses/521"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
+          }
+        }
+      }
+    },
     "/rikai/zip/async/{statusId}": {
       "get": {
         "summary": "Get async request status",
@@ -589,6 +589,10 @@
           "translated": {
             "type": "string",
             "description": "Translated answer if the `language` field was included in the request"
+          },
+          "translatedContext": {
+            "type": "string",
+            "description": "Translated context if the `language` field was included in the request"
           }
         },
         "type": "object",
@@ -669,7 +673,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -870,7 +874,7 @@
                 "type": "string"
               }
             ],
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -892,7 +896,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1084,7 +1088,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1117,7 +1121,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
             "type": "object"
           },
           "returnOCR": {
@@ -1186,7 +1190,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1235,7 +1239,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF, or TXT."
+            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, SVG, HEIC, TIFF, TIF, TXT or GIF."
           },
           "question": {
             "anyOf": [
@@ -1257,7 +1261,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1315,7 +1319,7 @@
       "RikAIOCRRequestBody": {
         "properties": {
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
             "type": "object"
           },
           "question": {
@@ -1338,7 +1342,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1486,7 +1490,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -1508,7 +1512,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1546,7 +1550,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
             "type": "object"
           },
           "returnOCR": {
@@ -1729,7 +1733,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1766,7 +1770,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
             "type": "object"
           },
           "outputURL": {
@@ -1931,7 +1935,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -1953,7 +1957,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1995,7 +1999,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
             "type": "object"
           },
           "outputURL": {
