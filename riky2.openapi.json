@@ -9,10 +9,10 @@
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
       "email": "support@lazarusai.com"
     },
-    "termsOfService": "https://www.lazarusforms.com/legal",
+    "termsOfService": "https://www.lazarusai.com/legal",
     "license": {
       "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusforms.com"
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
     },
     "summary": ""
   },
@@ -91,11 +91,14 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "413": {
+            "$ref": "#/components/responses/413"
           },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "521": {
+            "$ref": "#/components/responses/521"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         }
       }
@@ -179,11 +182,14 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "413": {
+            "$ref": "#/components/responses/413"
           },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "521": {
+            "$ref": "#/components/responses/521"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         }
       }
@@ -262,11 +268,14 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "413": {
+            "$ref": "#/components/responses/413"
           },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "521": {
+            "$ref": "#/components/responses/521"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         }
       }
@@ -274,7 +283,7 @@
     "/rikai/zip/riky2": {
       "post": {
         "summary": "Document input, ZIP file response",
-        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](../webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_zip_riky2",
         "parameters": [
           {
@@ -366,11 +375,14 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "413": {
+            "$ref": "#/components/responses/413"
           },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "521": {
+            "$ref": "#/components/responses/521"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         }
       }
@@ -378,7 +390,7 @@
     "/rikai/bulk/riky2": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](../webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_riky2",
         "parameters": [
           {
@@ -452,11 +464,8 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
-          },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "521": {
+            "$ref": "#/components/responses/521"
           }
         }
       }
@@ -536,8 +545,8 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "521": {
+            "$ref": "#/components/responses/521"
           }
         }
       }
@@ -580,10 +589,6 @@
           "translated": {
             "type": "string",
             "description": "Translated answer if the `language` field was included in the request"
-          },
-          "translatedContext": {
-            "type": "string",
-            "description": "Translated context if the `language` field was included in the request"
           }
         },
         "type": "object",
@@ -664,7 +669,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -748,7 +753,36 @@
           "question",
           "webhook"
         ],
-        "title": "BulkBase64Request"
+        "title": "BulkBase64Request",
+        "examples": [
+          {
+            "base64": "YOUR_BASE64_ENCODED_FILE",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": "YOUR_WEBHOOK_URL",
+            "settings": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ]
       },
       "BulkRequestBody": {
         "oneOf": [
@@ -836,7 +870,7 @@
                 "type": "string"
               }
             ],
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "question": {
             "anyOf": [
@@ -858,7 +892,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -947,7 +981,36 @@
           "question",
           "webhook"
         ],
-        "title": "BulkURLRequest"
+        "title": "BulkURLRequest",
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": "YOUR_WEBHOOK_URL",
+            "settings": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ]
       },
       "HTTPValidationError": {
         "properties": {
@@ -1021,7 +1084,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1054,7 +1117,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "returnOCR": {
@@ -1073,7 +1136,33 @@
           "base64",
           "question"
         ],
-        "title": "RikAIBase64Request"
+        "title": "RikAIBase64Request",
+        "examples": [
+          {
+            "base64": "YOUR_BASE64_ENCODED_FILE",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "ocr": null,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ]
       },
       "RikAIChatRequestBody": {
         "properties": {
@@ -1097,7 +1186,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1146,7 +1235,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, SVG, HEIC, TIFF, TIF, TXT or GIF."
+            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF, or TXT."
           },
           "question": {
             "anyOf": [
@@ -1168,7 +1257,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1226,7 +1315,7 @@
       "RikAIOCRRequestBody": {
         "properties": {
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "question": {
@@ -1249,7 +1338,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1397,7 +1486,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "question": {
             "anyOf": [
@@ -1419,7 +1508,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1457,7 +1546,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "returnOCR": {
@@ -1487,7 +1576,33 @@
           "inputURL",
           "question"
         ],
-        "title": "RikAIURLRequest"
+        "title": "RikAIURLRequest",
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "ocr": null,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ]
       },
       "SFTP": {
         "properties": {
@@ -1614,7 +1729,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1651,7 +1766,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "outputURL": {
@@ -1700,7 +1815,36 @@
           "question",
           "webhook"
         ],
-        "title": "ZipBase64Request"
+        "title": "ZipBase64Request",
+        "examples": [
+          {
+            "base64": "YOUR_BASE64_ENCODED_FILE",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "ocr": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ]
       },
       "ZipRequestBody": {
         "oneOf": [
@@ -1787,7 +1931,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
           },
           "question": {
             "anyOf": [
@@ -1809,7 +1953,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](../webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
@@ -1851,7 +1995,7 @@
             "description": "Custom JSON to be included in the returned response."
           },
           "ocr": {
-            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "description": "OCR data for the document (entire response from [OCR endpoint](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from Lazarus endpoints is supported as input.",
             "type": "object"
           },
           "outputURL": {
@@ -1900,7 +2044,36 @@
           "question",
           "webhook"
         ],
-        "title": "ZipURLRequest"
+        "title": "ZipURLRequest",
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": [
+              [
+                "What is the name of the patient?"
+              ],
+              [
+                "What is the first medication listed under Section C - Medical Information?",
+                "What is its strength?"
+              ]
+            ],
+            "webhook": null,
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "ocr": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "returnOCR": false,
+            "sftp": null,
+            "staticIP": false
+          }
+        ]
       },
       "ErrorMessage": {
         "properties": {
@@ -1939,10 +2112,10 @@
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "Missing required field": {
+              "Failed to queue request": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "Request body is missing required field(s): question",
+                  "message": "Failed to queue 2/5 file requests.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
@@ -2011,34 +2184,18 @@
           }
         }
       },
-      "500": {
-        "description": "An internal server error or model processing failed. Extraction model or LLM could not process your request.",
+      "413": {
+        "description": "Payload too large. The request payload or file size > 32MB and organization doesn't have 'big file' permission.",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "OCR failed": {
+              "Payload too large": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "Error during request to OCR microservice.",
-                  "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
-                }
-              },
-              "LLM failed": {
-                "value": {
-                  "status": "FAILURE",
-                  "message": "We made three attempts to process the model with no success.",
-                  "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
-                }
-              },
-              "Internal server error": {
-                "value": {
-                  "status": "FAILURE",
-                  "message": "An internal error occurred. Please report this to support@lazarusai.com.",
+                  "message": "[File was too large](../../../prompting-guide/faq/#what-if-i-encounter-an-error-indicating-my-file-is-too-large). Model could not process request.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
@@ -2047,18 +2204,38 @@
           }
         }
       },
-      "502": {
-        "description": "Could not connect to model.",
+      "521": {
+        "description": "An internal API error.",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "Model unavailable": {
+              "Internal server error": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "An internal error occurred. Please report this to support@lazarusai.com.",
+                  "message": "An internal error occurred. Please retry your request and report this to support@lazarusai.com.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "522": {
+        "description": "Model failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Model failure": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "A RikAI2 error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
