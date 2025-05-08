@@ -874,7 +874,7 @@
                 "type": "string"
               }
             ],
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, TIFF, TIF, or TXT."
           },
           "question": {
             "anyOf": [
@@ -1490,7 +1490,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, TIFF, TIF, or TXT."
           },
           "question": {
             "anyOf": [
@@ -1935,7 +1935,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, TIFF, TIF, or TXT."
           },
           "question": {
             "anyOf": [
