@@ -23,7 +23,7 @@
     "/ocr": {
       "post": {
         "summary": "JSON response",
-        "description": "Make a request to OCR and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n    - [PDF Form Example](https://documentation-resources.s3.amazonaws.com/JR_Form.pdf)\n    - [JSON Response for Example](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?usp=sharing)\n<!-- Supports PDF, PNG, TIF, TIFF, JPE, WebP, and TXT. -->",
+        "description": "Make a request to OCR and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser\n    - [PDF Form Example](https://documentation-resources.s3.amazonaws.com/JR_Form.pdf)\n    - [JSON Response Example](https://docs.google.com/document/d/15fSuTmEWKtidAFbaP3m9uMfX4GziJqZnNP385Sel5rM/edit?usp=sharing)\n<!-- Supports PDF, PNG, TIF, TIFF, JPE, WebP, and TXT. -->",
         "operationId": "post_ocr",
         "parameters": [
           {
@@ -85,11 +85,11 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "521": {
+            "$ref": "#/components/responses/521"
           },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         },
         "x-stoplight": {
@@ -158,11 +158,11 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "521": {
+            "$ref": "#/components/responses/521"
           },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         },
         "x-stoplight": {
@@ -223,11 +223,6 @@
             "type": "boolean",
             "description": "Send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": true
-          },
-          "version": {
-            "type": "integer",
-            "description": "OCR model version (1 or 2)",
-            "default": 1
           }
         }
       },
@@ -272,7 +267,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or HEIC.",
             "forceRequire": true
           },
           "fileId": {
@@ -295,13 +290,31 @@
             "type": "boolean",
             "description": "Send whole JSON response to webhook URL upon request completion. Set to `false` to only send request status.\n",
             "default": true
-          },
-          "version": {
-            "type": "integer",
-            "description": "OCR model version (1 or 2)",
-            "default": 1
           }
         }
+      },
+      "InputOutputSFTP": {
+        "properties": {
+          "inputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `inputURL`."
+          },
+          "outputURL": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              }
+            ],
+            "description": "SFTP server authentication info for the `outputURL`."
+          }
+        },
+        "type": "object",
+        "title": "InputOutputSFTP",
+        "required": []
       },
       "LineV2": {
         "properties": {
@@ -527,6 +540,31 @@
           "id": "t2ze8fr0ydm1x"
         }
       },
+      "SFTP": {
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "SFTP username."
+          },
+          "password": {
+            "type": "string",
+            "description": "SFTP password. Either `password` or `privateKey` are required."
+          },
+          "privateKey": {
+            "type": "string",
+            "description": "Base64 encoded SFTP private key. Either `password` or `privateKey` are required."
+          },
+          "privateKeyPassphrase": {
+            "type": "string",
+            "description": "Optional passphrase to use if private key is protected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "title": "SFTP"
+      },
       "SpanV2": {
         "properties": {
           "offset": {
@@ -562,7 +600,7 @@
           "inputUrl": {
             "type": "string",
             "title": "inputURL",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or HEIC.",
             "forceRequire": true
           },
           "fileId": {
@@ -583,6 +621,17 @@
             "title": "metadata",
             "description": "Custom JSON to be included in the returned response."
           },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
           "webhook": {
             "type": "string",
             "description": "Webhook to ping after API runs."
@@ -591,11 +640,6 @@
             "type": "boolean",
             "description": "Set to true to send all response data to webhook upon request completion, otherwise only send request status.",
             "default": true
-          },
-          "version": {
-            "type": "integer",
-            "description": "OCR model version (1 or 2)",
-            "default": 1
           }
         },
         "type": "object",
@@ -657,10 +701,6 @@
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
             "forceRequire": true
           },
-          "statusId": {
-            "type": "string",
-            "description": "List of document IDs for each file uploaded."
-          },
           "outputURL": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
@@ -694,11 +734,6 @@
             "type": "boolean",
             "description": "Set to true to send all response data to webhook upon request completion, otherwise only send request status.",
             "default": true
-          },
-          "version": {
-            "type": "integer",
-            "description": "OCR model version (1 or 2)",
-            "default": 1
           }
         },
         "type": "object",
@@ -716,12 +751,8 @@
           "inputURL": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, HEIC or TXT.",
             "forceRequire": true
-          },
-          "statusId": {
-            "type": "string",
-            "description": "List of document IDs for each file uploaded."
           },
           "outputURL": {
             "type": "string",
@@ -747,6 +778,17 @@
             "description": "Custom JSON to be included in the returned response.",
             "forceType": "object"
           },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
@@ -756,11 +798,6 @@
             "type": "boolean",
             "description": "Set to true to send all response data to webhook upon request completion, otherwise only send request status.",
             "default": true
-          },
-          "version": {
-            "type": "integer",
-            "description": "OCR model version (1 or 2).",
-            "default": 1
           }
         },
         "type": "object",
@@ -785,7 +822,7 @@
           "pattern": "YYYY-MM-DD",
           "title": "apiVersion",
           "description": "API Version",
-          "default": "2025-02-27"
+          "default": "2025-05-08"
         },
         "description": "API Version"
       },
@@ -871,7 +908,7 @@
               "Missing required field": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "Request body is missing required field(s): question"
+                  "message": "Requests must include an uploaded file using either a path to file, an input URL, or a file encoded as a base64 string. JSON requests must include either an 'inputURL' or 'base64' field. Multipart-form requests must include a 'file' field."
                 }
               }
             }
@@ -889,7 +926,7 @@
               "Invalid credentials": {
                 "value": {
                   "status": "AUTH_FAILURE",
-                  "message": "Invalid authentication"
+                  "message": "Authentication failed using org ID and auth key provided."
                 }
               }
             }
@@ -904,18 +941,35 @@
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "Custom model not found": {
+              "URL not found": {
                 "value": {
-                  "status": "FAILURE",
-                  "message": "Model id 'abc' is not valid."
+                  "detail": "Not Found"
                 }
               }
             }
           }
         }
       },
-      "500": {
-        "description": "Model processing failed. Extraction model or LLM could not process your request.",
+      "521": {
+        "description": "An API error occurred.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "API failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "An internal error occurred. Please retry your request"
+                }
+              }
+            }
+          }
+        }
+      },
+      "522": {
+        "description": "A model error occurred.",
         "content": {
           "application/json": {
             "schema": {
@@ -925,31 +979,7 @@
               "OCR failed": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "Error during request to OCR microservice."
-                }
-              },
-              "LLM failed": {
-                "value": {
-                  "status": "FAILURE",
-                  "message": "We made three attempts to process the model with no success."
-                }
-              }
-            }
-          }
-        }
-      },
-      "502": {
-        "description": "Could not connect to model.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/ErrorMessage"
-            },
-            "examples": {
-              "Custom model not found": {
-                "value": {
-                  "status": "FAILURE",
-                  "message": "Request to the model failed."
+                  "message": "An OCR model error occurred"
                 }
               }
             }
