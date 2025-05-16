@@ -7,7 +7,6 @@
     "title": "PII",
     "version": "",
     "summary": "",
-    "description": "Extract and redact personally identifiable information",
     "contact": {
       "name": "Lazarus IT",
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
@@ -23,7 +22,7 @@
     "/forms/pii": {
       "post": {
         "summary": "Extract, JSON response",
-        "description": "Make a request to extract PII data and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to extract PII data and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_pii",
         "parameters": [
           {
@@ -70,16 +69,44 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+              "description": "Request was invalid or we could not process your data.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           },
           "403": {
-            "$ref": "#/components/responses/403"
+            "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           },
           "500": {
-            "$ref": "#/components/responses/500"
+            "description": "Model processing failed. Extraction model or LLM could not process your request.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           },
           "502": {
-            "$ref": "#/components/responses/502"
+            "description": "Could not connect to model.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           }
         },
         "x-stoplight": {
@@ -96,7 +123,7 @@
     "/forms/pii/redact": {
       "post": {
         "summary": "Redact, JSON response",
-        "description": "Make a request to redact PII data from a document and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`. Note that `application/json` requests are preferred as `multipart/form-data` requests do not support all flags and fields.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
+        "description": "Make a request to redact PII data from a document and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_pii_redact",
         "parameters": [
           {
@@ -143,16 +170,44 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+              "description": "Request was invalid or we could not process your data.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           },
           "403": {
-            "$ref": "#/components/responses/403"
+            "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           },
           "500": {
-            "$ref": "#/components/responses/500"
+            "description": "Model processing failed. Extraction model or LLM could not process your request.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           },
           "502": {
-            "$ref": "#/components/responses/502"
+            "description": "Could not connect to model.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
           }
         },
         "x-stoplight": {
@@ -1135,16 +1190,6 @@
             "setDefault": false,
             "default": false
           },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
           "redact": {
             "type": "boolean",
             "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
@@ -1198,16 +1243,6 @@
             "setDefault": false,
             "default": false
           },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
           "redact": {
             "type": "boolean",
             "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
@@ -1237,16 +1272,6 @@
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
             "setDefault": false,
             "default": false
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
           },
           "redact": {
             "type": "boolean",
@@ -1291,16 +1316,9 @@
             "description": "A list of personally-identifiable information by page."
           },
           "redactedFile": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/RedactedFile"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/RedactedFile",
             "title": "redactedFile",
-            "description": "The b64 encoded PDF file with PII redacted."
+            "description": "The base64 encoded PDF file with PII redacted."
           }
         },
         "type": "object",
@@ -1397,31 +1415,15 @@
           },
           "getPII": {
             "type": "boolean",
-            "description": "Set to true to run the PII model first and redact any identified regions."
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
+            "description": "Set to `true` to redact both the specified `keywords` and any additional identified regions. Set to `false` to redact only the specified `keywords`.",
+            "default": false
           },
           "keywords": {
             "items": {
               "type": "string"
             },
             "type": "array",
-            "description": "Labels of fields to redact."
-          },
-          "pages": {
-            "items": {
-              "$ref": "#/components/schemas/PageContent"
-            },
-            "type": "array",
-            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions."
+            "description": "Labels of fields to redact. By default, only the specified `keywords` will be redacted. If you want all identified regions to be redacted in addition to the `keywords`, set `getPII` to `true`."
           },
           "sftp": {
             "anyOf": [
@@ -1473,30 +1475,14 @@
           },
           "getPII": {
             "type": "boolean",
-            "description": "Set to true to run the PII model first and redact any identified regions."
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
+            "description": "Set to `true` to redact both the specified `keywords` and any additional identified regions. Set to `false` to redact only the specified `keywords`.",
+            "default": false
           },
           "keywords": {
             "type": "array",
-            "description": "Labels of fields to redact.",
+            "description": "Labels of fields to redact. By default, only the specified `keywords` will be redacted. If you want all identified regions to be redacted in addition to the `keywords`, set `getPII` to `true`.",
             "items": {
               "type": "string"
-            }
-          },
-          "pages": {
-            "type": "array",
-            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions.",
-            "items": {
-              "$ref": "#/components/schemas/PageContent"
             }
           }
         }
@@ -1526,30 +1512,14 @@
           },
           "getPII": {
             "type": "boolean",
-            "description": "Set to true to run the PII model first and redact any identified regions."
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
+            "description": "Set to `true` to redact both the specified `keywords` and any additional identified regions. Set to `false` to redact only the specified `keywords`.",
+            "default": false
           },
           "keywords": {
             "type": "array",
-            "description": "Labels of fields to redact.",
+            "description": "Labels of fields to redact. By default, only the specified `keywords` will be redacted. If you want all identified regions to be redacted in addition to the `keywords`, set `getPII` to `true`.",
             "items": {
               "type": "string"
-            }
-          },
-          "pages": {
-            "type": "array",
-            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions.",
-            "items": {
-              "$ref": "#/components/schemas/PageContent"
             }
           },
           "sftp": {
@@ -1588,7 +1558,7 @@
               }
             ],
             "title": "redactedFile",
-            "description": "The encoded redacted PDF file."
+            "description": "The base64 encoded PDF file with PII redacted."
           }
         },
         "type": "object",
@@ -1603,11 +1573,11 @@
           "data": {
             "type": "string",
             "format": "binary",
-            "description": "Redacted and encoded file data."
+            "description": "Redacted file data in encoded bytes."
           },
           "encoding": {
             "type": "string",
-            "description": "File encoding."
+            "description": "Encoding of redacted file data."
           }
         },
         "type": "object",
