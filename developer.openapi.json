@@ -2146,12 +2146,6 @@
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true,
             "mostUsed": true
-          },
-          "staticIP": {
-            "type": "boolean",
-            "title": "Staticip",
-            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
-            "setDefault": false
           }
         },
         "type": "object",
