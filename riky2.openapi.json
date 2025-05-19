@@ -197,7 +197,7 @@
     "/rikai/zip/riky2": {
       "post": {
         "summary": "Document input, ZIP file response",
-        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, you must use a `webhook` which receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_zip_riky2",
         "parameters": [
           {
@@ -304,7 +304,7 @@
     "/rikai/bulk/riky2": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, you must use a `webhook` which receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_riky2",
         "parameters": [
           {
@@ -709,7 +709,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -874,7 +874,7 @@
                 "type": "string"
               }
             ],
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, TIFF, TIF, or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -937,7 +937,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1114,7 +1114,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1216,7 +1216,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1292,7 +1292,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1363,7 +1363,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1490,7 +1490,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, TIFF, TIF, or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -1543,7 +1543,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1637,7 +1637,7 @@
         "properties": {
           "advancedExplainability": {
             "type": "boolean",
-            "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context.",
+            "description": "When set to `false`, the model processes requests faster but does not return the full explainability. Set to `true` to include full explainability.",
             "default": false
           },
           "advancedVision": {
@@ -1647,7 +1647,7 @@
           },
           "returnConfidence": {
             "type": "boolean",
-            "description": "Set to true to include bounding boxes and confidence score in response."
+            "description": "Set to true to include bounding boxes and confidence score in response. Click [here](/../../models/Rikai/rikai2-extract/overview#returning-confidence-scores-and-bounding-boxes) for prompting guidelines to ensure optimal results when using this field."
           }
         },
         "type": "object",
@@ -1763,7 +1763,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
@@ -1935,7 +1935,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, TIFF, TIF, or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -1992,7 +1992,7 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
             "type": "object",
