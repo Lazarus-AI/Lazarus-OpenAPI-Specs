@@ -5,7 +5,7 @@
     "version": "0.1.0"
   },
   "paths": {
-    "/developer/": {
+    "/developer": {
       "get": {
         "summary": "Get connectivity test",
         "description": "Verify authKey, orgId, and connectivity",
