@@ -2139,13 +2139,6 @@
             "title": "Webhookheaders",
             "description": "Request headers to include in the POST requests to the webhook.",
             "mostUsed": true
-          },
-          "webhookSendFull": {
-            "type": "boolean",
-            "title": "Webhooksendfull",
-            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
-            "default": true,
-            "mostUsed": true
           }
         },
         "type": "object",
@@ -2166,6 +2159,24 @@
       },
       "DeveloperResponse": {
         "properties": {
+          "apiVersion": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Apiversion",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "forceType": "string"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Response ID"
+          },
           "status": {
             "allOf": [
               {
@@ -2184,6 +2195,24 @@
       },
       "WebhookTestResponse": {
         "properties": {
+          "apiVersion": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Apiversion",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "forceType": "string"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Response ID"
+          },
           "webhook_status_code": {
             "anyOf": [
               {
@@ -2813,5 +2842,11 @@
         "description": "/rikai/zip and /rikai/zip/{model_id} url request"
       }
     }
-  }
+  },
+    "servers": [
+    {
+      "url": "https://api.lazarusai.com",
+      "description": ""
+    }
+  ]
 }
