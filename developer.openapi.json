@@ -73,7 +73,7 @@
       "post": {
         "summary": "Post webhook test",
         "description": "Developer test for configuring a webhook to receive model responses",
-        "operationId": "post_webhook_check_developer_webhook_post",
+        "operationId": "post_webhook_test",
         "parameters": [
           {
             "name": "orgId",
