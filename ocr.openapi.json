@@ -822,7 +822,7 @@
           "pattern": "YYYY-MM-DD",
           "title": "apiVersion",
           "description": "API Version",
-          "default": "2025-05-08"
+          "default": "2025-05-22"
         },
         "description": "API Version"
       },
