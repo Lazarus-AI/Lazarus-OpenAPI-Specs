@@ -1698,6 +1698,24 @@
       }
     },
     "responses": {
+      "207": {
+        "description": "Bulk upload request failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "A RikAI2 model error occurred. Please report this to support@lazarusai.com"
+                }
+              }
+            }
+          }
+        }
+      },
       "400": {
         "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
         "content": {
@@ -1819,7 +1837,7 @@
         }
       },
       "522": {
-        "description": "Model failed.",
+        "description": "Model failed. This status code is sent to your webhook.",
         "content": {
           "application/json": {
             "schema": {
