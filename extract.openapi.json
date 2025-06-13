@@ -20,7 +20,7 @@
     "/rikai/bulk/rikai2-extract": {
       "post": {
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
+        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, you must use a `webhook` which receives [JSON response](/../../models/rikai/webhook-examples) by default.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_rikai2_extract",
         "parameters": [
           {
@@ -94,11 +94,17 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "413": {
+            "$ref": "#/components/responses/413"
           },
-          "502": {
-            "$ref": "#/components/responses/502"
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "521": {
+            "$ref": "#/components/responses/521"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         }
       }
@@ -178,8 +184,131 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "521": {
+            "$ref": "#/components/responses/521"
+          }
+        }
+      }
+    },
+    "/developer/webhook": {
+      "post": {
+        "summary": "Post Webhook Check",
+        "description": "Developer test for configuring a webhook to receive our responses",
+        "operationId": "post_webhook_check_developer_webhook_post",
+        "parameters": [
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookCheckRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookTestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/developer/api-version": {
+      "get": {
+        "summary": "Get Api Version",
+        "description": "Endpoint that returns what version the API is running on.\nIf apiVersion is supplied, verifies it matches the current API version.\n\nArgs:\n    request (Request): FastAPI request object\n    org_id (str): Org ID from request headers\n    auth_key (str): Auth Key from request headers\n    api_version (optional, str): User can pass apiVersion in header, checked against lbApiVersion if supplied\n    lb_api_version (str): API version header from load balancer",
+        "operationId": "get_api_version_developer_api_version_get",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "orgId",
+              "description": "Organization ID"
+            },
+            "description": "Organization ID"
+          },
+          {
+            "name": "authKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "title": "authKey",
+              "description": "Authentication key"
+            },
+            "description": "Authentication key"
+          },
+          {
+            "name": "apiVersion",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "apiVersion",
+              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+            },
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
         }
       }
@@ -250,7 +379,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file from which data will be extracted. If value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, you receive an individual response for each string."
           },
           "question": {
             "anyOf": [
@@ -269,7 +398,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -277,6 +406,7 @@
             "type": "object"
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -310,18 +440,20 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
           "outputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the PUT request to the output URL."
           },
@@ -353,80 +485,10 @@
           "question",
           "webhook"
         ],
-        "title": "BulkBase64Request"
-      },
-      "BulkRequestBody": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/BulkURLRequest"
-          },
-          {
-            "$ref": "#/components/schemas/BulkBase64Request"
-          }
-        ],
-        "title": "BulkRequestBody",
-        "required": [],
-        "properties": {}
-      },
-      "BulkResponse": {
-        "properties": {
-          "message": {
-            "type": "string",
-            "description": "Status message."
-          },
-          "model": {
-            "type": "string",
-            "description": "Model used to process the document."
-          },
-          "statusId": {
-            "type": "object",
-            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
-          },
-          "apiVersion": {
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "type": "string"
-          },
-          "endTime": {
-            "type": "integer",
-            "description": "Request end time recorded in epoch (Unix timestamp) format."
-          },
-          "failedRequests": {
-            "items": {},
-            "type": "array",
-            "description": "File requests that failed to queue."
-          },
-          "id": {
-            "type": "string",
-            "description": "Response ID"
-          },
-          "metadata": {
-            "type": "object",
-            "description": "JSON from the request `metadata` field."
-          },
-          "startTime": {
-            "type": "integer",
-            "description": "Request start time recorded in epoch (Unix timestamp) format."
-          },
-          "status": {
-            "$ref": "#/components/schemas/StatusEnum",
-            "description": "Status of the request."
-          },
-          "warning": {
-            "items": {
-              "type": "object"
-            },
-            "type": "array",
-            "description": "Warnings such as webhook failure."
-          }
-        },
-        "type": "object",
-        "required": [],
-        "title": "BulkResponse"
-      },
-      "BulkURLRequest": {
+        "title": "BulkBase64Request",
         "examples": [
           {
-            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "base64": "YOUR_BASE64_ENCODED_FILE",
             "question": {
               "PatientInfo": {
                 "FirstName": {
@@ -456,7 +518,80 @@
             "sftp": null,
             "staticIP": false
           }
+        ]
+      },
+      "BulkRequestBody": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BulkURLRequest"
+          },
+          {
+            "$ref": "#/components/schemas/BulkBase64Request"
+          }
         ],
+        "title": "BulkRequestBody",
+        "required": [],
+        "properties": {}
+      },
+      "BulkResponse": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "statusId": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "failedRequests": {
+            "items": {},
+            "type": "array",
+            "description": "File requests that failed to queue."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "JSON from the request `metadata` field."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "warning": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "description": "Warnings such as webhook failure."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "BulkResponse"
+      },
+      "BulkURLRequest": {
         "properties": {
           "inputURL": {
             "anyOf": [
@@ -470,7 +605,7 @@
                 "type": "string"
               }
             ],
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -489,7 +624,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -497,6 +632,7 @@
             "type": "object"
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -535,18 +671,20 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
           "outputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the PUT request to the output URL."
           },
@@ -578,7 +716,40 @@
           "question",
           "webhook"
         ],
-        "title": "BulkURLRequest"
+        "title": "BulkURLRequest",
+        "examples": [
+          {
+            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
+            "question": {
+              "PatientInfo": {
+                "FirstName": {
+                  "data": "Patient first name",
+                  "page_number": 0
+                },
+                "LastName": {
+                  "data": "Patient last name",
+                  "page_number": 0
+                }
+              }
+            },
+            "webhook": "YOUR_WEBHOOK_URL",
+            "settings": {
+              "returnConfidence": true
+            },
+            "webhookHeaders": null,
+            "webhookSendFull": true,
+            "fileId": "file1.pdf",
+            "forceBase64": false,
+            "forceOCR": false,
+            "language": "en",
+            "metadata": null,
+            "outputURL": null,
+            "outputURLHeaders": null,
+            "returnJSON": true,
+            "sftp": null,
+            "staticIP": false
+          }
+        ]
       },
       "HTTPValidationError": {
         "properties": {
@@ -622,7 +793,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file from which data will be extracted. If value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
           },
           "question": {
             "anyOf": [
@@ -646,9 +817,10 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -672,9 +844,10 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
@@ -715,9 +888,10 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -741,9 +915,10 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
@@ -764,7 +939,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF, or TXT."
+            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, SVG, HEIC, TIFF, TIF, TXT or GIF."
           },
           "question": {
             "anyOf": [
@@ -788,9 +963,10 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -819,9 +995,10 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
@@ -866,9 +1043,10 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -889,7 +1067,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file from which data will be extracted. If value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
           },
           "fileId": {
             "type": "string",
@@ -902,13 +1080,14 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
@@ -995,10 +1174,12 @@
             "description": "Language results are translated into."
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "JSON from the request `metadata` field."
           },
           "settings": {
+            "additionalProperties": true,
             "type": "object",
             "description": "JSON containing any custom user settings specified in the request."
           },
@@ -1016,44 +1197,11 @@
         "title": "RikAIResponse"
       },
       "RikAIURLRequest": {
-        "examples": [
-          {
-            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
-            "question": {
-              "PatientInfo": {
-                "FirstName": {
-                  "data": "Patient first name",
-                  "page_number": 0
-                },
-                "LastName": {
-                  "data": "Patient last name",
-                  "page_number": 0
-                }
-              }
-            },
-            "webhook": null,
-            "settings": {
-              "returnConfidence": true
-            },
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "sftp": null,
-            "staticIP": false
-          }
-        ],
         "properties": {
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -1077,9 +1225,10 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -1108,9 +1257,10 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
@@ -1167,7 +1317,7 @@
         "properties": {
           "returnConfidence": {
             "type": "boolean",
-            "description": "Set to true to include bounding boxes and confidence score in response."
+            "description": "Set to true to include bounding boxes and confidence score in response. Click [here](/../../models/Rikai/rikai2-extract/overview#returning-confidence-scores-and-bounding-boxes) for prompting guidelines to ensure optimal results when using this field."
           }
         },
         "type": "object",
@@ -1217,6 +1367,105 @@
         ],
         "title": "ValidationError"
       },
+      "VersionResponse": {
+        "properties": {
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          }
+        },
+        "type": "object",
+        "title": "VersionResponse",
+        "required": []
+      },
+      "WebhookCheckRequest": {
+        "properties": {
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "webhook"
+        ],
+        "title": "WebhookCheckRequest"
+      },
+      "WebhookCheckRequestBody": {
+        "$ref": "#/components/schemas/WebhookCheckRequest",
+        "title": "WebhookCheckRequestBody",
+        "required": [],
+        "properties": {}
+      },
+      "WebhookTestResponse": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "webhookError": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Error returned from a failed request to your webhook."
+          },
+          "webhookStatusCode": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status code returned by your webhook."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "WebhookTestResponse"
+      },
       "ZipBase64Request": {
         "properties": {
           "base64": {
@@ -1231,7 +1480,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file from which data will be extracted. If value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
           },
           "question": {
             "anyOf": [
@@ -1250,7 +1499,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -1258,6 +1507,7 @@
             "type": "object"
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -1265,6 +1515,10 @@
             "type": "boolean",
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
+          },
+          "bulkStartTime": {
+            "type": "integer",
+            "description": "Bulk request start time in Unix timestamp in milliseconds."
           },
           "fileId": {
             "type": "string",
@@ -1281,18 +1535,20 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
           "outputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the PUT request to the output URL."
           },
@@ -1316,6 +1572,10 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
+          },
+          "zipQueuedTime": {
+            "type": "integer",
+            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
           }
         },
         "type": "object",
@@ -1374,6 +1634,7 @@
             "description": "Response ID"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "JSON from the request `metadata` field."
           },
@@ -1394,6 +1655,7 @@
             "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
           },
           "warning": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Warnings such as webhook failure."
           }
@@ -1403,44 +1665,11 @@
         "title": "ZipResponse"
       },
       "ZipURLRequest": {
-        "examples": [
-          {
-            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
-            "question": {
-              "PatientInfo": {
-                "FirstName": {
-                  "data": "Patient first name",
-                  "page_number": 0
-                },
-                "LastName": {
-                  "data": "Patient last name",
-                  "page_number": 0
-                }
-              }
-            },
-            "webhook": null,
-            "settings": {
-              "returnConfidence": true
-            },
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "sftp": null,
-            "staticIP": false
-          }
-        ],
         "properties": {
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, TIFF, TIF or TXT."
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
           },
           "question": {
             "anyOf": [
@@ -1459,7 +1688,7 @@
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Here](../webhook-examples) is an example of a webhook URL response."
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -1467,6 +1696,7 @@
             "type": "object"
           },
           "webhookHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the POST requests to the webhook."
           },
@@ -1474,6 +1704,10 @@
             "type": "boolean",
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
+          },
+          "bulkStartTime": {
+            "type": "integer",
+            "description": "Bulk request start time in Unix timestamp in milliseconds."
           },
           "fileId": {
             "type": "string",
@@ -1495,18 +1729,20 @@
           },
           "language": {
             "type": "string",
-            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
           },
           "metadata": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
           "outputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting zip file or JSON can be sent. Must be open to PUT requests."
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
           },
           "outputURLHeaders": {
+            "additionalProperties": true,
             "type": "object",
             "description": "Request headers to include in the PUT request to the output URL."
           },
@@ -1530,6 +1766,10 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
+          },
+          "zipQueuedTime": {
+            "type": "integer",
+            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
           }
         },
         "type": "object",
@@ -1577,10 +1817,10 @@
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "Missing required field": {
+              "Failed to queue request": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "Request body is missing required field(s): question",
+                  "message": "Failed to queue 2/5 file requests.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
@@ -1649,34 +1889,18 @@
           }
         }
       },
-      "500": {
-        "description": "An internal server error or model processing failed. Extraction model or LLM could not process your request.",
+      "413": {
+        "description": "Payload too large. The request payload or file size > 32MB and organization doesn't have 'big file' permission.",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "OCR failed": {
+              "Payload too large": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "Error during request to OCR microservice.",
-                  "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
-                }
-              },
-              "LLM failed": {
-                "value": {
-                  "status": "FAILURE",
-                  "message": "We made three attempts to process the model with no success.",
-                  "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
-                }
-              },
-              "Internal server error": {
-                "value": {
-                  "status": "FAILURE",
-                  "message": "An internal error occurred. Please report this to support@lazarusai.com.",
+                  "message": "[File was too large](../../../prompting-guide/faq/#what-if-i-encounter-an-error-indicating-my-file-is-too-large). Model could not process request.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
@@ -1685,18 +1909,58 @@
           }
         }
       },
-      "502": {
-        "description": "Could not connect to model.",
+      "429": {
+        "description": "Too many requests, rate limit exceeded",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "Model unavailable": {
+              "Too many requests": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "An internal error occurred. Please report this to support@lazarusai.com.",
+                  "message": "You have exceeded the rate limit. Please retry your request later.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "521": {
+        "description": "An internal API error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Internal server error": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "An internal error occurred. Please retry your request and report this to support@lazarusai.com.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "522": {
+        "description": "Model failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Model failure": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "A RikAI2 error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
