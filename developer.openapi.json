@@ -6,7 +6,7 @@
   "paths": {
     "/developer/api-version": {
       "get": {
-        "summary": "Get api version",
+        "summary": "Get API version",
         "description": "Validate credentials and API version. If the api version isn't supported, the default api version will be returned.",
         "operationId": "get_developer_api_version",
         "responses": {
