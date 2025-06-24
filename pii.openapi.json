@@ -1653,7 +1653,7 @@
               }
             ],
             "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request."
-          },
+          }
         },
         "type": "object",
         "title": "RedactResult",
