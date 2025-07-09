@@ -1852,7 +1852,7 @@
                 "Model failure": {
                   "value": {
                     "status": "FAILURE",
-                    "message": "A PII model error occurred. Please report this to support@lazarusai.com.",
+                    "message": "A model error occurred. Please report this to support@lazarusai.com.",
                     "apiVersion": "YYYY-MM-DD",
                     "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                   }
