@@ -80,6 +80,9 @@
           },
           "500": {
             "$ref": "#/components/responses/500"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         },
         "x-stoplight": {
@@ -143,6 +146,9 @@
           },
           "500": {
             "$ref": "#/components/responses/500"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         },
         "x-stoplight": {
@@ -204,6 +210,9 @@
           },
           "500": {
             "$ref": "#/components/responses/500"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         },
         "x-stoplight": {
@@ -1721,6 +1730,26 @@
                 "value": {
                   "status": "FAILURE",
                   "message": "We made three attempts to process the model with no success."
+                }
+              }
+            }
+          }
+        }
+      },
+      "522": {
+        "description": "Model failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Model failure": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "A model error occurred. Please report this to support@lazarusai.com.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
               }
             }
