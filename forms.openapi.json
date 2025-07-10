@@ -158,8 +158,8 @@
     },
     "/forms/generic/zip/async": {
       "post": {
-        "summary": "Queue an async zip request",
-        "description": "Queue an asynchronous request to Forms model. To receive the model output, use either a `webhook` or an `outputURL`.\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a ZIP file. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.",
+        "summary": "Queue async request",
+        "description": "Queue an asynchronous request to Forms model. To receive the model output, use either a `webhook` or an `outputURL`.\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl). If the `returnJSON` parameter is set to true, a JSON file will be provided instead.",
         "operationId": "post_forms_async_zip",
         "parameters": [
           {
@@ -195,7 +195,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response. Output is a ZIP file. \n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
+            "description": "Successful Response.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1642,6 +1642,20 @@
       }
     },
     "parameters": {
+      "apiVersion": {
+        "name": "apiVersion",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "YYYY-MM-DD",
+          "title": "apiVersion",
+          "description": "API Version",
+          "default": "2025-07-10"
+        },
+        "description": "API Version"
+      },
       "statusId": {
         "name": "status_id",
         "in": "path",
@@ -1686,10 +1700,10 @@
         "schema": {
           "type": "integer",
           "title": "version",
-          "description": "API version",
+          "description": "Forms model version (1 or 2)",
           "default": 2
         },
-        "description": "API version"
+        "description": "Forms model version (1 or 2)"
       },
       "modelId": {
         "name": "custom_model_id",
