@@ -195,7 +195,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response. Output is a ZIP file. \n\n#### Response zip file contents\n| File  | Description |\n| ----- | ------- |\n| .csv  | CSV containing a breakdown of the itemization |\n| .json | JSON file containing the entire JSON response |\n| .txt  | TXT file containing the entire JSON response |\n| file  | The original uploaded file |",
+            "description": "Successful Response.",
             "content": {
               "application/json": {
                 "schema": {
