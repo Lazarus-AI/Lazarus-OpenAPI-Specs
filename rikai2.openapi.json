@@ -1513,6 +1513,26 @@
       }
     },
     "responses": {
+      "207": {
+        "description": "Bulk upload request failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
       "400": {
         "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
         "content": {
