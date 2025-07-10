@@ -1642,6 +1642,20 @@
       }
     },
     "parameters": {
+      "apiVersion": {
+        "name": "apiVersion",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "YYYY-MM-DD",
+          "title": "apiVersion",
+          "description": "API Version",
+          "default": "2025-07-10"
+        },
+        "description": "API Version"
+      },
       "statusId": {
         "name": "status_id",
         "in": "path",
