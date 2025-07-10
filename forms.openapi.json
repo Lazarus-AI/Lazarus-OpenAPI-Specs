@@ -158,8 +158,8 @@
     },
     "/forms/generic/zip/async": {
       "post": {
-        "summary": "Queue an async zip request",
-        "description": "Queue an asynchronous request to Forms model. To receive the model output, use either a `webhook` or an `outputURL`.\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a ZIP file. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.",
+        "summary": "Queue async request",
+        "description": "Queue an asynchronous request to Forms model. To receive the model output, use either a `webhook` or an `outputURL`.\n- **`webhook` (Recommended)**: Receives a JSON response by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl). If the `returnJSON` parameter is set to true, a JSON file will be provided instead.",
         "operationId": "post_forms_async_zip",
         "parameters": [
           {
