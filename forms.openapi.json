@@ -1700,10 +1700,10 @@
         "schema": {
           "type": "integer",
           "title": "version",
-          "description": "API version",
+          "description": "Forms model version (1 or 2)",
           "default": 2
         },
-        "description": "API version"
+        "description": "Forms model version (1 or 2)"
       },
       "modelId": {
         "name": "custom_model_id",
