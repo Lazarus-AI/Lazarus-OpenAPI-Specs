@@ -1247,105 +1247,6 @@
         ],
         "title": "ValidationError"
       },
-      "VersionResponse": {
-        "properties": {
-          "apiVersion": {
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "type": "string"
-          },
-          "id": {
-            "type": "string",
-            "description": "Response ID"
-          },
-          "status": {
-            "$ref": "#/components/schemas/StatusEnum",
-            "description": "Status of the request."
-          }
-        },
-        "type": "object",
-        "title": "VersionResponse",
-        "required": []
-      },
-      "WebhookCheckRequest": {
-        "properties": {
-          "webhook": {
-            "type": "string",
-            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
-          },
-          "webhookHeaders": {
-            "additionalProperties": true,
-            "type": "object",
-            "description": "Request headers to include in the POST requests to the webhook."
-          },
-          "webhookSendFull": {
-            "type": "boolean",
-            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
-            "default": true
-          },
-          "staticIP": {
-            "type": "boolean",
-            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
-            "default": false
-          }
-        },
-        "type": "object",
-        "required": [
-          "webhook"
-        ],
-        "title": "WebhookCheckRequest"
-      },
-      "WebhookCheckRequestBody": {
-        "$ref": "#/components/schemas/WebhookCheckRequest",
-        "title": "WebhookCheckRequestBody",
-        "required": [],
-        "properties": {}
-      },
-      "WebhookTestResponse": {
-        "properties": {
-          "status": {
-            "$ref": "#/components/schemas/StatusEnum",
-            "description": "Status of the request."
-          },
-          "apiVersion": {
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "type": "string"
-          },
-          "id": {
-            "type": "string",
-            "description": "Response ID"
-          },
-          "webhookError": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Error returned from a failed request to your webhook."
-          },
-          "webhookStatusCode": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Status code returned by your webhook."
-          }
-        },
-        "type": "object",
-        "required": [],
-        "title": "WebhookTestResponse"
-      },
       "ZipBase64Request": {
         "properties": {
           "base64": {
@@ -1830,7 +1731,7 @@
         }
       },
       "522": {
-        "description": "Model failed. This status code is sent to your webhook.",
+        "description": "Model failed.",
         "content": {
           "application/json": {
             "schema": {
