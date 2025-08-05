@@ -1595,6 +1595,14 @@
           "apiVersion": {
             "description": "API version used for request.",
             "type": "string"
+          },
+          "startTime": {
+            "description": "Request start time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          },
+          "endTime": {
+            "description": "Request end time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
           }
         },
         "type": "object",
@@ -1750,7 +1758,7 @@
         }
       },
       "522": {
-        "description": "Model failed.",
+        "description": "Model failed. This status code is sent to your webhook.",
         "content": {
           "application/json": {
             "schema": {
