@@ -2123,6 +2123,10 @@
             "type": "string",
             "description": "Response ID"
           },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
           "apiVersion": {
             "description": "API version used for request.",
             "type": "string"
@@ -2167,7 +2171,8 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2187,7 +2192,8 @@
                   "status": "AUTH_FAILURE",
                   "message": "Invalid authentication",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2207,7 +2213,8 @@
                   "status": "FAILURE",
                   "message": "Model id 'abc' is not valid.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2227,7 +2234,8 @@
                   "status": "FAILURE",
                   "message": "[File was too large](../../../prompting-guide/faq/#what-if-i-encounter-an-error-indicating-my-file-is-too-large). Model could not process request.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2247,7 +2255,8 @@
                   "status": "FAILURE",
                   "message": "You have exceeded the rate limit. Please retry your request later.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2267,7 +2276,8 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please retry your request and report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2285,9 +2295,10 @@
               "Model failure": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "A RikAI2 error occurred. Please report this to support@lazarusai.com.",
+                  "message": "A Riky2 error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
