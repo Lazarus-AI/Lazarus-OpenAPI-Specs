@@ -751,7 +751,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "sftp": {
@@ -981,7 +981,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "sftp": {
@@ -1142,7 +1142,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "staticIP": {
@@ -1320,7 +1320,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "staticIP": {
@@ -1393,7 +1393,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "sftp": {
@@ -1577,7 +1577,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "sftp": {
@@ -1814,7 +1814,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "sftp": {
@@ -2044,7 +2044,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "description": "Set to `true` to include OCR results in response.",
             "default": false
           },
           "sftp": {

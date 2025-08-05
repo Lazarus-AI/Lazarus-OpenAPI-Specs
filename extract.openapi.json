@@ -1731,7 +1731,7 @@
         }
       },
       "522": {
-        "description": "Model failed.",
+        "description": "Model failed. This status code is sent to your webhook.",
         "content": {
           "application/json": {
             "schema": {
