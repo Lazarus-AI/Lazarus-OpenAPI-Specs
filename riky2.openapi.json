@@ -631,35 +631,35 @@
           },
           "status": {
             "$ref": "#/components/schemas/StatusEnum",
-            "description": "Status of the request identified by the status ID."
+            "description": "Status of the model request identified by the status ID."
           },
           "code": {
             "$ref": "integer",
-            "description": "HTTP code of the request identified by the status ID."
+            "description": "HTTP code of the model request identified by the status ID."
           },
           "message": {
             "$ref": "string",
-            "description": "An error message related to the request identified by the status ID, if the request failed."
+            "description": "Error message for the model request identified by the status ID, if that request failed."
           },
           "error": {
             "$ref": "object",
-            "description": "Additional error details about the failed request identified by the status ID, if available."
+            "description": "Additional error details about the failure of the model request identified by status ID, if available."
           },
           "apiVersion": {
-            "description": "API version of this query. This may or may not be the API version of the request identified by the status ID. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "description": "API version passed into the header of this status request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
           "id": {
             "type": "string",
-            "description": "Response ID of this query. This is not the response ID of the request identified by the status ID."
+            "description": "Response ID for this status request. This is not an identifier of the model request being checked by the status ID."
           },
           "startTime": {
             "type": "integer",
-            "description": "Start time of this query, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the request identified by the status ID."
+            "description": "Start time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the model request being checked by status ID."
           },
           "endTime": {
             "type": "integer",
-            "description": "End time of this query, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the request identified by the status ID."
+            "description": "End time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the model request being checked by status ID."
           }
         },
         "type": "object",
