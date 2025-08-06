@@ -19,6 +19,7 @@
   "paths": {
     "/rikai/custom/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Document input, JSON response",
         "description": "Make a request to RikY2 and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_riky2",
@@ -113,6 +114,7 @@
     },
     "/rikai/ocr/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "OCR input, JSON response",
         "description": "Make a request to RikY2 by providing OCR results as input, receive JSON response data. This method skips the OCR process that typically precedes RikY2 calls. It is ideal for asking multiple questions of the same document.",
         "operationId": "post_ocr_riky2",
@@ -202,6 +204,7 @@
     },
     "/rikai/zip/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Document input, ZIP file response",
         "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_zip_riky2",
@@ -309,6 +312,7 @@
     },
     "/rikai/bulk/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Bulk file upload",
         "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_riky2",
@@ -395,6 +399,7 @@
     },
     "/rikai/chat/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Chat, no file input, JSON response",
         "description": "Make a RikY2 request using prompt as context. No document upload.",
         "operationId": "post_chat_riky2",
@@ -484,6 +489,7 @@
     },
     "/rikai/zip/async/{statusId}": {
       "get": {
+        "tags": ["Requests"],
         "summary": "Get async request status",
         "description": "Retrieves the status of an asynchronous request to `/rikai/zip/riky2?async=True` or `/rikai/bulk/riky2`. Identifiable by `statusId`.",
         "operationId": "get_async_status",
@@ -2898,7 +2904,12 @@
   },
   "tags": [
     {
-      "name": "Webhook Responses"
+      "name": "Requests",
+      "description": "Requests for the Lazarus API"
+    },
+    {
+      "name": "Webhook Responses",
+      "description": "Responses from the Lazarus API"
     }
   ],
   "servers": [

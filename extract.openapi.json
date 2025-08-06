@@ -19,6 +19,7 @@
   "paths": {
     "/rikai/bulk/rikai2-extract": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Bulk file upload",
         "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_rikai2_extract",
@@ -105,6 +106,7 @@
     },
     "/rikai/zip/async/{statusId}": {
       "get": {
+        "tags": ["Requests"],
         "summary": "Get async request status",
         "description": "Retrieves the status of an asynchronous request to `/rikai/zip/rikai2-extract?async=True` or `/rikai/bulk/rikai2-extract`. Identifiable by `statusId`.",
         "operationId": "get_async_status",
@@ -2332,7 +2334,12 @@
   },
   "tags": [
     {
-      "name": "Webhook Responses"
+      "name": "Requests",
+      "description": "Requests for the Lazarus API"
+    },
+    {
+      "name": "Webhook Responses",
+      "description": "Responses from the Lazarus API"
     }
   ],
   "servers": [
