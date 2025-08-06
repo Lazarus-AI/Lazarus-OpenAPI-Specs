@@ -230,7 +230,7 @@
           },
           "documentId": {
             "$ref": "string",
-            "description": "Document ID of the model request identified by the status ID. Document ID is the value of fileId if it is supplied in the model request; otherwise, a random UUID is generated."
+            "description": "Document ID of the model request identified by the status ID. Document ID is the value of `fileId` if it is supplied in the model request; otherwise, a random UUID is generated."
           },
           "message": {
             "$ref": "string",
