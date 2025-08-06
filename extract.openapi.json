@@ -1510,54 +1510,6 @@
         "title": "RunningWebhook",
         "required": []
       },
-      "RunningWebhook": {
-        "properties": {
-          "status": {
-            "description": "Status of the request.",
-            "type": "string"
-          },
-          "statusId": {
-            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
-            "type": "string"
-          },
-          "documentId": {
-            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
-            "type": "string"
-          },
-          "id": {
-            "description": "Response ID",
-            "type": "string"
-          },
-          "model": {
-            "description": "Model used to process the document.",
-            "type": "string"
-          },
-          "apiVersion": {
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "JSON from the request `metadata` field.",
-            "type": "object"
-          },
-          "organization": {
-            "description": "Organization ID.",
-            "type": "string"
-          },
-          "provider": {
-            "type": "string",
-            "description": "lazarus",
-            "default": "lazarus"
-          },
-          "startTime": {
-            "description": "Request start time recorded in epoch (Unix timestamp) format.",
-            "type": "integer"
-          }
-        },
-        "type": "object",
-        "title": "RunningWebhook",
-        "required": []
-      },
       "SFTP": {
         "properties": {
           "user": {
