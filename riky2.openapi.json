@@ -627,27 +627,39 @@
         "properties": {
           "model": {
             "type": "string",
-            "description": "Model used to process the document."
-          },
-          "apiVersion": {
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "type": "string"
-          },
-          "endTime": {
-            "type": "integer",
-            "description": "Request end time recorded in epoch (Unix timestamp) format."
-          },
-          "id": {
-            "type": "string",
-            "description": "Response ID"
-          },
-          "startTime": {
-            "type": "integer",
-            "description": "Request start time recorded in epoch (Unix timestamp) format."
+            "description": "Model used by the request identified by the status ID."
           },
           "status": {
             "$ref": "#/components/schemas/StatusEnum",
-            "description": "Status of the request."
+            "description": "Status of the request identified by the status ID."
+          },
+          "code": {
+            "$ref": "integer",
+            "description": "HTTP code of the request identified by the status ID."
+          },
+          "message": {
+            "$ref": "string",
+            "description": "An error message related to the request identified by the status ID, if the request failed."
+          },
+          "error": {
+            "$ref": "object",
+            "description": "Additional error details about the failed request identified by the status ID, if available."
+          },
+          "apiVersion": {
+            "description": "API version of this query. This may or may not be the API version of the request identified by the status ID. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID of this query. This is not the response ID of the request identified by the status ID"
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Start time of this query, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the request identified by the status ID"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "End time of this query, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the request identified by the status ID."
           }
         },
         "type": "object",
