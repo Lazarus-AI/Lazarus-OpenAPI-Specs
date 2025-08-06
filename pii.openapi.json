@@ -80,6 +80,9 @@
           },
           "502": {
             "$ref": "#/components/responses/502"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         },
         "x-stoplight": {
@@ -153,6 +156,9 @@
           },
           "502": {
             "$ref": "#/components/responses/502"
+          },
+          "522": {
+            "$ref": "#/components/responses/522"
           }
         },
         "x-stoplight": {
@@ -221,6 +227,12 @@
             "description": "Custom ID for document. If not present, will default to a random UUID.",
             "default": "UUID",
             "examples": ["file1.pdf"]
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response.",
+            "setDefault": false,
+            "default": false
           },
           "metadata": {
             "type": "object",
@@ -1135,6 +1147,12 @@
             "setDefault": false,
             "default": false
           },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response.",
+            "setDefault": false,
+            "default": false
+          },
           "pageQualityWeight": {
             "type": "number",
             "maximum": 1,
@@ -1198,6 +1216,12 @@
             "setDefault": false,
             "default": false
           },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
           "pageQualityWeight": {
             "type": "number",
             "maximum": 1,
@@ -1231,6 +1255,12 @@
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
             "forceRequire": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response.",
+            "setDefault": false,
+            "default": false
           },
           "forceBase64": {
             "type": "boolean",
@@ -1301,6 +1331,17 @@
             ],
             "title": "redactedFile",
             "description": "The b64 encoded PDF file with PII redacted."
+          },
+          "ocrResults": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request."
           }
         },
         "type": "object",
@@ -1395,6 +1436,12 @@
             "setDefault": false,
             "default": false
           },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response.",
+            "setDefault": false,
+            "default": false
+          },
           "getPII": {
             "type": "boolean",
             "description": "Set to true to run the PII model first and redact any identified regions."
@@ -1471,6 +1518,12 @@
             "setDefault": false,
             "default": false
           },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`. WARNING: RikAI2-Extract endpoint does not support returnOCR.",
+            "setDefault": false,
+            "default": false
+          },
           "getPII": {
             "type": "boolean",
             "description": "Set to true to run the PII model first and redact any identified regions."
@@ -1521,6 +1574,12 @@
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
+            "setDefault": false,
+            "default": false
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response.",
             "setDefault": false,
             "default": false
           },
@@ -1589,6 +1648,17 @@
             ],
             "title": "redactedFile",
             "description": "The encoded redacted PDF file."
+          },
+          "ocrResults": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request."
           }
         },
         "type": "object",
@@ -1765,6 +1835,26 @@
                   "value": {
                     "status": "FAILURE",
                     "message": "Request to the model failed."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "522": {
+          "description": "Model failed.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorMessage"
+              },
+              "examples": {
+                "Model failure": {
+                  "value": {
+                    "status": "FAILURE",
+                    "message": "A model error occurred. Please report this to support@lazarusai.com.",
+                    "apiVersion": "YYYY-MM-DD",
+                    "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                   }
                 }
               }
