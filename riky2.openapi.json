@@ -770,18 +770,6 @@
             "$ref": "#/components/schemas/StatusEnum",
             "description": "Status of the model request identified by the status ID."
           },
-          "code": {
-            "$ref": "integer",
-            "description": "HTTP code of the model request identified by the status ID."
-          },
-          "documentId": {
-            "$ref": "string",
-            "description": "Document ID of the model request identified by the status ID. Document ID is the value of `fileId` if it is supplied in the model request; otherwise, a random UUID is generated."
-          },
-          "message": {
-            "$ref": "string",
-            "description": "Error message for the model request identified by the status ID, if that request failed."
-          },
           "error": {
             "$ref": "object",
             "description": "Additional error details about the failure of the model request identified by status ID, if available."
@@ -811,25 +799,6 @@
               }
             ],
             "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated."
-          },
-          "endTime": {
-            "type": "integer",
-            "description": "Request end time recorded in epoch (Unix timestamp) format."
-          },
-          "error": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Present only when the request fails. Contains details about the error."
           },
           "id": {
             "type": "string",
