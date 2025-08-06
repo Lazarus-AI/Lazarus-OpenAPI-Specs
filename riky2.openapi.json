@@ -692,6 +692,7 @@
     },
     "request-succeeded": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Request Succeeded",
         "description": "When a request completes successfully, we'll send a POST request with full response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded",
@@ -719,6 +720,7 @@
     },
     "request-succeeded-truncated-response": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Request Succeeded Truncated",
         "description": "When a request completes successfully and your request body includes `webhookSendFull: False`, we'll send a POST request with truncated response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded_truncated",
