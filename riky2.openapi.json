@@ -570,6 +570,7 @@
   "webhooks": {
     "async-request-submitted": {
       "post": {
+        "tags": ["WebhookResponse"],
         "summary": "Async Request Submitted",
         "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_submitted",
@@ -597,6 +598,7 @@
     },
     "async-request-running": {
       "post": {
+        "tags": ["WebhookResponse"],
         "summary": "Async Request Running",
         "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_running",
@@ -624,6 +626,7 @@
     },
     "async-request-failed": {
       "post": {
+        "tags": ["WebhookResponse"],
         "summary": "Async Request Failed",
         "description": "When an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the webhook provided in your request body.",
         "operationId": "webhook_post_async_request_failed",
@@ -651,6 +654,7 @@
     },
     "async-request-output-url-warning": {
       "post": {
+        "tags": ["WebhookResponse"],
         "summary": "Async Request Output Url Warning",
         "description": "We send a POST request with this warning message to your webhook when\nan async request outputURL fails.",
         "operationId": "async_request_output_url_warningasync_request_output_url_warning_post",
@@ -2890,6 +2894,16 @@
       }
     }
   },
+  "tags": [
+    {
+      "name": "Request",
+      "description": "API Requests"
+    },
+    {
+      "name": "WebhookResponse",
+      "description": "Webhook Responses"
+    }
+  ],
   "servers": [
     {
       "url": "https://api.lazarusai.com/api",
