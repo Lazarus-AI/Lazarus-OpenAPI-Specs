@@ -802,7 +802,7 @@
             "description": "Status of the model request identified by the status ID."
           },
           "error": {
-            "$ref": "object",
+            "type": "object",
             "description": "Additional error details about the failure of the model request identified by status ID, if available."
           },
           "apiVersion": {
