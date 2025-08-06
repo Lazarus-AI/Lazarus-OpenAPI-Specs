@@ -194,6 +194,143 @@
       }
     }
   },
+  "webhooks": {
+    "async-request-submitted": {
+      "post": {
+        "summary": "Async Request Submitted",
+        "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll\nsend a POST request for each individual request in the submission\nwith this data to the `webhook` provided in your request body.",
+        "operationId": "webhook_post_async_request_submitted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmittedWebhook"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "async-request-running": {
+      "post": {
+        "summary": "Async Request Running",
+        "description": "When an asynchronous request begins processing, we'll send a POST\nrequest with this data to the `webhook` provided you request body.",
+        "operationId": "webhook_post_async_request_running",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunningWebhook"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "async-request-failed": {
+      "post": {
+        "summary": "Async Request Failed",
+        "description": "When an asynchronous request fails during processing, we'll send a\nPOST request with this data, including an error message, to the\nwebhook provided in your request body.",
+        "operationId": "webhook_post_async_request_failed",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsyncWebhookError"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "request-succeeded": {
+      "post": {
+        "summary": "Request Succeeded",
+        "description": "When a request completes successfully, we'll send a POST request with\nfull response data to the webhook provided in your request body.",
+        "operationId": "webhook_post_request_succeeded",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuccessWebhook"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "request-succeeded-truncated-response": {
+      "post": {
+        "summary": "Request Succeeded Truncated",
+        "description": "When a request completes successfully and your request body includes\n`webhookSendFull: False`, we'll send a POST request with truncated\nresponse data to the webhook provided in your request body.",
+        "operationId": "webhook_post_request_succeeded_truncated",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuccessWebhookShort"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "components": {
     "schemas": {
       "Answer": {
@@ -264,9 +401,61 @@
             "description": "API version passed into the header of this status request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
+          "code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Response code."
+          },
+          "documentId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Present only when the request fails. Contains details about the error."
+          },
           "id": {
             "type": "string",
             "description": "Response ID for this status request. This is not an identifier of the model request being checked by the status ID."
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status message."
           },
           "startTime": {
             "type": "integer",
@@ -280,6 +469,59 @@
         "type": "object",
         "required": [],
         "title": "AsyncStatusResponse"
+      },
+      "AsyncWebhookError": {
+        "properties": {
+          "status": {
+            "description": "Status of the request.",
+            "type": "string"
+          },
+          "statusId": {
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
+            "type": "string"
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Response ID",
+            "type": "string"
+          },
+          "model": {
+            "description": "Model used to process the document.",
+            "type": "string"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          },
+          "organization": {
+            "description": "Organization ID.",
+            "type": "string"
+          },
+          "provider": {
+            "type": "string",
+            "description": "lazarus",
+            "default": "lazarus"
+          },
+          "startTime": {
+            "description": "Request start time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          },
+          "endTime": {
+            "description": "Request end time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "title": "AsyncWebhookError",
+        "required": []
       },
       "BulkBase64Request": {
         "properties": {
@@ -1183,6 +1425,54 @@
         ],
         "title": "RikAIURLRequest"
       },
+      "RunningWebhook": {
+        "properties": {
+          "status": {
+            "description": "Status of the request.",
+            "type": "string"
+          },
+          "statusId": {
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
+            "type": "string"
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Response ID",
+            "type": "string"
+          },
+          "model": {
+            "description": "Model used to process the document.",
+            "type": "string"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          },
+          "organization": {
+            "description": "Organization ID.",
+            "type": "string"
+          },
+          "provider": {
+            "type": "string",
+            "description": "lazarus",
+            "default": "lazarus"
+          },
+          "startTime": {
+            "description": "Request start time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          }
+        },
+        "type": "object",
+        "title": "RunningWebhook",
+        "required": []
+      },
       "SFTP": {
         "properties": {
           "user": {
@@ -1237,6 +1527,193 @@
         "title": "StatusEnum",
         "required": [],
         "properties": {}
+      },
+      "SubmittedWebhook": {
+        "properties": {
+          "status": {
+            "description": "Status of the request.",
+            "type": "string"
+          },
+          "statusId": {
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
+            "type": "string"
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Response ID",
+            "type": "string"
+          },
+          "model": {
+            "description": "Model used to process the document.",
+            "type": "string"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          },
+          "organization": {
+            "description": "Organization ID.",
+            "type": "string"
+          },
+          "provider": {
+            "type": "string",
+            "description": "lazarus",
+            "default": "lazarus"
+          }
+        },
+        "type": "object",
+        "title": "SubmittedWebhook",
+        "required": []
+      },
+      "SuccessWebhook": {
+        "properties": {
+          "status": {
+            "description": "Status of the request.",
+            "type": "string"
+          },
+          "code": {
+            "description": "Response code.",
+            "type": "integer"
+          },
+          "data": {
+            "items": {},
+            "type": "array",
+            "description": "Question and answer data for each question asked in the request."
+          },
+          "statusId": {
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
+            "type": "string"
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Response ID",
+            "type": "string"
+          },
+          "model": {
+            "description": "Model used to process the document.",
+            "type": "string"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          },
+          "baseModel": {
+            "description": "Base model used during data extraction.",
+            "type": "string"
+          },
+          "questions": {
+            "description": "Number of questions asked.",
+            "type": "integer"
+          },
+          "pages": {
+            "description": "Number of pages in the document.",
+            "type": "integer"
+          },
+          "settings": {
+            "description": "JSON containing any custom user settings specified in the request.",
+            "type": "object"
+          },
+          "language": {
+            "description": "Language results are translated into.",
+            "type": "string"
+          },
+          "organization": {
+            "description": "Organization ID.",
+            "type": "string"
+          },
+          "provider": {
+            "type": "string",
+            "description": "lazarus",
+            "default": "lazarus"
+          },
+          "startTime": {
+            "description": "Request start time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          },
+          "endTime": {
+            "description": "Request end time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          },
+          "ocrResults": {
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "SuccessWebhook"
+      },
+      "SuccessWebhookShort": {
+        "properties": {
+          "status": {
+            "description": "Status of the request.",
+            "type": "string"
+          },
+          "code": {
+            "description": "Response code.",
+            "type": "integer"
+          },
+          "statusId": {
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
+            "type": "string"
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Response ID",
+            "type": "string"
+          },
+          "model": {
+            "description": "Model used to process the document.",
+            "type": "string"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          },
+          "organization": {
+            "description": "Organization ID.",
+            "type": "string"
+          },
+          "provider": {
+            "type": "string",
+            "description": "lazarus",
+            "default": "lazarus"
+          },
+          "startTime": {
+            "description": "Request start time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          },
+          "endTime": {
+            "description": "Request end time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          }
+        },
+        "type": "object",
+        "title": "SuccessWebhookShort",
+        "required": []
       },
       "ValidationError": {
         "properties": {
