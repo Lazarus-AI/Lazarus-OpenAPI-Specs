@@ -389,12 +389,6 @@
           },
           "429": {
             "$ref": "#/components/responses/429"
-          },
-          "521": {
-            "$ref": "#/components/responses/521"
-          },
-          "522": {
-            "$ref": "#/components/responses/522"
           }
         }
       }
