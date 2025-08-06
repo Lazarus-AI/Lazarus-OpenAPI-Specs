@@ -389,12 +389,6 @@
           },
           "429": {
             "$ref": "#/components/responses/429"
-          },
-          "521": {
-            "$ref": "#/components/responses/521"
-          },
-          "522": {
-            "$ref": "#/components/responses/522"
           }
         }
       }
@@ -577,7 +571,7 @@
     "async-request-submitted": {
       "post": {
         "summary": "Async Request Submitted",
-        "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll\nsend a POST request for each individual request in the submission\nwith this data to the `webhook` provided in your request body.",
+        "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_submitted",
         "requestBody": {
           "content": {
@@ -604,7 +598,7 @@
     "async-request-running": {
       "post": {
         "summary": "Async Request Running",
-        "description": "When an asynchronous request begins processing, we'll send a POST\nrequest with this data to the `webhook` provided you request body.",
+        "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided you request body.",
         "operationId": "webhook_post_async_request_running",
         "requestBody": {
           "content": {
@@ -631,7 +625,7 @@
     "async-request-failed": {
       "post": {
         "summary": "Async Request Failed",
-        "description": "When an asynchronous request fails during processing, we'll send a\nPOST request with this data, including an error message, to the\nwebhook provided in your request body.",
+        "description": "When an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the webhook provided in your request body.",
         "operationId": "webhook_post_async_request_failed",
         "requestBody": {
           "content": {
@@ -655,10 +649,47 @@
         }
       }
     },
+    "async-request-output-url-warning": {
+      "post": {
+        "summary": "Async Request Output Url Warning",
+        "description": "We send a POST request with this warning message to your webhook when\nan async request outputURL fails.",
+        "operationId": "async_request_output_url_warningasync_request_output_url_warning_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WarningWebhook"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "request-succeeded": {
       "post": {
         "summary": "Request Succeeded",
-        "description": "When a request completes successfully, we'll send a POST request with\nfull response data to the webhook provided in your request body.",
+        "description": "When a request completes successfully, we'll send a POST request with full response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded",
         "requestBody": {
           "content": {
@@ -685,7 +716,7 @@
     "request-succeeded-truncated-response": {
       "post": {
         "summary": "Request Succeeded Truncated",
-        "description": "When a request completes successfully and your request body includes\n`webhookSendFull: False`, we'll send a POST request with truncated\nresponse data to the webhook provided in your request body.",
+        "description": "When a request completes successfully and your request body includes `webhookSendFull: False`, we'll send a POST request with truncated response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded_truncated",
         "requestBody": {
           "content": {
@@ -815,6 +846,17 @@
             ],
             "description": "Status message."
           },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status message."
+          },
           "startTime": {
             "type": "integer",
             "description": "Start time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the model request being checked by status ID."
@@ -833,6 +875,18 @@
           "status": {
             "description": "Status of the request.",
             "type": "string"
+          },
+          "code": {
+            "description": "Response code.",
+            "type": "integer"
+          },
+          "message": {
+            "description": "Status message.",
+            "type": "string"
+          },
+          "error": {
+            "description": "Present only when the request fails. Contains details about the error.",
+            "type": "object"
           },
           "statusId": {
             "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
@@ -1292,6 +1346,37 @@
         "type": "object",
         "title": "InputOutputSFTP",
         "required": []
+      },
+      "OutputURLFailureWarning": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "url": {
+            "type": "string",
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
+          },
+          "code": {
+            "description": "Response code.",
+            "type": "integer"
+          },
+          "error": {
+            "description": "Present only when the request fails. Contains details about the error.",
+            "type": "object"
+          },
+          "field": {
+            "type": "string",
+            "description": "Name of the field causing an error.",
+            "default": "outputURL"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "url"
+        ],
+        "title": "OutputURLFailureWarning"
       },
       "RikAIBase64Request": {
         "properties": {
@@ -2019,7 +2104,9 @@
             "type": "integer"
           },
           "data": {
-            "items": {},
+            "items": {
+              "$ref": "#/components/schemas/Answer"
+            },
             "type": "array",
             "description": "Question and answer data for each question asked in the request."
           },
@@ -2180,6 +2267,43 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "WarningWebhook": {
+        "properties": {
+          "warning": {
+            "$ref": "#/components/schemas/OutputURLFailureWarning",
+            "description": "Warnings such as outputURL failure."
+          },
+          "statusId": {
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint.",
+            "type": "string"
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Response ID",
+            "type": "string"
+          },
+          "model": {
+            "description": "Model used to process the document.",
+            "type": "string"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "warning"
+        ],
+        "title": "WarningWebhook"
       },
       "ZipBase64Request": {
         "properties": {
@@ -2592,6 +2716,14 @@
           "apiVersion": {
             "description": "API version used for request.",
             "type": "string"
+          },
+          "startTime": {
+            "description": "Request start time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
+          },
+          "endTime": {
+            "description": "Request end time recorded in epoch (Unix timestamp) format.",
+            "type": "integer"
           }
         },
         "type": "object",
@@ -2757,7 +2889,7 @@
               "Model failure": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "A Riky2 error occurred. Please report this to support@lazarusai.com.",
+                  "message": "A RikY2 error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
                   "model": "Riky2"
