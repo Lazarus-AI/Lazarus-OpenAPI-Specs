@@ -219,7 +219,7 @@
     "async-request-running": {
       "post": {
         "summary": "Async Request Running",
-        "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided you request body.",
+        "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_running",
         "requestBody": {
           "content": {
@@ -418,17 +418,6 @@
           "id": {
             "type": "string",
             "description": "Response ID for this status request. This is not an identifier of the model request being checked by the status ID."
-          },
-          "message": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Status message."
           },
           "message": {
             "anyOf": [
