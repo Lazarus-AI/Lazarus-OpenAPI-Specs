@@ -262,11 +262,11 @@
           },
           "id": {
             "type": "string",
-            "description": "Response ID of this query. This is not the response ID of the request identified by the status ID"
+            "description": "Response ID of this query. This is not the response ID of the request identified by the status ID."
           },
           "startTime": {
             "type": "integer",
-            "description": "Start time of this query, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the request identified by the status ID"
+            "description": "Start time of this query, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the request identified by the status ID."
           },
           "endTime": {
             "type": "integer",
