@@ -209,12 +209,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
+            "description": "Our API expects a 200 status code response to our webhook requests"
           }
         }
       }
@@ -237,12 +232,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
+            "description": "Our API expects a 200 status code response to our webhook requests"
           }
         }
       }
@@ -265,12 +255,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
+            "description": "Our API expects a 200 status code response to our webhook requests"
           }
         }
       }
@@ -278,9 +263,9 @@
     "async-request-output-url-warning": {
       "post": {
         "tags": ["Webhook Responses"],
-        "summary": "Async Request Output Url Warning",
-        "description": "We send a POST request with this warning message to your webhook when\nan async request outputURL fails.",
-        "operationId": "async_request_output_url_warningasync_request_output_url_warning_post",
+        "summary": "Async Request OutputURL Failure Warning",
+        "description": "When our PUT request to your `outputURL` fails, we'll send a POST request with this warning message to the webhook provided in your request body. Results will be posted to this webhook in a separate request.",
+        "operationId": "webhook_post_async_request_output_url_warning",
         "requestBody": {
           "content": {
             "application/json": {
@@ -293,22 +278,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
+            "description": "Our API expects a 200 status code response to our webhook requests"
           }
         }
       }
@@ -331,12 +301,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
+            "description": "Our API expects a 200 status code response to our webhook requests"
           }
         }
       }
@@ -359,12 +324,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
+            "description": "Our API expects a 200 status code response to our webhook requests"
           }
         }
       }
@@ -396,55 +356,41 @@
             "type": "string",
             "description": "Model used by the request identified by the status ID."
           },
-          "status": {
-            "$ref": "#/components/schemas/StatusEnum",
-            "description": "Status of the model request identified by the status ID."
-          },
-          "documentId": {
-            "type": "string",
-            "description": "Document ID of the model request identified by the status ID. Document ID is the value of `fileId` if it is supplied in the model request; otherwise, a random UUID is generated."
-          },
-          "error": {
-            "type": "object",
-            "description": "Additional error details about the failure of the model request identified by status ID, if available."
-          },
           "apiVersion": {
             "description": "API version passed into the header of this status request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
           "code": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Response code."
+            "description": "Response code.",
+            "type": "integer"
+          },
+          "documentId": {
+            "description": "Document ID of the model request identified by the status ID. Document ID is the value of `fileId` if it is supplied in the model request; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "End time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the model request being checked by status ID."
+          },
+          "error": {
+            "description": "Additional error details about the failure of the model request identified by status ID, if available.",
+            "type": "object"
           },
           "id": {
             "type": "string",
             "description": "Response ID for this status request. This is not an identifier of the model request being checked by the status ID."
           },
           "message": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "description": "Status message."
           },
           "startTime": {
             "type": "integer",
             "description": "Start time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the model request being checked by status ID."
           },
-          "endTime": {
-            "type": "integer",
-            "description": "End time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the model request being checked by status ID."
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
           }
         },
         "type": "object",
