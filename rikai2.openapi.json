@@ -404,13 +404,13 @@
             "type": "string",
             "description": "Status message."
           },
-          "endTime": {
-            "type": "integer",
-            "description": "End time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the model request being checked by status ID."
-          },
           "startTime": {
             "type": "integer",
             "description": "Start time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the model request being checked by status ID."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "End time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the model request being checked by status ID."
           }
         },
         "type": "object",
