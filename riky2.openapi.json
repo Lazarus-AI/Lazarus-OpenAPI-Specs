@@ -19,6 +19,7 @@
   "paths": {
     "/rikai/custom/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Document input, JSON response",
         "description": "Make a request to RikY2 and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
         "operationId": "post_riky2",
@@ -113,6 +114,7 @@
     },
     "/rikai/ocr/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "OCR input, JSON response",
         "description": "Make a request to RikY2 by providing OCR results as input, receive JSON response data. This method skips the OCR process that typically precedes RikY2 calls. It is ideal for asking multiple questions of the same document.",
         "operationId": "post_ocr_riky2",
@@ -202,6 +204,7 @@
     },
     "/rikai/zip/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Document input, ZIP file response",
         "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_zip_riky2",
@@ -309,6 +312,7 @@
     },
     "/rikai/bulk/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Bulk file upload",
         "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_riky2",
@@ -395,6 +399,7 @@
     },
     "/rikai/chat/riky2": {
       "post": {
+        "tags": ["Requests"],
         "summary": "Chat, no file input, JSON response",
         "description": "Make a RikY2 request using prompt as context. No document upload.",
         "operationId": "post_chat_riky2",
@@ -484,6 +489,7 @@
     },
     "/rikai/zip/async/{statusId}": {
       "get": {
+        "tags": ["Requests"],
         "summary": "Get async request status",
         "description": "Retrieves the status of an asynchronous request to `/rikai/zip/riky2?async=True` or `/rikai/bulk/riky2`. Identifiable by `statusId`.",
         "operationId": "get_async_status",
@@ -570,6 +576,7 @@
   "webhooks": {
     "async-request-submitted": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Async Request Submitted",
         "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_submitted",
@@ -592,6 +599,7 @@
     },
     "async-request-running": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Async Request Running",
         "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_running",
@@ -614,6 +622,7 @@
     },
     "async-request-failed": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Async Request Failed",
         "description": "When an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the webhook provided in your request body.",
         "operationId": "webhook_post_async_request_failed",
@@ -636,6 +645,7 @@
     },
     "async-request-output-url-warning": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Async Request OutputURL Failure Warning",
         "description": "When our PUT request to your `outputURL` fails, we'll send a POST request with this warning message to the webhook provided in your request body. Results will be posted to this webhook in a separate request.",
         "operationId": "webhook_post_async_request_output_url_warning",
@@ -658,6 +668,7 @@
     },
     "request-succeeded": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Request Succeeded",
         "description": "When a request completes successfully, we'll send a POST request with full response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded",
@@ -680,6 +691,7 @@
     },
     "request-succeeded-truncated-response": {
       "post": {
+        "tags": ["Webhook Responses"],
         "summary": "Request Succeeded Truncated",
         "description": "When a request completes successfully and your request body includes `webhookSendFull: False`, we'll send a POST request with truncated response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded_truncated",
@@ -755,10 +767,10 @@
         "properties": {
           "model": {
             "type": "string",
-            "description": "Model used to process the document."
+            "description": "Model used by the request identified by the status ID."
           },
           "apiVersion": {
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "description": "API version passed into the header of this status request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
             "type": "string"
           },
           "code": {
@@ -770,16 +782,16 @@
             "type": "string"
           },
           "endTime": {
-            "type": "integer",
+            "type": "End time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the model request being checked by status ID.",
             "description": "Request end time recorded in epoch (Unix timestamp) format."
           },
           "error": {
-            "description": "Present only when the request fails. Contains details about the error.",
+            "description": "Additional error details about the failure of the model request identified by status ID, if available.",
             "type": "object"
           },
           "id": {
             "type": "string",
-            "description": "Response ID"
+            "description": "Response ID for this status request. This is not an identifier of the model request being checked by the status ID."
           },
           "message": {
             "description": "Status message.",
@@ -787,11 +799,11 @@
           },
           "startTime": {
             "type": "integer",
-            "description": "Request start time recorded in epoch (Unix timestamp) format."
+            "description": "Start time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the model request being checked by status ID."
           },
           "status": {
             "$ref": "#/components/schemas/StatusEnum",
-            "description": "Status of the request."
+            "description": "Status of the model request identified by the status ID."
           }
         },
         "type": "object",
@@ -2637,6 +2649,10 @@
             "type": "string",
             "description": "Response ID"
           },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
           "apiVersion": {
             "description": "API version used for request.",
             "type": "string"
@@ -2689,7 +2705,8 @@
                   "status": "FAILURE",
                   "message": "Request body is missing required field(s): question",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2709,7 +2726,8 @@
                   "status": "AUTH_FAILURE",
                   "message": "Invalid authentication",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2729,7 +2747,8 @@
                   "status": "FAILURE",
                   "message": "Model id 'abc' is not valid.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2749,7 +2768,8 @@
                   "status": "FAILURE",
                   "message": "[File was too large](../../../prompting-guide/faq/#what-if-i-encounter-an-error-indicating-my-file-is-too-large). Model could not process request.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2769,7 +2789,8 @@
                   "status": "FAILURE",
                   "message": "You have exceeded the rate limit. Please retry your request later.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2789,7 +2810,8 @@
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please retry your request and report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2807,9 +2829,10 @@
               "Model failure": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "A RikAI2 error occurred. Please report this to support@lazarusai.com.",
+                  "message": "A RikY2 error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5",
+                  "model": "Riky2"
                 }
               }
             }
@@ -2818,6 +2841,16 @@
       }
     }
   },
+  "tags": [
+    {
+      "name": "Requests",
+      "description": "Requests for the Lazarus API"
+    },
+    {
+      "name": "Webhook Responses",
+      "description": "Responses from the Lazarus API"
+    }
+  ],
   "servers": [
     {
       "url": "https://api.lazarusai.com/api",
