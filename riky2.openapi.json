@@ -2099,10 +2099,6 @@
             "description": "JSON containing any custom user settings specified in the request.",
             "type": "object"
           },
-          "vkgSettings": {
-            "description": "Settings needed to use VKG + RikAI.",
-            "type": "object"
-          },
           "language": {
             "description": "Language results are translated into.",
             "type": "string"
