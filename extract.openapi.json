@@ -2283,5 +2283,15 @@
       "url": "https://api.lazarusai.com/api",
       "description": ""
     }
+  ],
+  "tags": [
+    {
+      "name": "Requests",
+      "description": "Requests for the Lazarus API"
+    },
+    {
+      "name": "Webhook Responses",
+      "description": "Responses from the Lazarus API"
+    }
   ]
 }
