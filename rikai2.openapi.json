@@ -97,6 +97,25 @@
           }
         }
       }
+    },
+    "/status": {
+      "get": {
+        "summary": "Status",
+        "description": "Check the status of app dependencies.",
+        "operationId": "status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -209,6 +228,104 @@
         "type": "string",
         "title": "InvalidLicenseResponse",
         "description": "Invalid License Response - License was not able to successfully authenticate"
+      },
+      "StatusComponent": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of a specific component of the container"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StatusComponentType"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Type of the component"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Error message if status is ERROR"
+          }
+        },
+        "type": "object",
+        "required": [
+            "status"
+        ],
+        "title": "StatusComponent",
+        "description": "Status of an individual component."
+      },
+      "StatusComponentName": {
+        "type": "string",
+        "enum": [
+          "model",
+          "ocr",
+          "license"
+        ],
+        "title": "StatusComponentName",
+        "description": "Status components."
+      },
+      "StatusComponentType": {
+        "type": "string",
+        "enum": [
+          "vLLM",
+          "Online License",
+          "Offline License"
+        ],
+        "title": "StatusComponentType",
+        "description": "Types of status components."
+      },
+      "StatusEnum": {
+        "type": "string",
+        "enum": [
+          "OK",
+          "ERROR"
+        ],
+        "title": "StatusEnum",
+        "description": "Status values."
+      },
+      "StatusResponse": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Overall container status"
+          },
+          "components": {
+            "additionalProperties": {
+                "$ref": "#/components/schemas/StatusComponent"
+            },
+            "propertyNames": {
+                "$ref": "#/components/schemas/StatusComponentName"
+            },
+            "type": "object",
+            "title": "Components",
+            "description": "Components that make up the container status"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "ISO timestamp, UTC timezone"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "components",
+          "timestamp"
+        ],
+        "title": "StatusResponse",
+        "description": "GET /status response body."
       }
     }
   }
