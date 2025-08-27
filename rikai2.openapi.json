@@ -20,30 +20,6 @@
         "summary": "Rikai2",
         "description": "Supported input files should support standard file formats (Formats are checked with file header bytes):\n- PDF\n- JPG/JPEG\n- PNG\n- TIFF",
         "operationId": "rikai2_post",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Authorization",
-              "description": "Set to `Bearer LICENSE_KEY`"
-            },
-            "description": "Set to `Bearer LICENSE_KEY`"
-          },
-          {
-            "name": "authkey",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "Authkey",
-              "description": "Set to the value of the environment variable `API_KEY`. Defaults to `null`, if `null`, omit this header"
-            },
-            "description": "Set to the value of the environment variable `API_KEY`. Defaults to `null`, if `null`, omit this header"
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -81,16 +57,6 @@
                     "summary": "Invalid license",
                     "value": "Invalid license"
                   }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Invalid Authentication",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
                 }
               }
             }
@@ -175,7 +141,12 @@
             "type": "boolean",
             "description": "Set to `true` to include OCR results in response. Under construction.",
             "default": false
-          },            
+          },  
+          "pageBatchSize": {
+            "type": "int",
+            "description": "Specifies the number of pages that are passed to the Lazarus Forms model at a time. The input document will be divided into chunks, each containing up to `pageBatchSize` pages. Must be a positive integer.",
+            "default": null
+          },          
           "settings": {
             "properties": {
               "advancedExplainability": {
