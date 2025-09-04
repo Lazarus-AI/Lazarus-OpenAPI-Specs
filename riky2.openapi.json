@@ -841,7 +841,7 @@
             "type": "string"
           },
           "code": {
-            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes.",
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/Rikai/webhook-error-codes) for descriptions of all the error codes.",
             "type": "integer"
           },
           "message": {
@@ -1317,7 +1317,7 @@
             "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
           },
           "code": {
-            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes.",
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/Rikai/webhook-error-codes) for descriptions of all the error codes.",
             "type": "integer"
           },
           "error": {
