@@ -19,7 +19,9 @@
   "paths": {
     "/rikai/bulk/rikai2-extract": {
       "post": {
-        "tags": ["Requests"],
+        "tags": [
+          "Requests"
+        ],
         "summary": "Bulk file upload",
         "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
         "operationId": "post_bulk_rikai2_extract",
@@ -106,7 +108,9 @@
     },
     "/rikai/zip/async/{statusId}": {
       "get": {
-        "tags": ["Requests"],
+        "tags": [
+          "Requests"
+        ],
         "summary": "Get async request status",
         "description": "Retrieves the status of an asynchronous request to `/rikai/zip/rikai2-extract?async=True` or `/rikai/bulk/rikai2-extract`. Identifiable by `statusId`.",
         "operationId": "get_async_status",
@@ -193,7 +197,9 @@
   "webhooks": {
     "async-request-submitted": {
       "post": {
-        "tags": ["Webhook Responses"],
+        "tags": [
+          "Webhook Responses"
+        ],
         "summary": "Async Request Submitted",
         "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_submitted",
@@ -216,7 +222,9 @@
     },
     "async-request-running": {
       "post": {
-        "tags": ["Webhook Responses"],
+        "tags": [
+          "Webhook Responses"
+        ],
         "summary": "Async Request Running",
         "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided in your request body.",
         "operationId": "webhook_post_async_request_running",
@@ -239,7 +247,9 @@
     },
     "async-request-failed": {
       "post": {
-        "tags": ["Webhook Responses"],
+        "tags": [
+          "Webhook Responses"
+        ],
         "summary": "Async Request Failed",
         "description": "When an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the webhook provided in your request body.",
         "operationId": "webhook_post_async_request_failed",
@@ -262,7 +272,9 @@
     },
     "async-request-output-url-warning": {
       "post": {
-        "tags": ["Webhook Responses"],
+        "tags": [
+          "Webhook Responses"
+        ],
         "summary": "Async Request OutputURL Failure Warning",
         "description": "When our PUT request to your `outputURL` fails, we'll send a POST request with this warning message to the webhook provided in your request body. Results will be posted to this webhook in a separate request.",
         "operationId": "webhook_post_async_request_output_url_warning",
@@ -285,7 +297,9 @@
     },
     "request-succeeded": {
       "post": {
-        "tags": ["Webhook Responses"],
+        "tags": [
+          "Webhook Responses"
+        ],
         "summary": "Request Succeeded",
         "description": "When a request completes successfully, we'll send a POST request with full response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded",
@@ -308,7 +322,9 @@
     },
     "request-succeeded-truncated-response": {
       "post": {
-        "tags": ["Webhook Responses"],
+        "tags": [
+          "Webhook Responses"
+        ],
         "summary": "Request Succeeded Truncated",
         "description": "When a request completes successfully and your request body includes `webhookSendFull: False`, we'll send a POST request with truncated response data to the webhook provided in your request body.",
         "operationId": "webhook_post_request_succeeded_truncated",
@@ -373,7 +389,7 @@
             "type": "string"
           },
           "code": {
-            "description": "Response code.",
+            "description": "Response code. Possible values are `200`, `400`, `401`, `403`, `404`, `413`, `521`, and `522`.",
             "type": "integer"
           },
           "id": {
@@ -381,8 +397,8 @@
             "description": "Response ID for this status request. This is not an identifier of the model request being checked by the status ID."
           },
           "message": {
-            "type": "string",
-            "description": "Status message."
+            "description": "Status message.",
+            "type": "string"
           },
           "startTime": {
             "type": "integer",
@@ -404,7 +420,7 @@
             "type": "string"
           },
           "code": {
-            "description": "Response code.",
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes.",
             "type": "integer"
           },
           "message": {
@@ -502,16 +518,6 @@
             "description": "Optional user settings.",
             "type": "object"
           },
-          "webhookHeaders": {
-            "additionalProperties": true,
-            "type": "object",
-            "description": "Request headers to include in the POST requests to the webhook."
-          },
-          "webhookSendFull": {
-            "type": "boolean",
-            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
-            "default": true
-          },
           "fileId": {
             "anyOf": [
               {
@@ -530,6 +536,16 @@
             ],
             "default": "UUID"
           },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
           "forceOCR": {
             "type": "boolean",
             "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
@@ -538,26 +554,6 @@
           "language": {
             "type": "string",
             "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
-          },
-          "metadata": {
-            "additionalProperties": true,
-            "type": "object",
-            "description": "Custom JSON to be included in the returned response."
-          },
-          "outputURL": {
-            "type": "string",
-            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
-          },
-          "outputURLHeaders": {
-            "additionalProperties": true,
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL."
-          },
-          "returnJSON": {
-            "type": "boolean",
-            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
-            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -574,6 +570,26 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "default": true
           }
         },
         "type": "object",
@@ -728,16 +744,6 @@
             "description": "Optional user settings.",
             "type": "object"
           },
-          "webhookHeaders": {
-            "additionalProperties": true,
-            "type": "object",
-            "description": "Request headers to include in the POST requests to the webhook."
-          },
-          "webhookSendFull": {
-            "type": "boolean",
-            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
-            "default": true
-          },
           "fileId": {
             "anyOf": [
               {
@@ -756,10 +762,15 @@
             ],
             "default": "UUID"
           },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "default": false
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
           },
           "forceOCR": {
             "type": "boolean",
@@ -769,26 +780,6 @@
           "language": {
             "type": "string",
             "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
-          },
-          "metadata": {
-            "additionalProperties": true,
-            "type": "object",
-            "description": "Custom JSON to be included in the returned response."
-          },
-          "outputURL": {
-            "type": "string",
-            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
-          },
-          "outputURLHeaders": {
-            "additionalProperties": true,
-            "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL."
-          },
-          "returnJSON": {
-            "type": "boolean",
-            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
-            "default": true
           },
           "sftp": {
             "anyOf": [
@@ -805,6 +796,26 @@
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
             "default": false
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "default": true
           }
         },
         "type": "object",
@@ -887,7 +898,7 @@
             "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
           },
           "code": {
-            "description": "Response code.",
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes.",
             "type": "integer"
           },
           "error": {
@@ -1110,11 +1121,6 @@
               "file1.pdf"
             ],
             "default": "UUID"
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "default": false
           },
           "forceOCR": {
             "type": "boolean",
@@ -1373,11 +1379,6 @@
             ],
             "default": "UUID"
           },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "default": false
-          },
           "forceOCR": {
             "type": "boolean",
             "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
@@ -1564,7 +1565,7 @@
             "type": "string"
           },
           "code": {
-            "description": "Response code.",
+            "description": "`200` response code.",
             "type": "integer"
           },
           "data": {
@@ -1649,7 +1650,7 @@
             "type": "string"
           },
           "code": {
-            "description": "Response code.",
+            "description": "Response code. Possible values are `200`, `400`, `401`, `403`, `404`, `413`, `521`, and `522`.",
             "type": "integer"
           },
           "statusId": {
@@ -1902,7 +1903,7 @@
         "properties": {
           "code": {
             "type": "integer",
-            "description": "Response code."
+            "description": "Response code. Possible values are `200`, `400`, `401`, `403`, `404`, `413`, `521`, and `522`."
           },
           "model": {
             "type": "string",
@@ -2015,11 +2016,6 @@
               "file1.pdf"
             ],
             "default": "UUID"
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "default": false
           },
           "forceOCR": {
             "type": "boolean",
@@ -2278,16 +2274,6 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Requests",
-      "description": "Requests for the Lazarus API"
-    },
-    {
-      "name": "Webhook Responses",
-      "description": "Responses from the Lazarus API"
-    }
-  ],
   "servers": [
     {
       "url": "https://api.lazarusai.com/api",
