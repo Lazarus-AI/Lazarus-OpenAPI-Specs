@@ -5,7 +5,17 @@
   },
   "info": {
     "title": "VKG API Reference",
-    "description": "VKG API Reference"
+    "description": "VKG API Reference",
+    "contact": {
+      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+      "name": "Lazarus IT",
+      "email": "support@lazarusai.com"
+    },
+    "license": {
+      "name": "Get Lazarus",
+      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+    },
+    "termsOfService": "https://www.lazarusai.com/legal"
   },
   "servers": [
     {
@@ -20,12 +30,9 @@
           "All VKG Management"
         ],
         "summary": "Get All VKG Overview",
-        "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the metadata filter section of the documentation.",
+        "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the [Searching the VKG: metadataFilter](../vkg/concepts/filter) section of the documentation.",
         "operationId": "get-vkg-overview-all",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -47,8 +54,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgs": {
                       "type": "object",
@@ -80,9 +87,6 @@
         "description": "Create a single VKG and instantiate optional metadata.",
         "operationId": "create-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -146,8 +150,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "created": {
                       "type": "boolean"
@@ -183,9 +187,6 @@
         "operationId": "delete-vkg-all",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -199,7 +200,7 @@
           "content": {}
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Success, no content to send. "
           }
         },
@@ -223,9 +224,6 @@
         "description": "Export all the VKGs into CSVs as a ZIP file.",
         "operationId": "export-vkg-all",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -308,9 +306,6 @@
         "operationId": "duplicate-vkg",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -364,8 +359,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "fromVkg": {
                       "type": "string",
@@ -375,18 +370,9 @@
                       "type": "string",
                       "description": "Same as input `toVkg` with whitespaces stripped from both ends (ID that should be used)"
                     },
-                    "expected": {
-                      "$ref": "#/components/schemas/expected"
-                    },
-                    "added": {
-                      "$ref": "#/components/schemas/added"
-                    },
-                    "nodesAdded": {
-                      "type": "array",
-                      "description": "Node IDs of the nodes that have been added",
-                      "items": {
-                        "type": "string"
-                      }
+                    "nodesCopied": {
+                      "type": "int",
+                      "description": "Number of nodes copied. Equals to the number of nodes in the original VKG."
                     }
                   }
                 }
@@ -415,9 +401,6 @@
         "operationId": "get-vkg-overview",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -444,8 +427,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgId": {
                       "type": "string"
@@ -477,9 +460,6 @@
         "description": "Edit a VKG's name and/or it's metadata schema.",
         "operationId": "edit-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -522,8 +502,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgId": {
                       "type": "object",
@@ -569,9 +549,6 @@
         "operationId": "delete-vkg",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -595,8 +572,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "expected": {
                       "$ref": "#/components/schemas/expected"
@@ -627,12 +604,9 @@
           "Single VKG Management"
         ],
         "summary": "Search VKG",
-        "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilters](../docs/concepts/metadata/filter.md) page.",
+        "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilter](../vkg/concepts/filter) page.",
         "operationId": "search-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -655,7 +629,7 @@
                 "properties": {
                   "queries": {
                     "type": "array",
-                    "description": "Queries to search on.",
+                    "description": "The question or keyword for the search.",
                     "items": {
                       "type": "string"
                     }
@@ -666,7 +640,7 @@
                   },
                   "metadataFilter": {
                     "type": "object",
-                    "description": "Filter where `METADATA_NAME` is the name of the metadata field to filter on",
+                    "description": "Metadata field to filter on.",
                     "additionalProperties": {
                       "$ref": "#/components/schemas/metadata-filter"
                     }
@@ -687,8 +661,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgId": {
                       "type": "string"
@@ -730,9 +704,6 @@
         "operationId": "compute-tsne",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -765,20 +736,11 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgId": {
                       "$ref": "#/components/schemas/vkg-id"
-                    },
-                    "tsne": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/tsne"
-                        }
-                      }
                     }
                   }
                 }
@@ -806,9 +768,6 @@
         "description": "Export the VKG into a CSV.",
         "operationId": "export-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -877,9 +836,6 @@
         "operationId": "get-vkg-nodes",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -919,8 +875,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgId": {
                       "type": "string"
@@ -973,9 +929,6 @@
         "operationId": "delete-vkg-nodes-all",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -999,8 +952,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "expected": {
                       "$ref": "#/components/schemas/expected"
@@ -1034,9 +987,6 @@
         "description": "Delete Nodes in batch by specific node IDs.",
         "operationId": "delete-vkg-nodes-specific",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1079,8 +1029,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "expected": {
                       "$ref": "#/components/schemas/expected"
@@ -1114,9 +1064,6 @@
         "description": "",
         "operationId": "add-nodes-body",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1159,8 +1106,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgId": {
                       "$ref": "#/components/schemas/vkg-id"
@@ -1203,9 +1150,6 @@
         "operationId": "edit-nodes-body",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -1247,8 +1191,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "expected": {
                       "$ref": "#/components/schemas/expected"
@@ -1257,7 +1201,7 @@
                       "$ref": "#/components/schemas/modified"
                     },
                     "modifiedNodes": {
-                      "type": "object",
+                      "type": "Array of strings",
                       "additionalProperties": {
                         "$ref": "#/components/schemas/node"
                       }
@@ -1288,9 +1232,6 @@
         "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
         "operationId": "add-nodes-file",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1331,8 +1272,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "vkgId": {
                       "$ref": "#/components/schemas/vkg-id"
@@ -1371,9 +1312,6 @@
         "operationId": "edit-nodes-file",
         "parameters": [
           {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
             "$ref": "#/components/parameters/orgId"
           },
           {
@@ -1413,8 +1351,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     },
                     "expected": {
                       "$ref": "#/components/schemas/expected"
@@ -1458,8 +1396,8 @@
                     "status": {
                       "$ref": "#/components/schemas/status"
                     },
-                    "errors": {
-                      "$ref": "#/components/schemas/errors"
+                    "error": {
+                      "$ref": "#/components/schemas/error"
                     }
                   }
                 }
@@ -1482,20 +1420,20 @@
   "tags": [
     {
       "name": "All VKG Management",
-      "description": "Management for all the VKGs"
+      "description": "Management for all VKGs in the system."
     },
     {
       "name": "Single VKG Management",
-      "description": "Management for a specific VKG"
+      "description": "Management for a specific VKG."
     },
     {
       "name": "Nodes",
-      "description": "Management for a specific VKG's nodes"
+      "description": "Management for a specific VKG's nodes."
     }
   ],
   "components": {
     "parameters": {
-      "VKG_ID": {
+      "{VKG_ID}": {
         "name": "VKG_ID",
         "in": "path",
         "description": "ID of the VKG being accessed",
@@ -1627,7 +1565,7 @@
       },
       "metadata-filter": {
         "title": "Metadata Filter",
-        "description": "Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are listed in the Searching the VKG: metadataFilter section of the documentation.",
+        "description": "Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are listed in the [Searching the VKG: metadataFilter](../vkg/concepts/filter) section of the documentation.",
         "x-stoplight": {
           "id": "1qkmfh7tuvdl9"
         },
@@ -1832,13 +1770,13 @@
         ],
         "description": "Request's success/failure status."
       },
-      "errors": {
+      "error": {
         "type": "object",
         "nullable": true,
         "x-stoplight": {
           "id": "ec6onla5yj2ai"
         },
-        "title": "Errors",
+        "title": "Error",
         "description": "Object containing the error's description and other details that may be helpful."
       },
       "added": {
@@ -1864,6 +1802,7 @@
       },
       "modified-nodes": {
         "type": "object",
+        "description": "List of modified node IDs",
         "additionalProperties": {
           "$ref": "#/components/schemas/node"
         },
