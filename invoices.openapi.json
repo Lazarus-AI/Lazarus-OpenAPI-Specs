@@ -1609,99 +1609,99 @@
           "description": "Authentication key"
         },
         "description": "Authentication key"
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question"
+                }
+              }
+            }
+          }
+        }
       },
-      "responses": {
-        "400": {
-          "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Missing required field": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Request body is missing required field(s): question"
-                  }
+      "403": {
+        "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Invalid credentials": {
+                "value": {
+                  "status": "AUTH_FAILURE",
+                  "message": "Invalid authentication"
                 }
               }
             }
           }
-        },
-        "403": {
-          "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Invalid credentials": {
-                  "value": {
-                    "status": "AUTH_FAILURE",
-                    "message": "Invalid authentication"
-                  }
+        }
+      },
+      "404": {
+        "description": "Not found error. When a request references an invalid endpoint or resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Model id 'abc' is not valid."
                 }
               }
             }
           }
-        },
-        "404": {
-          "description": "Not found error. When a request references an invalid endpoint or resource.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
+        }
+      },
+      "500": {
+        "description": "Model processing failed. Extraction model or LLM could not process your request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "OCR failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Error during request to OCR microservice."
+                }
               },
-              "examples": {
-                "Custom model not found": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Model id 'abc' is not valid."
-                  }
+              "LLM failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "We made three attempts to process the model with no success."
                 }
               }
             }
           }
-        },
-        "500": {
-          "description": "Model processing failed. Extraction model or LLM could not process your request.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "OCR failed": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Error during request to OCR microservice."
-                  }
-                },
-                "LLM failed": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "We made three attempts to process the model with no success."
-                  }
-                }
-              }
-            }
-          }
-        },
-        "502": {
-          "description": "Could not connect to model.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Custom model not found": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Request to the model failed."
-                  }
+        }
+      },
+      "502": {
+        "description": "Could not connect to model.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request to the model failed."
                 }
               }
             }
