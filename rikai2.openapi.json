@@ -47,16 +47,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorMessage"
-                },
-                "examples": {
-                  "no_license_files": {
-                    "summary": "License not provided",
-                    "value": "License not provided"
-                  },
-                  "invalid_license_files": {
-                    "summary": "Invalid license",
-                    "value": "Invalid license"
-                  }
                 }
               }
             }
