@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "RikAI2",
+    "title": "RikAI 2",
     "termsOfService": "https://www.lazarusai.com/legal",
     "contact": {
       "name": "Lazarus IT",
@@ -17,8 +17,8 @@
   "paths": {
     "/rikai2": {
       "post": {
-        "summary": "Rikai2",
-        "description": "Supported input files should support standard file formats (Formats are checked with file header bytes):\n- PDF\n- JPG/JPEG\n- PNG\n- TIFF",
+        "summary": "RikAI 2",
+        "description": "Supported input files should support standard file formats (Formats are checked with file header bytes):\n- PDF\n- JPG/JPEG\n- PNG\n- TIFF/TIF\n- HEIC",
         "operationId": "rikai2_post",
         "requestBody": {
           "required": true,
@@ -44,19 +44,39 @@
           "401": {
             "description": "Invalid/Empty License",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorMessage"
                 },
                 "examples": {
-                  "no_token": {
+                  "no_license_files": {
                     "summary": "License not provided",
                     "value": "License not provided"
                   },
-                  "invalid_token": {
+                  "invalid_license_files": {
                     "summary": "Invalid license",
                     "value": "Invalid license"
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal API error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "522": {
+            "description": "Model failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
                 }
               }
             }
@@ -100,11 +120,11 @@
           },
           "confidence": {
             "type": "number",
-            "description": "Answer confidence score ranging from 0 to 1. Under construction."
+            "description": "Answer confidence score ranging from 0 to 1."
           },
           "context": {
             "type": "string",
-            "description": "Where in the document the answer was found. Under construction."
+            "description": "Where in the document the answer was found."
           }
         },
         "type": "object",
@@ -144,14 +164,14 @@
           },  
           "pageBatchSize": {
             "type": "int",
-            "description": "Specifies the number of pages that are passed to the Lazarus Forms model at a time. The input document will be divided into chunks, each containing up to `pageBatchSize` pages. Must be a positive integer.",
+            "description": "Specifies the number of pages that are passed to the Lazarus Forms model at a time. The input document will be divided into chunks, each containing up to `pageBatchSize` pages. Must be a positive integer. Currently only supported for PDFs.",
             "default": null
           },          
           "settings": {
             "properties": {
               "advancedExplainability": {
                 "type": "boolean",
-                "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context. Under construction.",
+                "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context.",
                 "default": false
               },
             },
@@ -203,7 +223,7 @@
       "StatusComponent": {
         "properties": {
           "status": {
-            "$ref": "#/components/schemas/StatusEnum",
+            "$ref": "#/components/schemas/StatusEndpointEnum",
             "description": "Status of a specific component of the container"
           },
           "type": {
@@ -256,19 +276,19 @@
         "title": "StatusComponentType",
         "description": "Types of status components."
       },
-      "StatusEnum": {
+      "StatusEndpointEnum": {
         "type": "string",
         "enum": [
           "OK",
           "ERROR"
         ],
-        "title": "StatusEnum",
+        "title": "StatusEndpointEnum",
         "description": "Status values."
       },
       "StatusResponse": {
         "properties": {
           "status": {
-            "$ref": "#/components/schemas/StatusEnum",
+            "$ref": "#/components/schemas/StatusEndpointEnum",
             "description": "Overall container status"
           },
           "components": {
@@ -298,6 +318,46 @@
         "title": "StatusResponse",
         "description": "GET /status response body."
       }
+    },
+    "StatusEnum": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "FAILURE",
+          "AUTH_FAILURE"
+        ],
+        "title": "StatusEnum",
+        "description": "Status enum for responses"
+      },
+    "ErrorResponse": {
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              }
+            ],
+            "title": "status",
+            "description": "Status of the request."
+          },
+          "message": {
+            "type": "string",
+            "title": "message",
+            "description": "Error message."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ErrorResponse",
+        "description": "Response when an error occurs."
+      }
+  },
+  "servers": [
+    {
+      "url": "https://<hostname>:8080",
+      "description": ""
     }
-  }
+  ]
 }
