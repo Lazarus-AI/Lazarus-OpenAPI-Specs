@@ -1,0 +1,692 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Metrics Service",
+            "termsOfService": "https://www.lazarusai.com/legal",
+        "contact": {
+        "name": "Lazarus IT",
+        "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+        "email": "support@lazarusai.com"
+        },
+        "license": {
+        "name": "Get Lazarus",
+        "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+        },
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/usage": {
+            "get": {
+                "summary": "Get Usage",
+                "description": "Get model usage metrics by aggregating requests.",
+                "operationId": "get_usage_api_usage_get",
+                "parameters": [
+                    {
+                        "name": "start_time",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "title": "Start Time"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "title": "End Time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UsageMetrics"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/usage/report": {
+            "get": {
+                "summary": "Download Usage Report",
+                "description": "Generate and download model usage report.",
+                "operationId": "download_usage_report_api_usage_report_get",
+                "parameters": [
+                    {
+                        "name": "start_time",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "title": "Start Time"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "title": "End Time"
+                        }
+                    },
+                    {
+                        "name": "verbose",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/UsageReportVerbosity",
+                            "default": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "text/csv": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "start_time,end_time,requests,successes,auth_failures,failures,pages,questions,avg_request_time,avg_ocr_time,avg_model_time\n2025-01-01T00:00:00.000000+00:00,2025-02-01T00:00:00.000000+00:00,16,3,11,2,33,9,5.020374,1.028486,3.003002"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Check": {
+                "properties": {
+                    "start_time": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Start Time",
+                        "description": "Start time of the check"
+                    },
+                    "end_time": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "End Time",
+                        "description": "End time of the check"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At",
+                        "description": "Time of creation"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At",
+                        "description": "Time of update"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "Unique check ID"
+                    },
+                    "meta_data": {
+                        "type": "string",
+                        "title": "Meta Data",
+                        "description": "Check metadata"
+                    },
+                    "requests": {
+                        "type": "string",
+                        "title": "Requests",
+                        "description": "Number of requests"
+                    },
+                    "pages": {
+                        "type": "string",
+                        "title": "Pages",
+                        "description": "Number of pages"
+                    },
+                    "questions": {
+                        "type": "string",
+                        "title": "Questions",
+                        "description": "Number of questions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "start_time",
+                    "end_time",
+                    "meta_data",
+                    "requests",
+                    "pages",
+                    "questions"
+                ],
+                "title": "Check",
+                "description": "Check ORM model.\n\nEncrypted aggregated request metric counts over a given time period."
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "Request": {
+                "properties": {
+                    "request_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Request Id",
+                        "description": "Log ID associated with the request"
+                    },
+                    "pages": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Pages",
+                        "description": "Number of pages in the request"
+                    },
+                    "questions": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Questions",
+                        "description": "Number of questions in the request"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/RequestStatus",
+                        "description": "Request status"
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "title": "Status Code",
+                        "description": "Request status code"
+                    },
+                    "error_message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error Message",
+                        "description": "Request error message, if applicable"
+                    },
+                    "advanced_explainability": {
+                        "type": "boolean",
+                        "title": "Advanced Explainability",
+                        "description": "Request advanced_explainability setting"
+                    },
+                    "return_ocr": {
+                        "type": "boolean",
+                        "title": "Return Ocr",
+                        "description": "Request return_ocr setting"
+                    },
+                    "request_start_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Request Start Time",
+                        "description": "Start time of the request"
+                    },
+                    "request_end_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Request End Time",
+                        "description": "End time of the request"
+                    },
+                    "ocr_start_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ocr Start Time",
+                        "description": "Start time of the OCR call"
+                    },
+                    "ocr_end_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ocr End Time",
+                        "description": "End time of the OCR call"
+                    },
+                    "model_start_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Model Start Time",
+                        "description": "Start time of the LLM call"
+                    },
+                    "model_end_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Model End Time",
+                        "description": "End time of the LLM call"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At",
+                        "description": "Time of creation"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At",
+                        "description": "Time of update"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "Unique ID"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "pages",
+                    "questions",
+                    "status",
+                    "status_code",
+                    "error_message",
+                    "advanced_explainability",
+                    "return_ocr",
+                    "request_start_time",
+                    "request_end_time",
+                    "ocr_start_time",
+                    "ocr_end_time",
+                    "model_start_time",
+                    "model_end_time"
+                ],
+                "title": "Request",
+                "description": "Request ORM model.\n\nStores information about each end-to-end request."
+            },
+            "RequestBase": {
+                "properties": {
+                    "request_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Request Id",
+                        "description": "Log ID associated with the request"
+                    },
+                    "pages": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Pages",
+                        "description": "Number of pages in the request"
+                    },
+                    "questions": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Questions",
+                        "description": "Number of questions in the request"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/RequestStatus",
+                        "description": "Request status"
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "title": "Status Code",
+                        "description": "Request status code"
+                    },
+                    "error_message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error Message",
+                        "description": "Request error message, if applicable"
+                    },
+                    "advanced_explainability": {
+                        "type": "boolean",
+                        "title": "Advanced Explainability",
+                        "description": "Request advanced_explainability setting"
+                    },
+                    "return_ocr": {
+                        "type": "boolean",
+                        "title": "Return Ocr",
+                        "description": "Request return_ocr setting"
+                    },
+                    "request_start_time": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Request Start Time",
+                        "description": "Start time of the request"
+                    },
+                    "request_end_time": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Request End Time",
+                        "description": "End time of the request"
+                    },
+                    "ocr_start_time": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ocr Start Time",
+                        "description": "Start time of the OCR call"
+                    },
+                    "ocr_end_time": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ocr End Time",
+                        "description": "End time of the OCR call"
+                    },
+                    "model_start_time": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Model Start Time",
+                        "description": "Start time of the LLM call"
+                    },
+                    "model_end_time": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Model End Time",
+                        "description": "End time of the LLM call"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "pages",
+                    "questions",
+                    "status",
+                    "status_code",
+                    "error_message",
+                    "advanced_explainability",
+                    "return_ocr",
+                    "request_start_time",
+                    "request_end_time",
+                    "ocr_start_time",
+                    "ocr_end_time",
+                    "model_start_time",
+                    "model_end_time"
+                ],
+                "title": "RequestBase",
+                "description": "Request base model."
+            },
+            "UsageMetrics": {
+                "properties": {
+                    "start_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Start Time",
+                        "description": "Start time of usage period."
+                    },
+                    "end_time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "End Time",
+                        "description": "End time of usage period."
+                    },
+                    "requests": {
+                        "type": "integer",
+                        "title": "Requests",
+                        "description": "Number of total requests over usage period."
+                    },
+                    "successes": {
+                        "type": "integer",
+                        "title": "Successes",
+                        "description": "Number of successful requests over usage period."
+                    },
+                    "auth_failures": {
+                        "type": "integer",
+                        "title": "Auth Failures",
+                        "description": "Number of requests that failed authentication over usage period."
+                    },
+                    "failures": {
+                        "type": "integer",
+                        "title": "Failures",
+                        "description": "Number of failed requests over usage period (not including auth failures)."
+                    },
+                    "pages": {
+                        "type": "integer",
+                        "title": "Pages",
+                        "description": "Number of total pages over usage period."
+                    },
+                    "questions": {
+                        "type": "integer",
+                        "title": "Questions",
+                        "description": "Number of total questions over usage period."
+                    },
+                    "avg_request_time": {
+                        "type": "number",
+                        "title": "Avg Request Time",
+                        "description": "Average request time in seconds."
+                    },
+                    "avg_ocr_time": {
+                        "type": "number",
+                        "title": "Avg Ocr Time",
+                        "description": "Average OCR time in seconds."
+                    },
+                    "avg_model_time": {
+                        "type": "number",
+                        "title": "Avg Model Time",
+                        "description": "Average model time in seconds."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "start_time",
+                    "end_time",
+                    "requests",
+                    "successes",
+                    "auth_failures",
+                    "failures",
+                    "pages",
+                    "questions",
+                    "avg_request_time",
+                    "avg_ocr_time",
+                    "avg_model_time"
+                ],
+                "title": "UsageMetrics",
+                "description": "Model request usage metrics info."
+            },
+            "UsageReportVerbosity": {
+                "type": "integer",
+                "enum": [
+                    0,
+                    1
+                ],
+                "title": "UsageReportVerbosity",
+                "description": "Verbosity level of usage report."
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
