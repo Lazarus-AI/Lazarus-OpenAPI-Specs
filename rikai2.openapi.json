@@ -96,6 +96,40 @@
   },
   "components": {
     "schemas": {
+      "CPUStats": {
+        "properties": {
+          "architecture": {
+            "type": "string",
+            "description": "CPU architecture (e.g. 64bit)"
+          },
+          "model": {
+            "type": "string",
+            "description": "Processor model string"
+          },
+          "physicalCores": {
+            "type": "integer",
+            "description": "Number of physical CPU cores"
+          },
+          "logicalCores": {
+            "type": "integer",
+            "description": "Number of logical CPU cores"
+          },
+          "utilizationPercent": {
+            "type": "number",
+            "description": "Current CPU utilization percentage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "architecture",
+          "model",
+          "physicalCores",
+          "logicalCores",
+          "utilizationPercent"
+        ],
+        "title": "CPUStats",
+        "description": "CPU utilization stats."
+      },
       "Data": {
         "properties": {
           "question": {
@@ -124,6 +158,88 @@
         ],
         "title": "Data",
         "description": "Answer data model for /rikai2 response"
+      },
+      "DiskStats": {
+        "properties": {
+          "totalGB": {
+            "type": "number",
+            "description": "Total disk size in GB"
+          },
+          "usedGB": {
+            "type": "number",
+            "description": "Used disk space in GB"
+          },
+          "usedPercent": {
+            "type": "number",
+            "description": "Percentage of disk currently used"
+          }
+        },
+        "type": "object",
+        "required": [
+          "totalGB",
+          "usedGB",
+          "usedPercent"
+        ],
+        "title": "DiskStats",
+        "description": "Disk usage statistics."
+      },
+      "GPUStats": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "GPU device ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "GPU name"
+          },
+          "memoryTotalGB": {
+            "type": "number",
+            "description": "Total GPU memory in GB"
+          },
+          "memoryAllocatedGB": {
+            "type": "number",
+            "description": "Memory currently allocated in GB"
+          },
+          "utilizationPercent": {
+              "type": "number",
+              "description": "Current GPU utilization percentage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "memoryTotalGB",
+          "memoryAllocatedGB",
+          "utilizationPercent"
+        ],
+        "title": "GPUStats",
+        "description": "GPU device utilization stats."
+      },
+      "MemoryStats": {
+        "properties": {
+          "totalGB": {
+            "type": "number",
+            "description": "Total system memory in GB"
+          },
+          "availableGB": {
+            "type": "number",
+            "description": "Available system memory in GB"
+          },
+          "usedPercent": {
+            "type": "number",
+            "description": "Percentage of memory currently used"
+          }
+        },
+        "type": "object",
+        "required": [
+          "totalGB",
+          "availableGB",
+          "usedPercent"
+        ],
+        "title": "MemoryStats",
+        "description": "Memory utilization stats."
       },
       "RikAI2Request": {
         "properties": {
@@ -281,6 +397,12 @@
             "$ref": "#/components/schemas/StatusEndpointEnum",
             "description": "Overall container status"
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "ISO timestamp, UTC timezone"
+          },
           "components": {
             "additionalProperties": {
                 "$ref": "#/components/schemas/StatusComponent"
@@ -292,18 +414,41 @@
             "title": "Components",
             "description": "Components that make up the container status"
           },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Timestamp",
-            "description": "ISO timestamp, UTC timezone"
+          "cpu": {
+            "$ref": "#/components/schemas/CPUStats",
+            "description": "Host machine CPU utilization statistics"
+          },
+          "memory": {
+            "$ref": "#/components/schemas/MemoryStats",
+            "description": "System memory statistics (RAM)"
+          },
+          "disk": {
+            "$ref": "#/components/schemas/DiskStats",
+            "description": "Disk usage statistics"
+          },
+          "gpus": {
+            "anyOf": [
+                {
+                  "items": {
+                    "$ref": "#/components/schemas/GPUStats"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+            ],
+            "description": "List of GPU devices and their utilization statistics"
           }
         },
         "type": "object",
         "required": [
           "status",
           "components",
-          "timestamp"
+          "timestamp",
+          "cpu",
+          "memory",
+          "disk"
         ],
         "title": "StatusResponse",
         "description": "GET /status response body."
