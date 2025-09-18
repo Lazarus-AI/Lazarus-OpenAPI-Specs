@@ -5,6 +5,7 @@
   },
   "info": {
     "title": "VKG API Reference",
+    "version": "",
     "description": "VKG API Reference",
     "contact": {
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
@@ -33,9 +34,6 @@
         "description": "Provides an overview of all the VKGs in the system. Filters that can be applied on metadata during search or to limit nodes on a certain VKG. Multiple filters can be applied at once (E.g. 'One of' + 'More Than'). Supported filters are in the [Searching the VKG: metadataFilter](../vkg/concepts/filter) section of the documentation.",
         "operationId": "get-vkg-overview-all",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -72,12 +70,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "9uptk7e9rjf3z"
         }
@@ -90,9 +82,6 @@
         "description": "Create a single VKG and instantiate optional metadata.",
         "operationId": "create-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -130,17 +119,6 @@
                 }
               },
               "examples": {
-                "default": {
-                  "value": {
-                    "vkgId": "numbers",
-                    "metadata": {
-                      "data": {
-                        "default": 12,
-                        "type": "number"
-                      }
-                    }
-                  }
-                }
               }
             }
           }
@@ -174,12 +152,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "l7n0smcx31l5k"
         }
@@ -192,9 +164,6 @@
         "description": "Delete all existing VKGs.",
         "operationId": "delete-vkg-all",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -213,12 +182,6 @@
             "description": "Success, no content to send. "
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "geaqbm7f0aevm"
         }
@@ -233,9 +196,6 @@
         "description": "Export all the VKGs into CSVs as a ZIP file.",
         "operationId": "export-vkg-all",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -256,12 +216,12 @@
                     "type": "string",
                     "default": "[ISO Datetime]_export.csv"
                   },
-                  "includeTsne": {
+                  "include_tsne": {
                     "type": "boolean",
                     "default": false,
                     "x-deprecated": true
                   },
-                  "includeMetadata": {
+                  "include_metadata": {
                     "type": "boolean",
                     "default": true,
                     "x-deprecated": true
@@ -297,12 +257,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "o7dvady5jlwgh"
         }
@@ -317,9 +271,6 @@
         "description": "Duplicate a VKG from another, preserving the nodes and metadata schema.",
         "operationId": "duplicate-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -386,7 +337,7 @@
                       "description": "Same as input `toVkg` with whitespaces stripped from both ends (ID that should be used)"
                     },
                     "nodesCopied": {
-                      "type": "int",
+                      "type": "integer",
                       "description": "Number of nodes copied. Equals to the number of nodes in the original VKG."
                     }
                   }
@@ -395,12 +346,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "2i3eiq92jrrrw"
         }
@@ -415,9 +360,6 @@
         "description": "Provides an overview of the specified VKG.",
         "operationId": "get-vkg-overview",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -460,12 +402,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "if1q44ibr5pjd"
         }
@@ -478,9 +414,6 @@
         "description": "Edit a VKG's name and/or it's metadata schema.",
         "operationId": "edit-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -551,12 +484,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "drxn1w2hr5m1s"
         }
@@ -569,9 +496,6 @@
         "description": "Delete a single VKG.",
         "operationId": "delete-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -611,12 +535,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "58wnpscpkcy23"
         }
@@ -631,9 +549,6 @@
         "description": "Perform a search on the VKG. To read about the supported filters for `metadataFilters`, refer to the [Searching the VKG: metadataFilter](../vkg/concepts/filter) page.",
         "operationId": "search-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -710,12 +625,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "zuohzfbdu0ktd"
         }
@@ -730,9 +639,6 @@
         "description": "Compute the TSNE of the VKG. TSNE is the metric used to visualize nodes as a graph. Each node's TSNE needs to be calculated in order to create a visualization.",
         "operationId": "compute-tsne",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -778,12 +684,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "aqn3066t9fqmb"
         }
@@ -798,9 +698,6 @@
         "description": "Export the VKG into a CSV.",
         "operationId": "export-vkg",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -823,11 +720,11 @@
                   "filename": {
                     "type": "string"
                   },
-                  "includeTsne": {
+                  "include_tsne": {
                     "type": "boolean",
                     "x-deprecated": true
                   },
-                  "includeMetadata": {
+                  "include_metadata": {
                     "type": "boolean",
                     "default": true
                   }
@@ -848,12 +745,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "t8htcwsr3dndq"
         }
@@ -868,9 +759,6 @@
         "description": "Retrieve all nodes.\n",
         "operationId": "get-vkg-nodes",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -934,7 +822,7 @@
                     "calculateTsne": {
                       "type": "boolean"
                     },
-                    "includeMetadata": {
+                    "include_metadata": {
                       "type": "boolean"
                     },
                     "statistics": {
@@ -946,12 +834,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "ztld34xz2u90l"
         }
@@ -964,9 +846,6 @@
         "description": "Delete all nodes in the VKG.",
         "operationId": "delete-vkg-nodes-all",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1006,12 +885,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "8jjrvctukliow"
         }
@@ -1026,9 +899,6 @@
         "description": "Delete Nodes in batch by specific node IDs.",
         "operationId": "delete-vkg-nodes-specific",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1086,12 +956,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "jjqrj68n1bzq7"
         }
@@ -1106,9 +970,6 @@
         "description": "",
         "operationId": "add-nodes-body",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1176,12 +1037,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "5pxo08k4hgrse"
         }
@@ -1194,9 +1049,6 @@
         "description": "",
         "operationId": "edit-nodes-body",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1249,7 +1101,7 @@
                       "$ref": "#/components/schemas/modified"
                     },
                     "modifiedNodes": {
-                      "type": "Array of strings",
+                      "type": "array",
                       "additionalProperties": {
                         "$ref": "#/components/schemas/node"
                       }
@@ -1260,12 +1112,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "04nwiukmpsdlz"
         }
@@ -1280,9 +1126,6 @@
         "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
         "operationId": "add-nodes-file",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1344,12 +1187,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "8r519hyss34e8"
         }
@@ -1362,9 +1199,6 @@
         "description": "For documentation on file formatting, refer to [Formatting](./usage/formatting).",
         "operationId": "edit-nodes-file",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
           {
             "$ref": "#/components/parameters/orgId"
           },
@@ -1423,12 +1257,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "rzis6sjee2xp0"
         }
@@ -1459,12 +1287,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "i9jbco8syrqju"
         }
@@ -1487,7 +1309,7 @@
   ],
   "components": {
     "parameters": {
-      "VKG_ID": {
+      "{VKG_ID}": {
         "name": "VKG_ID",
         "in": "path",
         "description": "ID of the VKG being accessed",
@@ -1595,23 +1417,22 @@
       },
       "metadata-field-basic": {
         "title": "Metadata Field Basic",
-        "x-stoplight": {
-          "id": "bld7a3stiopya"
-        },
         "type": "object",
         "properties": {
           "default": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "905g05a2420zl"
-            },
-            "description": "Default value."
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Default value."
+              },
+              {
+                "type": "number",
+                "description": "Default value."
+              }
+            ]
           },
           "type": {
             "type": "string",
-            "x-stoplight": {
-              "id": "nulsp5uqwepge"
-            },
             "description": "Type of this metadata."
           }
         },

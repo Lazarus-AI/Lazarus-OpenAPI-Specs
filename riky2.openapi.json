@@ -744,7 +744,7 @@
           "answer": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -755,7 +755,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -918,7 +918,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1143,7 +1143,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1278,19 +1278,6 @@
           }
         ]
       },
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array"
-          }
-        },
-        "type": "object",
-        "title": "HTTPValidationError",
-        "required": []
-      },
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
@@ -1356,7 +1343,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1460,7 +1447,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1533,7 +1520,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1611,7 +1598,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1781,7 +1768,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1963,27 +1950,6 @@
           "user"
         ],
         "title": "SFTP"
-      },
-      "Settings": {
-        "properties": {
-          "advancedExplainability": {
-            "type": "boolean",
-            "description": "When set to `false`, the model processes requests faster but does not return the full explainability. Set to `true` to include full explainability.",
-            "default": false
-          },
-          "advancedVision": {
-            "type": "boolean",
-            "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
-            "default": false
-          },
-          "returnConfidence": {
-            "type": "boolean",
-            "description": "Set to true to include bounding boxes and confidence score in response. Click [here](/../../models/Rikai/rikai2-extract/overview#returning-confidence-scores-and-bounding-boxes) for prompting guidelines to ensure optimal results when using this field."
-          }
-        },
-        "type": "object",
-        "title": "Settings",
-        "required": []
       },
       "StatusEnum": {
         "type": "string",
@@ -2187,36 +2153,6 @@
         "title": "SuccessWebhookShort",
         "required": []
       },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array"
-          },
-          "msg": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
-      },
       "WarningWebhook": {
         "properties": {
           "warning": {
@@ -2273,7 +2209,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -2498,7 +2434,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -2838,6 +2774,16 @@
     {
       "url": "https://api.lazarusai.com/api",
       "description": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "Requests",
+      "description": "Requests for the Lazarus API"
+    },
+    {
+      "name": "Webhook Responses",
+      "description": "Responses from the Lazarus API"
     }
   ]
 }

@@ -81,17 +81,11 @@
           },
           "500": {
             "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
           }
-        },
-        "x-stoplight": {
-          "id": "hsr46bp1hhx92"
-        },
-        "servers": [
-          {
-            "url": "https://api.lazarusai.com/api",
-            "description": ""
-          }
-        ]
+        }
       }
     },
     "/forms/invoices/zip": {
@@ -153,17 +147,11 @@
           },
           "500": {
             "$ref": "#/components/responses/500"
+          },
+          "502": {
+            "$ref": "#/components/responses/502"
           }
-        },
-        "x-stoplight": {
-          "id": "yrqdyckec4evr"
-        },
-        "servers": [
-          {
-            "url": "https://api.lazarusai.com/api",
-            "description": ""
-          }
-        ]
+        }
       }
     }
   },
@@ -213,8 +201,7 @@
               }
             ],
             "title": "base64",
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "fileId": {
             "type": "string",
@@ -285,8 +272,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -343,8 +329,7 @@
         "properties": {
           "inputUrl": {
             "type": "string",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -423,8 +408,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "outputUrl": {
             "type": "string",
@@ -511,8 +495,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -565,8 +548,7 @@
         "properties": {
           "inputUrl": {
             "type": "string",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "outputUrl": {
             "type": "string",
@@ -817,31 +799,6 @@
           "id": "96gj0hbjmgbs9"
         }
       },
-      "ItemData": {
-        "properties": {
-          "price": {
-            "type": "number",
-            "description": "Price per item.",
-            "default": 0
-          },
-          "quantity": {
-            "type": "integer",
-            "description": "Number of items.",
-            "default": 0
-          },
-          "totalPrice": {
-            "type": "number",
-            "description": "Total price of an item.",
-            "default": 0
-          }
-        },
-        "type": "object",
-        "title": "ItemData",
-        "description": "Item Data",
-        "x-stoplight": {
-          "id": "8g4apwdipfd09"
-        }
-      },
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
@@ -952,90 +909,6 @@
           "id": "58tpwzc9q1toi"
         }
       },
-      "SSNData": {
-        "properties": {
-          "ssnNumber": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SSNNumber"
-              }
-            ],
-            "title": "ssnNumber",
-            "description": "Extracted social security number."
-          }
-        },
-        "type": "object",
-        "title": "SSNData",
-        "description": "SSN Data",
-        "x-stoplight": {
-          "id": "6d6i34epse39z"
-        }
-      },
-      "SSNNumber": {
-        "properties": {
-          "index": {
-            "type": "string",
-            "description": "Actual social security number."
-          }
-        },
-        "type": "object",
-        "title": "SSNNumber",
-        "description": "SSN Number",
-        "x-stoplight": {
-          "id": "2gjukpki2l988"
-        }
-      },
-      "SSNResponseBody": {
-        "properties": {
-          "documentId": {
-            "type": "string",
-            "description": "ID for document request or filename if specified."
-          },
-          "metadata": {
-            "type": "object",
-            "description": "JSON from the request 'metadata' field."
-          },
-          "ssnData": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SSNData"
-              }
-            ],
-            "title": "ssnData",
-            "description": "Social security card data."
-          },
-          "status": {
-            "type": "string",
-            "description": "Status of the request."
-          },
-          "startTime": {
-            "type": "integer",
-            "description": "Request start time."
-          },
-          "endTime": {
-            "type": "integer",
-            "description": "Request end time."
-          },
-          "id": {
-            "type": "string",
-            "description": "Request ID."
-          },
-          "pages": {
-            "type": "integer",
-            "description": "Number of pages in the document."
-          },
-          "modelType": {
-            "type": "string",
-            "description": "Type of base/extraction model used, OCR or Forms."
-          }
-        },
-        "type": "object",
-        "title": "SSNResponseBody",
-        "description": "SSN Response Body",
-        "x-stoplight": {
-          "id": "jsx1vqkpdwj5l"
-        }
-      },
       "Span": {
         "properties": {
           "offset": {
@@ -1066,35 +939,6 @@
           "id": "5iwbrcvy0zuc3"
         }
       },
-      "ContentRegion": {
-        "properties": {
-          "polygon": {
-            "items": {
-              "type": "number"
-            },
-            "type": "array",
-            "description": "Bounding box coordinates of content."
-          },
-          "content": {
-            "type": "string",
-            "description": "Detected text."
-          },
-          "confidence": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Confidence score."
-          }
-        },
-        "type": "object",
-        "required": [
-          "polygon"
-        ],
-        "title": "ContentRegion",
-        "x-stoplight": {
-          "id": "ivi57lpw7ei5f"
-        }
-      },
       "ErrorMessage": {
         "properties": {
           "status": {
@@ -1119,441 +963,6 @@
         "description": "Response when an error occurs.",
         "x-stoplight": {
           "id": "uii1uj39tnp42"
-        }
-      },
-      "PIIBase64Request": {
-        "properties": {
-          "base64": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
-          "redact": {
-            "type": "boolean",
-            "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
-            "default": false
-          }
-        },
-        "type": "object",
-        "title": "PIIBase64Request",
-        "required": [
-          "base64"
-        ],
-        "x-stoplight": {
-          "id": "31o25qyxeqge4"
-        }
-      },
-      "PIIFileRequest": {
-        "type": "object",
-        "title": "PIIFileRequest",
-        "x-stoplight": {
-          "id": "qjn5ay7bahh9r"
-        },
-        "required": [
-          "file"
-        ],
-        "properties": {
-          "file": {
-            "type": "string",
-            "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
-          "redact": {
-            "type": "boolean",
-            "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
-            "default": false
-          }
-        }
-      },
-      "PIIURLRequest": {
-        "type": "object",
-        "title": "PIIURLRequest",
-        "x-stoplight": {
-          "id": "9nbt9g6u3fy5a"
-        },
-        "required": [
-          "inputURL"
-        ],
-        "properties": {
-          "inputURL": {
-            "type": "string",
-            "minLength": 1,
-            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
-          "redact": {
-            "type": "boolean",
-            "description": "Set to true to include the redacted file in the response as a base64-encoded PDF.",
-            "default": false
-          }
-        }
-      },
-      "PIIResult": {
-        "properties": {
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
-            "title": "status",
-            "description": "Status of the request."
-          },
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/PageContent"
-            },
-            "type": "array",
-            "title": "Items",
-            "description": "A list of personally-identifiable information by page."
-          },
-          "redactedFile": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/RedactedFile"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "redactedFile",
-            "description": "The b64 encoded PDF file with PII redacted."
-          }
-        },
-        "type": "object",
-        "required": [
-          "items"
-        ],
-        "title": "PIIResult",
-        "description": "Model to return to /pii requests",
-        "x-stoplight": {
-          "id": "dyqhc1tljy2za"
-        }
-      },
-      "PageContent": {
-        "properties": {
-          "dimension": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PageDimension"
-              }
-            ],
-            "description": "Width, height, and units of the given page."
-          },
-          "regions": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/ContentRegion"
-                },
-                "type": "array"
-              },
-              {
-                "items": {
-                  "items": {
-                    "type": "number"
-                  },
-                  "type": "array"
-                },
-                "type": "array"
-              }
-            ],
-            "description": "List of bounding boxes or content regions."
-          }
-        },
-        "type": "object",
-        "required": [
-          "dimension",
-          "regions"
-        ],
-        "title": "PageContent",
-        "x-stoplight": {
-          "id": "ov6ocef3die0y"
-        }
-      },
-      "PageDimension": {
-        "properties": {
-          "height": {
-            "type": "number",
-            "exclusiveMinimum": 0,
-            "description": "Document height."
-          },
-          "width": {
-            "type": "number",
-            "exclusiveMinimum": 0,
-            "description": "Document width."
-          },
-          "unit": {
-            "type": "string",
-            "description": "Unit of measurement used for height and width."
-          }
-        },
-        "type": "object",
-        "required": [
-          "height",
-          "width"
-        ],
-        "title": "PageDimension",
-        "x-stoplight": {
-          "id": "klat0sx1s7ntt"
-        }
-      },
-      "RedactBase64Request": {
-        "properties": {
-          "base64": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-          "getPII": {
-            "type": "boolean",
-            "description": "Set to true to run the PII model first and redact any identified regions."
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
-          "keywords": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "description": "Labels of fields to redact."
-          },
-          "pages": {
-            "items": {
-              "$ref": "#/components/schemas/PageContent"
-            },
-            "type": "array",
-            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions."
-          }
-        },
-        "type": "object",
-        "title": "RedactBase64Request",
-        "required": [
-          "base64"
-        ],
-        "x-stoplight": {
-          "id": "z52f06xa9h5po"
-        }
-      },
-      "RedactFileRequest": {
-        "type": "object",
-        "title": "RedactFileRequest",
-        "x-stoplight": {
-          "id": "uo4hxvqqq7zkc"
-        },
-        "required": [
-          "file"
-        ],
-        "properties": {
-          "file": {
-            "type": "string",
-            "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-          "getPII": {
-            "type": "boolean",
-            "description": "Set to true to run the PII model first and redact any identified regions."
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
-          "keywords": {
-            "type": "array",
-            "description": "Labels of fields to redact.",
-            "items": {
-              "type": "string"
-            }
-          },
-          "pages": {
-            "type": "array",
-            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions.",
-            "items": {
-              "$ref": "#/components/schemas/PageContent"
-            }
-          }
-        }
-      },
-      "RedactURLRequest": {
-        "type": "object",
-        "title": "RedactURLRequest",
-        "x-stoplight": {
-          "id": "sov6x9uit7ri4"
-        },
-        "required": [
-          "inputURL"
-        ],
-        "properties": {
-          "inputURL": {
-            "type": "string",
-            "minLength": 1,
-            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
-          },
-          "forceBase64": {
-            "type": "boolean",
-            "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
-            "default": false
-          },
-          "getPII": {
-            "type": "boolean",
-            "description": "Set to true to run the PII model first and redact any identified regions."
-          },
-          "pageQualityWeight": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
-            "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
-            "format": "float"
-          },
-          "keywords": {
-            "type": "array",
-            "description": "Labels of fields to redact.",
-            "items": {
-              "type": "string"
-            }
-          },
-          "pages": {
-            "type": "array",
-            "description": "List of page content to redact regions to redact. Can directly insert results from /pii response field \"items\" or custom regions and dimensions.",
-            "items": {
-              "$ref": "#/components/schemas/PageContent"
-            }
-          }
-        }
-      },
-      "RedactResult": {
-        "properties": {
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
-            "title": "status",
-            "description": "Status of the request."
-          },
-          "redactedFile": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RedactedFile"
-              }
-            ],
-            "title": "redactedFile",
-            "description": "The encoded redacted PDF file."
-          }
-        },
-        "type": "object",
-        "title": "RedactResult",
-        "description": "Model to return to /redact requests",
-        "x-stoplight": {
-          "id": "gn2t02wje0vl9"
-        }
-      },
-      "RedactedFile": {
-        "properties": {
-          "data": {
-            "type": "string",
-            "format": "binary",
-            "description": "Redacted and encoded file data."
-          },
-          "encoding": {
-            "type": "string",
-            "description": "File encoding."
-          }
-        },
-        "type": "object",
-        "required": [
-          "data",
-          "encoding"
-        ],
-        "title": "RedactedFile",
-        "x-stoplight": {
-          "id": "tx0hef30q015l"
         }
       },
       "StatusEnum": {
@@ -1609,111 +1018,111 @@
           "description": "Authentication key"
         },
         "description": "Authentication key"
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question"
+                }
+              }
+            }
+          }
+        }
       },
-      "responses": {
-        "400": {
-          "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Missing required field": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Request body is missing required field(s): question"
-                  }
+      "403": {
+        "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Invalid credentials": {
+                "value": {
+                  "status": "AUTH_FAILURE",
+                  "message": "Invalid authentication"
                 }
               }
             }
           }
-        },
-        "403": {
-          "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Invalid credentials": {
-                  "value": {
-                    "status": "AUTH_FAILURE",
-                    "message": "Invalid authentication"
-                  }
+        }
+      },
+      "404": {
+        "description": "Not found error. When a request references an invalid endpoint or resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Model id 'abc' is not valid."
                 }
               }
             }
           }
-        },
-        "404": {
-          "description": "Not found error. When a request references an invalid endpoint or resource.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
+        }
+      },
+      "500": {
+        "description": "Model processing failed. Extraction model or LLM could not process your request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "OCR failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Error during request to OCR microservice."
+                }
               },
-              "examples": {
-                "Custom model not found": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Model id 'abc' is not valid."
-                  }
+              "LLM failed": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "We made three attempts to process the model with no success."
                 }
               }
             }
           }
-        },
-        "500": {
-          "description": "Model processing failed. Extraction model or LLM could not process your request.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "OCR failed": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Error during request to OCR microservice."
-                  }
-                },
-                "LLM failed": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "We made three attempts to process the model with no success."
-                  }
-                }
-              }
-            }
-          }
-        },
-        "502": {
-          "description": "Could not connect to model.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Custom model not found": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Request to the model failed."
-                  }
+        }
+      },
+      "502": {
+        "description": "Could not connect to model.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Custom model not found": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "Request to the model failed."
                 }
               }
             }
           }
         }
       }
-    },
-    "servers": [
-      {
-        "url": "https://api.lazarusai.com/api",
-        "description": ""
-      }
-    ]
-  }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.lazarusai.com/api",
+      "description": ""
+    }
+  ]
 }

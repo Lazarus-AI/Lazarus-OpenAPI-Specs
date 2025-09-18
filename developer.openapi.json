@@ -1,7 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Developer"
+    "title": "Developer",
+    "version": ""
   },
   "paths": {
     "/developer/api-version": {
@@ -147,108 +148,6 @@
   },
   "components": {
     "schemas": {
-      "SFTP": {
-        "properties": {
-          "user": {
-            "type": "string",
-            "title": "user",
-            "description": "SFTP username."
-          },
-          "password": {
-            "type": "string",
-            "title": "Password",
-            "description": "SFTP password. Either `password` or `privateKey` are required."
-          },
-          "privateKey": {
-            "type": "string",
-            "title": "Privatekey",
-            "description": "Base64 encoded SFTP private key. Either `password` or `privateKey` are required."
-          },
-          "privateKeyPassphrase": {
-            "type": "string",
-            "title": "Privatekeypassphrase",
-            "description": "Optional passphrase to use if private key is protected."
-          }
-        },
-        "type": "object",
-        "required": [
-          "user"
-        ],
-        "title": "SFTP",
-        "description": "SFTP authentication model, request body"
-      },
-      "Settings": {
-        "properties": {
-          "verbose": {
-            "type": "boolean",
-            "title": "Verbose",
-            "description": "When set to true, enables verbose mode, more detailed and complex responses",
-            "forceExclude": true
-          },
-          "temperature": {
-            "type": "number",
-            "title": "Temperature",
-            "description": "Adjusts the verbosity level of responses, with higher float values increasing the detail of the output",
-            "forceExclude": true
-          },
-          "safety": {
-            "type": "boolean",
-            "title": "Safety",
-            "forceExclude": true
-          },
-          "version": {
-            "type": "string",
-            "title": "Version",
-            "forceExclude": true
-          },
-          "sendFile": {
-            "type": "boolean",
-            "title": "Sendfile",
-            "forceExclude": true
-          },
-          "msOCR": {
-            "type": "boolean",
-            "title": "Msocr",
-            "description": "Set to true if OCR passed is Microsoft's OCR.",
-            "forceExclude": true
-          },
-          "advancedVision": {
-            "type": "boolean",
-            "title": "Advancedvision",
-            "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
-            "models": {
-              "RikAI2-Extract": {
-                "forceExclude": true
-              }
-            },
-            "setDefault": false
-          },
-          "advancedExplainability": {
-            "type": "boolean",
-            "title": "Advancedexplainability",
-            "description": "When set to `false`, the model processes requests faster but does not return the full explainability. Set to `true` to include full explainability.",
-            "models": {
-              "RikAI2-Extract": {
-                "forceExclude": true
-              }
-            },
-            "setDefault": false
-          },
-          "returnConfidence": {
-            "type": "boolean",
-            "title": "Returnconfidence",
-            "description": "Set to true to include bounding boxes and confidence score in response. Click [here](/../../models/Rikai/rikai2-extract/overview#returning-confidence-scores-and-bounding-boxes) for prompting guidelines to ensure optimal results when using this field.",
-            "models": {
-              "RikAI2": {
-                "forceExclude": true
-              }
-            }
-          }
-        },
-        "type": "object",
-        "title": "Settings",
-        "description": "Settings model, request body"
-      },
       "StatusEnum": {
         "type": "string",
         "enum": [
@@ -261,53 +160,18 @@
         "title": "StatusEnum",
         "description": "Status enum for responses"
       },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
-      },
       "WebhookCheckRequest": {
         "properties": {
           "webhook": {
             "type": "string",
             "pattern": "https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "title": "Webhook",
-            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response.",
-            "mostUsed": true
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
           },
           "webhookHeaders": {
             "type": "object",
             "title": "Webhookheaders",
-            "description": "Request headers to include in the POST requests to the webhook.",
-            "mostUsed": true
+            "description": "Request headers to include in the POST requests to the webhook."
           }
         },
         "examples": [
@@ -336,49 +200,6 @@
         "title": "WebhookCheckRequestBody",
         "description": "/developer/webhook url request"
       },
-      "DeveloperResponse": {
-        "properties": {
-          "apiVersion": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Apiversion",
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "forceType": "string"
-          },
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "description": "Response ID"
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
-            "description": "Status of the request."
-          }
-        },
-        "type": "object",
-        "required": [
-          "status"
-        ],
-        "examples": [
-          {
-            "apiVersion": "2025-05-22",
-            "id": "cf0b39c8",
-            "status": "SUCCESS"
-          }
-        ],
-        "title": "DeveloperResponse",
-        "description": "/developer response"
-      },
       "VersionResponse": {
         "properties": {
           "apiVersion": {
@@ -391,8 +212,7 @@
               }
             ],
             "title": "Apiversion",
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "forceType": "string"
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
           },
           "status": {
             "allOf": [
@@ -428,8 +248,7 @@
               }
             ],
             "title": "Apiversion",
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
-            "forceType": "string"
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
           },
           "id": {
             "type": "string",
