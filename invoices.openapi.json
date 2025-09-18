@@ -201,7 +201,7 @@
               }
             ],
             "title": "base64",
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "fileId": {
             "type": "string",
@@ -272,7 +272,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -329,7 +329,7 @@
         "properties": {
           "inputUrl": {
             "type": "string",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -408,7 +408,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "outputUrl": {
             "type": "string",
@@ -495,7 +495,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -548,7 +548,7 @@
         "properties": {
           "inputUrl": {
             "type": "string",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "outputUrl": {
             "type": "string",

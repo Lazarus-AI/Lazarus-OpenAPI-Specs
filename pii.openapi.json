@@ -640,7 +640,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII."
           },
           "forceBase64": {
             "type": "boolean",

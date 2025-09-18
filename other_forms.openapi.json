@@ -517,7 +517,7 @@
               }
             ],
             "title": "base64",
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "fileId": {
             "type": "string",
@@ -572,7 +572,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -629,7 +629,7 @@
         "properties": {
           "inputUrl": {
             "type": "string",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -692,7 +692,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "outputUrl": {
             "type": "string",
@@ -763,7 +763,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "fileId": {
             "type": "string",
@@ -816,7 +816,7 @@
         "properties": {
           "inputUrl": {
             "type": "string",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF."
           },
           "outputUrl": {
             "type": "string",
@@ -1287,7 +1287,7 @@
           "base64": {
             "type": "string",
             "minLength": 1,
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1330,7 +1330,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1366,7 +1366,7 @@
             "type": "string",
             "minLength": 1,
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1503,7 +1503,7 @@
           "base64": {
             "type": "string",
             "minLength": 1,
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1559,7 +1559,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII."
           },
           "forceBase64": {
             "type": "boolean",
@@ -1608,7 +1608,7 @@
             "type": "string",
             "minLength": 1,
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT. Note that TIFF files are currently unsupported for PII.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT. Note that TIFF files are currently unsupported for PII."
           },
           "forceBase64": {
             "type": "boolean",

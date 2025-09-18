@@ -196,7 +196,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "fileId": {
             "type": "string",
@@ -266,7 +266,7 @@
             "type": "string",
             "format": "binary",
             "title": "file",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or HEIC.",
+            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or HEIC."
           },
           "fileId": {
             "type": "string",
@@ -594,7 +594,7 @@
           "inputUrl": {
             "type": "string",
             "title": "inputURL",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or HEIC.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or HEIC."
           },
           "fileId": {
             "type": "string",
@@ -691,7 +691,7 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "outputURL": {
             "type": "string",
@@ -741,7 +741,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, HEIC or TXT.",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, HEIC or TXT."
           },
           "outputURL": {
             "type": "string",
