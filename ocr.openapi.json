@@ -197,7 +197,6 @@
               }
             ],
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
           },
           "fileId": {
             "type": "string",
@@ -268,7 +267,6 @@
             "format": "binary",
             "title": "file",
             "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or HEIC.",
-            "forceRequire": true
           },
           "fileId": {
             "type": "string",
@@ -413,14 +411,10 @@
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           }
         },
         "type": "object",
-        "required": [
-          "ocrVersion"
-        ],
         "title": "OCRResultsResponseBodyV2",
         "x-stoplight": {
           "id": "753ptcmntgr2g"
@@ -601,7 +595,6 @@
             "type": "string",
             "title": "inputURL",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or HEIC.",
-            "forceRequire": true
           },
           "fileId": {
             "type": "string",
@@ -699,7 +692,6 @@
               }
             ],
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
           },
           "outputURL": {
             "type": "string",
@@ -708,8 +700,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object"
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "fileId": {
             "type": "string",
@@ -722,8 +713,7 @@
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "webhook": {
             "type": "string",
@@ -752,7 +742,6 @@
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, HEIC or TXT.",
-            "forceRequire": true
           },
           "outputURL": {
             "type": "string",
@@ -761,8 +750,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object"
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "fileId": {
             "type": "string",
@@ -775,8 +763,7 @@
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "sftp": {
             "anyOf": [
@@ -941,9 +928,10 @@
               "$ref": "#/components/schemas/ErrorMessage"
             },
             "examples": {
-              "URL not found": {
+              "Missing required field": {
                 "value": {
-                  "detail": "Not Found"
+                  "status": "FAILURE",
+                  "message": "Request body is missing required field(s): question"
                 }
               }
             }

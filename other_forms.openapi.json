@@ -86,12 +86,6 @@
         "x-stoplight": {
           "id": "0fdkotemra6fv"
         },
-        "servers": [
-          {
-            "url": "https://api.lazarusai.com/api",
-            "description": ""
-          }
-        ],
         "tags": [
           "SSN"
         ]
@@ -524,7 +518,6 @@
             ],
             "title": "base64",
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
           },
           "fileId": {
             "type": "string",
@@ -580,7 +573,6 @@
             "format": "binary",
             "title": "file",
             "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
           },
           "fileId": {
             "type": "string",
@@ -638,7 +630,6 @@
           "inputUrl": {
             "type": "string",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
           },
           "fileId": {
             "type": "string",
@@ -702,7 +693,6 @@
               }
             ],
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
           },
           "outputUrl": {
             "type": "string",
@@ -774,7 +764,6 @@
             "format": "binary",
             "title": "file",
             "description": "File to upload: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
           },
           "fileId": {
             "type": "string",
@@ -828,7 +817,6 @@
           "inputUrl": {
             "type": "string",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, or TIFF.",
-            "forceRequire": true
           },
           "outputUrl": {
             "type": "string",
@@ -1061,31 +1049,6 @@
         "description": "Item",
         "x-stoplight": {
           "id": "96gj0hbjmgbs9"
-        }
-      },
-      "ItemData": {
-        "properties": {
-          "price": {
-            "type": "number",
-            "description": "Price per item.",
-            "default": 0
-          },
-          "quantity": {
-            "type": "integer",
-            "description": "Number of items.",
-            "default": 0
-          },
-          "totalPrice": {
-            "type": "number",
-            "description": "Total price of an item.",
-            "default": 0
-          }
-        },
-        "type": "object",
-        "title": "ItemData",
-        "description": "Item Data",
-        "x-stoplight": {
-          "id": "8g4apwdipfd09"
         }
       },
       "KVPEntity": {
@@ -1325,12 +1288,10 @@
             "type": "string",
             "minLength": 1,
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
           },
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
             "default": false
           },
           "pageQualityWeight": {
@@ -1339,8 +1300,6 @@
             "minimum": 0,
             "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
             "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
             "format": "float"
           },
           "redact": {
@@ -1372,12 +1331,10 @@
             "type": "string",
             "format": "binary",
             "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
           },
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
             "default": false
           },
           "pageQualityWeight": {
@@ -1386,8 +1343,6 @@
             "minimum": 0,
             "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
             "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
             "format": "float"
           },
           "redact": {
@@ -1412,12 +1367,10 @@
             "minLength": 1,
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
           },
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
             "default": false
           },
           "pageQualityWeight": {
@@ -1426,8 +1379,6 @@
             "minimum": 0,
             "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
             "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
             "format": "float"
           },
           "redact": {
@@ -1553,12 +1504,10 @@
             "type": "string",
             "minLength": 1,
             "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
           },
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
             "default": false
           },
           "getPII": {
@@ -1571,8 +1520,6 @@
             "minimum": 0,
             "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
             "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
             "format": "float"
           },
           "keywords": {
@@ -1613,12 +1560,10 @@
             "type": "string",
             "format": "binary",
             "description": "File to upload: Must be a PDF, JPEG, PNG, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
           },
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
             "default": false
           },
           "getPII": {
@@ -1631,8 +1576,6 @@
             "minimum": 0,
             "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
             "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
             "format": "float"
           },
           "keywords": {
@@ -1666,12 +1609,10 @@
             "minLength": 1,
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
             "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT. Note that TIFF files are currently unsupported for PII.",
-            "forceRequire": true
           },
           "forceBase64": {
             "type": "boolean",
             "description": "Setting this parameter to true converts files to Base64 format before sending them on to the model.",
-            "setDefault": false,
             "default": false
           },
           "getPII": {
@@ -1684,8 +1625,6 @@
             "minimum": 0,
             "description": "Hyperparameter to weigh word confidences against confidence that a given word is PII.",
             "default": 0.5,
-            "forceType": "number",
-            "setFormat": "float",
             "format": "float"
           },
           "keywords": {
@@ -1807,126 +1746,8 @@
           "description": "Authentication key"
         },
         "description": "Authentication key"
-      },
-      "responses": {
-        "400": {
-          "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Missing required field": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Request body is missing required field(s): question"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "403": {
-          "description": "Unauthorized attempt. There was an issue with your credentials, model permissions or billing.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Invalid credentials": {
-                  "value": {
-                    "status": "AUTH_FAILURE",
-                    "message": "Invalid authentication"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Not found error. When a request references an invalid endpoint or resource.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Custom model not found": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Model id 'abc' is not valid."
-                  }
-                }
-              }
-            }
-          }
-        },
-        "500": {
-          "description": "Model processing failed. Extraction model or LLM could not process your request.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "OCR failed": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Error during request to OCR microservice."
-                  }
-                },
-                "LLM failed": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "We made three attempts to process the model with no success."
-                  }
-                }
-              }
-            }
-          }
-        },
-        "502": {
-          "description": "Could not connect to model.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorMessage"
-              },
-              "examples": {
-                "Custom model not found": {
-                  "value": {
-                    "status": "FAILURE",
-                    "message": "Request to the model failed."
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     },
-    "servers": [
-      {
-        "url": "https://api.lazarusai.com/api",
-        "description": ""
-      }
-    ],
-    "tags": [
-      {
-        "name": "Invoices",
-        "description": "Extract invoice data"
-      },
-      {
-        "name": "PII",
-        "description": "Extract and redact personally identifiable information"
-      },
-      {
-        "name": "SSN",
-        "description": "Extract social security numbers"
-      }
-    ],
     "responses": {
       "400": {
         "description": "Bad request or failure to read. Request was invalid or we could not process your data.",
@@ -2025,5 +1846,25 @@
         }
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://api.lazarusai.com/api",
+      "description": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "Invoices",
+      "description": "Extract invoice data"
+    },
+    {
+      "name": "PII",
+      "description": "Extract and redact personally identifiable information"
+    },
+    {
+      "name": "SSN",
+      "description": "Extract social security numbers"
+    }
+  ]
 }
