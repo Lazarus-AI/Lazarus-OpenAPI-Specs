@@ -21,4 +21,4 @@ jobs:
       run: npm install @redocly/cli
 
     - name: Lint OpenAPI specs
-      run: npx @redocly/cli lint --format=github-actions --skip-rule=security-defined --skip-rule=operation-4xx-response --skip-rule=info-license --skip-rule=configuration --skip-rule=spec-components-invalid-map-name --skip-rule=no-undefined-server-variable ./*.json
+      run: npx @redocly/cli lint --format=github-actions --skip-rule=security-defined --skip-rule=operation-4xx-response --skip-rule=info-license --skip-rule=configuration --skip-rule=spec-components-invalid-map-name --skip-rule=no-undefined-server-variable ./*.openapi.json
