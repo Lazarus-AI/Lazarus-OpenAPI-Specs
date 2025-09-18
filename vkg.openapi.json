@@ -1500,7 +1500,7 @@
       "vkg-id": {
         "type": "string",
         "title": "VKG ID",
-        "description": "VKG's ID.",
+        "description": "VKG's ID. Must be between 4 and 64 characters (inclusive) and must not contain any of the following characters: ` ! # $ % ^ & * + = } { ; : \\ < > / ? ~ \"",
         "x-stoplight": {
           "id": "hjwh9o5k8qv40"
         }
