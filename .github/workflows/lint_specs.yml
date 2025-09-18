@@ -1,0 +1,24 @@
+name: Node.js CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint_specs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install redocly/cli
+      run: npm install @redocly/cli
+
+    - name: Lint OpenAPI specs
+      run: npx @redocly/cli lint --format=github-actions --skip-rule=security-defined --skip-rule=operation-4xx-response --skip-rule=info-license --skip-rule=configuration --skip-rule=spec-components-invalid-map-name --skip-rule=no-undefined-server-variable ./*.json
