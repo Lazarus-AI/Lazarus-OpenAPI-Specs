@@ -244,19 +244,9 @@
       "RikAI2Request": {
         "properties": {
           "question": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            ],
+            "type": "string",
             "title": "Question",
-            "description": "Single question or list of questions as string to ask about the file"
+            "description": "Single question to ask about the file"
           },
           "file": {
             "type": "string",
@@ -296,12 +286,10 @@
       "RikAI2Response": {
         "properties": {
           "data": {
-            "items": {
-              "$ref": "#/components/schemas/Data"
-            },
-            "type": "array",
+              "$ref": "#/components/schemas/Data",
+            "type": "object",
             "title": "Data",
-            "description": "List of question and answer pairs"
+            "description": "Question and answer pair"
           },
           "model": {
             "type": "string",
