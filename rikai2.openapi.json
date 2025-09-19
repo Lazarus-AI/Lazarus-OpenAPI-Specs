@@ -311,7 +311,23 @@
           "ocrResults": {
             "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request. Under construction.",
             "type": "object"
-          }          
+          },
+          "timeMS": {
+            "items": {
+              "$ref": "#/components/schemas/TimeMS"
+            },
+            "type": "object",
+            "title": "timeMS",
+            "description": "A collection of time in milliseconds spent on different parts of the request."
+          },
+          "timestamps": {
+            "items": {
+              "$ref": "#/components/schemas/Timestamps"
+            },
+            "type": "object",
+            "title": "timestamp",
+            "description": "A collection of Unix timestamps in milliseconds."
+          }
         },
         "type": "object",
         "required": [
@@ -462,6 +478,125 @@
         ],
         "title": "StatusEnum",
         "description": "Status enum for responses"
+      },
+      "TimeMS": {
+        "properties": {
+          "auth": {
+            "type": "int",
+            "title": "auth",
+            "description": "Time taken to perform authentication (ms)"
+          },
+          "ocr": {
+            "type": "int",
+            "title": "ocr",
+            "description": "Time taken to run OCR (ms)"
+          },
+          "model": {
+            "type": "int",
+            "title": "model",
+            "description": "Time taken to run model (ms)"
+          },
+          "preAuth": {
+            "type": "int",
+            "title": "preAuth",
+            "description": "Time taken from request start to authentication (ms)"
+          },
+          "preOCR": {
+            "type": "int",
+            "title": "preOCR",
+            "description": "Time taken from the previous stage to running OCR (ms)"
+          },
+          "preModel": {
+            "type": "int",
+            "title": "preModel",
+            "description": "Time taken from the previous stage to running model (ms)"
+          },
+          "interModel": {
+            "type": "int",
+            "title": "interModel",
+            "description": "Time taken in between multiple model calls (ms)"
+          },
+          "postprocessing": {
+            "type": "int",
+            "title": "postprocessing",
+            "description": "Time taken from the previous stage to request end (ms)"
+          },
+          "total": {
+            "type": "int",
+            "title": "total",
+            "description": "Time taken from request start to request end (ms)"
+          }
+        },
+        "type": "object",
+        "title": "timeMS",
+        "description": "A collection of time in milliseconds spent on different parts of the request."
+      },
+      "Timestamps": {
+        "properties": {
+          "requestStart": {
+            "type": "int",
+            "title": "requestStart",
+            "description": "Unix timestamp (ms) when a request starts."
+          },
+          "requestEnd": {
+            "type": "int",
+            "title": "requestEnd",
+            "description": "Unix timestamp (ms) when a request ends."
+          },
+          "authStart": {
+            "type": "int",
+            "title": "authStart",
+            "description": "Unix timestamp (ms) when authentication starts."
+          },
+          "authEnd": {
+            "type": "int",
+            "title": "authEnd",
+            "description": "Unix timestamp (ms) when authentication ends."
+          },
+          "ocrStart": {
+            "type": "int",
+            "title": "ocrStart",
+            "description": "Unix timestamp (ms) when OCR starts."
+          },
+          "ocrEnd": {
+            "type": "int",
+            "title": "ocrEnd",
+            "description": "Unix timestamp (ms) when OCR ends."
+          },
+          "modelInitStart": {
+            "type": "int",
+            "title": "modelInitStart",
+            "description": "Unix timestamp (ms) when the initial call to model starts."
+          },
+          "modelInitEnd": {
+            "type": "int",
+            "title": "modelInitEnd",
+            "description": "Unix timestamp (ms) when the initial call to model ends."
+          },
+          "modelFinStart": {
+            "type": "int",
+            "title": "modelFinStart",
+            "description": "Unix timestamp (ms) when the subsequent call to model starts, if there is more than one question asked."
+          },
+          "modelFinEnd": {
+            "type": "int",
+            "title": "modelFinEnd",
+            "description": "Unix timestamp (ms) when the subsequent call to model end, if there is more than one question asked."
+          },
+          "modelExpStart": {
+            "type": "int",
+            "title": "modelExpStart",
+            "description": "Unix timestamp (ms) when the additional call to model starts, if advancedExplainability is set to true."
+          },
+          "modelExpEnd": {
+            "type": "int",
+            "title": "modelExpEnd",
+            "description": "Unix timestamp (ms) when the additional call to model ends, if advancedExplainability is set to true."
+          }
+        },
+        "type": "object",
+        "title": "timestamps",
+        "description": "A collection of Unix timestamps in milliseconds."
       },
     "ErrorResponse": {
         "properties": {
