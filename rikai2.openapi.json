@@ -536,62 +536,52 @@
           "requestStart": {
             "type": "int",
             "title": "requestStart",
-            "description": "Unix timestamp (ms) when a request starts."
+            "description": "Unix timestamp (ms) when a request starts"
           },
           "requestEnd": {
             "type": "int",
             "title": "requestEnd",
-            "description": "Unix timestamp (ms) when a request ends."
+            "description": "Unix timestamp (ms) when a request ends"
           },
           "authStart": {
             "type": "int",
             "title": "authStart",
-            "description": "Unix timestamp (ms) when authentication starts."
+            "description": "Unix timestamp (ms) when authentication starts"
           },
           "authEnd": {
             "type": "int",
             "title": "authEnd",
-            "description": "Unix timestamp (ms) when authentication ends."
+            "description": "Unix timestamp (ms) when authentication ends"
           },
           "ocrStart": {
             "type": "int",
             "title": "ocrStart",
-            "description": "Unix timestamp (ms) when OCR starts."
+            "description": "Unix timestamp (ms) when OCR starts"
           },
           "ocrEnd": {
             "type": "int",
             "title": "ocrEnd",
-            "description": "Unix timestamp (ms) when OCR ends."
+            "description": "Unix timestamp (ms) when OCR ends"
           },
           "modelInitStart": {
             "type": "int",
             "title": "modelInitStart",
-            "description": "Unix timestamp (ms) when the initial call to model starts."
+            "description": "Unix timestamp (ms) when the initial call to model starts"
           },
           "modelInitEnd": {
             "type": "int",
             "title": "modelInitEnd",
-            "description": "Unix timestamp (ms) when the initial call to model ends."
-          },
-          "modelFinStart": {
-            "type": "int",
-            "title": "modelFinStart",
-            "description": "Unix timestamp (ms) when the subsequent call to model starts, if there is more than one question asked."
-          },
-          "modelFinEnd": {
-            "type": "int",
-            "title": "modelFinEnd",
-            "description": "Unix timestamp (ms) when the subsequent call to model end, if there is more than one question asked."
+            "description": "Unix timestamp (ms) when the initial call to model ends"
           },
           "modelExpStart": {
             "type": "int",
             "title": "modelExpStart",
-            "description": "Unix timestamp (ms) when the additional call to model starts, if advancedExplainability is set to true."
+            "description": "Unix timestamp (ms) when the additional call to model starts, if advancedExplainability is set to true"
           },
           "modelExpEnd": {
             "type": "int",
             "title": "modelExpEnd",
-            "description": "Unix timestamp (ms) when the additional call to model ends, if advancedExplainability is set to true."
+            "description": "Unix timestamp (ms) when the additional call to model ends, if advancedExplainability is set to true"
           }
         },
         "type": "object",
