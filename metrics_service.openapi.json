@@ -110,7 +110,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "start_time,end_time,requests,successes,auth_failures,failures,pages,questions,avg_request_time,avg_ocr_time,avg_model_time 2025-01-01T00:00:00.000000+00:00,2025-02-01T00:00:00.000000+00:00,16,3,11,2,33,9,5.020374,1.028486,3.003002"
+                                "example": "start_time,end_time,requests,successes,auth_failures,failures,pages,questions,avg_request_time,avg_ocr_time,avg_model_time\n2025-01-01T00:00:00.000000+00:00,2025-02-01T00:00:00.000000+00:00,16,3,11,2,33,9,5.020374,1.028486,3.003002"
                             }
                         }
                     },
