@@ -5,6 +5,7 @@
   },
   "info": {
     "title": "VKG API Reference",
+    "version": "",
     "description": "VKG API Reference",
     "contact": {
       "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
@@ -69,12 +70,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "9uptk7e9rjf3z"
         }
@@ -124,17 +119,6 @@
                 }
               },
               "examples": {
-                "default": {
-                  "value": {
-                    "vkgId": "numbers",
-                    "metadata": {
-                      "data": {
-                        "default": 12,
-                        "type": "number"
-                      }
-                    }
-                  }
-                }
               }
             }
           }
@@ -168,12 +152,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "l7n0smcx31l5k"
         }
@@ -204,12 +182,6 @@
             "description": "Success, no content to send. "
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "geaqbm7f0aevm"
         }
@@ -244,12 +216,12 @@
                     "type": "string",
                     "default": "[ISO Datetime]_export.csv"
                   },
-                  "includeTsne": {
+                  "include_tsne": {
                     "type": "boolean",
                     "default": false,
                     "x-deprecated": true
                   },
-                  "includeMetadata": {
+                  "include_metadata": {
                     "type": "boolean",
                     "default": true,
                     "x-deprecated": true
@@ -285,12 +257,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "o7dvady5jlwgh"
         }
@@ -371,7 +337,7 @@
                       "description": "Same as input `toVkg` with whitespaces stripped from both ends (ID that should be used)"
                     },
                     "nodesCopied": {
-                      "type": "int",
+                      "type": "integer",
                       "description": "Number of nodes copied. Equals to the number of nodes in the original VKG."
                     }
                   }
@@ -380,12 +346,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "2i3eiq92jrrrw"
         }
@@ -442,12 +402,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "if1q44ibr5pjd"
         }
@@ -530,12 +484,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "drxn1w2hr5m1s"
         }
@@ -587,12 +535,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "58wnpscpkcy23"
         }
@@ -683,12 +625,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "zuohzfbdu0ktd"
         }
@@ -748,12 +684,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "aqn3066t9fqmb"
         }
@@ -790,11 +720,11 @@
                   "filename": {
                     "type": "string"
                   },
-                  "includeTsne": {
+                  "include_tsne": {
                     "type": "boolean",
                     "x-deprecated": true
                   },
-                  "includeMetadata": {
+                  "include_metadata": {
                     "type": "boolean",
                     "default": true
                   }
@@ -815,12 +745,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "t8htcwsr3dndq"
         }
@@ -898,7 +822,7 @@
                     "calculateTsne": {
                       "type": "boolean"
                     },
-                    "includeMetadata": {
+                    "include_metadata": {
                       "type": "boolean"
                     },
                     "statistics": {
@@ -910,12 +834,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "ztld34xz2u90l"
         }
@@ -967,12 +885,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "8jjrvctukliow"
         }
@@ -1044,12 +956,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "jjqrj68n1bzq7"
         }
@@ -1131,12 +1037,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "5pxo08k4hgrse"
         }
@@ -1201,7 +1101,7 @@
                       "$ref": "#/components/schemas/modified"
                     },
                     "modifiedNodes": {
-                      "type": "Array of strings",
+                      "type": "array",
                       "additionalProperties": {
                         "$ref": "#/components/schemas/node"
                       }
@@ -1212,12 +1112,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "04nwiukmpsdlz"
         }
@@ -1293,12 +1187,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "8r519hyss34e8"
         }
@@ -1369,12 +1257,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "rzis6sjee2xp0"
         }
@@ -1405,12 +1287,6 @@
             }
           }
         },
-        "servers": [
-          {
-            "url": "https://{BASE_URL}",
-            "description": ""
-          }
-        ],
         "x-stoplight": {
           "id": "i9jbco8syrqju"
         }
@@ -1541,23 +1417,22 @@
       },
       "metadata-field-basic": {
         "title": "Metadata Field Basic",
-        "x-stoplight": {
-          "id": "bld7a3stiopya"
-        },
         "type": "object",
         "properties": {
           "default": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "905g05a2420zl"
-            },
-            "description": "Default value."
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Default value."
+              },
+              {
+                "type": "number",
+                "description": "Default value."
+              }
+            ]
           },
           "type": {
             "type": "string",
-            "x-stoplight": {
-              "id": "nulsp5uqwepge"
-            },
             "description": "Type of this metadata."
           }
         },
