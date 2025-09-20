@@ -285,7 +285,7 @@
       "RikAI2Response": {
         "properties": {
           "data": {
-              "$ref": "#/components/schemas/Data",
+            "$ref": "#/components/schemas/Data",
             "type": "object",
             "title": "Data",
             "description": "Question and answer pair"
@@ -300,17 +300,13 @@
             "type": "object"
           },
           "timeMS": {
-            "items": {
-              "$ref": "#/components/schemas/TimeMS"
-            },
+            "$ref": "#/components/schemas/TimeMS",
             "type": "object",
             "title": "timeMS",
             "description": "A collection of time in milliseconds spent on different parts of the request."
           },
           "timestamps": {
-            "items": {
-              "$ref": "#/components/schemas/Timestamps"
-            },
+            "$ref": "#/components/schemas/Timestamps",
             "type": "object",
             "title": "timestamp",
             "description": "A collection of Unix timestamps in milliseconds."
