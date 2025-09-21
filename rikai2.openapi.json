@@ -252,6 +252,11 @@
             "title": "File",
             "description": "Input file as a base64 encoded string"
           },
+          "metadata": {
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response.",
+            "default": null
+          },  
           "ocrResults": {
             "type": "object",
             "description": "OCR data for the document. If included, we do not run OCR on the document and use these results instead. Only OCR data obtained using `returnOcr` flag is supported as input.",
@@ -299,6 +304,10 @@
             "type": "string",
             "title": "Model",
             "description": "Name of the model"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "JSON from the request `metadata` field.",
           },
           "ocrResults": {
             "description": "OCR results from the document. Returned only if `returnOcr` was set to true in the request.",
