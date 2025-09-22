@@ -278,7 +278,7 @@
                 "type": "int",
                 "description": "Specifies the number of pages that are passed to the Lazarus OCR model at a time. The input document will be divided into chunks, each containing up to `ocrBatchSize` pages. Must be a positive integer. Currently only supported for PDFs.",
                 "default": null
-          }
+              }
             },
             "type": "object",
             "title": "Settings"
@@ -333,11 +333,6 @@
         ],
         "title": "RikAI2Response",
         "description": "Response body for /rikai2 endpoint"
-      },
-      "InvalidLicenseResponse": {
-        "type": "string",
-        "title": "InvalidLicenseResponse",
-        "description": "Invalid License Response - License was not able to successfully authenticate"
       },
       "StatusComponent": {
         "properties": {
