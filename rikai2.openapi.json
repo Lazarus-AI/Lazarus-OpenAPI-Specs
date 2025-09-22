@@ -275,7 +275,7 @@
                 "default": false
               },  
               "ocrBatchSize": {
-                "type": "int",
+                "type": "integer",
                 "description": "Specifies the number of pages that are passed to the Lazarus OCR model at a time. The input document will be divided into chunks, each containing up to `ocrBatchSize` pages. Must be a positive integer. Currently only supported for PDFs.",
                 "default": null
               }
@@ -474,47 +474,47 @@
       "TimeMS": {
         "properties": {
           "auth": {
-            "type": "int",
+            "type": "integer",
             "title": "auth",
             "description": "Time taken to perform authentication (ms)"
           },
           "ocr": {
-            "type": "int",
+            "type": "integer",
             "title": "ocr",
             "description": "Time taken to run OCR (ms)"
           },
           "model": {
-            "type": "int",
+            "type": "integer",
             "title": "model",
             "description": "Time taken to run model (ms)"
           },
           "preAuth": {
-            "type": "int",
+            "type": "integer",
             "title": "preAuth",
             "description": "Time taken from request start to authentication (ms)"
           },
           "preOcr": {
-            "type": "int",
+            "type": "integer",
             "title": "preOcr",
             "description": "Time taken from the previous stage to running OCR (ms)"
           },
           "preModel": {
-            "type": "int",
+            "type": "integer",
             "title": "preModel",
             "description": "Time taken from the previous stage to running model (ms)"
           },
           "interModel": {
-            "type": "int",
+            "type": "integer",
             "title": "interModel",
             "description": "Time taken in between multiple model calls (ms)"
           },
           "postprocessing": {
-            "type": "int",
+            "type": "integer",
             "title": "postprocessing",
             "description": "Time taken from the previous stage to request end (ms)"
           },
           "total": {
-            "type": "int",
+            "type": "integer",
             "title": "total",
             "description": "Time taken from request start to request end (ms)"
           }
@@ -526,52 +526,52 @@
       "Timestamps": {
         "properties": {
           "requestStart": {
-            "type": "int",
+            "type": "integer",
             "title": "requestStart",
             "description": "Unix timestamp (ms) when a request starts"
           },
           "requestEnd": {
-            "type": "int",
+            "type": "integer",
             "title": "requestEnd",
             "description": "Unix timestamp (ms) when a request ends"
           },
           "authStart": {
-            "type": "int",
+            "type": "integer",
             "title": "authStart",
             "description": "Unix timestamp (ms) when authentication starts"
           },
           "authEnd": {
-            "type": "int",
+            "type": "integer",
             "title": "authEnd",
             "description": "Unix timestamp (ms) when authentication ends"
           },
           "ocrStart": {
-            "type": "int",
+            "type": "integer",
             "title": "ocrStart",
             "description": "Unix timestamp (ms) when OCR starts"
           },
           "ocrEnd": {
-            "type": "int",
+            "type": "integer",
             "title": "ocrEnd",
             "description": "Unix timestamp (ms) when OCR ends"
           },
           "modelInitStart": {
-            "type": "int",
+            "type": "integer",
             "title": "modelInitStart",
             "description": "Unix timestamp (ms) when the initial call to model starts"
           },
           "modelInitEnd": {
-            "type": "int",
+            "type": "integer",
             "title": "modelInitEnd",
             "description": "Unix timestamp (ms) when the initial call to model ends"
           },
           "modelExpStart": {
-            "type": "int",
+            "type": "integer",
             "title": "modelExpStart",
             "description": "Unix timestamp (ms) when the additional call to model starts, if advancedExplainability is set to true"
           },
           "modelExpEnd": {
-            "type": "int",
+            "type": "integer",
             "title": "modelExpEnd",
             "description": "Unix timestamp (ms) when the additional call to model ends, if advancedExplainability is set to true"
           }
