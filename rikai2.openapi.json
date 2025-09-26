@@ -183,40 +183,6 @@
         "title": "DiskStats",
         "description": "Disk usage statistics."
       },
-      "GPUStats": {
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "GPU device ID"
-          },
-          "name": {
-            "type": "string",
-            "description": "GPU name"
-          },
-          "memoryTotalGB": {
-            "type": "number",
-            "description": "Total GPU memory in GB"
-          },
-          "memoryAllocatedGB": {
-            "type": "number",
-            "description": "Memory currently allocated in GB"
-          },
-          "utilizationPercent": {
-              "type": "number",
-              "description": "Current GPU utilization percentage"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "memoryTotalGB",
-          "memoryAllocatedGB",
-          "utilizationPercent"
-        ],
-        "title": "GPUStats",
-        "description": "GPU device utilization stats."
-      },
       "MemoryStats": {
         "properties": {
           "totalGB": {
@@ -434,20 +400,6 @@
           "disk": {
             "$ref": "#/components/schemas/DiskStats",
             "description": "Disk usage statistics"
-          },
-          "gpus": {
-            "anyOf": [
-                {
-                  "items": {
-                    "$ref": "#/components/schemas/GPUStats"
-                  },
-                  "type": "array"
-                },
-                {
-                  "type": "null"
-                }
-            ],
-            "description": "List of GPU devices and their utilization statistics"
           }
         },
         "type": "object",
