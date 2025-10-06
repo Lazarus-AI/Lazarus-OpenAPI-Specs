@@ -261,6 +261,10 @@
       },
       "RikAI2Response": {
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
           "data": {
             "$ref": "#/components/schemas/Data",
             "type": "object",
