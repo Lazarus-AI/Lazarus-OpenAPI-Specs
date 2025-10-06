@@ -263,7 +263,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Response ID"
+            "description": "Request ID"
           },
           "data": {
             "$ref": "#/components/schemas/Data",
