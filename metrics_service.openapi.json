@@ -205,7 +205,7 @@
                     },
                     "avg_auth_time": {
                         "type": "number",
-                        "title": "Avg Authentication Time",
+                        "title": "Avg Auth Time",
                         "description": "Average authentication time in seconds."
                     },
                     "avg_ocr_time": {
