@@ -235,8 +235,10 @@
                     "pages",
                     "questions",
                     "avg_request_time",
+                    "avg_auth_time",
                     "avg_ocr_time",
-                    "avg_model_time"
+                    "avg_model_init_time",
+                    "avg_model_exp_time"
                 ],
                 "title": "UsageMetrics",
                 "description": "Model request usage metrics info."
