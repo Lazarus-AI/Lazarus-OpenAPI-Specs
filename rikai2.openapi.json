@@ -1,569 +1,851 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-    "title": "RikAI 2",
-    "version": "",
-    "termsOfService": "https://www.lazarusai.com/legal",
-    "contact": {
-      "name": "Lazarus IT",
-      "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
-      "email": "support@lazarusai.com"
-    },
-    "license": {
-      "name": "Get Lazarus",
-      "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
-    },
-  },
-  "paths": {
-    "/rikai2": {
-      "post": {
-        "summary": "RikAI 2",
-        "description": "Supported input files should support standard file formats (Formats are checked with file header bytes):\n- PDF\n- JPG/JPEG\n- PNG\n- TIFF/TIF\n- HEIC",
-        "operationId": "rikai2_post",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAI2Request"
-              }
-            }
-          }
+    "openapi": "3.1.0",
+    "info": {
+        "title": "RikAI 2",
+        "termsOfService": "https://www.lazarusai.com/legal",
+        "contact": {
+            "name": "Lazarus IT",
+            "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+            "email": "support@lazarusai.com"
         },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAI2Response"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid/Empty License",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal API error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "522": {
-            "description": "Model failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
+        "license": {
+            "name": "Get Lazarus",
+            "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+        },
+        "version": ""
+    },
+    "servers": [
+        {
+            "url": "https://<hostname>:8080",
+            "description": ""
         }
-      }
-    },
-    "/status": {
-      "get": {
-        "summary": "Status",
-        "description": "Check the status of app dependencies.",
-        "operationId": "status_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StatusResponse"
+    ],
+    "paths": {
+        "/rikai2": {
+            "post": {
+                "summary": "Rikai 2",
+                "description": "Supported input files should support standard file formats (Formats are checked with file header bytes):\n- PDF\n- JPG/JPEG\n- PNG\n- TIFF/TIF\n- HEIC",
+                "operationId": "rikai2_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RikAI2RequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RikAI2ModelResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid/Empty License",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal API error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "522": {
+                        "description": "Model failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
+        },
+        "/status": {
+            "get": {
+                "summary": "Status",
+                "description": "Check the status of app dependencies.",
+                "operationId": "status_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StatusResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "CPUStats": {
-        "properties": {
-          "architecture": {
-            "type": "string",
-            "description": "CPU architecture (e.g. 64bit)"
-          },
-          "model": {
-            "type": "string",
-            "description": "Processor model string"
-          },
-          "physicalCores": {
-            "type": "integer",
-            "description": "Number of physical CPU cores"
-          },
-          "logicalCores": {
-            "type": "integer",
-            "description": "Number of logical CPU cores"
-          },
-          "utilizationPercent": {
-            "type": "number",
-            "description": "Current CPU utilization percentage"
-          }
-        },
-        "type": "object",
-        "required": [
-          "architecture",
-          "model",
-          "physicalCores",
-          "logicalCores",
-          "utilizationPercent"
-        ],
-        "title": "CPUStats",
-        "description": "CPU utilization stats."
-      },
-      "Data": {
-        "properties": {
-          "question": {
-            "type": "string",
-            "title": "Question",
-            "description": "Question asked"
-          },
-          "answer": {
-            "type": "string",
-            "title": "Answer",
-            "description": "Answer to appropriate question"
-          },
-          "confidence": {
-            "type": "number",
-            "description": "Answer confidence score ranging from 0 to 1."
-          },
-          "context": {
-            "type": "string",
-            "description": "Where in the document the answer was found."
-          }
-        },
-        "type": "object",
-        "required": [
-          "question",
-          "answer"
-        ],
-        "title": "Data",
-        "description": "Answer data model for /rikai2 response"
-      },
-      "DiskStats": {
-        "properties": {
-          "totalGB": {
-            "type": "number",
-            "description": "Total disk size in GB"
-          },
-          "usedGB": {
-            "type": "number",
-            "description": "Used disk space in GB"
-          },
-          "usedPercent": {
-            "type": "number",
-            "description": "Percentage of disk currently used"
-          }
-        },
-        "type": "object",
-        "required": [
-          "totalGB",
-          "usedGB",
-          "usedPercent"
-        ],
-        "title": "DiskStats",
-        "description": "Disk usage statistics."
-      },
-      "MemoryStats": {
-        "properties": {
-          "totalGB": {
-            "type": "number",
-            "description": "Total system memory in GB"
-          },
-          "availableGB": {
-            "type": "number",
-            "description": "Available system memory in GB"
-          },
-          "usedPercent": {
-            "type": "number",
-            "description": "Percentage of memory currently used"
-          }
-        },
-        "type": "object",
-        "required": [
-          "totalGB",
-          "availableGB",
-          "usedPercent"
-        ],
-        "title": "MemoryStats",
-        "description": "Memory utilization stats."
-      },
-      "RikAI2Request": {
-        "properties": {
-          "question": {
-            "type": "string",
-            "title": "Question",
-            "description": "Single question to ask about the file"
-          },
-          "file": {
-            "type": "string",
-            "title": "File",
-            "description": "Input file as a base64 encoded string"
-          },
-          "metadata": {
-            "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "default": null
-          },  
-          "ocrResults": {
-            "type": "object",
-            "description": "OCR data for the document. If included, we do not run OCR on the document and use these results instead. Only OCR data obtained using `returnOcr` flag is supported as input.",
-            "default": null
-          },          
-          "settings": {
-            "properties": {
-              "advancedExplainability": {
-                "type": "boolean",
-                "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context.",
-                "default": false
-              },
-              "returnOcr": {
-                "type": "boolean",
-                "description": "Set to `true` to include OCR results in response.",
-                "default": false
-              },  
-              "ocrBatchSize": {
-                "type": "integer",
-                "description": "Specifies the number of pages that are passed to the Lazarus OCR model at a time. The input document will be divided into chunks, each containing up to `ocrBatchSize` pages. Must be a positive integer. Currently only supported for PDFs.",
-                "default": null
-              }
+    },
+    "components": {
+        "schemas": {
+            "AddlSettings": {
+                "properties": {
+                    "advancedExplainability": {
+                        "type": "boolean",
+                        "title": "advancedExplainability",
+                        "description": "When set to `false`, the model processes requests faster but does not return the full context. Set to `true` to include full context.",
+                        "default": false
+                    },
+                    "ocrBatchSize": {
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "exclusiveMinimum": 0.0
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "ocrBatchSize",
+                        "description": "Specifies the number of pages that are passed to the Lazarus OCR model at a time. The input document will be divided into chunks, each containing up to `ocrBatchSize` pages. Must be a positive integer. Currently only supported for PDFs."
+                    },
+                    "returnOcr": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "returnOcr",
+                        "description": "Set to `true` to include OCR results in response."
+                    },
+                    "rikaiMaxPages": {
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "minimum": 0.0
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "rikaiMaxPages",
+                        "description": ""
+                    }
+                },
+                "type": "object",
+                "title": "AddlSettings",
+                "description": "Fields supported in settings dict."
             },
-            "type": "object",
-            "title": "Settings"
-          }          
-        },
-        "type": "object",
-        "required": [
-          "question",
-          "file"
-        ],
-        "title": "RikAI2Request",
-        "description": "Request body for /rikai2 endpoint"
-      },
-      "RikAI2Response": {
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/Data",
-            "type": "object",
-            "title": "Data",
-            "description": "Question and answer pair"
-          },
-          "model": {
-            "type": "string",
-            "title": "Model",
-            "description": "Name of the model"
-          },
-          "metadata": {
-            "type": "object",
-            "description": "JSON from the request `metadata` field.",
-          },
-          "ocrResults": {
-            "description": "OCR results from the document. Returned only if `returnOcr` was set to true in the request.",
-            "type": "object"
-          },
-          "timeMS": {
-            "$ref": "#/components/schemas/TimeMS",
-            "type": "object",
-            "title": "timeMS",
-            "description": "A collection of time in milliseconds spent on different parts of the request."
-          },
-          "timestamps": {
-            "$ref": "#/components/schemas/Timestamps",
-            "type": "object",
-            "title": "timestamp",
-            "description": "A collection of Unix timestamps in milliseconds."
-          }
-        },
-        "type": "object",
-        "required": [
-          "data",
-          "model"
-        ],
-        "title": "RikAI2Response",
-        "description": "Response body for /rikai2 endpoint"
-      },
-      "StatusComponent": {
-        "properties": {
-          "status": {
-            "$ref": "#/components/schemas/StatusEndpointEnum",
-            "description": "Status of a specific component of the container"
-          },
-          "type": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/StatusComponentType"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Type of the component"
-          },
-          "error": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Error message if status is ERROR"
-          }
-        },
-        "type": "object",
-        "required": [
-            "status"
-        ],
-        "title": "StatusComponent",
-        "description": "Status of an individual component."
-      },
-      "StatusComponentName": {
-        "type": "string",
-        "enum": [
-          "model",
-          "ocr",
-          "license"
-        ],
-        "title": "StatusComponentName",
-        "description": "Status components."
-      },
-      "StatusComponentType": {
-        "type": "string",
-        "enum": [
-          "vLLM",
-          "Online License",
-          "Offline License"
-        ],
-        "title": "StatusComponentType",
-        "description": "Types of status components."
-      },
-      "StatusEndpointEnum": {
-        "type": "string",
-        "enum": [
-          "OK",
-          "ERROR"
-        ],
-        "title": "StatusEndpointEnum",
-        "description": "Status values."
-      },
-      "StatusResponse": {
-        "properties": {
-          "status": {
-            "$ref": "#/components/schemas/StatusEndpointEnum",
-            "description": "Overall container status"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Timestamp",
-            "description": "ISO timestamp, UTC timezone"
-          },
-          "components": {
-            "additionalProperties": {
-                "$ref": "#/components/schemas/StatusComponent"
+            "CPUStats": {
+                "properties": {
+                    "architecture": {
+                        "type": "string",
+                        "title": "architecture",
+                        "description": "CPU architecture (e.g. 64bit)."
+                    },
+                    "model": {
+                        "type": "string",
+                        "title": "model",
+                        "description": "Processor model string."
+                    },
+                    "physicalCores": {
+                        "type": "integer",
+                        "title": "physicalCores",
+                        "description": "Number of physical CPU cores."
+                    },
+                    "logicalCores": {
+                        "type": "integer",
+                        "title": "logicalCores",
+                        "description": "Number of logical CPU cores."
+                    },
+                    "utilizationPercent": {
+                        "type": "number",
+                        "title": "utilizationPercent",
+                        "description": "Current CPU utilization percentage."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "architecture",
+                    "model",
+                    "physicalCores",
+                    "logicalCores",
+                    "utilizationPercent"
+                ],
+                "title": "CPUStats",
+                "description": "CPU utilization stats."
             },
-            "propertyNames": {
-                "$ref": "#/components/schemas/StatusComponentName"
+            "DiskStats": {
+                "properties": {
+                    "totalGB": {
+                        "type": "number",
+                        "title": "totalGB",
+                        "description": "Total disk size in GB."
+                    },
+                    "usedGB": {
+                        "type": "number",
+                        "title": "usedGB",
+                        "description": "Used disk space in GB."
+                    },
+                    "usedPercent": {
+                        "type": "number",
+                        "title": "usedPercent",
+                        "description": "Percentage of disk currently used."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "totalGB",
+                    "usedGB",
+                    "usedPercent"
+                ],
+                "title": "DiskStats",
+                "description": "Disk usage statistics."
             },
-            "type": "object",
-            "title": "Components",
-            "description": "Components that make up the container status"
-          },
-          "cpu": {
-            "$ref": "#/components/schemas/CPUStats",
-            "description": "Host machine CPU utilization statistics"
-          },
-          "memory": {
-            "$ref": "#/components/schemas/MemoryStats",
-            "description": "System memory statistics (RAM)"
-          },
-          "disk": {
-            "$ref": "#/components/schemas/DiskStats",
-            "description": "Disk usage statistics"
-          }
-        },
-        "type": "object",
-        "required": [
-          "status",
-          "components",
-          "timestamp",
-          "cpu",
-          "memory",
-          "disk"
-        ],
-        "title": "StatusResponse",
-        "description": "GET /status response body."
-      },
-      "StatusEnum": {
-        "type": "string",
-        "enum": [
-          "SUCCESS",
-          "FAILURE",
-          "AUTH_FAILURE"
-        ],
-        "title": "StatusEnum",
-        "description": "Status enum for responses"
-      },
-      "TimeMS": {
-        "properties": {
-          "auth": {
-            "type": "integer",
-            "title": "auth",
-            "description": "Time taken to perform authentication (ms)"
-          },
-          "ocr": {
-            "type": "integer",
-            "title": "ocr",
-            "description": "Time taken to run OCR (ms)"
-          },
-          "model": {
-            "type": "integer",
-            "title": "model",
-            "description": "Time taken to run model (ms)"
-          },
-          "preAuth": {
-            "type": "integer",
-            "title": "preAuth",
-            "description": "Time taken from request start to authentication (ms)"
-          },
-          "preOcr": {
-            "type": "integer",
-            "title": "preOcr",
-            "description": "Time taken from the previous stage to running OCR (ms)"
-          },
-          "preModel": {
-            "type": "integer",
-            "title": "preModel",
-            "description": "Time taken from the previous stage to running model (ms)"
-          },
-          "interModel": {
-            "type": "integer",
-            "title": "interModel",
-            "description": "Time taken in between multiple model calls (ms)"
-          },
-          "postprocessing": {
-            "type": "integer",
-            "title": "postprocessing",
-            "description": "Time taken from the previous stage to request end (ms)"
-          },
-          "total": {
-            "type": "integer",
-            "title": "total",
-            "description": "Time taken from request start to request end (ms)"
-          }
-        },
-        "type": "object",
-        "title": "timeMS",
-        "description": "A collection of time in milliseconds spent on different parts of the request."
-      },
-      "Timestamps": {
-        "properties": {
-          "requestStart": {
-            "type": "integer",
-            "title": "requestStart",
-            "description": "Unix timestamp (ms) when a request starts"
-          },
-          "requestEnd": {
-            "type": "integer",
-            "title": "requestEnd",
-            "description": "Unix timestamp (ms) when a request ends"
-          },
-          "authStart": {
-            "type": "integer",
-            "title": "authStart",
-            "description": "Unix timestamp (ms) when authentication starts"
-          },
-          "authEnd": {
-            "type": "integer",
-            "title": "authEnd",
-            "description": "Unix timestamp (ms) when authentication ends"
-          },
-          "ocrStart": {
-            "type": "integer",
-            "title": "ocrStart",
-            "description": "Unix timestamp (ms) when OCR starts"
-          },
-          "ocrEnd": {
-            "type": "integer",
-            "title": "ocrEnd",
-            "description": "Unix timestamp (ms) when OCR ends"
-          },
-          "modelInitStart": {
-            "type": "integer",
-            "title": "modelInitStart",
-            "description": "Unix timestamp (ms) when the initial call to model starts"
-          },
-          "modelInitEnd": {
-            "type": "integer",
-            "title": "modelInitEnd",
-            "description": "Unix timestamp (ms) when the initial call to model ends"
-          },
-          "modelExpStart": {
-            "type": "integer",
-            "title": "modelExpStart",
-            "description": "Unix timestamp (ms) when the additional call to model starts, if advancedExplainability is set to true"
-          },
-          "modelExpEnd": {
-            "type": "integer",
-            "title": "modelExpEnd",
-            "description": "Unix timestamp (ms) when the additional call to model ends, if advancedExplainability is set to true"
-          }
-        },
-        "type": "object",
-        "title": "timestamps",
-        "description": "A collection of Unix timestamps in milliseconds."
-      },
-    "ErrorResponse": {
-        "properties": {
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusEnum"
-              }
-            ],
-            "title": "status",
-            "description": "Status of the request."
-          },
-          "message": {
-            "type": "string",
-            "title": "message",
-            "description": "Error message."
-          }
-        },
-        "type": "object",
-        "required": [
-          "status"
-        ],
-        "title": "ErrorResponse",
-        "description": "Response when an error occurs."
-      }
+            "ErrorResponse": {
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/RequestStatus",
+                        "title": "status",
+                        "description": "Status of the request."
+                    },
+                    "message": {
+                        "type": "string",
+                        "title": "message",
+                        "description": "Error message."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "status",
+                    "message"
+                ],
+                "title": "ErrorResponse",
+                "description": "JSON error response used in documentation."
+            },
+            "MemoryStats": {
+                "properties": {
+                    "totalGB": {
+                        "type": "number",
+                        "title": "totalGB",
+                        "description": "Total system memory in GB."
+                    },
+                    "availableGB": {
+                        "type": "number",
+                        "title": "availableGB",
+                        "description": "Available system memory in GB."
+                    },
+                    "usedPercent": {
+                        "type": "number",
+                        "title": "usedPercent",
+                        "description": "Percentage of memory currently used."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "totalGB",
+                    "availableGB",
+                    "usedPercent"
+                ],
+                "title": "MemoryStats",
+                "description": "Memory utilization stats."
+            },
+            "QuestionAnswerPair": {
+                "properties": {
+                    "question": {
+                        "type": "string",
+                        "title": "question",
+                        "description": "Question asked."
+                    },
+                    "answer": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            }
+                        ],
+                        "title": "answer",
+                        "description": "Answer to appropriate question."
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "title": "confidence",
+                        "description": "Answer confidence score ranging from 0 to 1."
+                    },
+                    "context": {
+                        "type": "string",
+                        "title": "context",
+                        "description": "Where in the document the answer was found."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "question",
+                    "answer",
+                    "confidence",
+                    "context"
+                ],
+                "title": "QuestionAnswerPair",
+                "description": "Data for each Q&A in response."
+            },
+            "RequestStatus": {
+                "type": "string",
+                "enum": [
+                    "SUCCESS",
+                    "FAILURE",
+                    "AUTH_FAILURE"
+                ],
+                "title": "RequestStatus",
+                "description": "Status enum for requests."
+            },
+            "ResponseTimeBuckets": {
+                "properties": {
+                    "auth": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "auth",
+                        "description": "Time taken to perform authentication (ms)."
+                    },
+                    "ocr": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "ocr",
+                        "description": "Time taken to run OCR (ms)."
+                    },
+                    "model": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "model",
+                        "description": "Time taken to run model (ms)."
+                    },
+                    "pre_auth": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "preAuth",
+                        "description": "Time taken from request start to authentication (ms)."
+                    },
+                    "pre_ocr": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "preOcr",
+                        "description": "Time taken from the previous stage to running OCR (ms)."
+                    },
+                    "pre_model": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "preModel",
+                        "description": "Time taken from the previous stage to running model (ms)."
+                    },
+                    "inter_model": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "interModel",
+                        "description": "Time taken in between multiple model calls (ms)."
+                    },
+                    "postprocessing": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "postprocessing",
+                        "description": "Time taken from the previous stage to request end (ms)."
+                    },
+                    "total": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "total",
+                        "description": "Time taken from request start to request end (ms)."
+                    }
+                },
+                "type": "object",
+                "title": "ResponseTimeBuckets",
+                "description": "Data for time buckets in response."
+            },
+            "ResponseTimestamps": {
+                "properties": {
+                    "request_start": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "requestStart",
+                        "description": "Unix timestamp (ms) when a request starts."
+                    },
+                    "request_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "requestEnd",
+                        "description": "Unix timestamp (ms) when a request ends."
+                    },
+                    "auth_start": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "authStart",
+                        "description": "Unix timestamp (ms) when authentication starts."
+                    },
+                    "auth_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "authEnd",
+                        "description": "Unix timestamp (ms) when authentication ends."
+                    },
+                    "ocr_start": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "ocrStart",
+                        "description": "Unix timestamp (ms) when OCR starts."
+                    },
+                    "ocr_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "ocrEnd",
+                        "description": "Unix timestamp (ms) when OCR ends."
+                    },
+                    "model_init_start": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "modelInitStart",
+                        "description": "Unix timestamp (ms) when the initial call to model starts."
+                    },
+                    "model_init_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "modelInitEnd",
+                        "description": "Unix timestamp (ms) when the initial call to model ends."
+                    },
+                    "model_fin_start": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "modelFinStart",
+                        "description": ""
+                    },
+                    "model_fin_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "modelFinEnd",
+                        "description": ""
+                    },
+                    "model_exp_start": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "modelExpStart",
+                        "description": "Unix timestamp (ms) when the additional call to model starts, if `advancedExplainability` is set to `true`."
+                    },
+                    "model_exp_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "modelExpEnd",
+                        "description": "Unix timestamp (ms) when the additional call to model ends, if `advancedExplainability` is set to `true`."
+                    }
+                },
+                "type": "object",
+                "title": "ResponseTimestamps",
+                "description": "Data for timestamps in response."
+            },
+            "RikAI2ModelResponseBody": {
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/RequestStatus",
+                        "title": "status",
+                        "description": "Status of the request."
+                    },
+                    "id": {
+                        "type": "string",
+                        "title": "id",
+                        "description": "Response ID."
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/QuestionAnswerPair",
+                        "title": "data",
+                        "description": "Question and answer pair."
+                    },
+                    "model": {
+                        "type": "string",
+                        "title": "model",
+                        "description": "Name of the model."
+                    },
+                    "ocrResults": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "ocrResults",
+                        "description": "OCR results from the document. Returned only if `returnOcr` was set to `true` in the request."
+                    },
+                    "metadata": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "metadata",
+                        "description": "JSON from the request `metadata` field."
+                    },
+                    "timeMS": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ResponseTimeBuckets"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "timeMS",
+                        "description": "A collection of time in milliseconds spent on different parts of the request."
+                    },
+                    "timestamps": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ResponseTimestamps"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "timestamps",
+                        "description": "A collection of Unix timestamps in milliseconds."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "status",
+                    "id",
+                    "data",
+                    "model"
+                ],
+                "title": "RikAI2ModelResponseBody",
+                "description": "Response body for /rikai2 endpoint."
+            },
+            "RikAI2RequestBody": {
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "title": "file",
+                        "description": "Input file as a base64 encoded string."
+                    },
+                    "metadata": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "metadata",
+                        "description": "Custom JSON to be included in the returned response."
+                    },
+                    "ocrResults": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "ocrResults",
+                        "description": "OCR data for the document. If included, we do not run OCR on the document and use these results instead. Only OCR data obtained using `returnOcr` flag is supported as input."
+                    },
+                    "question": {
+                        "type": "string",
+                        "title": "question",
+                        "description": "Single question to ask about the file."
+                    },
+                    "settings": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/AddlSettings"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "settings"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "file",
+                    "question"
+                ],
+                "title": "RikAI2RequestBody",
+                "description": "Request body for /rikai2 endpoint."
+            },
+            "StatusComponent": {
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/StatusEnum",
+                        "title": "status",
+                        "description": "Status of a specific component of the container."
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusComponentType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "type",
+                        "description": "Type of the component."
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "error",
+                        "description": "Error message if status is `ERROR`."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "status"
+                ],
+                "title": "StatusComponent",
+                "description": "Status of an individual component."
+            },
+            "StatusComponentName": {
+                "type": "string",
+                "enum": [
+                    "model",
+                    "ocr",
+                    "license",
+                    "metrics"
+                ],
+                "title": "StatusComponentName",
+                "description": "Main status components."
+            },
+            "StatusComponentType": {
+                "type": "string",
+                "enum": [
+                    "vLLM",
+                    "AWS License",
+                    "Online License",
+                    "Offline License"
+                ],
+                "title": "StatusComponentType",
+                "description": "Types of status components."
+            },
+            "StatusEnum": {
+                "type": "string",
+                "enum": [
+                    "OK",
+                    "ERROR"
+                ],
+                "title": "StatusEnum",
+                "description": "Status values."
+            },
+            "StatusResponse": {
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/StatusEnum",
+                        "title": "status",
+                        "description": "Overall container status."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "timestamp",
+                        "description": "ISO timestamp, UTC timezone."
+                    },
+                    "components": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/StatusComponent"
+                        },
+                        "propertyNames": {
+                            "$ref": "#/components/schemas/StatusComponentName"
+                        },
+                        "type": "object",
+                        "title": "components",
+                        "description": "Components that make up the container status."
+                    },
+                    "cpu": {
+                        "$ref": "#/components/schemas/CPUStats",
+                        "title": "cpu",
+                        "description": "Host machine CPU utilization statistics."
+                    },
+                    "memory": {
+                        "$ref": "#/components/schemas/MemoryStats",
+                        "title": "memory",
+                        "description": "System memory statistics (RAM)."
+                    },
+                    "disk": {
+                        "$ref": "#/components/schemas/DiskStats",
+                        "title": "disk"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "status",
+                    "timestamp",
+                    "components",
+                    "cpu",
+                    "memory",
+                    "disk"
+                ],
+                "title": "StatusResponse",
+                "description": "GET /status response body."
+            }
+        }
     }
-  },
-  "servers": [
-    {
-      "url": "https://<hostname>:8080",
-      "description": ""
-    }
-  ]
-
 }
