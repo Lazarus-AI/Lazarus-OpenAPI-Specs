@@ -203,15 +203,25 @@
                         "title": "Avg Request Time",
                         "description": "Average request time in seconds."
                     },
+                    "avg_auth_time": {
+                        "type": "number",
+                        "title": "Avg Auth Time",
+                        "description": "Average authentication time in seconds."
+                    },
                     "avg_ocr_time": {
                         "type": "number",
                         "title": "Avg Ocr Time",
                         "description": "Average OCR time in seconds."
                     },
-                    "avg_model_time": {
+                    "avg_model_init_time": {
                         "type": "number",
-                        "title": "Avg Model Time",
-                        "description": "Average model time in seconds."
+                        "title": "Avg Init Model Time",
+                        "description": "Average initial model time in seconds."
+                    },
+                    "avg_model_exp_time": {
+                        "type": "number",
+                        "title": "Avg Exp Model Time",
+                        "description": "Average subsequent model time in seconds if `advancedExplainability` is set to true."
                     }
                 },
                 "type": "object",
@@ -225,8 +235,10 @@
                     "pages",
                     "questions",
                     "avg_request_time",
+                    "avg_auth_time",
                     "avg_ocr_time",
-                    "avg_model_time"
+                    "avg_model_init_time",
+                    "avg_model_exp_time"
                 ],
                 "title": "UsageMetrics",
                 "description": "Model request usage metrics info."
