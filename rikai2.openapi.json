@@ -23,7 +23,7 @@
     "paths": {
         "/rikai2": {
             "post": {
-                "summary": "Rikai 2",
+                "summary": "RikAI 2",
                 "description": "Supported input files should support standard file formats (Formats are checked with file header bytes):\n- PDF\n- JPG/JPEG\n- PNG\n- TIFF/TIF\n- HEIC",
                 "operationId": "rikai2_post",
                 "requestBody": {
@@ -356,7 +356,7 @@
                         "title": "model",
                         "description": "Time taken to run model (ms)."
                     },
-                    "pre_auth": {
+                    "preAuth": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -368,7 +368,7 @@
                         "title": "preAuth",
                         "description": "Time taken from request start to authentication (ms)."
                     },
-                    "pre_ocr": {
+                    "preOcr": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -380,7 +380,7 @@
                         "title": "preOcr",
                         "description": "Time taken from the previous stage to running OCR (ms)."
                     },
-                    "pre_model": {
+                    "preModel": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -392,7 +392,7 @@
                         "title": "preModel",
                         "description": "Time taken from the previous stage to running model (ms)."
                     },
-                    "inter_model": {
+                    "interModel": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -435,7 +435,7 @@
             },
             "ResponseTimestamps": {
                 "properties": {
-                    "request_start": {
+                    "requestStart": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -447,7 +447,7 @@
                         "title": "requestStart",
                         "description": "Unix timestamp (ms) when a request starts."
                     },
-                    "request_end": {
+                    "requestEnd": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -459,7 +459,7 @@
                         "title": "requestEnd",
                         "description": "Unix timestamp (ms) when a request ends."
                     },
-                    "auth_start": {
+                    "authStart": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -471,7 +471,7 @@
                         "title": "authStart",
                         "description": "Unix timestamp (ms) when authentication starts."
                     },
-                    "auth_end": {
+                    "authEnd": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -483,7 +483,7 @@
                         "title": "authEnd",
                         "description": "Unix timestamp (ms) when authentication ends."
                     },
-                    "ocr_start": {
+                    "ocrStart": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -495,7 +495,7 @@
                         "title": "ocrStart",
                         "description": "Unix timestamp (ms) when OCR starts."
                     },
-                    "ocr_end": {
+                    "ocrEnd": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -507,7 +507,7 @@
                         "title": "ocrEnd",
                         "description": "Unix timestamp (ms) when OCR ends."
                     },
-                    "model_init_start": {
+                    "modelInitStart": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -519,7 +519,7 @@
                         "title": "modelInitStart",
                         "description": "Unix timestamp (ms) when the initial call to model starts."
                     },
-                    "model_init_end": {
+                    "modelInitEnd": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -531,7 +531,7 @@
                         "title": "modelInitEnd",
                         "description": "Unix timestamp (ms) when the initial call to model ends."
                     },
-                    "model_fin_start": {
+                    "modelFinStart": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -543,7 +543,7 @@
                         "title": "modelFinStart",
                         "description": ""
                     },
-                    "model_fin_end": {
+                    "modelFinEnd": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -555,7 +555,7 @@
                         "title": "modelFinEnd",
                         "description": ""
                     },
-                    "model_exp_start": {
+                    "modelExpStart": {
                         "anyOf": [
                             {
                                 "type": "integer"
@@ -567,7 +567,7 @@
                         "title": "modelExpStart",
                         "description": "Unix timestamp (ms) when the additional call to model starts, if `advancedExplainability` is set to `true`."
                     },
-                    "model_exp_end": {
+                    "modelExpEnd": {
                         "anyOf": [
                             {
                                 "type": "integer"
