@@ -1,0 +1,649 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Document Splitter",
+      "version": "1.0",
+      "description": "Splits documents by Patient, Subdocument, or None",
+      "contact": {
+        "name": "Lazarus IT",
+        "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+        "email": "support@lazarusai.com"
+      },
+      "termsOfService": "https://www.lazarusai.com/legal",
+      "license": {
+        "name": "Get Lazarus",
+        "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+      },
+      "summary": ""
+    },
+    "paths": {
+      "/api/async/doc-split/submit": {
+        "post": {
+          "tags": ["Requests"],
+          "summary": "Single File Upload (async)",
+          "description": "Upload a file via an Amazon S3 presigned URL, Firebase URL, Google Drive link, or any downloadable URL for asynchronous processing. The model returns a ZIP file to the specified `output_url` and sends status updates to the provided `webhook`.\n\n",
+          "parameters": [
+            {
+              "name": "orgId",
+              "in": "header",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9\\-_]+$",
+                "title": "orgId",
+                "description": "Organization ID"
+              },
+              "description": "Organization ID"
+            },
+            {
+              "name": "authKey",
+              "in": "header",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9\\-_]+$",
+                "title": "authKey",
+                "description": "Authentication key"
+              },
+              "description": "Authentication key"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncUpload"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AsyncResponse"
+                  }
+                }
+              }
+            },
+            "202": {
+              "$ref": "#/components/responses/202"
+            }
+          }
+        }
+      },
+      "/api/async/doc-split/job/status/<job_id>": {
+        "get": {
+          "tags": ["Requests"],
+          "summary": "Get async request status",
+          "description": "Retrieves the status of an asynchronous request. Identifiable by <job_id>.",
+          "operationId": "get_async_status",
+          "parameters": [
+            {
+              "name": "job_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "job_id",
+                "description": "Identifier of the job whose status is being requested."
+              },
+              "description": "Identifier of the job whose status is being requested."
+            },
+            {
+              "name": "orgId",
+              "in": "header",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9\\-_]+$",
+                "title": "orgId",
+                "description": "Organization ID"
+              },
+              "description": "Organization ID"
+            },
+            {
+              "name": "authKey",
+              "in": "header",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-zA-Z0-9\\-_]+$",
+                "title": "authKey",
+                "description": "Authentication key"
+              },
+              "description": "Authentication key"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "`OK` or `OK: Job doesn't exist, or was not successfully submitted due to incorrect orgId or authKey. Same status code, but different response structure.`",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AsyncStatusResponse"
+                  }
+                }
+              }
+            },
+            "202": { 
+                "$ref": "#/components/responses/Async202"
+              },
+            "400": {
+              "$ref": "#/components/responses/400"
+            }
+          }
+        }
+      }
+    },
+    "webhooks": {
+      "async-request-failed": {
+        "post": {
+          "tags": ["Webhook Responses"],
+          "summary": "Async Request Failed",
+          "description": "Async Request Failed- there are several cases, outlined below. This is only returned once the job is successfully submitted.",
+          "operationId": "webhook_post_async_request_failed",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncWebhookError"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Our API expects a 200 status code response to our webhook requests"
+            }
+          }
+        }
+      },
+      "request-succeeded": {
+        "post": {
+          "tags": ["Webhook Responses"],
+          "summary": "Request Succeeded",
+          "description": "Async Request Succeeded.",
+          "operationId": "webhook_post_request_succeeded",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessWebhook"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Our API expects a 200 status code response to our webhook requests"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "BodyOfRequest": {
+          "properties": {
+            "inputUrl": {
+              "description": "inputURL for the request.",
+              "type": "string"
+            },
+            "input_url": {
+                "description": "inputURL for the request.",
+                "type": "string"
+            },
+            "jobId": {
+                "description": "JobId for the request.",
+                "type": "string"
+            },
+            "job_id": {
+                "description": "JobId for the request.",
+                "type": "string"
+            },
+            "metadata": {
+                "description": "Custom JSON for the request and the splitting methodology used for the document splitting process.",
+                "type": "string"
+            },
+            "outputUrl": {
+                "description": "outputURL for the request.",
+                "type": "string"
+            },
+            "output_url": {
+                "description": "outputURL for the request.",
+                "type": "string"
+            },
+            "webhook": {
+                "description": "webhook for the request.",
+                "type": "string"
+            }
+          },
+          "type": "object",
+          "required": [
+            "answer",
+            "question"
+          ],
+          "title": "BodyOfRequest"
+        },
+        "AsyncStatusResponse": {
+          "properties": {
+            "created_timestamp": {
+                "type": "integer",
+                "description": "Date time stamp in ISO 8601 UTC format."
+              },
+            "message": {
+                "type": "string",
+                "description": "String with value `success`."
+            }, 
+            "model": {
+              "type": "string",
+              "description": "String with value `DocumentSplitter`."
+            },
+            "processing_time": {
+                "type": "integer",
+                "description": "Int with value `endTime`-`startTime` in milliseconds."
+            },
+            "status": {
+                "type": "string",
+                "description": "String with value `COMPLETE` or `ERROR`."
+            },
+            "updated_timestamp": {
+                "type": "integer",
+                "description": "Time stamp status is updated in the log management database stored on Lazarus' infrastructure."
+            },
+            "error": {
+                "type": "string",
+                "description": "String with value `No logs found for that job. Please use format: /generic/zip/async/<jobId>`."
+            }
+          },
+          "type": "object",
+          "required": [],
+          "title": "AsyncStatusResponse"
+        },
+        "AsyncWebhookError": {
+          "properties": {
+            "status": {
+              "description": "ERROR.",
+              "type": "string"
+            },
+            "jobId": {
+                "description": "JobID for the request.",
+                "type": "string"
+            },
+            "job_status": {
+                "description": "ERROR.",
+                "type": "string"
+            },
+            "job_id": {
+                "description": "JobID for the request.",
+                "type": "string"
+            },
+            "created_timestamp": {
+                "description": "Date time stamp in ISO 8601 UTC format.",
+                "type": "string"
+            },
+            "updated_timestamp": {
+                "description":  "Time stamp status is updated in the log management database stored on Lazarus' infrastructure.",
+                "type": "string"
+            },
+            "processing_time": {
+                "description": "Number of milliseconds taken to send the request to the task queue.",
+                "type": "string"
+            },
+            "json_schema": {
+                "description": "1.0",
+                "type": "string"
+            },
+            "message": {
+            "description": "### Error Cases\n\n#### Case 1: Failed to download file from `input_url`\n**Message:** “Failed to download file from the input url”\n\n#### Case 2: OCR model failed to run  \n**Message:** “The call to OCR failed to run”\n\n#### Case 3: Failed to realign pages after OCR call  \nWhich may include other OCR calls.  \n**Message:** “Failed to realign pages due to subsequent OCR calls, or post processing errors”\n\n#### Case 4: Document Splitter model failed to run  \nIncludes one retry if needed.  \n**Message:** “The call to Document Splitter Model failed to run”\n\n#### Case 5: Catchall error for cases not covered above  \n**Message:** “Post processing error”",
+            "type": "string"
+            },
+            "splitting_method": {
+                "description": "Splitting method: `None`, `Document`, or `Patient`.",
+                "type": "string"
+            },
+            "splittingMethod": {
+                "description": "Splitting method: `None`, `Document`, or `Patient`.",
+                "type": "string"
+            },
+            "sample_key": {
+                "description": "Any key/value pair provided in metadata in the request.",
+                "type": "string"
+            },
+            "provider": {
+                "description": "lazarus",
+                "type": "string"
+            },
+            "model": {
+                "description": "String with value `DocumentSplitter`.",
+                "type": "string"
+            },
+            "code": {
+                "description": "Int with value `200`.",
+                "type": "integer"
+            }
+          },
+          "type": "object",
+          "title": "AsyncWebhookError",
+          "required": []
+        },
+        "AsyncResponse": {
+        "properties": {
+            "asyncMode": {
+                "description": "Boolean with value `true`."
+            },
+            "client": {
+                "description": "String with value `consensus`."
+            },
+            "code": {
+                "description": "Int with value `403`."
+            },
+            "documentId": {
+                "description": "String with value `job_id`from request."
+            },
+            "jobId": {
+              "type": "string",
+              "description": "API version of the endpoint provided."
+            },
+            "jsonSchema": {
+                "type": "string",
+                "description": "String with value `job_id` from request."
+            },
+            "message": {
+                "type": "string",
+                "description": "String with the value `The access method is invalid. Access denied.`"
+            },
+            "processingTime": {
+                "type": "string",
+                "description": "Number of milliseconds taken to send the request to the task queue."
+            },
+            "requestBody": {
+                "items": {
+                  "$ref": "#/components/schemas/BodyOfRequest"
+                },
+                "type": "object",
+                "description": "The request body sent to the API endpoint."
+            },
+            "startTime": {
+              "description": "Unix timestamp of the request at submission.",
+              "type": "integer"
+            },
+            "endTime": {
+              "description": "Unix timestamp of the request at response.",
+              "type": "integer"
+            },
+            "status": {
+                "description": "String with value `ERROR`."
+            }
+          },
+          "type": "object",
+          "required": [],
+          "title": "AsyncResponse"
+        },
+        "AsyncUpload": {
+          "properties": {
+            "input_url": {
+              "description": "URL of the file to extract data from. Must be a PDF.",
+              "type": "string" 
+
+            },
+            "job_id": {
+              "description": "Job ID of the job sent to the endpoint.",
+              "type": "string"
+            },
+            "webhook": {
+              "type": "string",
+              "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+              "description": "URL where status update JSONs can be sent. Must be open to POST requests that accept the header “content-type” with value “application/json”."
+            },
+            "metadata": {
+              "type": "object: must contain the field splitting_method, whose values can take either one of “None”, “Document”, “Patient”.",
+              "description": "Custom JSON to be included in the returned response, as well as identifying the splitting methodology used for the document splitting process. “None” does not split the document, “Document” splits the document provided by subdocuments separated by header pages and differing patients, and “Patient” only splits the document provided into subdocuments separated by differing patients."
+            },
+            "output_url": {
+              "type": "string",
+              "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+              "description": "URL where the resulting ZIP file can be sent. Must be open to PUT requests that accept the header “content-type” with value “application/zip”."
+            }
+          },
+          "type": "object",
+          "required": [
+            "inputURL",
+            "output_url",
+            "webhook"
+          ],
+          "title": "AsyncUpload"
+        },
+        "SuccessWebhook": {
+          "properties": {
+            "status": {
+                "description": "SUCCESS.",
+                "type": "string"
+              },
+              "jobId": {
+                  "description": "JobID for the request.",
+                  "type": "string"
+              },
+              "job_status": {
+                  "description": "SUCCESS.",
+                  "type": "string"
+              },
+              "job_id": {
+                  "description": "JobID for the request.",
+                  "type": "string"
+              },
+              "created_timestamp": {
+                  "description": "Date time stamp in ISO 8601 UTC format.",
+                  "type": "string"
+              },
+              "updated_timestamp": {
+                  "description":  "Time stamp status is updated in the log management database stored on Lazarus' infrastructure.",
+                  "type": "string"
+              },
+              "processing_time": {
+                  "description": "Number of milliseconds taken to send the request to the task queue.",
+                  "type": "string"
+              },
+              "json_schema": {
+                  "description": "1.0",
+                  "type": "string"
+              },
+              "message": {
+              "description": "### Error Cases\n\n#### Case 1: Failed to download file from `input_url`\n**Message:** “Failed to download file from the input url”\n\n#### Case 2: OCR model failed to run  \n**Message:** “The call to OCR failed to run”\n\n#### Case 3: Failed to realign pages after OCR call  \nWhich may include other OCR calls.  \n**Message:** “Failed to realign pages due to subsequent OCR calls, or post processing errors”\n\n#### Case 4: Document Splitter model failed to run  \nIncludes one retry if needed.  \n**Message:** “The call to Document Splitter Model failed to run”\n\n#### Case 5: Catchall error for cases not covered above  \n**Message:** “Post processing error”",
+              "type": "string"
+              },
+              "splitting_method": {
+                  "description": "Splitting method: `None`, `Document`, or `Patient`.",
+                  "type": "string"
+              },
+              "splittingMethod": {
+                  "description": "Splitting method: `None`, `Document`, or `Patient`.",
+                  "type": "string"
+              },
+              "sample_key": {
+                  "description": "Any key/value pair provided in metadata in the request.",
+                  "type": "string"
+              },
+              "provider": {
+                  "description": "lazarus",
+                  "type": "string"
+              },
+              "model": {
+                  "description": "String with value `DocumentSplitter`.",
+                  "type": "string"
+              },
+              "code": {
+                  "description": "Int with value `200`.",
+                  "type": "integer"
+              }
+          },
+          "type": "object",
+          "required": [
+            "data"
+          ],
+          "title": "SuccessWebhook"
+        },
+        "AcceptedMessage": {
+          "properties": {
+            "asyncMode": {
+                "description": "Boolean with value `true`."
+            },
+            "client": {
+                "description": "String with value `consensus`."
+            },
+            "code": {
+                "description": "Int with value `202`."
+            },
+            "documentId": {
+                "description": "String with value `job_id`from request."
+            },
+            "jobId": {
+              "type": "string",
+              "description": "API version of the endpoint provided."
+            },
+            "jsonSchema": {
+                "type": "string",
+                "description": "String with value `job_id` from request."
+            },
+            "message": {
+                "type": "string",
+                "description": "String with value `running`."
+            },
+            "processingTime": {
+                "type": "string",
+                "description": "Int with value `endTime`-`startTime` in milliseconds."
+            },
+            "requestBody": {
+                "items": {
+                  "$ref": "#/components/schemas/BodyOfRequest"
+                },
+                "type": "object",
+                "description": "The request body sent to the API endpoint."
+            },
+            "startTime": {
+              "description": "Unix timestamp of the request at submission.",
+              "type": "integer"
+            },
+            "endTime": {
+              "description": "Unix timestamp of the request at response.",
+              "type": "integer"
+            },
+            "status": {
+                "description": "String with value `RUNNING`."
+            }
+          },
+          "type": "object",
+          "title": "AcceptedMessage",
+          "description": "Response when request is accepted."
+        },
+        "Accepted202Message": {
+            "properties": {
+              "created_timestamp": {
+                "type": "integer",
+                "description": "Date time stamp in ISO 8601 UTC format."
+              },
+            "message": {
+                "type": "string",
+                "description": "String with value `running`."
+            }, 
+            "model": {
+              "type": "string",
+              "description": "String with value `DocumentSplitter`."
+            },
+            "processing_time": {
+                "type": "integer",
+                "description": "Int with value `endTime`-`startTime` in milliseconds."
+            },
+            "status": {
+                "type": "string",
+                "description": "String with value `RUNNING`."
+            }
+            },
+            "type": "object",
+            "title": "Accepted202Message",
+            "description": "Response when request is accepted."
+          },
+          "Error400Message": {
+            "properties": {
+              "code": {
+                "type": "integer",
+                "description": "Int with value `400`."
+              },
+            "message": {
+                "type": "string",
+                "description": "String with value `Invalid API Key for model`."
+            }, 
+            "model": {
+              "type": "string",
+              "description": "String with value `DocumentSplitter`."
+            },
+            "status": {
+                "type": "string",
+                "description": "String with value `Error`."
+            }
+            },
+            "type": "object",
+            "title": "Error400Message",
+            "description": "Response when request fails."
+        }
+      },
+      "responses": {
+        "202": {
+          "description": "Accepted",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptedMessage"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request: Wrong `orgId` or `authKey`.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error400Message"
+              }
+            }
+          }
+        },
+        "Async202": {
+          "description": "Accepted.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Accepted202Message"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "Requests",
+        "description": "Requests for the Document Splitter API"
+      },
+      {
+        "name": "Webhook Responses",
+        "description": "Responses from the Document Splitter API."
+      }
+    ],
+    "servers": [
+      {
+        "url": "{CONSENSUS DOMAIN}",
+        "description": "Base SaaS endpoint- one per environment (DEV, QA, PROD)"
+      }
+    ]
+  }
