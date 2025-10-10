@@ -11,14 +11,21 @@
         "license": {
             "name": "Get Lazarus",
             "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
-        }
+        },
+        "version": ""
     },
+    "servers": [
+        {
+            "url": "https://<hostname>:8081",
+            "description": ""
+        }
+    ],
     "paths": {
         "/api/usage": {
-            "get": {
+            "post": {
                 "summary": "Get Usage",
                 "description": "Get model usage metrics by aggregating requests.",
-                "operationId": "get_usage_api_usage_get",
+                "operationId": "get_api_usage",
                 "parameters": [
                     {
                         "name": "start_time",
@@ -69,7 +76,7 @@
             "get": {
                 "summary": "Download Usage Report",
                 "description": "Generate and download model usage report.",
-                "operationId": "download_usage_report_api_usage_report_get",
+                "operationId": "get_api_usage_report",
                 "parameters": [
                     {
                         "name": "start_time",
@@ -97,14 +104,19 @@
                         "required": false,
                         "schema": {
                             "$ref": "#/components/schemas/UsageReportVerbosity",
+                            "description": "Verbosity level of usage report.",
                             "default": 1
-                        }
+                        },
+                        "description": "Verbosity level of usage report."
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Successful Response",
                         "content": {
+                            "application/json": {
+                                "schema": {}
+                            },
                             "text/csv": {
                                 "schema": {
                                     "type": "string"
@@ -274,11 +286,5 @@
                 "title": "ValidationError"
             }
         }
-    },
-    "servers": [
-    {
-      "url": "https://<hostname>:8081",
-      "description": ""
     }
-  ]
 }
