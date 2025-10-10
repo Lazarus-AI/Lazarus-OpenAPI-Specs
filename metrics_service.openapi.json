@@ -11,14 +11,21 @@
         "license": {
             "name": "Get Lazarus",
             "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
-        }
+        },
+        "version": ""
     },
+    "servers": [
+        {
+            "url": "https://<hostname>:8081",
+            "description": ""
+        }
+    ],
     "paths": {
         "/api/usage": {
             "get": {
                 "summary": "Get Usage",
                 "description": "Get model usage metrics by aggregating requests.",
-                "operationId": "get_usage_api_usage_get",
+                "operationId": "get_api_usage",
                 "parameters": [
                     {
                         "name": "start_time",
@@ -69,7 +76,7 @@
             "get": {
                 "summary": "Download Usage Report",
                 "description": "Generate and download model usage report.",
-                "operationId": "download_usage_report_api_usage_report_get",
+                "operationId": "download_api_usage_report",
                 "parameters": [
                     {
                         "name": "start_time",
@@ -105,6 +112,9 @@
                     "200": {
                         "description": "Successful Response",
                         "content": {
+                            "application/json": {
+                                "schema": {}
+                            },
                             "text/csv": {
                                 "schema": {
                                     "type": "string"
@@ -154,7 +164,7 @@
                             }
                         ],
                         "title": "Start Time",
-                        "description": "Start time of usage period."
+                        "description": "Start time of the usage period."
                     },
                     "end_time": {
                         "anyOf": [
@@ -166,7 +176,7 @@
                             }
                         ],
                         "title": "End Time",
-                        "description": "End time of usage period."
+                        "description": "End time of the usage period."
                     },
                     "requests": {
                         "type": "integer",
@@ -186,17 +196,17 @@
                     "failures": {
                         "type": "integer",
                         "title": "Failures",
-                        "description": "Number of failed requests over usage period (not including auth failures)."
+                        "description": "Number of failed requests over usage period (not including authentication failures)."
                     },
                     "pages": {
                         "type": "integer",
                         "title": "Pages",
-                        "description": "Number of total pages over usage period."
+                        "description": "Number of total pages over the usage period."
                     },
                     "questions": {
                         "type": "integer",
                         "title": "Questions",
-                        "description": "Number of total questions over usage period."
+                        "description": "Number of total questions over the usage period."
                     },
                     "avg_request_time": {
                         "type": "number",
@@ -274,11 +284,5 @@
                 "title": "ValidationError"
             }
         }
-    },
-    "servers": [
-    {
-      "url": "https://<hostname>:8081",
-      "description": ""
     }
-  ]
 }
