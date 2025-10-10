@@ -22,7 +22,7 @@
     ],
     "paths": {
         "/api/usage": {
-            "post": {
+            "get": {
                 "summary": "Get Usage",
                 "description": "Get model usage metrics by aggregating requests.",
                 "operationId": "get_api_usage",
