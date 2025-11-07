@@ -1,8 +1,20 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "FastAPI",
-        "version": "0.1.0"
+        "title": "RikAI2-RAG",
+        "version": "",
+        "description": "",
+        "contact": {
+            "name": "Lazarus IT",
+            "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+            "email": "support@lazarusai.com"
+        },
+        "termsOfService": "https://www.lazarusai.com/legal",
+        "license": {
+            "name": "Get Lazarus",
+            "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+        },
+        "summary": ""
     },
     "paths": {
         "/api/rag/": {
