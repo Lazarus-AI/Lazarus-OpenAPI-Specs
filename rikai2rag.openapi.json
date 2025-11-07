@@ -1,0 +1,480 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "RikAI2-RAG",
+        "version": "",
+        "description": "",
+        "contact": {
+        "name": "Lazarus IT",
+        "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+        "email": "support@lazarusai.com"
+        },
+        "termsOfService": "https://www.lazarusai.com/legal",
+        "license": {
+        "name": "Get Lazarus",
+        "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+        },
+        "summary": ""
+    },
+    "paths": {
+        "/api/rag/": {
+            "post": {
+                "summary": "Rag Request",
+                "operationId": "rag_request_api_rag__post",
+                "parameters": [
+                    {
+                        "name": "orgid",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "pattern": "^[a-zA-Z0-9\\-_]+$"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "orgid",
+                            "description": "orgid"
+                        },
+                        "description": "orgid"
+                    },
+                    {
+                        "name": "authkey",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "pattern": "^[a-zA-Z0-9\\-_]+$"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "authkey",
+                            "description": "authkey"
+                        },
+                        "description": "authkey"
+                    },
+                    {
+                        "name": "simple",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "simple",
+                            "description": "Boolean whether the topics RikAI2 should be skipped (`true`) or not (`false | None`)",
+                            "default": false
+                        },
+                        "description": "Boolean whether the topics RikAI2 should be skipped (`true`) or not (`false | None`)"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RagRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RagResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "RagRequest": {
+                "properties": {
+                    "base64": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Base64",
+                        "description": "The base64 encoding of a file to be used in the API request. (Base64 or InputURL are required)"
+                    },
+                    "inputUrl": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inputurl",
+                        "description": "The url of a file to be used in the API request. (Base64 or InputURL are required)"
+                    },
+                    "question": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            }
+                        ],
+                        "title": "Question",
+                        "description": "The question for the model to answer."
+                    },
+                    "settings": {
+                        "$ref": "#/components/schemas/Settings"
+                    },
+                    "vkg": {
+                        "$ref": "#/components/schemas/VKGInput"
+                    },
+                    "searchPrompt": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Searchprompt",
+                        "description": "The prompt to RikAI2 that should create a comma separated list of topics to be used to search the VKG specified in `vkg.vkgId`"
+                    },
+                    "numClosest": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Numclosest",
+                        "description": "The number of nodes to be included for every topics search in the VKG specified in `vkg.vkgId`",
+                        "default": 5
+                    },
+                    "numTopics": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Numtopics",
+                        "description": "The maximum number of topics for searching in the VKG specified in `vkg.vkgId`",
+                        "default": 20
+                    },
+                    "webhook": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Webhook",
+                        "exclude_schema": true
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "question",
+                    "settings",
+                    "vkg"
+                ],
+                "title": "RagRequest"
+            },
+            "RagResponse": {
+                "properties": {
+                    "apiVersion": {
+                        "type": "string",
+                        "title": "Apiversion"
+                    },
+                    "baseModel": {
+                        "type": "string",
+                        "title": "Basemodel"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "title": "Code"
+                    },
+                    "data": {
+                        "items": {},
+                        "type": "array",
+                        "title": "Data"
+                    },
+                    "documentId": {
+                        "type": "string",
+                        "title": "Documentid"
+                    },
+                    "endTime": {
+                        "type": "integer",
+                        "title": "Endtime"
+                    },
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "metadata": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Metadata"
+                    },
+                    "model": {
+                        "type": "string",
+                        "title": "Model"
+                    },
+                    "organization": {
+                        "type": "string",
+                        "title": "Organization"
+                    },
+                    "pages": {
+                        "type": "integer",
+                        "title": "Pages"
+                    },
+                    "provider": {
+                        "type": "string",
+                        "title": "Provider"
+                    },
+                    "questions": {
+                        "type": "integer",
+                        "title": "Questions"
+                    },
+                    "settings": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Settings"
+                    },
+                    "startTime": {
+                        "type": "integer",
+                        "title": "Starttime"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    },
+                    "statusId": {
+                        "type": "string",
+                        "title": "Statusid"
+                    },
+                    "topics": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Topics"
+                    },
+                    "nodes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Nodes"
+                    },
+                    "searchPrompt": {
+                        "type": "string",
+                        "title": "Searchprompt"
+                    },
+                    "requestPrompt": {
+                        "type": "string",
+                        "title": "Requestprompt"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "apiVersion",
+                    "baseModel",
+                    "code",
+                    "data",
+                    "documentId",
+                    "endTime",
+                    "id",
+                    "metadata",
+                    "model",
+                    "organization",
+                    "pages",
+                    "provider",
+                    "questions",
+                    "settings",
+                    "startTime",
+                    "status",
+                    "statusId",
+                    "topics",
+                    "nodes",
+                    "searchPrompt",
+                    "requestPrompt"
+                ],
+                "title": "RagResponse"
+            },
+            "Settings": {
+                "properties": {
+                    "advanced_explainability": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Advanced Explainability",
+                        "description": "Conditional for if the model should return a context for it's decision",
+                        "default": false
+                    },
+                    "advanced_vision": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Advanced Vision",
+                        "description": "Conditional for if the model should use image analysis in addition to OCR analysis",
+                        "default": true
+                    }
+                },
+                "type": "object",
+                "title": "Settings"
+            },
+            "VKGInput": {
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "title": "Url",
+                        "description": "VKG Base URL (without a final slash \"/\")"
+                    },
+                    "vkgId": {
+                        "type": "string",
+                        "title": "Vkgid",
+                        "description": "The VKG ID for the graph to be used in this request."
+                    },
+                    "orgId": {
+                        "type": "string",
+                        "title": "Orgid",
+                        "description": "Your Organization's Org ID"
+                    },
+                    "authKey": {
+                        "type": "string",
+                        "title": "Authkey",
+                        "description": "Your Organization's Auth Key"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "title": "Userid",
+                        "description": "Your User ID"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url",
+                    "vkgId",
+                    "orgId",
+                    "authKey",
+                    "userId"
+                ],
+                "title": "VKGInput"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
