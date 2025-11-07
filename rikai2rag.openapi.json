@@ -1,20 +1,8 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "RikAI2-RAG",
-        "version": "",
-        "description": "",
-        "contact": {
-        "name": "Lazarus IT",
-        "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
-        "email": "support@lazarusai.com"
-        },
-        "termsOfService": "https://www.lazarusai.com/legal",
-        "license": {
-        "name": "Get Lazarus",
-        "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
-        },
-        "summary": ""
+        "title": "FastAPI",
+        "version": "0.1.0"
     },
     "paths": {
         "/api/rag/": {
@@ -23,7 +11,7 @@
                 "operationId": "rag_request_api_rag__post",
                 "parameters": [
                     {
-                        "name": "orgid",
+                        "name": "orgId",
                         "in": "header",
                         "required": true,
                         "schema": {
@@ -37,13 +25,13 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "orgid",
-                            "description": "orgid"
+                            "title": "orgId",
+                            "description": "orgId"
                         },
-                        "description": "orgid"
+                        "description": "orgId"
                     },
                     {
-                        "name": "authkey",
+                        "name": "authKey",
                         "in": "header",
                         "required": true,
                         "schema": {
@@ -57,10 +45,10 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "authkey",
-                            "description": "authkey"
+                            "title": "authKey",
+                            "description": "authKey"
                         },
-                        "description": "authkey"
+                        "description": "authKey"
                     },
                     {
                         "name": "simple",
@@ -77,6 +65,7 @@
                             ],
                             "title": "simple",
                             "description": "Boolean whether the topics RikAI2 should be skipped (`true`) or not (`false | None`)",
+                            "exclude_schema": true,
                             "default": false
                         },
                         "description": "Boolean whether the topics RikAI2 should be skipped (`true`) or not (`false | None`)"
