@@ -1,0 +1,295 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Container Wrapper Specs",
+        "description": "Container Wrapper API Reference",
+        "contact": {
+        "url": "https://lazarus-ai.atlassian.net/servicedesk/customer/portal/8",
+        "name": "Lazarus IT",
+        "email": "support@lazarusai.com"
+        },
+        "license": {
+        "name": "Get Lazarus",
+        "url": "https://emvnha23ura.typeform.com/lazarus-rikai?typeform-source=dashboard.lazarusai.com"
+        },
+        "termsOfService": "https://www.lazarusai.com/legal"
+    },
+    "paths": {
+        "/auth/status": {
+            "get": {
+                "summary": "Server Status",
+                "operationId": "server_status_status_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Server Status",
+                "operationId": "server_status_status_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/auth/request": {
+            "get": {
+                "summary": "Authenticate Request",
+                "operationId": "authenticate_request_auth_request_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/credentials/license": {
+            "get": {
+                "summary": "Get Org License",
+                "operationId": "get_org_license_credentials_license_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/credentials/scopes": {
+            "get": {
+                "summary": "Get User Scopes",
+                "operationId": "get_user_scopes_credentials_scopes_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/user/login": {
+            "post": {
+                "summary": "User Login",
+                "operationId": "user_login_user_login_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/organizations": {
+            "get": {
+                "summary": "Get Organization Details",
+                "operationId": "get_organization_details_organizations_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/organizations/users": {
+            "get": {
+                "summary": "Get Organization User List",
+                "operationId": "get_organization_user_list_organizations_users_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add User To Organization",
+                "operationId": "add_user_to_organization_organizations_users_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove User From Organization",
+                "operationId": "remove_user_from_organization_organizations_users_delete",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/organizations/users/password": {
+            "put": {
+                "summary": "Update Users Password",
+                "operationId": "update_users_password_organizations_users_password_put",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/organizations/users/settings": {
+            "get": {
+                "summary": "Get Org Users Settings",
+                "operationId": "get_org_users_settings_organizations_users_settings_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Org Users Settings",
+                "operationId": "update_org_users_settings_organizations_users_settings_put",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/users": {
+            "put": {
+                "summary": "Update User Permissions",
+                "operationId": "update_user_permissions_users_put",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/bulk_add_users": {
+            "post": {
+                "summary": "Bulk Add Users",
+                "operationId": "bulk_add_users_bulk_add_users_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/scopes": {
+            "put": {
+                "summary": "Rename Scopes",
+                "operationId": "rename_scopes_scopes_put",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Scopes",
+                "operationId": "create_scopes_scopes_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Scopes",
+                "operationId": "delete_scopes_scopes_delete",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
