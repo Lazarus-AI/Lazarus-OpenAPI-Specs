@@ -31,6 +31,9 @@
           },
           {
             "$ref": "#/components/parameters/version"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
           }
         ],
         "requestBody": {
@@ -101,6 +104,9 @@
           },
           {
             "$ref": "#/components/parameters/version"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
           }
         ],
         "requestBody": {
@@ -164,6 +170,9 @@
           },
           {
             "$ref": "#/components/parameters/version"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
           }
         ],
         "requestBody": {
@@ -305,8 +314,7 @@
           },
           "id": {
             "type": "string",
-            "description": "Request ID.",
-            "removeDefault": true
+            "description": "Request ID."
           }
         },
         "type": "object",
@@ -341,8 +349,7 @@
         "properties": {
           "kind": {
             "type": "string",
-            "description": "Type of cell.",
-            "removeDefault": true
+            "description": "Type of cell."
           },
           "rowIndex": {
             "type": "integer",
@@ -501,20 +508,17 @@
           "inputURL": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
-            "forceRequire": true
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "statusId": {
             "type": "string",
@@ -527,9 +531,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "webhook": {
             "type": "string",
@@ -597,20 +599,17 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "statusId": {
             "type": "string",
@@ -623,9 +622,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "webhook": {
             "type": "string",
@@ -682,8 +679,7 @@
           },
           "id": {
             "type": "string",
-            "description": "Request ID.",
-            "removeDefault": true
+            "description": "Request ID."
           }
         },
         "type": "object",
@@ -714,20 +710,17 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "webhook": {
             "type": "string",
@@ -787,20 +780,17 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
-            "forceRequire": true
+            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or TXT."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "webhook": {
             "type": "string",
@@ -819,9 +809,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "forceBase64": {
             "type": "boolean",
@@ -855,20 +843,17 @@
           "inputURL": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
-            "forceRequire": true
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "webhook": {
             "type": "string",
@@ -937,13 +922,11 @@
                 "type": "string"
               }
             ],
-            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model.",
-            "forceRequire": true
+            "description": "Base64 encoded string for the file to extract data from. If it is an array, the base64 strings will be appended into one PDF then ran through the model."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
@@ -959,8 +942,7 @@
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "webhook": {
             "type": "string",
@@ -979,9 +961,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "statusId": {
             "type": "string",
@@ -1025,13 +1005,11 @@
           "inputURL": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
-            "forceRequire": true
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, PNG, TIFF, or TXT."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
@@ -1047,8 +1025,7 @@
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "webhook": {
             "type": "string",
@@ -1067,9 +1044,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "statusId": {
             "type": "string",
@@ -1113,13 +1088,11 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or TXT.",
-            "forceRequire": true
+            "description": "File to upload: Must be a PDF, JPEG, PNG, TIFF, or TXT."
           },
           "fileId": {
             "type": "string",
             "description": "Custom ID for document. If not present, will default to a random UUID.",
-            "setDefault": "UUID",
             "default": "UUID",
             "examples": ["file1.pdf"]
           },
@@ -1135,8 +1108,7 @@
           },
           "metadata": {
             "type": "object",
-            "description": "Custom JSON to be included in the returned response.",
-            "forceType": "object"
+            "description": "Custom JSON to be included in the returned response."
           },
           "webhook": {
             "type": "string",
@@ -1155,9 +1127,7 @@
           },
           "outputURLHeaders": {
             "type": "object",
-            "description": "Request headers to include in the PUT request to the output URL.",
-            "forceType": "object",
-            "removeDefault": true
+            "description": "Request headers to include in the PUT request to the output URL."
           },
           "statusId": {
             "type": "string",
@@ -1187,8 +1157,7 @@
           },
           "id": {
             "type": "string",
-            "description": "Request ID.",
-            "removeDefault": true
+            "description": "Request ID."
           },
           "pages": {
             "type": "integer",
@@ -1211,8 +1180,7 @@
               "$ref": "#/components/schemas/KeyValuePair"
             },
             "type": "array",
-            "description": "List of key value pairs found in the document.",
-            "removeDefault": true
+            "description": "List of key value pairs found in the document."
           },
           "modelType": {
             "type": "string",
@@ -1243,8 +1211,7 @@
               "$ref": "#/components/schemas/ExtractedTable"
             },
             "type": "array",
-            "description": "Tables found in the document.",
-            "removeDefault": true
+            "description": "Tables found in the document."
           },
           "metadata": {
             "type": "object",
@@ -1383,8 +1350,7 @@
               "type": "number"
             },
             "type": "array",
-            "description": "Bounding box coordinates of content.",
-            "removeDefault": true
+            "description": "Bounding box coordinates of content."
           },
           "content": {
             "type": "string",
@@ -1535,8 +1501,7 @@
               "type": "number"
             },
             "type": "array",
-            "description": "Bounding box coordinates of content.",
-            "removeDefault": true
+            "description": "Bounding box coordinates of content."
           },
           "confidence": {
             "type": "number",
@@ -1609,8 +1574,7 @@
               "type": "number"
             },
             "type": "array",
-            "description": "Bounding box coordinates of content.",
-            "removeDefault": true
+            "description": "Bounding box coordinates of content."
           },
           "confidence": {
             "type": "number",
@@ -1643,7 +1607,7 @@
           "pattern": "YYYY-MM-DD",
           "title": "apiVersion",
           "description": "API Version",
-          "default": "2025-07-10"
+          "default": "2025-08-07"
         },
         "description": "API Version"
       },
@@ -1695,34 +1659,6 @@
           "default": 2
         },
         "description": "Forms model version (1 or 2)"
-      },
-      "modelId": {
-        "name": "custom_model_id",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "title": "custom_model_id",
-          "description": "Custom model ID"
-        },
-        "description": "Custom model ID"
-      },
-      "async": {
-        "name": "async",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "description": "Runs request asynchronously"
-        },
-        "description": "Runs request asynchronously"
       }
     },
     "responses": {
@@ -1833,9 +1769,7 @@
               "Model failure": {
                 "value": {
                   "status": "FAILURE",
-                  "message": "A model error occurred. Please report this to support@lazarusai.com.",
-                  "apiVersion": "YYYY-MM-DD",
-                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                  "message": "A model error occurred. Please report this to support@lazarusai.com."
                 }
               }
             }
