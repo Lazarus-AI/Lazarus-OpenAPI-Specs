@@ -744,7 +744,7 @@
           "answer": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -755,7 +755,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -918,7 +918,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -1143,7 +1143,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -2074,7 +2074,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -2178,7 +2178,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -2251,7 +2251,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -2329,7 +2329,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -2499,7 +2499,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -3057,7 +3057,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
@@ -3282,7 +3282,7 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "type": "array"
               },
               {
                 "type": "string"
