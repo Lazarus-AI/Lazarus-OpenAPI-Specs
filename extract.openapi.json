@@ -195,7 +195,7 @@
     }
   },
   "webhooks": {
-    "async-request-submitted": {
+    "rikai-async-request-submitted": {
       "post": {
         "tags": [
           "Webhook Responses"
@@ -220,7 +220,7 @@
         }
       }
     },
-    "async-request-running": {
+    "rikai-async-request-running": {
       "post": {
         "tags": [
           "Webhook Responses"
@@ -245,7 +245,7 @@
         }
       }
     },
-    "async-request-failed": {
+    "rikai-async-request-failed": {
       "post": {
         "tags": [
           "Webhook Responses"
@@ -270,7 +270,7 @@
         }
       }
     },
-    "async-request-output-url-warning": {
+    "rikai-async-request-output-url-warning": {
       "post": {
         "tags": [
           "Webhook Responses"
@@ -295,7 +295,7 @@
         }
       }
     },
-    "request-succeeded": {
+    "rikai-request-succeeded": {
       "post": {
         "tags": [
           "Webhook Responses"
@@ -320,7 +320,7 @@
         }
       }
     },
-    "request-succeeded-truncated-response": {
+    "rikai-request-succeeded-truncated-response": {
       "post": {
         "tags": [
           "Webhook Responses"
@@ -420,7 +420,7 @@
             "type": "string"
           },
           "code": {
-            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/Rikai/webhook-error-codes) for descriptions of all the error codes.",
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes.",
             "type": "integer"
           },
           "message": {
@@ -859,6 +859,732 @@
           }
         ]
       },
+      "ContentType": {
+        "type": "string",
+        "enum": [
+          "application/json",
+          "application/zip"
+        ],
+        "title": "ContentType",
+        "required": [],
+        "properties": {}
+      },
+      "ContextGranularity": {
+        "type": "string",
+        "enum": [
+          "fine",
+          "page"
+        ],
+        "title": "ContextGranularity",
+        "required": [],
+        "properties": {}
+      },
+      "ContextSettings": {
+        "properties": {
+          "contextGranularity": {
+            "$ref": "#/components/schemas/ContextGranularity",
+            "description": "Controls the granularity of document content included in the model context.",
+            "default": "page"
+          },
+          "imagesOnly": {
+            "type": "boolean",
+            "description": "Turn on to increase performance for image-only documents.",
+            "default": false
+          },
+          "includeOcrInput": {
+            "type": "boolean",
+            "description": "Determines if OCR data is sent in the prompt.",
+            "default": true
+          },
+          "maxContext": {
+            "type": "integer",
+            "description": "Specifies the amount of context sent to the model.",
+            "default": 10
+          },
+          "splitPageImages": {
+            "type": "boolean",
+            "description": "Turn on to increase image processing by sending more information to the model.",
+            "default": false
+          },
+          "textOnly": {
+            "type": "boolean",
+            "description": "Turn on to increase performance for text-only documents.",
+            "default": false
+          },
+          "variableContextSize": {
+            "type": "boolean",
+            "description": "Determines whether the context used by the model is dynamically selected. Turning this to `true` means `max_context` will be ignored.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ContextSettings",
+        "required": []
+      },
+      "EngineBulkInput": {
+        "properties": {
+          "file": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FileURL"
+                },
+                "type": "array"
+              },
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FileBase64"
+                },
+                "type": "array"
+              }
+            ],
+            "description": "File data, either base64 encoded file or file URL."
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A string containing the prompt."
+          }
+        },
+        "type": "object",
+        "required": [
+          "file",
+          "prompt"
+        ],
+        "title": "EngineBulkInput"
+      },
+      "EngineBulkRequestBody": {
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/EngineBulkInput",
+            "description": "Model input."
+          },
+          "output": {
+            "$ref": "#/components/schemas/EngineOutputParameters",
+            "description": "Output URL and HTTP request parameters to receive results asynchronously."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/EngineSettings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              [
+                "file1.pdf",
+                "file2.pdf"
+              ]
+            ]
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "description": "Custom JSON to be included in the returned response.",
+            "type": "object"
+          },
+          "rasterize": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for status URL and output URL if they exist.",
+            "default": false
+          },
+          "statusWebhook": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StatusURL"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status URL to send status updates for the request."
+          }
+        },
+        "type": "object",
+        "required": [
+          "input",
+          "output"
+        ],
+        "title": "EngineBulkRequestBody"
+      },
+      "EngineBulkResponse": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "jobIds": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "description": "Job ID to track the bulk request progress"
+          },
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "failedRequests": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "File requests that failed to queue."
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Language results are translated into."
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "warning": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Warnings such as webhook failure."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "EngineBulkResponse"
+      },
+      "EngineErrorWebhook": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
+          },
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Present only when the request fails. Contains details about the error."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job ID to track the bulk request progress"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "apiVersion",
+          "id",
+          "inputId",
+          "status",
+          "code",
+          "endTime",
+          "message",
+          "startTime"
+        ],
+        "title": "EngineErrorWebhook"
+      },
+      "EngineJobStatusResponse": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version passed into the header of this status request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID for this status request. This is not an identifier of the model request being checked by the job ID."
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used by the request identified by the job ID."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Response code. Possible values are `200`, `400`, `401`, `403`, `404`, `413`, `521`, and `522`."
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "End time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the end time of the model request being checked by job ID."
+          },
+          "error": {
+            "description": "Additional error details about the failure of the model request identified by job ID, if available.",
+            "type": "object"
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Input ID of the job identified by the job ID. This is the `inputId` from the original request, if one was provided."
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status message."
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Start time for this status request, recorded in epoch (Unix timestamp, ms) format. This is not the start time of the model request being checked by status ID."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "EngineJobStatusResponse"
+      },
+      "EngineOutputParameters": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON will be sent."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/ContentType",
+            "description": "Determines file type of output file. Must be 'application/json' or 'application/zip'.",
+            "default": "application/json"
+          },
+          "headers": {
+            "description": "Request headers to include in the PUT request to the output URL.",
+            "type": "object"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT"
+            ],
+            "description": "HTTP method to use for output URL. Must be 'POST' or 'PUT'.",
+            "default": "POST"
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTPAuthentication"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "SFTP server authentication info for the output `url`."
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "EngineOutputParameters"
+      },
+      "EngineRunningWebhook": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job ID to track the bulk request progress"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "apiVersion",
+          "id",
+          "inputId",
+          "status",
+          "startTime"
+        ],
+        "title": "EngineRunningWebhook"
+      },
+      "EngineSettings": {
+        "properties": {
+          "advancedExplainability": {
+            "type": "boolean",
+            "description": "When set to `false`, the model processes requests faster but does not return the full explainability. Set to `true` to include full explainability.",
+            "default": false
+          },
+          "modelSettings": {
+            "$ref": "#/components/schemas/ModelSettings",
+            "description": "Model settings. Backend defaults are applied if omitted."
+          }
+        },
+        "type": "object",
+        "title": "EngineSettings",
+        "required": []
+      },
+      "EngineSubmittedWebhook": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job ID to track the bulk request progress"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "apiVersion",
+          "id",
+          "inputId",
+          "status"
+        ],
+        "title": "EngineSubmittedWebhook"
+      },
+      "EngineSuccessWebhook": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Response code. Possible values are `200`, `400`, `401`, `403`, `404`, `413`, `521`, and `522`."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job ID to track the bulk request progress"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "apiVersion",
+          "id",
+          "inputId",
+          "status",
+          "code",
+          "endTime",
+          "startTime"
+        ],
+        "title": "EngineSuccessWebhook"
+      },
+      "EngineWarningWebhook": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "inputId": {
+            "type": "string",
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
+          },
+          "warning": {
+            "$ref": "#/components/schemas/models__aie__aie_webhook__OutputURLFailureWarning",
+            "description": "Warnings such as webhook failure."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job ID to track the bulk request progress"
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "apiVersion",
+          "id",
+          "inputId",
+          "warning"
+        ],
+        "title": "EngineWarningWebhook"
+      },
+      "FileBase64": {
+        "properties": {
+          "base64": {
+            "type": "string",
+            "description": "Base64 encoded string for the file from which data will be extracted."
+          }
+        },
+        "type": "object",
+        "required": [
+          "base64"
+        ],
+        "title": "FileBase64"
+      },
+      "FileURL": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTPAuthentication"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "SFTP server authentication info for the input file `url`."
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "FileURL"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError",
+        "required": []
+      },
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
@@ -874,36 +1600,540 @@
         "title": "InputOutputSFTP",
         "required": []
       },
-      "OutputURLFailureWarning": {
+      "ModelCapability": {
+        "type": "string",
+        "enum": [
+          "standard"
+        ],
+        "title": "ModelCapability",
+        "required": [],
+        "properties": {}
+      },
+      "ModelSettings": {
         "properties": {
-          "message": {
-            "type": "string",
-            "description": "Status message."
+          "capability": {
+            "$ref": "#/components/schemas/ModelCapability",
+            "description": "The primary capability required for this request. Used to configure appropriate backend mechanisms.",
+            "default": "standard"
           },
-          "url": {
-            "type": "string",
-            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
+          "tier": {
+            "$ref": "#/components/schemas/ModelTier",
+            "description": "The performance tier used for the request. Tiers influence tradeoffs between latency, cost, and model performance.",
+            "default": "standard"
+          }
+        },
+        "type": "object",
+        "title": "ModelSettings",
+        "required": []
+      },
+      "ModelTier": {
+        "type": "string",
+        "enum": [
+          "premium",
+          "standard"
+        ],
+        "title": "ModelTier",
+        "required": [],
+        "properties": {}
+      },
+      "RikAIBase64Request": {
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
           },
-          "code": {
-            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/Rikai/webhook-error-codes) for descriptions of all the error codes.",
-            "type": "integer"
+          "question": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
+            "examples": [
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
+            ]
           },
-          "error": {
-            "description": "Present only when the request fails. Contains details about the error.",
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
             "type": "object"
           },
-          "field": {
+          "webhook": {
             "type": "string",
-            "description": "Name of the field causing an error.",
-            "default": "outputURL"
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
           }
         },
         "type": "object",
         "required": [
-          "message",
-          "url"
+          "base64",
+          "question"
         ],
-        "title": "OutputURLFailureWarning"
+        "title": "RikAIBase64Request"
+      },
+      "RikAIChatRequestBody": {
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
+            "examples": [
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
+            ]
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "RikAIChatRequestBody",
+        "required": [
+          "question"
+        ]
+      },
+      "RikAIFileRequest": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, SVG, HEIC, TIFF, TIF, TXT or GIF."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
+            "examples": [
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
+            ]
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "file",
+          "question"
+        ],
+        "title": "RikAIFileRequest"
+      },
+      "RikAIOCRRequestBody": {
+        "properties": {
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "type": "object"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
+            "examples": [
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
+            ]
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "inputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "ocr",
+          "question"
+        ],
+        "title": "RikAIOCRRequestBody"
+      },
+      "RikAIRequestBody": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RikAIURLRequest"
+          },
+          {
+            "$ref": "#/components/schemas/RikAIBase64Request"
+          }
+        ],
+        "title": "RikAIRequestBody",
+        "required": [],
+        "properties": {}
+      },
+      "RikAIResponse": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "questions": {
+            "description": "Number of questions asked.",
+            "type": "integer"
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "baseModel": {
+            "description": "Base model used during data extraction.",
+            "type": "string"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Answer"
+            },
+            "type": "array",
+            "description": "Question and answer data for each question asked in the request."
+          },
+          "documentId": {
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated.",
+            "type": "string"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language results are translated into."
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "JSON from the request `metadata` field."
+          },
+          "settings": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "JSON containing any custom user settings specified in the request."
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "RikAIResponse"
+      },
+      "RikAIURLRequest": {
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
+            "examples": [
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
+            ]
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "inputURL",
+          "question"
+        ],
+        "title": "RikAIURLRequest"
       },
       "RunningWebhook": {
         "properties": {
@@ -978,6 +2208,52 @@
         ],
         "title": "SFTP"
       },
+      "SFTPAuthentication": {
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "SFTP username."
+          },
+          "password": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "SFTP password. Either `password` or `privateKey` are required."
+          },
+          "privateKey": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Base64 encoded SFTP private key. Either `password` or `privateKey` are required."
+          },
+          "privateKeyPassphrase": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional passphrase to use if private key is protected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "title": "SFTPAuthentication"
+      },
       "Settings": {
         "properties": {
           "returnConfidence": {
@@ -1001,6 +2277,26 @@
         "title": "StatusEnum",
         "required": [],
         "properties": {}
+      },
+      "StatusURL": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "description": "Status URL to send status updates for the request."
+          },
+          "headers": {
+            "description": "Status URL to send status updates for the request.",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "StatusURL"
       },
       "SubmittedWebhook": {
         "properties": {
@@ -1187,10 +2483,40 @@
         "title": "SuccessWebhookShort",
         "required": []
       },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
       "WarningWebhook": {
         "properties": {
           "warning": {
-            "$ref": "#/components/schemas/OutputURLFailureWarning",
+            "$ref": "#/components/schemas/models__webhook__OutputURLFailureWarning",
             "description": "Warnings such as outputURL failure."
           },
           "statusId": {
@@ -1223,6 +2549,407 @@
           "warning"
         ],
         "title": "WarningWebhook"
+      },
+      "ZipBase64Request": {
+        "properties": {
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
+            "examples": [
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "bulkStartTime": {
+            "type": "integer",
+            "description": "Bulk request start time in Unix timestamp in milliseconds."
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "default": true
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          },
+          "zipQueuedTime": {
+            "type": "integer",
+            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
+          }
+        },
+        "type": "object",
+        "required": [
+          "base64",
+          "question",
+          "webhook"
+        ],
+        "title": "ZipBase64Request"
+      },
+      "ZipRequestBody": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ZipURLRequest"
+          },
+          {
+            "$ref": "#/components/schemas/ZipBase64Request"
+          }
+        ],
+        "title": "ZipRequestBody",
+        "required": [],
+        "properties": {}
+      },
+      "ZipResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code. Possible values are `200`, `400`, `401`, `403`, `404`, `413`, `521`, and `522`."
+          },
+          "model": {
+            "type": "string",
+            "description": "Model used to process the document."
+          },
+          "organization": {
+            "type": "string",
+            "description": "Organization ID."
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "apiVersion": {
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "type": "string"
+          },
+          "documentId": {
+            "type": "string",
+            "description": "The unique identifier for the document. If `fileId` is supplied in the request, it is used as the `documentId`; otherwise, a random UUID is generated."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "JSON from the request `metadata` field."
+          },
+          "questions": {
+            "description": "Number of questions asked.",
+            "type": "integer"
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "statusId": {
+            "type": "string",
+            "description": "A list of document IDs, each representing an uploaded file. Each ID is a randomly generated UUID. These IDs serve as input for retrieving the status of an asynchronous request via the `/rikai/zip/async/{statusId}` endpoint."
+          },
+          "warning": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Warnings such as webhook failure."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "ZipResponse"
+      },
+      "ZipURLRequest": {
+        "properties": {
+          "inputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
+            "examples": [
+              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
+            ]
+          },
+          "webhook": {
+            "type": "string",
+            "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "webhookHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the POST requests to the webhook."
+          },
+          "webhookSendFull": {
+            "type": "boolean",
+            "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
+            "default": true
+          },
+          "bulkStartTime": {
+            "type": "integer",
+            "description": "Bulk request start time in Unix timestamp in milliseconds."
+          },
+          "fileId": {
+            "type": "string",
+            "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ],
+            "default": "UUID"
+          },
+          "forceOCR": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Custom JSON to be included in the returned response."
+          },
+          "outputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
+          },
+          "outputURLHeaders": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Request headers to include in the PUT request to the output URL."
+          },
+          "returnJSON": {
+            "type": "boolean",
+            "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
+            "default": true
+          },
+          "sftp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SFTP"
+              },
+              {
+                "$ref": "#/components/schemas/InputOutputSFTP"
+              }
+            ],
+            "description": "SFTP authentication details. Required for SFTP URLs in `inputURL` or `outputURL`. Option to provide separate server authentication info for `inputURL` and `outputURL`."
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for static IP for webhook and outputURL if they exist",
+            "default": false
+          },
+          "zipQueuedTime": {
+            "type": "integer",
+            "description": "Time when /zip is sent to task queue in Unix timestamp in milliseconds."
+          }
+        },
+        "type": "object",
+        "required": [
+          "inputURL",
+          "question",
+          "webhook"
+        ],
+        "title": "ZipURLRequest"
+      },
+      "models__aie__aie_webhook__OutputURLFailureWarning": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Present only when the request fails. Contains details about the error."
+          },
+          "field": {
+            "type": "string",
+            "description": "Name of the field causing an error.",
+            "default": "output.url"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON will be sent."
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "OutputURLFailureWarning"
+      },
+      "models__webhook__OutputURLFailureWarning": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Status message."
+          },
+          "code": {
+            "description": "Response code. The possible error codes you may receive at your webhook upon failure are `400`, `401`, `403`, `404`, `413`, `521`, and `522`. See this [guide](/../../models/webhook-error-codes) for descriptions of all the error codes.",
+            "type": "integer"
+          },
+          "error": {
+            "description": "Present only when the request fails. Contains details about the error.",
+            "type": "object"
+          },
+          "field": {
+            "type": "string",
+            "description": "Name of the field causing an error.",
+            "default": "outputURL"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL where resulting [ZIP file](../../outputurl) or JSON can be sent. Must be open to PUT requests."
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "OutputURLFailureWarning"
       },
       "ErrorMessage": {
         "properties": {
@@ -1393,6 +3120,26 @@
                 "value": {
                   "status": "FAILURE",
                   "message": "An internal error occurred. Please retry your request and report this to support@lazarusai.com.",
+                  "apiVersion": "YYYY-MM-DD",
+                  "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
+                }
+              }
+            }
+          }
+        }
+      },
+      "522": {
+        "description": "Model failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorMessage"
+            },
+            "examples": {
+              "Model failure": {
+                "value": {
+                  "status": "FAILURE",
+                  "message": "A RikAI2 error occurred. Please report this to support@lazarusai.com.",
                   "apiVersion": "YYYY-MM-DD",
                   "id": "073b8e4c-3bc9-4105-8e3a-887a6aa7b4c5"
                 }
