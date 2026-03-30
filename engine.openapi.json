@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Engine",
+    "title": "Applied Intelligence Engine",
     "version": "",
     "description": "",
     "contact": {
@@ -22,8 +22,8 @@
         "tags": [
           "Requests"
         ],
-        "summary": "",
-        "description": "",
+        "summary": "Bulk file upload",
+        "description": "Upload 1 or more files to the Applied Intelligence Engine for asynchronous processing.\n\n\n#### Input\nEach request requires a `prompt` and a `file`. The following file upload options are supported (Content-Type `application/json` only):\n- `file.url` \u2014 link to file\n- `file.base64` \u2014 base64 encoded file data\n\n#### Output\nTo receive results at a URL, define an `output` config. The `output` config supports parameters to define the type of output request, including:\n- `contentType` \u2014 the content type of the response delivered to your URL (defaults to `application/json`)\n- `method` \u2014 the HTTP method used when sending results to your URL (defaults to `POST`)\n\n#### Status updates\nOpt in to the `statusWebhook` to receive updates as asynchronous requests process. The `statusWebhook` URL can be the same URL as the `output` URL.\n\n#### Model settings\nUse `modelSettings` to optionally configure the backend processing components:\n- `capability` \u2014 selects the processing capability\n- `tier` \u2014 selects the performance tier\n\nTo access additional capabilities and tiers beyond `standard`, contact your Lazarus representative.\n\n",
         "operationId": "post_engine_bulk",
         "parameters": [
           {
@@ -111,8 +111,8 @@
         "tags": [
           "Requests"
         ],
-        "summary": "",
-        "description": "",
+        "summary": "Get async request status",
+        "description": "Retrieves the status of an asynchronous request to `/engine/bulk`. Identifiable by `jobId`.",
         "operationId": "get_engine_job_status",
         "parameters": [
           {
