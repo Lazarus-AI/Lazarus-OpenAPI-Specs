@@ -23,7 +23,7 @@
           "Requests"
         ],
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to the Applied Intelligence Engine for asynchronous processing.\n\n\n#### Input\nEach request requires a `prompt` and a `file`. The following file upload options are supported (Content-Type `application/json` only):\n- `file.url` — link to file\n- `file.base64` — base64 encoded file data\n\n#### Output\nTo receive results at a URL, define an `output` config. The `output` config supports parameters to define the type of output request, including:\n- `contentType` — the content type of the response delivered to your URL (defaults to `application/json`)\n- `method` — the HTTP method used when sending results to your URL (defaults to `POST`)\n\n#### Status updates\nOpt in to the `statusWebhook` to receive updates as asynchronous requests process. The `statusWebhook` URL can be the same URL as the `output` URL.\n\n#### Model settings\nUse `modelSettings` to optionally configure the backend processing components:\n- `capability` — selects the processing capability\n- `tier` — selects the performance tier\n\nTo access additional capabilities and tiers beyond `standard`, contact your Lazarus representative.\n\n",
+        "description": "Upload 1 or more files to the Applied Intelligence Engine for asynchronous processing.\n\n\n#### Input\nEach request requires a `prompt` and a `file`. The following file upload options are supported (Content-Type `application/json` only):\n- `file.url` \u2014 link to file\n- `file.base64` \u2014 base64 encoded file data\n\n#### Output\nTo receive results at a URL, define an `output` config. The `output` config supports parameters to define the type of output request, including:\n- `contentType` \u2014 the content type of the response delivered to your URL (defaults to `application/json`)\n- `method` \u2014 the HTTP method used when sending results to your URL (defaults to `POST`)\n\n#### Status updates\nOpt in to the `statusWebhook` to receive updates as asynchronous requests process. The `statusWebhook` URL can be the same URL as the `output` URL.\n\n#### Model settings\nUse `modelSettings` to optionally configure the backend processing components:\n- `capability` \u2014 selects the processing capability\n- `tier` \u2014 selects the performance tier\n\nTo access additional capabilities and tiers beyond `standard`, contact your Lazarus representative.\n\n",
         "operationId": "post_engine_bulk",
         "parameters": [
           {
@@ -1125,7 +1125,14 @@
             "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
           },
           "message": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "Status message."
           },
           "startTime": {
@@ -1258,7 +1265,7 @@
           "url": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting [ZIP file](../../outputurl) or JSON will be sent."
+            "description": "URL where resulting [ZIP file](../outputurl) or JSON will be sent."
           },
           "contentType": {
             "$ref": "#/components/schemas/ContentType",
@@ -1266,7 +1273,7 @@
             "default": "application/json"
           },
           "headers": {
-            "description": "Request headers to include in the PUT request to the output URL.",
+            "description": "Request headers to include in the POST or PUT request to the output URL.",
             "type": "object"
           },
           "method": {
@@ -1355,6 +1362,18 @@
           "modelSettings": {
             "$ref": "#/components/schemas/ModelSettings",
             "description": "Model settings. Backend defaults are applied if omitted."
+          },
+          "responseSchema": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "JSON schema for structured response formatting (OpenAI strict mode)."
           }
         },
         "type": "object",
@@ -2950,7 +2969,7 @@
                 "type": "null"
               }
             ],
-            "description": "URL where resulting [ZIP file](../../outputurl) or JSON will be sent."
+            "description": "URL where resulting [ZIP file](../outputurl) or JSON will be sent."
           }
         },
         "type": "object",

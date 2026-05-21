@@ -1158,7 +1158,14 @@
             "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
           },
           "message": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "Status message."
           },
           "startTime": {
@@ -1291,7 +1298,7 @@
           "url": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL where resulting [ZIP file](../../outputurl) or JSON will be sent."
+            "description": "URL where resulting [ZIP file](../outputurl) or JSON will be sent."
           },
           "contentType": {
             "$ref": "#/components/schemas/ContentType",
@@ -1299,7 +1306,7 @@
             "default": "application/json"
           },
           "headers": {
-            "description": "Request headers to include in the PUT request to the output URL.",
+            "description": "Request headers to include in the POST or PUT request to the output URL.",
             "type": "object"
           },
           "method": {
@@ -1388,6 +1395,18 @@
           "modelSettings": {
             "$ref": "#/components/schemas/ModelSettings",
             "description": "Model settings. Backend defaults are applied if omitted."
+          },
+          "responseSchema": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "JSON schema for structured response formatting (OpenAI strict mode)."
           }
         },
         "type": "object",
@@ -2905,7 +2924,7 @@
                 "type": "null"
               }
             ],
-            "description": "URL where resulting [ZIP file](../../outputurl) or JSON will be sent."
+            "description": "URL where resulting [ZIP file](../outputurl) or JSON will be sent."
           }
         },
         "type": "object",
