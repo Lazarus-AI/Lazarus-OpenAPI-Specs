@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "RikY2",
+    "title": "Applied Intelligence Engine",
     "version": "",
     "description": "",
     "contact": {
@@ -17,313 +17,14 @@
     "summary": ""
   },
   "paths": {
-    "/rikai/custom/riky2": {
-      "post": {
-        "tags": [
-          "Requests"
-        ],
-        "summary": "Document input, JSON response",
-        "description": "Make a request to RikY2 and receive JSON response data.\n\n#### File upload options\nWe support requests with Content-Type `application/json` or `multipart/form-data`.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n- `[multipart/form-data]` **file**  upload local file from browser",
-        "operationId": "post_riky2",
-        "parameters": [
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIRequestBody"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIFileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "413": {
-            "$ref": "#/components/responses/413"
-          },
-          "429": {
-            "$ref": "#/components/responses/429"
-          },
-          "521": {
-            "$ref": "#/components/responses/521"
-          },
-          "522": {
-            "$ref": "#/components/responses/522"
-          }
-        }
-      }
-    },
-    "/rikai/ocr/riky2": {
-      "post": {
-        "tags": [
-          "Requests"
-        ],
-        "summary": "OCR input, JSON response",
-        "description": "Make a request to RikY2 by providing OCR results as input, receive JSON response data. This method skips the OCR process that typically precedes RikY2 calls. It is ideal for asking multiple questions of the same document.",
-        "operationId": "post_ocr_riky2",
-        "parameters": [
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIOCRRequestBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "413": {
-            "$ref": "#/components/responses/413"
-          },
-          "429": {
-            "$ref": "#/components/responses/429"
-          },
-          "521": {
-            "$ref": "#/components/responses/521"
-          },
-          "522": {
-            "$ref": "#/components/responses/522"
-          }
-        }
-      }
-    },
-    "/rikai/zip/riky2": {
-      "post": {
-        "tags": [
-          "Requests"
-        ],
-        "summary": "Document input, ZIP file response",
-        "description": "Make a request to RikY2 and receive response data in a ZIP file.\n To process your request asynchronously, include the `async` query parameter. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
-        "operationId": "post_zip_riky2",
-        "parameters": [
-          {
-            "name": "async",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "async",
-              "description": "Runs request asynchronously"
-            },
-            "description": "Runs request asynchronously"
-          },
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ZipRequestBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ZipResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "413": {
-            "$ref": "#/components/responses/413"
-          },
-          "429": {
-            "$ref": "#/components/responses/429"
-          },
-          "521": {
-            "$ref": "#/components/responses/521"
-          },
-          "522": {
-            "$ref": "#/components/responses/522"
-          }
-        }
-      }
-    },
-    "/rikai/bulk/riky2": {
+    "/engine/bulk": {
       "post": {
         "tags": [
           "Requests"
         ],
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikY2 for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
-        "operationId": "post_bulk_riky2",
+        "description": "Upload 1 or more files to the Applied Intelligence Engine for asynchronous processing.\n\n\n#### Input\nEach request requires a `prompt` and a `file`. The following file upload options are supported (Content-Type `application/json` only):\n- `file.url` \u2014 link to file\n- `file.base64` \u2014 base64 encoded file data\n\n#### Output\nTo receive results at a URL, define an `output` config. The `output` config supports parameters to define the type of output request, including:\n- `contentType` \u2014 the content type of the response delivered to your URL (defaults to `application/json`)\n- `method` \u2014 the HTTP method used when sending results to your URL (defaults to `POST`)\n\n#### Status updates\nOpt in to the `statusWebhook` to receive updates as asynchronous requests process. The `statusWebhook` URL can be the same URL as the `output` URL.\n\n#### Model settings\nUse `modelSettings` to optionally configure the backend processing components:\n- `capability` \u2014 selects the processing capability\n- `tier` \u2014 selects the performance tier\n\nTo access additional capabilities and tiers beyond `standard`, contact your Lazarus representative.\n\n",
+        "operationId": "post_engine_bulk",
         "parameters": [
           {
             "name": "orgId",
@@ -368,7 +69,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkRequestBody"
+                "$ref": "#/components/schemas/EngineBulkRequestBody"
               }
             }
           }
@@ -379,7 +80,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BulkResponse"
+                  "$ref": "#/components/schemas/EngineBulkResponse"
                 }
               }
             }
@@ -405,117 +106,25 @@
         }
       }
     },
-    "/rikai/chat/riky2": {
-      "post": {
-        "tags": [
-          "Requests"
-        ],
-        "summary": "Chat, no file input, JSON response",
-        "description": "Make a RikY2 request using prompt as context. No document upload.",
-        "operationId": "post_chat_riky2",
-        "parameters": [
-          {
-            "name": "orgId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "orgId",
-              "description": "Organization ID"
-            },
-            "description": "Organization ID"
-          },
-          {
-            "name": "authKey",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "title": "authKey",
-              "description": "Authentication key"
-            },
-            "description": "Authentication key"
-          },
-          {
-            "name": "apiVersion",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "apiVersion",
-              "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-            },
-            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RikAIChatRequestBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RikAIResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "413": {
-            "$ref": "#/components/responses/413"
-          },
-          "429": {
-            "$ref": "#/components/responses/429"
-          },
-          "521": {
-            "$ref": "#/components/responses/521"
-          },
-          "522": {
-            "$ref": "#/components/responses/522"
-          }
-        }
-      }
-    },
-    "/rikai/zip/async/{statusId}": {
+    "/engine/jobs/{jobId}/status": {
       "get": {
         "tags": [
           "Requests"
         ],
         "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/riky2?async=True` or `/rikai/bulk/riky2`. Identifiable by `statusId`.",
-        "operationId": "get_async_status",
+        "description": "Retrieves the status of an asynchronous request to `/engine/bulk`. Identifiable by `jobId`.",
+        "operationId": "get_engine_job_status",
         "parameters": [
           {
-            "name": "statusId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "statusId",
-              "description": "Status ID"
+              "title": "jobId",
+              "description": "Job ID to track the bulk request progress"
             },
-            "description": "Status ID"
+            "description": "Job ID to track the bulk request progress"
           },
           {
             "name": "orgId",
@@ -561,7 +170,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AsyncStatusResponse"
+                  "$ref": "#/components/schemas/EngineJobStatusResponse"
                 }
               }
             }
@@ -586,19 +195,19 @@
     }
   },
   "webhooks": {
-    "rikai-async-request-submitted": {
+    "engine-async-request-submitted": {
       "post": {
         "tags": [
           "Webhook Responses"
         ],
         "summary": "Async Request Submitted",
-        "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the `webhook` provided in your request body.",
+        "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_submitted",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SubmittedWebhook"
+                "$ref": "#/components/schemas/EngineSubmittedWebhook"
               }
             }
           },
@@ -611,19 +220,19 @@
         }
       }
     },
-    "rikai-async-request-running": {
+    "engine-async-request-running": {
       "post": {
         "tags": [
           "Webhook Responses"
         ],
         "summary": "Async Request Running",
-        "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided in your request body.",
+        "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_running",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RunningWebhook"
+                "$ref": "#/components/schemas/EngineRunningWebhook"
               }
             }
           },
@@ -636,19 +245,19 @@
         }
       }
     },
-    "rikai-async-request-failed": {
+    "engine-async-request-failed": {
       "post": {
         "tags": [
           "Webhook Responses"
         ],
         "summary": "Async Request Failed",
-        "description": "When an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the webhook provided in your request body.",
+        "description": "If an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_failed",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AsyncWebhookError"
+                "$ref": "#/components/schemas/EngineErrorWebhook"
               }
             }
           },
@@ -661,19 +270,19 @@
         }
       }
     },
-    "rikai-async-request-output-url-warning": {
+    "engine-async-request-output-url-warning": {
       "post": {
         "tags": [
           "Webhook Responses"
         ],
         "summary": "Async Request OutputURL Failure Warning",
-        "description": "When our PUT request to your `outputURL` fails, we'll send a POST request with this warning message to the webhook provided in your request body. Results will be posted to this webhook in a separate request.",
+        "description": "If our request to your output URL fails, we'll send a POST request with this warning message to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_output_url_warning",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WarningWebhook"
+                "$ref": "#/components/schemas/EngineWarningWebhook"
               }
             }
           },
@@ -686,44 +295,19 @@
         }
       }
     },
-    "rikai-request-succeeded": {
+    "engine-async-request-succeeded": {
       "post": {
         "tags": [
           "Webhook Responses"
         ],
         "summary": "Request Succeeded",
-        "description": "When a request completes successfully, we'll send a POST request with full response data to the webhook provided in your request body.",
-        "operationId": "webhook_post_request_succeeded",
+        "description": "When an async request completes successfully, we'll send a POST request with `status: SUCCESS` to the status webhook provided in your request body. Full API results will be posted to the output URL provided in the request body.",
+        "operationId": "webhook_post_async_request_succeeded",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SuccessWebhook"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Our API expects a 200 status code response to our webhook requests"
-          }
-        }
-      }
-    },
-    "rikai-request-succeeded-truncated-response": {
-      "post": {
-        "tags": [
-          "Webhook Responses"
-        ],
-        "summary": "Request Succeeded Truncated",
-        "description": "When a request completes successfully and your request body includes `webhookSendFull: False`, we'll send a POST request with truncated response data to the webhook provided in your request body.",
-        "operationId": "webhook_post_request_succeeded_truncated",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SuccessWebhookShort"
+                "$ref": "#/components/schemas/EngineSuccessWebhook"
               }
             }
           },
@@ -744,10 +328,15 @@
           "answer": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
             "description": "Model's answer to the question asked."
@@ -755,10 +344,15 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
             "description": "The question asked."
@@ -778,6 +372,10 @@
           "translatedContext": {
             "type": "string",
             "description": "Translated context if the `language` field was included in the request"
+          },
+          "warning": {
+            "type": "string",
+            "description": "Warning about feature or model usage"
           }
         },
         "type": "object",
@@ -918,24 +516,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "fileId": {
             "anyOf": [
@@ -957,7 +559,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "webhookHeaders": {
@@ -1022,36 +624,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkBase64Request",
-        "examples": [
-          {
-            "base64": "YOUR_BASE64_ENCODED_FILE",
-            "question": [
-              [
-                "What is the name of the patient?"
-              ],
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ],
-            "webhook": "YOUR_WEBHOOK_URL",
-            "settings": null,
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "returnOCR": false,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "BulkBase64Request"
       },
       "BulkRequestBody": {
         "oneOf": [
@@ -1143,24 +716,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "fileId": {
             "anyOf": [
@@ -1182,7 +759,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "webhookHeaders": {
@@ -1247,36 +824,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkURLRequest",
-        "examples": [
-          {
-            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
-            "question": [
-              [
-                "What is the name of the patient?"
-              ],
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ],
-            "webhook": "YOUR_WEBHOOK_URL",
-            "settings": null,
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "returnOCR": false,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "BulkURLRequest"
       },
       "ContentType": {
         "type": "string",
@@ -2093,19 +1641,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2150,7 +1702,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "staticIP": {
@@ -2164,52 +1716,30 @@
           "base64",
           "question"
         ],
-        "title": "RikAIBase64Request",
-        "examples": [
-          {
-            "base64": "YOUR_BASE64_ENCODED_FILE",
-            "question": [
-              [
-                "What is the name of the patient?"
-              ],
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ],
-            "webhook": null,
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "ocr": null,
-            "returnOCR": false,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "RikAIBase64Request"
       },
       "RikAIChatRequestBody": {
         "properties": {
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2270,19 +1800,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2323,7 +1857,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "staticIP": {
@@ -2348,19 +1882,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2377,6 +1915,20 @@
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
           },
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
@@ -2384,6 +1936,11 @@
               "file1.pdf"
             ],
             "default": "UUID"
+          },
+          "inputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "language": {
             "type": "string",
@@ -2396,7 +1953,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
@@ -2518,19 +2075,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2575,7 +2136,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
@@ -2600,33 +2161,7 @@
           "inputURL",
           "question"
         ],
-        "title": "RikAIURLRequest",
-        "examples": [
-          {
-            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
-            "question": [
-              [
-                "What is the name of the patient?"
-              ],
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ],
-            "webhook": null,
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "ocr": null,
-            "returnOCR": false,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "RikAIURLRequest"
       },
       "RunningWebhook": {
         "properties": {
@@ -3076,24 +2611,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhookHeaders": {
             "additionalProperties": true,
@@ -3152,7 +2691,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
@@ -3182,36 +2721,7 @@
           "question",
           "webhook"
         ],
-        "title": "ZipBase64Request",
-        "examples": [
-          {
-            "base64": "YOUR_BASE64_ENCODED_FILE",
-            "question": [
-              [
-                "What is the name of the patient?"
-              ],
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ],
-            "webhook": null,
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "ocr": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "returnOCR": false,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "ZipBase64Request"
       },
       "ZipRequestBody": {
         "oneOf": [
@@ -3301,24 +2811,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhookHeaders": {
             "additionalProperties": true,
@@ -3377,7 +2891,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
@@ -3407,36 +2921,7 @@
           "question",
           "webhook"
         ],
-        "title": "ZipURLRequest",
-        "examples": [
-          {
-            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
-            "question": [
-              [
-                "What is the name of the patient?"
-              ],
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ],
-            "webhook": null,
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "ocr": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "returnOCR": false,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "ZipURLRequest"
       },
       "models__aie__aie_webhook__OutputURLFailureWarning": {
         "properties": {
