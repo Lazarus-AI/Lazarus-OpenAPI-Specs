@@ -718,7 +718,7 @@
                 "type": "string"
               }
             ],
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "question": {
             "anyOf": [
@@ -938,7 +938,7 @@
                 "type": "array"
               }
             ],
-            "description": "File data, either base64 encoded file or file URL."
+            "description": "File to process. Supported types: `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`. Provide either a base64-encoded string or a file URL."
           },
           "prompt": {
             "type": "string",
@@ -1557,7 +1557,7 @@
         "properties": {
           "base64": {
             "type": "string",
-            "description": "Base64 encoded string for the file from which data will be extracted."
+            "description": "Base64 encoded string for the file to process. Supported types: `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           }
         },
         "type": "object",
@@ -1571,7 +1571,7 @@
           "url": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "sftp": {
             "anyOf": [
@@ -1815,7 +1815,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "File to upload: Must be a PDF, JPEG, JPG, PNG, SVG, HEIC, TIFF, TIF, TXT or GIF."
+            "description": "File to upload: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "question": {
             "anyOf": [
@@ -1951,7 +1951,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "language": {
             "type": "string",
@@ -2072,7 +2072,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "question": {
             "anyOf": [
@@ -2772,7 +2772,7 @@
           "inputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
-            "description": "URL for the file to extract data from: Must be a PDF, JPEG, JPG, PNG, HEIC, SVG, TIFF, TIF, TXT, or GIF."
+            "description": "URL for the file to extract data from: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "question": {
             "anyOf": [
