@@ -1359,6 +1359,10 @@
             "description": "When set to `false`, the model processes requests faster but does not return the full explainability. Set to `true` to include full explainability.",
             "default": false
           },
+          "explainabilitySettings": {
+            "$ref": "#/components/schemas/ExplainabilitySettings",
+            "description": "Explainability settings. Backend defaults are applied if omitted."
+          },
           "modelSettings": {
             "$ref": "#/components/schemas/ModelSettings",
             "description": "Model settings. Backend defaults are applied if omitted."
@@ -1519,6 +1523,18 @@
           "warning"
         ],
         "title": "EngineWarningWebhook"
+      },
+      "ExplainabilitySettings": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Enable source grounding and advanced response schema features.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ExplainabilitySettings",
+        "required": []
       },
       "FileBase64": {
         "properties": {

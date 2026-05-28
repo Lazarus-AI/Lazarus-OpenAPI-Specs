@@ -744,10 +744,15 @@
           "answer": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
             "description": "Model's answer to the question asked."
@@ -755,10 +760,15 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
             "description": "The question asked."
@@ -778,6 +788,10 @@
           "translatedContext": {
             "type": "string",
             "description": "Translated context if the `language` field was included in the request"
+          },
+          "warning": {
+            "type": "string",
+            "description": "Warning about feature or model usage"
           }
         },
         "type": "object",
@@ -918,24 +932,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "fileId": {
             "anyOf": [
@@ -957,7 +975,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "webhookHeaders": {
@@ -1143,24 +1161,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "fileId": {
             "anyOf": [
@@ -1182,7 +1204,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "webhookHeaders": {
@@ -1811,6 +1833,10 @@
             "description": "When set to `false`, the model processes requests faster but does not return the full explainability. Set to `true` to include full explainability.",
             "default": false
           },
+          "explainabilitySettings": {
+            "$ref": "#/components/schemas/ExplainabilitySettings",
+            "description": "Explainability settings. Backend defaults are applied if omitted."
+          },
           "modelSettings": {
             "$ref": "#/components/schemas/ModelSettings",
             "description": "Model settings. Backend defaults are applied if omitted."
@@ -1972,6 +1998,18 @@
         ],
         "title": "EngineWarningWebhook"
       },
+      "ExplainabilitySettings": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Enable source grounding and advanced response schema features.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ExplainabilitySettings",
+        "required": []
+      },
       "FileBase64": {
         "properties": {
           "base64": {
@@ -2093,19 +2131,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2150,7 +2192,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "staticIP": {
@@ -2197,19 +2239,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2270,19 +2316,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2323,7 +2373,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "staticIP": {
@@ -2348,19 +2398,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2377,6 +2431,20 @@
             "description": "Receive the full JSON response at the webhook URL upon request completion. Set to `false` to only receive request status.",
             "default": true
           },
+          "base64": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Base64 encoded string for the file from which data will be extracted. If the value is an array of base64 strings, each string will be combined into one PDF before getting run through the model."
+          },
           "fileId": {
             "type": "string",
             "description": "Custom ID for uploaded file, returned as `documentId` in the response. Requests with multiple files accept unique fileIds for each file. FileIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
@@ -2384,6 +2452,11 @@
               "file1.pdf"
             ],
             "default": "UUID"
+          },
+          "inputURL": {
+            "type": "string",
+            "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
+            "description": "URL for the file to extract data from: Must be a `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`."
           },
           "language": {
             "type": "string",
@@ -2396,7 +2469,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
@@ -2518,19 +2591,23 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhook": {
             "type": "string",
@@ -2575,7 +2652,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
@@ -3076,24 +3153,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhookHeaders": {
             "additionalProperties": true,
@@ -3152,7 +3233,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
@@ -3301,24 +3382,28 @@
           "question": {
             "anyOf": [
               {
-                "type": "list"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A string or list of strings containing the question(s) to be asked.",
-            "examples": [
-              [
-                "What is the first medication listed under Section C - Medical Information?",
-                "What is its strength?"
-              ]
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
             "pattern": " https?://(?:www\\\\.)?[a-zA-Z0-9./:]+",
             "description": "Webhook URL to which status updates and JSON response will be sent. This is where you will receive the model output. \n[Click here](/../../models/rikai/webhook-examples) for an example of a webhook URL response."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings",
+            "description": "Optional user settings.",
+            "type": "object"
           },
           "webhookHeaders": {
             "additionalProperties": true,
@@ -3377,7 +3462,7 @@
           },
           "returnOCR": {
             "type": "boolean",
-            "description": "Set to `true` to include OCR results in response.",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
             "default": false
           },
           "sftp": {
