@@ -923,6 +923,88 @@
         "title": "ContextSettings",
         "required": []
       },
+      "EngineAnswer": {
+        "properties": {
+          "answer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ],
+            "description": "Model's answer to the prompt."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The model prompt."
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Answer confidence score ranging from 0 to 1."
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Where in the document the answer was found."
+          },
+          "fieldConfidences": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Per-field confidence scores and source annotations. Populated when explainability is enabled."
+          },
+          "translated": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EngineTranslation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Translated answer if the `language` field was included in the request"
+          },
+          "warning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Warning about feature or model usage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "answer",
+          "prompt"
+        ],
+        "title": "EngineAnswer"
+      },
       "EngineBulkInput": {
         "properties": {
           "file": {
@@ -1351,6 +1433,183 @@
         ],
         "title": "EngineOutputParameters"
       },
+      "EngineRequestBody": {
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/Input",
+            "description": "Model input."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/EngineSettings",
+            "description": "Optional user settings.",
+            "type": "object"
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently.",
+            "examples": [
+              "file1.pdf"
+            ]
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A language code (e.g. 'EN') or the name of the language you wish to translate answers and explainability into. [List of supported codes.](../../../prompting-guide/faq/#supported-languages)"
+          },
+          "metadata": {
+            "description": "Custom JSON to be included in the returned response.",
+            "type": "object"
+          },
+          "rasterize": {
+            "type": "boolean",
+            "description": "Will rasterize a pdf. Set this parameter to `true` only if the input file is a fillable pdf.",
+            "default": false
+          },
+          "responseSchema": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Deprecated. Use settings.responseSchema instead.",
+            "deprecated": true
+          },
+          "staticIP": {
+            "type": "boolean",
+            "description": "Set to `true` for status URL and output URL if they exist.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "input"
+        ],
+        "title": "EngineRequestBody"
+      },
+      "EngineResponse": {
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "API version used for the request. Defaults to the latest production version. To pin to a specific API version, please contact your Lazarus representative to receive the appropriate version header.",
+            "example": "YYYY-MM-DD"
+          },
+          "data": {
+            "$ref": "#/components/schemas/EngineAnswer",
+            "description": "Prompt and answer data for each prompt in the request."
+          },
+          "id": {
+            "type": "string",
+            "description": "Response ID"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Number of pages in the document."
+          },
+          "prompts": {
+            "type": "integer",
+            "description": "Number of prompts included."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/EngineSettingsResponse",
+            "description": "JSON containing any custom user settings specified in the request."
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "description": "Status of the request."
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Request end time recorded in epoch (Unix timestamp) format."
+          },
+          "inputId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom ID(s) for uploaded file(s), returned as `inputId` in the response. Requests with multiple files accept unique inputIds for each file. InputIds can be used to facilitate tracking, referencing, and managing input and output files efficiently."
+          },
+          "jobId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Job ID to track the bulk request progress"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Language results are translated into."
+          },
+          "metadata": {
+            "description": "JSON from the request `metadata` field.",
+            "type": "object"
+          },
+          "ocrResults": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request."
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Request start time recorded in epoch (Unix timestamp) format."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "EngineResponse"
+      },
       "EngineRunningWebhook": {
         "properties": {
           "apiVersion": {
@@ -1431,6 +1690,25 @@
         "type": "object",
         "title": "EngineSettings",
         "required": []
+      },
+      "EngineSettingsResponse": {
+        "properties": {
+          "advancedExplainability": {
+            "type": "boolean",
+            "description": "Advanced explainability as specified in the request."
+          },
+          "explainabilitySettings": {
+            "$ref": "#/components/schemas/ExplainabilitySettingsResponse",
+            "description": "Explainability settings as specified in the request."
+          },
+          "modelSettings": {
+            "$ref": "#/components/schemas/ModelSettingsResponse",
+            "description": "Model settings as specified in the request."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "EngineSettingsResponse"
       },
       "EngineSubmittedWebhook": {
         "properties": {
@@ -1535,6 +1813,41 @@
         ],
         "title": "EngineSuccessWebhook"
       },
+      "EngineTranslation": {
+        "properties": {
+          "answer": {
+            "type": "string",
+            "description": "Translated answer if the `language` field was included in the request"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Translated context if the `language` field was included in the request"
+          },
+          "warning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Warning about feature or model usage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "answer"
+        ],
+        "title": "EngineTranslation"
+      },
       "EngineWarningWebhook": {
         "properties": {
           "apiVersion": {
@@ -1594,6 +1907,25 @@
         "title": "ExplainabilitySettings",
         "required": []
       },
+      "ExplainabilitySettingsResponse": {
+        "properties": {
+          "assessSourceRelevance": {
+            "type": "boolean",
+            "description": "When true, a second LLM call rates each extracted field's validity based on its cited source paragraphs. The field-level confidence score becomes a more accurate reflection of the value's validity."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Enable source grounding and advanced response schema features."
+          },
+          "preprocessSources": {
+            "type": "boolean",
+            "description": "When true, a sourcing LLM call identifies relevant document regions, providing a more focused context."
+          }
+        },
+        "type": "object",
+        "required": [],
+        "title": "ExplainabilitySettingsResponse"
+      },
       "FileBase64": {
         "properties": {
           "base64": {
@@ -1645,6 +1977,32 @@
         "title": "HTTPValidationError",
         "required": []
       },
+      "Input": {
+        "properties": {
+          "file": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FileURL"
+              },
+              {
+                "$ref": "#/components/schemas/FileBase64"
+              }
+            ],
+            "description": "File to process. Supported types: `HEIC`, `JPEG`, `JPG`, `PDF`, `PNG`, `TIFF`, `TIF`, or `TXT`. Provide either a base64-encoded string or a file URL."
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A string containing the prompt."
+          }
+        },
+        "type": "object",
+        "required": [
+          "file",
+          "prompt"
+        ],
+        "title": "Input"
+      },
       "InputOutputSFTP": {
         "properties": {
           "inputURL": {
@@ -1684,6 +2042,23 @@
         },
         "type": "object",
         "title": "ModelSettings",
+        "required": []
+      },
+      "ModelSettingsResponse": {
+        "properties": {
+          "capability": {
+            "$ref": "#/components/schemas/ModelCapability",
+            "description": "Model capability as specified in the request.",
+            "default": "standard"
+          },
+          "tier": {
+            "$ref": "#/components/schemas/ModelTier",
+            "description": "Model tier as specified in the request.",
+            "default": "standard"
+          }
+        },
+        "type": "object",
+        "title": "ModelSettingsResponse",
         "required": []
       },
       "ModelTier": {
