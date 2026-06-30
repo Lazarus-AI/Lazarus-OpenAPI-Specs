@@ -973,7 +973,7 @@
                 "type": "null"
               }
             ],
-            "description": "Per-field confidence scores and source annotations. Populated when explainability is enabled."
+            "description": "Per-field confidence scores and source annotations. Populated when `enabled` is `true` and `guided` is `false`. Each field value is an annotation object with `data` (the extracted value), `confidence_score` (0-1), and `sources` (document regions cited for that value)."
           },
           "translated": {
             "anyOf": [
@@ -1889,17 +1889,17 @@
         "properties": {
           "assessSourceRelevance": {
             "type": "boolean",
-            "description": "When true, a second LLM call rates each extracted field's validity based on its cited source paragraphs. The field-level confidence score becomes a more accurate reflection of the value's validity.",
+            "description": "When `true`, each field's extracted value is validated against the document passages cited for it. The confidence score reflects whether the cited evidence actually supports the extracted value \u2014 not just that the model located something in the document. Use when scores drive decisions such as routing to human review. Requires `enabled: true`.",
             "default": false
           },
           "enabled": {
             "type": "boolean",
-            "description": "Enable source grounding and advanced response schema features.",
+            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value. Has no effect when `guided` is `true`.",
             "default": false
           },
           "preprocessSources": {
             "type": "boolean",
-            "description": "When true, a sourcing LLM call identifies relevant document regions, providing a more focused context.",
+            "description": "When `true`, a sourcing pass runs before extraction to identify document regions most relevant to the schema. The extraction model then works from a focused view rather than the full document, improving accuracy for long or dense documents at the cost of an additional LLM call. Requires `enabled: true`.",
             "default": false
           }
         },
@@ -1911,15 +1911,15 @@
         "properties": {
           "assessSourceRelevance": {
             "type": "boolean",
-            "description": "When true, a second LLM call rates each extracted field's validity based on its cited source paragraphs. The field-level confidence score becomes a more accurate reflection of the value's validity."
+            "description": "When `true`, each field's extracted value is validated against the document passages cited for it. The confidence score reflects whether the cited evidence actually supports the extracted value \u2014 not just that the model located something in the document. Use when scores drive decisions such as routing to human review. Requires `enabled: true`."
           },
           "enabled": {
             "type": "boolean",
-            "description": "Enable source grounding and advanced response schema features."
+            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value. Has no effect when `guided` is `true`."
           },
           "preprocessSources": {
             "type": "boolean",
-            "description": "When true, a sourcing LLM call identifies relevant document regions, providing a more focused context."
+            "description": "When `true`, a sourcing pass runs before extraction to identify document regions most relevant to the schema. The extraction model then works from a focused view rather than the full document, improving accuracy for long or dense documents at the cost of an additional LLM call. Requires `enabled: true`."
           }
         },
         "type": "object",
