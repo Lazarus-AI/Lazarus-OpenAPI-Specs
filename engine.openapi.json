@@ -198,7 +198,7 @@
     "engine-async-request-submitted": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request Submitted",
         "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the status webhook provided in your request body.",
@@ -223,7 +223,7 @@
     "engine-async-request-running": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request Running",
         "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the status webhook provided in your request body.",
@@ -248,7 +248,7 @@
     "engine-async-request-failed": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request Failed",
         "description": "If an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the status webhook provided in your request body.",
@@ -273,7 +273,7 @@
     "engine-async-request-output-url-warning": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request OutputURL Failure Warning",
         "description": "If our request to your output URL fails, we'll send a POST request with this warning message to the status webhook provided in your request body.",
@@ -298,7 +298,7 @@
     "engine-async-request-succeeded": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Request Succeeded",
         "description": "When an async request completes successfully, we'll send a POST request with `status: SUCCESS` to the status webhook provided in your request body. Full API results will be posted to the output URL provided in the request body.",
@@ -317,6 +317,31 @@
           "200": {
             "description": "Our API expects a 200 status code response to our webhook requests"
           }
+        }
+      }
+    },
+    "engine-request-output": {
+      "post": {
+        "summary": "Request Output",
+        "description": "When an async request completes successfully, we'll send a POST request with full response data to the output URL provided in your request body.",
+        "operationId": "webhook_post_engine_request_output",
+        "tags": [
+          "Output Webhook Response"
+        ],
+        "responses": {
+          "200": {
+            "description": "Our API expects a 200 status code response to our webhook requests"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EngineResponse"
+              }
+            }
+          },
+          "required": true
         }
       }
     }
@@ -3269,8 +3294,12 @@
       "description": "Requests for the Lazarus API"
     },
     {
-      "name": "Webhook Responses",
-      "description": "Responses from the Lazarus API"
+      "name": "Status Webhook Responses",
+      "description": "Status updates delivered to your status webhook"
+    },
+    {
+      "name": "Output Webhook Response",
+      "description": "Output delivered to your configured output URL"
     }
   ]
 }
