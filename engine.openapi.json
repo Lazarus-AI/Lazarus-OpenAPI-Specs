@@ -1958,19 +1958,9 @@
       },
       "ExplainabilitySettings": {
         "properties": {
-          "assessSourceRelevance": {
-            "type": "boolean",
-            "description": "When `true`, each field's extracted value is validated against the document passages cited for it. The confidence score reflects whether the cited evidence actually supports the extracted value \u2014 not just that the model located something in the document. Use when scores drive decisions such as routing to human review. Requires `enabled: true`.",
-            "default": false
-          },
           "enabled": {
             "type": "boolean",
-            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value. Has no effect when `guided` is `true`.",
-            "default": false
-          },
-          "preprocessSources": {
-            "type": "boolean",
-            "description": "When `true`, a sourcing pass runs before extraction to identify document regions most relevant to the schema. The extraction model then works from a focused view rather than the full document, improving accuracy for long or dense documents at the cost of an additional LLM call. Requires `enabled: true`.",
+            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value.",
             "default": false
           }
         },
@@ -1980,17 +1970,9 @@
       },
       "ExplainabilitySettingsResponse": {
         "properties": {
-          "assessSourceRelevance": {
-            "type": "boolean",
-            "description": "When `true`, each field's extracted value is validated against the document passages cited for it. The confidence score reflects whether the cited evidence actually supports the extracted value \u2014 not just that the model located something in the document. Use when scores drive decisions such as routing to human review. Requires `enabled: true`."
-          },
           "enabled": {
             "type": "boolean",
             "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value. Has no effect when `guided` is `true`."
-          },
-          "preprocessSources": {
-            "type": "boolean",
-            "description": "When `true`, a sourcing pass runs before extraction to identify document regions most relevant to the schema. The extraction model then works from a focused view rather than the full document, improving accuracy for long or dense documents at the cost of an additional LLM call. Requires `enabled: true`."
           }
         },
         "type": "object",
