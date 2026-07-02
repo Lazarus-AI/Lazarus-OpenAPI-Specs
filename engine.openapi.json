@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "RikAI-Extract",
+    "title": "Applied Intelligence Engine",
     "version": "",
     "description": "",
     "contact": {
@@ -17,14 +17,14 @@
     "summary": ""
   },
   "paths": {
-    "/rikai/bulk/rikai2-extract": {
+    "/engine/bulk": {
       "post": {
         "tags": [
           "Requests"
         ],
         "summary": "Bulk file upload",
-        "description": "Upload 1 or more files to RikAI2-Extract for asynchronous processing. To receive the model output, use either a `webhook` or an `outputURL`:\n- **`webhook` (Recommended)**: Receives a [JSON response](/../../models/rikai/webhook-examples) by default.\n- `outputURL`: Receives a [ZIP file](../../outputurl) for each document in the request. If the `returnJSON` parameter is set to true, a JSON file will be provided instead.\n\n\n#### File upload options\nWe only support requests with Content-Type `application/json` at this endpoint.\n- `[application/json]` **inputURL**  link to file\n- `[application/json]` **base64** base64 encoded file data\n\n",
-        "operationId": "post_bulk_rikai2_extract",
+        "description": "Upload 1 or more files to the Applied Intelligence Engine for asynchronous processing.\n\n\n#### Input\nEach request requires a `prompt` and a `file`. The following file upload options are supported (Content-Type `application/json` only):\n- `file.url` \u2014 link to file\n- `file.base64` \u2014 base64 encoded file data\n\n#### Output\nTo receive results at a URL, define an `output` config. The `output` config supports parameters to define the type of output request, including:\n- `contentType` \u2014 the content type of the response delivered to your URL (defaults to `application/json`)\n- `method` \u2014 the HTTP method used when sending results to your URL (defaults to `POST`)\n\n#### Status updates\nOpt in to the `statusWebhook` to receive updates as asynchronous requests process. The `statusWebhook` URL can be the same URL as the `output` URL.\n\n#### Model settings\nUse `modelSettings` to optionally configure the backend processing components:\n- `capability` \u2014 selects the processing capability\n- `tier` \u2014 selects the performance tier\n\nTo access additional capabilities and tiers beyond `standard`, contact your Lazarus representative.\n\n",
+        "operationId": "post_engine_bulk",
         "parameters": [
           {
             "name": "orgId",
@@ -69,7 +69,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkRequestBody"
+                "$ref": "#/components/schemas/EngineBulkRequestBody"
               }
             }
           }
@@ -80,7 +80,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BulkResponse"
+                  "$ref": "#/components/schemas/EngineBulkResponse"
                 }
               }
             }
@@ -106,25 +106,25 @@
         }
       }
     },
-    "/rikai/zip/async/{statusId}": {
+    "/engine/jobs/{jobId}/status": {
       "get": {
         "tags": [
           "Requests"
         ],
         "summary": "Get async request status",
-        "description": "Retrieves the status of an asynchronous request to `/rikai/zip/rikai2-extract?async=True` or `/rikai/bulk/rikai2-extract`. Identifiable by `statusId`.",
-        "operationId": "get_async_status",
+        "description": "Retrieves the status of an asynchronous request to `/engine/bulk`. Identifiable by `jobId`.",
+        "operationId": "get_engine_job_status",
         "parameters": [
           {
-            "name": "statusId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "statusId",
-              "description": "Status ID"
+              "title": "jobId",
+              "description": "Job ID to track the bulk request progress"
             },
-            "description": "Status ID"
+            "description": "Job ID to track the bulk request progress"
           },
           {
             "name": "orgId",
@@ -170,7 +170,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AsyncStatusResponse"
+                  "$ref": "#/components/schemas/EngineJobStatusResponse"
                 }
               }
             }
@@ -195,19 +195,19 @@
     }
   },
   "webhooks": {
-    "rikai-async-request-submitted": {
+    "engine-async-request-submitted": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request Submitted",
-        "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the `webhook` provided in your request body.",
+        "description": "When an asynchronous request is submitted at a `/bulk` endpoint, we'll send a POST request for each individual request in the submission with this data to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_submitted",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SubmittedWebhook"
+                "$ref": "#/components/schemas/EngineSubmittedWebhook"
               }
             }
           },
@@ -220,19 +220,19 @@
         }
       }
     },
-    "rikai-async-request-running": {
+    "engine-async-request-running": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request Running",
-        "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the `webhook` provided in your request body.",
+        "description": "When an asynchronous request begins processing, we'll send a POST request with this data to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_running",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RunningWebhook"
+                "$ref": "#/components/schemas/EngineRunningWebhook"
               }
             }
           },
@@ -245,19 +245,19 @@
         }
       }
     },
-    "rikai-async-request-failed": {
+    "engine-async-request-failed": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request Failed",
-        "description": "When an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the webhook provided in your request body.",
+        "description": "If an asynchronous request fails during processing, we'll send a POST request with this data, including an error message, to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_failed",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AsyncWebhookError"
+                "$ref": "#/components/schemas/EngineErrorWebhook"
               }
             }
           },
@@ -270,19 +270,19 @@
         }
       }
     },
-    "rikai-async-request-output-url-warning": {
+    "engine-async-request-output-url-warning": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Async Request OutputURL Failure Warning",
-        "description": "When our PUT request to your `outputURL` fails, we'll send a POST request with this warning message to the webhook provided in your request body. Results will be posted to this webhook in a separate request.",
+        "description": "If our request to your output URL fails, we'll send a POST request with this warning message to the status webhook provided in your request body.",
         "operationId": "webhook_post_async_request_output_url_warning",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WarningWebhook"
+                "$ref": "#/components/schemas/EngineWarningWebhook"
               }
             }
           },
@@ -295,19 +295,19 @@
         }
       }
     },
-    "rikai-request-succeeded": {
+    "engine-async-request-succeeded": {
       "post": {
         "tags": [
-          "Webhook Responses"
+          "Status Webhook Responses"
         ],
         "summary": "Request Succeeded",
-        "description": "When a request completes successfully, we'll send a POST request with full response data to the webhook provided in your request body.",
-        "operationId": "webhook_post_request_succeeded",
+        "description": "When an async request completes successfully, we'll send a POST request with `status: SUCCESS` to the status webhook provided in your request body. Full API results will be posted to the output URL provided in the request body.",
+        "operationId": "webhook_post_async_request_succeeded",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SuccessWebhook"
+                "$ref": "#/components/schemas/EngineSuccessWebhook"
               }
             }
           },
@@ -320,28 +320,28 @@
         }
       }
     },
-    "rikai-request-succeeded-truncated-response": {
+    "engine-request-output": {
       "post": {
+        "summary": "Request Output",
+        "description": "When an async request completes successfully, we'll send a POST request with full response data to the output URL provided in your request body.",
+        "operationId": "webhook_post_engine_request_output",
         "tags": [
-          "Webhook Responses"
+          "Output Webhook Response"
         ],
-        "summary": "Request Succeeded Truncated",
-        "description": "When a request completes successfully and your request body includes `webhookSendFull: False`, we'll send a POST request with truncated response data to the webhook provided in your request body.",
-        "operationId": "webhook_post_request_succeeded_truncated",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SuccessWebhookShort"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "Our API expects a 200 status code response to our webhook requests"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EngineResponse"
+              }
+            }
+          },
+          "required": true
         }
       }
     }
@@ -351,12 +351,56 @@
       "Answer": {
         "properties": {
           "answer": {
-            "description": "Model's answer to the question asked. The model fills the JSON structure that was provided for input.",
-            "type": "object"
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ],
+            "description": "Model's answer to the question asked."
           },
           "question": {
-            "description": "The question asked.",
-            "type": "object"
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ],
+            "description": "The question asked."
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Answer confidence score ranging from 0 to 1."
+          },
+          "context": {
+            "type": "string",
+            "description": "Where in the document the answer was found."
+          },
+          "translated": {
+            "type": "string",
+            "description": "Translated answer if the `language` field was included in the request"
+          },
+          "translatedContext": {
+            "type": "string",
+            "description": "Translated context if the `language` field was included in the request"
+          },
+          "warning": {
+            "type": "string",
+            "description": "Warning about feature or model usage"
           }
         },
         "type": "object",
@@ -497,16 +541,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
@@ -535,6 +581,11 @@
               "file1.pdf"
             ],
             "default": "UUID"
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
           },
           "webhookHeaders": {
             "additionalProperties": true,
@@ -598,40 +649,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkBase64Request",
-        "examples": [
-          {
-            "base64": "YOUR_BASE64_ENCODED_FILE",
-            "question": {
-              "PatientInfo": {
-                "FirstName": {
-                  "data": "Patient first name",
-                  "page_number": 0
-                },
-                "LastName": {
-                  "data": "Patient last name",
-                  "page_number": 0
-                }
-              }
-            },
-            "webhook": "YOUR_WEBHOOK_URL",
-            "settings": {
-              "returnConfidence": true
-            },
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "BulkBase64Request"
       },
       "BulkRequestBody": {
         "oneOf": [
@@ -723,16 +741,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
@@ -761,6 +781,11 @@
               "file1.pdf"
             ],
             "default": "UUID"
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
           },
           "webhookHeaders": {
             "additionalProperties": true,
@@ -824,40 +849,7 @@
           "question",
           "webhook"
         ],
-        "title": "BulkURLRequest",
-        "examples": [
-          {
-            "inputURL": "https://firebasestorage.googleapis.com/v0/b/lazarus-apis-testing.appspot.com/o/examples%2FSample%20Form.pdf?alt=media&token=5b537052-ea54-4be4-9d36-9620ee994c1c",
-            "question": {
-              "PatientInfo": {
-                "FirstName": {
-                  "data": "Patient first name",
-                  "page_number": 0
-                },
-                "LastName": {
-                  "data": "Patient last name",
-                  "page_number": 0
-                }
-              }
-            },
-            "webhook": "YOUR_WEBHOOK_URL",
-            "settings": {
-              "returnConfidence": true
-            },
-            "webhookHeaders": null,
-            "webhookSendFull": true,
-            "fileId": "file1.pdf",
-            "forceBase64": false,
-            "forceOCR": false,
-            "language": "en",
-            "metadata": null,
-            "outputURL": null,
-            "outputURLHeaders": null,
-            "returnJSON": true,
-            "sftp": null,
-            "staticIP": false
-          }
-        ]
+        "title": "BulkURLRequest"
       },
       "ContentType": {
         "type": "string",
@@ -971,7 +963,7 @@
                 "type": "null"
               }
             ],
-            "description": "Per-field confidence scores and source annotations. Populated when `enabled` is `true` and `guided` is `false`. Each field value is an annotation object with `data` (the extracted value), `confidence_score` (0-1), and `sources` (document regions cited for that value)."
+            "description": "Per-field confidence scores and source annotations. Populated when `enabled` is `true`. Each field value is an annotation object with `data` (the extracted value), `confidence_score` (0-1), and `sources` (bounding boxes cited for that value)."
           },
           "translated": {
             "anyOf": [
@@ -1682,7 +1674,7 @@
                 "type": "null"
               }
             ],
-            "description": "JSON schema for structured response formatting (OpenAI strict mode)."
+            "description": "JSON schema for structured response formatting"
           }
         },
         "type": "object",
@@ -1885,19 +1877,9 @@
       },
       "ExplainabilitySettings": {
         "properties": {
-          "assessSourceRelevance": {
-            "type": "boolean",
-            "description": "When `true`, each field's extracted value is validated against the document passages cited for it. The confidence score reflects whether the cited evidence actually supports the extracted value \u2014 not just that the model located something in the document. Use when scores drive decisions such as routing to human review. Requires `enabled: true`.",
-            "default": false
-          },
           "enabled": {
             "type": "boolean",
-            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value. Has no effect when `guided` is `true`.",
-            "default": false
-          },
-          "preprocessSources": {
-            "type": "boolean",
-            "description": "When `true`, a sourcing pass runs before extraction to identify document regions most relevant to the schema. The extraction model then works from a focused view rather than the full document, improving accuracy for long or dense documents at the cost of an additional LLM call. Requires `enabled: true`.",
+            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the bounding boxes cited for each value.",
             "default": false
           }
         },
@@ -1907,17 +1889,9 @@
       },
       "ExplainabilitySettingsResponse": {
         "properties": {
-          "assessSourceRelevance": {
-            "type": "boolean",
-            "description": "When `true`, each field's extracted value is validated against the document passages cited for it. The confidence score reflects whether the cited evidence actually supports the extracted value \u2014 not just that the model located something in the document. Use when scores drive decisions such as routing to human review. Requires `enabled: true`."
-          },
           "enabled": {
             "type": "boolean",
-            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value. Has no effect when `guided` is `true`."
-          },
-          "preprocessSources": {
-            "type": "boolean",
-            "description": "When `true`, a sourcing pass runs before extraction to identify document regions most relevant to the schema. The extraction model then works from a focused view rather than the full document, improving accuracy for long or dense documents at the cost of an additional LLM call. Requires `enabled: true`."
+            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the bounding boxes cited for each value."
           }
         },
         "type": "object",
@@ -2088,16 +2062,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -2141,6 +2117,15 @@
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "type": "object"
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
           "staticIP": {
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
@@ -2159,16 +2144,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -2234,16 +2221,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -2287,6 +2276,11 @@
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
+          },
           "staticIP": {
             "type": "boolean",
             "description": "Set to `true` for static IP for webhook and outputURL if they exist",
@@ -2309,16 +2303,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -2375,6 +2371,11 @@
             "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -2463,6 +2464,10 @@
             "type": "object",
             "description": "JSON from the request `metadata` field."
           },
+          "ocrResults": {
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request.",
+            "type": "object"
+          },
           "settings": {
             "additionalProperties": true,
             "type": "object",
@@ -2491,16 +2496,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "settings": {
             "$ref": "#/components/schemas/Settings",
@@ -2543,6 +2550,15 @@
             "additionalProperties": true,
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
+          },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "type": "object"
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -2689,6 +2705,16 @@
       },
       "Settings": {
         "properties": {
+          "advancedExplainability": {
+            "type": "boolean",
+            "description": "When set to `false`, the model processes requests faster but does not return the full explainability. Set to `true` to include full explainability.",
+            "default": false
+          },
+          "advancedVision": {
+            "type": "boolean",
+            "description": "Set to `true` to enable advanced features such as checkboxes and tables.",
+            "default": false
+          },
           "returnConfidence": {
             "type": "boolean",
             "description": "Set to true to include bounding boxes and confidence score in response. Click [here](/../../models/Rikai/rikai2-extract/overview#returning-confidence-scores-and-bounding-boxes) for prompting guidelines to ensure optimal results when using this field."
@@ -2852,6 +2878,10 @@
           "endTime": {
             "description": "Request end time recorded in epoch (Unix timestamp) format.",
             "type": "integer"
+          },
+          "ocrResults": {
+            "description": "OCR results from the document. Returned only if `returnOCR` was set to true in the request.",
+            "type": "object"
           }
         },
         "type": "object",
@@ -3006,16 +3036,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
@@ -3063,6 +3095,10 @@
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "type": "object"
+          },
           "outputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
@@ -3077,6 +3113,11 @@
             "type": "boolean",
             "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -3195,16 +3236,18 @@
           "question": {
             "anyOf": [
               {
-                "type": "object"
+                "items": {},
+                "type": "array"
               },
               {
                 "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
               }
             ],
-            "description": "A JSON string or a dictionary containing the question(s) to be asked.",
-            "examples": [
-              "{\"PatientInfo\": {\"FirstName\": {\"data\": \"Patient first name\", \"page_number\": 0}, \"LastName\": {\"data\": \"Patient last name\", \"page_number\": 0}}}"
-            ]
+            "description": "A string or list of strings containing the question(s) to be asked, except for the RikAI2-Extract endpoint, where the question must be a JSON string or a dictionary."
           },
           "webhook": {
             "type": "string",
@@ -3252,6 +3295,10 @@
             "type": "object",
             "description": "Custom JSON to be included in the returned response."
           },
+          "ocr": {
+            "description": "OCR data for the document (entire response from [OCR endpoint (version: 2)](../../ocr/ocr_v2), [example here](https://lazarus-ai.atlassian.net/wiki/external/YmIwNDNmNWZmNzhhNGYwNDg3MjBlNmFhOTgwMzAwNjc)). If included, we do not run OCR on the document and use these results instead. Only OCR data obtained from the Lazarus OCR endpoint (include version: 2 in the header) is supported as input.",
+            "type": "object"
+          },
           "outputURL": {
             "type": "string",
             "pattern": " (https?|s?ftp)://(?:www\\\\.)?[a-zA-Z0-9./:]+",
@@ -3266,6 +3313,11 @@
             "type": "boolean",
             "description": "Specifies the format of the response sent to `outputURL`. When set to true, a JSON response is sent to the `outputURL`. Set to false to send a ZIP file instead.",
             "default": true
+          },
+          "returnOCR": {
+            "type": "boolean",
+            "description": "Set to `true` to include OCR results in response. Does not work if advanced_vision is also set to `true`.",
+            "default": false
           },
           "sftp": {
             "anyOf": [
@@ -3599,8 +3651,12 @@
       "description": "Requests for the Lazarus API"
     },
     {
-      "name": "Webhook Responses",
-      "description": "Responses from the Lazarus API"
+      "name": "Status Webhook Responses",
+      "description": "Status updates delivered to your status webhook"
+    },
+    {
+      "name": "Output Webhook Response",
+      "description": "Output delivered to your configured output URL"
     }
   ]
 }
