@@ -1044,7 +1044,7 @@
                 "type": "null"
               }
             ],
-            "description": "Per-field confidence scores and source annotations. Populated when `enabled` is `true` and `guided` is `false`. Each field value is an annotation object with `data` (the extracted value), `confidence_score` (0-1), and `sources` (document regions cited for that value)."
+            "description": "Per-field confidence scores and source annotations. Populated when `enabled` is `true`. Each field value is an annotation object with `data` (the extracted value), `confidence_score` (0-1), and `sources` (bounding boxes cited for that value)."
           },
           "translated": {
             "anyOf": [
@@ -1755,7 +1755,7 @@
                 "type": "null"
               }
             ],
-            "description": "JSON schema for structured response formatting (OpenAI strict mode)."
+            "description": "JSON schema for structured response formatting"
           }
         },
         "type": "object",
@@ -1960,7 +1960,7 @@
         "properties": {
           "enabled": {
             "type": "boolean",
-            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value.",
+            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the bounding boxes cited for each value.",
             "default": false
           }
         },
@@ -1972,7 +1972,7 @@
         "properties": {
           "enabled": {
             "type": "boolean",
-            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the document regions cited for each value. Has no effect when `guided` is `true`."
+            "description": "Activates source grounding for the extraction. When `true`, the response includes a `field_confidences` object with per-field confidence scores and the bounding boxes cited for each value."
           }
         },
         "type": "object",
