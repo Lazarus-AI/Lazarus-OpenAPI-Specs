@@ -862,7 +862,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusai.com/api/forms",
+      "url": "https://api-prod.lazarusforms.com/api/forms",
       "description": ""
     }
   ]

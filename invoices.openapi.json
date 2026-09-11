@@ -1121,7 +1121,7 @@
   },
   "servers": [
     {
-      "url": "https://api.lazarusai.com/api",
+      "url": "https://api-prod.lazarusforms.com/api",
       "description": ""
     }
   ]
